@@ -10,7 +10,7 @@ with Flow(
     name="CadUnico: Nome do objetivo - Descrição detalhada do objetivo",
 ) as exemplo__nome_do_objetivo__greet_flow:
     # Parameters
-    name = Parameter("name", default="pipeliner")
+    name = Parameter("name", default="cadunico")
 
     # Tasks
     greet_task = greet(name)
