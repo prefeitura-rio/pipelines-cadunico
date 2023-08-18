@@ -7,6 +7,7 @@ from typing import List
 from google.oauth2 import service_account
 
 from pipelines.utils.logging import log
+from pipelines.utils.prefect import get_flow_run_mode
 
 
 def getenv_or_action(key: str, *, action: str = "raise", default: str = None):
@@ -45,7 +46,7 @@ def getenv_or_action(key: str, *, action: str = "raise", default: str = None):
 
 
 def get_bd_credentials_from_env(
-    mode: str = "prod", scopes: List[str] = None
+    mode: str = get_flow_run_mode(), scopes: List[str] = None
 ) -> service_account.Credentials:
     """
     Gets credentials from env vars

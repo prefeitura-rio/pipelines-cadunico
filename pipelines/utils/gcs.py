@@ -5,9 +5,27 @@ from google.cloud import storage
 from google.cloud.storage.blob import Blob
 
 from pipelines.utils.env import get_bd_credentials_from_env
+from pipelines.utils.prefect import get_flow_run_mode
 
 
-def list_blobs_with_prefix(bucket_name: str, prefix: str, mode: str = "prod") -> List[Blob]:
+def get_gcs_client(mode: str = get_flow_run_mode()) -> storage.Client:
+    """
+    Get a GCS client with the credentials from the environment.
+    Mode needs to be "prod" or "staging"
+
+    Args:
+        mode (str): The mode to filter by (prod or staging).
+
+    Returns:
+        storage.Client: The GCS client.
+    """
+    credentials = get_bd_credentials_from_env(mode=mode)
+    return storage.Client(credentials=credentials)
+
+
+def list_blobs_with_prefix(
+    bucket_name: str, prefix: str, mode: str = get_flow_run_mode()
+) -> List[Blob]:
     """
     Lists all the blobs in the bucket that begin with the prefix.
     This can be used to list all blobs in a "folder", e.g. "public/".
@@ -21,7 +39,21 @@ def list_blobs_with_prefix(bucket_name: str, prefix: str, mode: str = "prod") ->
     Returns:
         List[Blob]: The list of blobs.
     """
-    credentials = get_bd_credentials_from_env(mode=mode)
-    storage_client = storage.Client(credentials=credentials)
+    storage_client = get_gcs_client(mode=mode)
     blobs = storage_client.list_blobs(bucket_name, prefix=prefix)
     return list(blobs)
+
+
+def parse_blobs_to_partition_list(blobs: List[Blob]) -> List[str]:
+    """
+    Extracts the partition information from the blobs.
+    """
+    partitions = []
+    for blob in blobs:
+        for folder in blob.name.split("/"):
+            if "=" in folder:
+                key = folder.split("=")[0]
+                value = folder.split("=")[1]
+                if key == "data_particao":
+                    partitions.append(value)
+    return partitions
