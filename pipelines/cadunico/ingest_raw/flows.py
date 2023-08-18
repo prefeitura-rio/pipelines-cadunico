@@ -2,6 +2,7 @@
 from prefect import Parameter
 from prefect.run_configs import KubernetesRun
 from prefect.storage import GCS
+from prefect.utilities.edges import unmapped
 
 from pipelines.cadunico.ingest_raw.tasks import (
     get_existing_partitions,
@@ -11,9 +12,6 @@ from pipelines.cadunico.ingest_raw.tasks import (
 )
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
-
-# from prefect.utilities.edges import unmapped
-
 
 with Flow(
     name="CadUnico: Flow de teste",
@@ -33,7 +31,7 @@ with Flow(
     files_to_ingest = get_files_to_ingest(
         prefix=prefix_raw_area, partitions=existing_partitions, bucket_name=project_id
     )
-    ingest_file.map(blob=files_to_ingest, output_directory=ingested_files_output)
+    ingest_file.map(blob=files_to_ingest, output_directory=unmapped(ingested_files_output))
 
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
