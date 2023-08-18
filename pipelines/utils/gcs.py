@@ -8,7 +8,7 @@ from pipelines.utils.env import get_bd_credentials_from_env
 from pipelines.utils.prefect import get_flow_run_mode
 
 
-def get_gcs_client(mode: str = get_flow_run_mode()) -> storage.Client:
+def get_gcs_client(mode: str = None) -> storage.Client:
     """
     Get a GCS client with the credentials from the environment.
     Mode needs to be "prod" or "staging"
@@ -19,13 +19,13 @@ def get_gcs_client(mode: str = get_flow_run_mode()) -> storage.Client:
     Returns:
         storage.Client: The GCS client.
     """
+    if not mode:
+        mode = get_flow_run_mode()
     credentials = get_bd_credentials_from_env(mode=mode)
     return storage.Client(credentials=credentials)
 
 
-def list_blobs_with_prefix(
-    bucket_name: str, prefix: str, mode: str = get_flow_run_mode()
-) -> List[Blob]:
+def list_blobs_with_prefix(bucket_name: str, prefix: str, mode: str = None) -> List[Blob]:
     """
     Lists all the blobs in the bucket that begin with the prefix.
     This can be used to list all blobs in a "folder", e.g. "public/".
@@ -39,6 +39,8 @@ def list_blobs_with_prefix(
     Returns:
         List[Blob]: The list of blobs.
     """
+    if not mode:
+        mode = get_flow_run_mode()
     storage_client = get_gcs_client(mode=mode)
     blobs = storage_client.list_blobs(bucket_name, prefix=prefix)
     return list(blobs)

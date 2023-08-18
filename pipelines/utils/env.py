@@ -46,11 +46,13 @@ def getenv_or_action(key: str, *, action: str = "raise", default: str = None):
 
 
 def get_bd_credentials_from_env(
-    mode: str = get_flow_run_mode(), scopes: List[str] = None
+    mode: str = None, scopes: List[str] = None
 ) -> service_account.Credentials:
     """
     Gets credentials from env vars
     """
+    if not mode:
+        mode = get_flow_run_mode()
     if mode not in ["prod", "staging"]:
         raise ValueError("Mode must be 'prod' or 'staging'")
     env: str = getenv(f"BASEDOSDADOS_CREDENTIALS_{mode.upper()}", "")
