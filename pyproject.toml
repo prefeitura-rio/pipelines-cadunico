@@ -5,9 +5,11 @@ description = ""
 authors = ["Gabriel Gazola Milan <gabriel.gazola@poli.ufrj.br>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.11"
 prefect = "1.4.1"
 google-cloud-storage = "^2.10.0"
+infisical = "^1.4.0"
+basedosdados = "2.0.0b5"
 
 
 [tool.poetry.group.dev]
