@@ -5,6 +5,7 @@ from typing import Literal
 from infisical import InfisicalClient
 
 from pipelines.utils.env import getenv_or_action
+from pipelines.utils.prefect import get_flow_run_mode
 
 
 def get_infisical_client() -> InfisicalClient:
@@ -24,7 +25,7 @@ def get_infisical_client() -> InfisicalClient:
 
 def get_secret(
     secret_name: str,
-    environment: str,
+    environment: str = None,
     type: Literal["shared", "personal"] = "personal",
     path: str = "/",
     client: InfisicalClient = None,
@@ -46,6 +47,9 @@ def get_secret(
     if client is None:
         client = get_infisical_client()
 
+    if not environment:
+        environment = get_flow_run_mode()
+
     return client.get_secret(
         secret_name=secret_name,
         type=type,
@@ -56,7 +60,7 @@ def get_secret(
 
 def inject_env(
     secret_name: str,
-    environment: str,
+    environment: str = None,
     type: Literal["shared", "personal"] = "personal",
     path: str = "/",
     client: InfisicalClient = None,
@@ -74,6 +78,9 @@ def inject_env(
     """
     if client is None:
         client = get_infisical_client()
+
+    if not environment:
+        environment = get_flow_run_mode()
 
     secret_value = client.get_secret(
         secret_name=secret_name,
@@ -98,6 +105,6 @@ def inject_bd_credentials() -> None:
     ]:
         inject_env(
             secret_name=secret_name,
-            environment="prod",  # TODO: replace with identifier for current environment
+            environment=get_flow_run_mode(),
             client=client,
         )
