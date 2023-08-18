@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from prefect import context, task
+import prefect
+from prefect import task
 
 from pipelines.utils.gcs import list_blobs_with_prefix
 from pipelines.utils.logging import log
@@ -14,4 +15,4 @@ def list_blobs():
 
 @task
 def log_context():
-    log(dict(context))
+    log(dict(prefect.context))
