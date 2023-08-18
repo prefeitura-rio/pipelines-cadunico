@@ -12,6 +12,7 @@ from prefect.run_configs import RunConfig
 from prefect.storage import Storage
 
 from pipelines.utils.state_handlers import (
+    handler_initialize_sentry,
     handler_inject_bd_credentials,
     handler_skip_if_running,
 )
@@ -32,7 +33,7 @@ class CustomFlow(Flow):
         tasks: Iterable[Task] = None,
         edges: Iterable[Edge] = None,
         reference_tasks: Iterable[Task] = None,
-        state_handlers: List[Callable] = [handler_inject_bd_credentials],
+        state_handlers: List[Callable] = [handler_initialize_sentry, handler_inject_bd_credentials],
         on_failure: Callable = None,
         validate: bool = None,
         result: Optional[Result] = None,

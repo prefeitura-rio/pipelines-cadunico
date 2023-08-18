@@ -10,6 +10,7 @@ prefect = "1.4.1"
 google-cloud-storage = "^2.10.0"
 infisical = "^1.4.0"
 basedosdados = "2.0.0b5"
+sentry-sdk = "^1.29.2"
 
 
 [tool.poetry.group.dev]

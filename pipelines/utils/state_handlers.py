@@ -1,9 +1,26 @@
 # -*- coding: utf-8 -*-
 import prefect
+import sentry_sdk
 from prefect.client import Client
 from prefect.engine.state import Skipped, State
 
-from pipelines.utils.infisical import inject_bd_credentials
+from pipelines.utils.infisical import get_secret, inject_bd_credentials
+from pipelines.utils.prefect import get_flow_run_mode
+
+
+def handler_initialize_sentry(obj, old_state: State, new_state: State) -> State:
+    """
+    State handler that will set up Sentry.
+    """
+    if new_state.is_running():
+        sentry_dsn = get_secret("SENTRY_DSN")
+        environment = get_flow_run_mode()
+        sentry_sdk.init(
+            dsn=sentry_dsn,
+            traces_sample_rate=0,
+            environment=environment,
+        )
+    return new_state
 
 
 def handler_inject_bd_credentials(obj, old_state: State, new_state: State) -> State:
