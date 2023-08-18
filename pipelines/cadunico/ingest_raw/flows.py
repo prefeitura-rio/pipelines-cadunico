@@ -14,7 +14,7 @@ from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
 
 with Flow(
-    name="CadUnico: Flow de teste",
+    name="CadUnico: Ingestão de dados brutos",
 ) as cadunico__ingest_raw__flow:
     # Parameters
     ingested_files_output = Parameter("ingested_files_output", default="/tmp/ingested_files/")
