@@ -64,7 +64,7 @@ def get_files_to_ingest(prefix: str, partitions: List[str], bucket_name: str) ->
     log(f"Blobs: {raw_blobs}")
 
     # Filter ZIP files
-    raw_blobs = [blob for blob in raw_blobs if blob.name.endswith(".zip")]
+    raw_blobs = [blob for blob in raw_blobs if blob.name.lower().endswith(".zip")]
     log(f"ZIP blobs: {raw_blobs}")
 
     # Extract partition information from blobs
@@ -76,7 +76,12 @@ def get_files_to_ingest(prefix: str, partitions: List[str], bucket_name: str) ->
         day = partition_info[5:7]
         return f"{year}-{month}-{day}"
 
-    raw_partitions = [_parse_partition(blob) for blob in raw_blobs]
+    raw_partitions = []
+    for blob in raw_blobs:
+        try:
+            raw_partitions.append(_parse_partition(blob))
+        except Exception as e:
+            log(f"Failed to parse partition from blob {blob.name}: {e}", "warning")
     log(f"Raw partitions: {raw_partitions}")
 
     # Filter files that are not in the staging area
@@ -108,7 +113,7 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
 
     # Download blob to temporary directory
     gcs_client = get_gcs_client()
-    fname = str(temp_directory / blob.name)
+    fname = str(temp_directory / blob.name.rpartition("/")[-1])
     blob.download_to_filename(fname, client=gcs_client)
     log(f"Downloaded blob {blob.name} to {fname}")
 

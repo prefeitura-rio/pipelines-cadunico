@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import base64
 from os import environ
 from typing import Literal
 
@@ -98,6 +99,8 @@ def inject_bd_credentials() -> None:
     """
     client = get_infisical_client()
 
+    environment = get_flow_run_mode()
+
     for secret_name in [
         "BASEDOSDADOS_CONFIG",
         "BASEDOSDADOS_CREDENTIALS_PROD",
@@ -105,6 +108,12 @@ def inject_bd_credentials() -> None:
     ]:
         inject_env(
             secret_name=secret_name,
-            environment=get_flow_run_mode(),
+            environment=environment,
             client=client,
         )
+
+    service_account_name = f"BASEDOSDADOS_CREDENTIALS_{environment.upper()}"
+    service_account = base64.b64decode(environ[service_account_name])
+    with open("/tmp/credentials.json", "wb") as credentials_file:
+        credentials_file.write(service_account)
+    environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/tmp/credentials.json"
