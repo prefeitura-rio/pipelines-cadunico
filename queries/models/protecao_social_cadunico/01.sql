@@ -1,17 +1,18 @@
-{{
-        config(
-            materialized='incremental',
-            partition_by={
-                "field": "data_particao",
-                "data_type": "date",
-                "granularity": "month",
-            }    
-        )
+
+        {{
+            config(
+                materialized='incremental',
+                partition_by={
+                    "field": "data_particao",
+                    "data_type": "date",
+                    "granularity": "month",
+                }    
+            )
+            
+        }}
         
-    }}
-    
-    SELECT
-        SUBSTRING(text,1,13) AS chv_natural_prefeitura_fam,
+        SELECT
+            SUBSTRING(text,1,13) AS chv_natural_prefeitura_fam,
         SUBSTRING(text,14,11) AS cod_familiar_fam,
         SUBSTRING(text,25,13) AS vazio,
         SUBSTRING(text,38,2) AS num_reg_arquivo,
@@ -57,15 +58,18 @@
         SUBSTRING(text,1130,100) AS nom_unidade_territorial_fam,
         SUBSTRING(text,1230,1) AS ind_formulario_sup3_fam,
         SUBSTRING(text,1231,2) AS nu_origem_cadastro_fam,
-    FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
-    WHERE SUBSTRING(text,38,2) = '01' AND
-          SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+        FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
+        WHERE SUBSTRING(text,38,2) = '01' AND
+            SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 
-    {% if is_incremental() %}
+        {% if is_incremental() %}
 
-    {% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
+        {% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
 
-    AND
-        SAFE_CAST(data_particao AS DATE) > ("{{ max_partition }}")
+        AND
+            SAFE_CAST(data_particao AS DATE) > ("{{ max_partition }}")
 
-    {% endif %}
+        {% endif %}
+        
+        
+        

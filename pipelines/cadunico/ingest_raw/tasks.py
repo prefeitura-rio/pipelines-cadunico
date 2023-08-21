@@ -12,6 +12,7 @@ from prefect import task
 
 from pipelines.cadunico.ingest_raw.utils import parse_partition
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
+from pipelines.utils.io import get_root_path
 from pipelines.utils.gcs import (
     get_gcs_client,
     list_blobs_with_prefix,
@@ -247,3 +248,22 @@ def append_data_to_storage(
         dump_mode=dump_mode,
         biglake_table=biglake_table,
     )
+
+
+@task
+def get_tables_to_materialize(dataset_id):
+    """
+    Upload to GCS.
+
+    Args:
+        data_path (str | Path): The path to the data.
+        dataset_id (str): The dataset ID.
+        table_id (str): The table ID.
+        dump_mode (str): The dump mode.
+        biglake_table (bool): Whether to create a BigLake table.
+    """
+    root_path = get_root_path()
+    queries_dir = root_path / f"queries/models/{dataset_id}/"
+    tables = [
+        str(q).replace(".sql", "").split("/")[-1] for q in queries_dir.iterdir() if q.is_file()
+    ]
