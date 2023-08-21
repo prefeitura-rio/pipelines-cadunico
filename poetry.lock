@@ -65,13 +65,13 @@ files = [
 
 [[package]]
 name = "basedosdados"
-version = "2.0.0b6"
+version = "2.0.0b8"
 description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
 optional = false
 python-versions = ">=3.8,<3.11"
 files = [
-    {file = "basedosdados-2.0.0b6-py3-none-any.whl", hash = "sha256:ebcab88e9fbaf593be748d88c5b1d3f8a6a1fdfdb07e8dec35c83fe9afa47599"},
-    {file = "basedosdados-2.0.0b6.tar.gz", hash = "sha256:df88c6a0442ddf04a92693ae816834ceb8b3841b1be0ed6d53011b6ea47bb4b9"},
+    {file = "basedosdados-2.0.0b8-py3-none-any.whl", hash = "sha256:be9b3819a3aaf1b2ab7f93ad43e4983fd8e96afefae47c53090b98c10d1259d7"},
+    {file = "basedosdados-2.0.0b8.tar.gz", hash = "sha256:c67e337cde6105f102620b968f31b9585bb801edf9257d1a71319c06ea6f2bc7"},
 ]
 
 [package.dependencies]
@@ -3180,4 +3180,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "8a5cdc770120553d1a91849d4cfb137b4378b11cb27df3b7563c0d55276c6868"
+content-hash = "4244972fd0b30862f8ca96c142180b03b05426102b841a50ce637532efdfb575"
