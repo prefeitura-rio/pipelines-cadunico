@@ -7,6 +7,7 @@ from uuid import uuid4
 
 import pandas as pd
 
+import pipelines
 from pipelines.utils.logging import log
 
 
@@ -109,6 +110,13 @@ def dump_header_to_file(data_path: Union[str, Path], data_type: str = "csv"):
     log(f"Wrote {data_type.upper()} header at {save_header_file_path}")
 
     return save_header_path
+
+
+def get_root_path() -> Path:
+    """
+    Returns the root path of the project.
+    """
+    return Path(pipelines.__file__).parent.parent
 
 
 def to_json_dataframe(
