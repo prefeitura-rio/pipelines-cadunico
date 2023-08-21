@@ -4,7 +4,9 @@ from typing import List
 from uuid import uuid4
 from zipfile import ZipFile
 
+import basedosdados as bd
 from google.cloud.storage.blob import Blob
+import pandas as pd
 from prefect import task
 
 from pipelines.cadunico.ingest_raw.utils import parse_partition
@@ -151,7 +153,59 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
 
 
 @task
-def create_update_table(
+def create_table_if_not_existis(
+    dataset_id: str,
+    table_id: str,
+    biglake_table: bool = True,
+):
+    """
+    Create table using BD+ .
+
+    Args:
+        data_path (str | Path): The path to the data.
+        dataset_id (str): The dataset ID.
+        table_id (str): The table ID.
+        biglake_table (bool): Whether to create a BigLake table.
+    """
+    
+    tb = bd.Table(dataset_id=dataset_id, table_id=table_id)
+    st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
+    
+    
+    
+    table_exists = tb.table_exists(mode="staging")
+    
+    if not table_exists:
+        mock_data_path = Path("/tmp/mock_data/")
+        mock_data_path_partition = mock_data_path / "ano_particao=1970/mes_particao=1/data_particao=1970-01-01/"
+        mock_data_path_partition.mkdir(parents=True, exist_ok=True)
+        
+        data = {
+            "text":["delete_this_data"]
+        }
+        
+        #create mock data csv
+        pd.DataFrame(data).to_csv(mock_data_path_partition / "delete_this_data.csv", index=False)
+        
+        #create table
+        tb.create(
+            path=mock_data_path,
+            if_storage_data_exists="replace",
+            biglake_table=biglake_table,
+        )
+        log(f'SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}')
+        #delete data from storage
+        st.delete_table(mode="staging")
+        log(f'SUCESSFULLY DELETED DATA FROM STORAGE: {dataset_id}.{table_id}')
+    else:
+        log(f'TABLE ALREADY EXISTS: {dataset_id}.{table_id}')
+    
+    
+    return table_exists
+        
+        
+@task
+def append_data_to_storage(
     data_path: str | Path,
     dataset_id: str,
     table_id: str,
@@ -159,7 +213,7 @@ def create_update_table(
     biglake_table: bool = True,
 ):
     """
-    Create table using BD+ and upload to GCS.
+    Upload to GCS.
 
     Args:
         data_path (str | Path): The path to the data.

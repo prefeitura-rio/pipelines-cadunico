@@ -5,7 +5,8 @@ from prefect.storage import GCS
 from prefect.utilities.edges import unmapped
 
 from pipelines.cadunico.ingest_raw.tasks import (
-    create_update_table,
+    append_data_to_storage,
+    create_table_if_not_existis,
     get_existing_partitions,
     get_files_to_ingest,
     get_project_id_task,
@@ -39,14 +40,22 @@ with Flow(
     ingested_files = ingest_file.map(
         blob=files_to_ingest, output_directory=unmapped(ingested_files_output)
     )
-    tb_create = create_update_table(
+    
+    create_table = create_table_if_not_existis(
+            dataset_id= dataset_id,
+            table_id= table_id,
+            biglake_table= biglake_table,
+    )
+    create_table.set_upstream(ingested_files)
+    
+    tb_create = append_data_to_storage(
         data_path=ingested_files_output,
         dataset_id=dataset_id,
         table_id=table_id,
         dump_mode=dump_mode,
         biglake_table=biglake_table,
     )
-    tb_create.set_upstream(ingested_files)
+    tb_create.set_upstream(create_table)
 
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
