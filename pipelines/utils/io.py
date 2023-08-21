@@ -119,7 +119,7 @@ def get_root_path() -> Path:
     root_path = Path(pipelines.__file__).parent.parent
     # If the root path is site-packages, we're running in a Docker container. Thus, we
     # need to change the root path to /app
-    if root_path.name == "site-packages":
+    if str(root_path).endswith("site-packages"):
         root_path = "/app"
     return root_path
 
