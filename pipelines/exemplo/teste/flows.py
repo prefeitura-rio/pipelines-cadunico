@@ -4,7 +4,7 @@ from prefect.storage import GCS
 
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
-from pipelines.exemplo.teste.tasks import list_blobs, log_context, run_dbt_model
+from pipelines.exemplo.teste.tasks import list_blobs, log_context, run_dbt_model_task
 
 with Flow(
     name="CadUnico: Flow de teste",
@@ -22,7 +22,7 @@ exemplo__teste__flow.run_config = KubernetesRun(image=constants.DOCKER_IMAGE.val
 with Flow(
     name="CadUnico: Testando execução do dbt",
 ) as exemplo__teste__dbt_flow:
-    run_dbt_model(dataset_id="example")
+    run_dbt_model_task(dataset_id="example")
 
 # Storage and run configs
 exemplo__teste__dbt_flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
