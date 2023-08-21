@@ -5,6 +5,7 @@ from prefect.storage import GCS
 from prefect.utilities.edges import unmapped
 
 from pipelines.cadunico.ingest_raw.tasks import (
+    create_update_table,
     get_existing_partitions,
     get_files_to_ingest,
     get_project_id_task,
@@ -17,6 +18,10 @@ with Flow(
     name="CadUnico: Ingestão de dados brutos",
 ) as cadunico__ingest_raw__flow:
     # Parameters
+    dataset_id = Parameter("dataset_id", default="protecao_social_cadunico")
+    table_id = Parameter("table_id", default="registro_familia")
+    dump_mode = Parameter("dump_mode", default="append")
+    biglake_table = Parameter("biglake_table", default=True)
     ingested_files_output = Parameter("ingested_files_output", default="/tmp/ingested_files/")
     prefix_raw_area = Parameter("prefix_raw_area", default="raw/cadunico")
     prefix_staging_area = Parameter(
@@ -31,7 +36,17 @@ with Flow(
     files_to_ingest = get_files_to_ingest(
         prefix=prefix_raw_area, partitions=existing_partitions, bucket_name=project_id
     )
-    ingest_file.map(blob=files_to_ingest, output_directory=unmapped(ingested_files_output))
+    ingested_files = ingest_file.map(
+        blob=files_to_ingest, output_directory=unmapped(ingested_files_output)
+    )
+    tb_create = create_update_table(
+        data_path=ingested_files_output,
+        dataset_id=dataset_id,
+        table_id=table_id,
+        dump_mode=dump_mode,
+        biglake_table=biglake_table,
+    )
+    tb_create.set_upstream(ingested_files)
 
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)

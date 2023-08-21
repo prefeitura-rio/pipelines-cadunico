@@ -7,7 +7,8 @@ from zipfile import ZipFile
 from google.cloud.storage.blob import Blob
 from prefect import task
 
-from pipelines.utils.bd import get_project_id
+from pipelines.cadunico.ingest_raw.utils import parse_partition
+from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
 from pipelines.utils.gcs import (
     get_gcs_client,
     list_blobs_with_prefix,
@@ -68,19 +69,11 @@ def get_files_to_ingest(prefix: str, partitions: List[str], bucket_name: str) ->
     log(f"ZIP blobs: {raw_blobs}")
 
     # Extract partition information from blobs
-    def _parse_partition(blob: Blob) -> str:
-        name_parts = blob.name.split(".")
-        partition_info = name_parts[-3]
-        year = str(2000 + int(partition_info[1:3]))
-        month = partition_info[3:5]
-        day = partition_info[5:7]
-        return f"{year}-{month}-{day}"
-
     raw_partitions = []
     raw_partitions_blobs = []
     for blob in raw_blobs:
         try:
-            raw_partitions.append(_parse_partition(blob))
+            raw_partitions.append(parse_partition(blob))
             raw_partitions_blobs.append(blob)
         except Exception as e:
             log(f"Failed to parse partition from blob {blob.name}: {e}", "warning")
@@ -126,3 +119,59 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
         zip_file.extractall(unzip_output_directory)
     log(f"Unzipped {fname} to {unzip_output_directory}")
     log(f"Unzipped files: {list(unzip_output_directory.glob('*'))}")
+
+    # List TXT files (non-case sensitive)
+    txt_files = list(unzip_output_directory.glob("*.txt")) + list(
+        unzip_output_directory.glob("*.TXT")
+    )
+    log(f"TXT files: {txt_files}")
+
+    # Modify extension to CSV
+    csv_files: List[Path] = []
+    for txt_file in txt_files:
+        csv_file = txt_file.with_suffix(".csv")
+        txt_file.rename(csv_file)
+        csv_files.append(csv_file)
+    log(f"CSV files: {csv_files}")
+
+    # Create partition directories
+    partition = parse_partition(blob)
+    year, month, _ = partition.split("-")
+    partition_directory = (
+        output_directory
+        / f"ano_particao={int(year)}"
+        / f"mes_particao={int(month)}"
+        / f"data_particao={partition}"
+    )
+    partition_directory.mkdir(parents=True, exist_ok=True)
+
+    # Move CSV files to partition directory
+    for csv_file in csv_files:
+        csv_file.rename(partition_directory / csv_file.name)
+
+
+@task
+def create_update_table(
+    data_path: str | Path,
+    dataset_id: str,
+    table_id: str,
+    dump_mode: str,
+    biglake_table: bool = True,
+):
+    """
+    Create table using BD+ and upload to GCS.
+
+    Args:
+        data_path (str | Path): The path to the data.
+        dataset_id (str): The dataset ID.
+        table_id (str): The table ID.
+        dump_mode (str): The dump mode.
+        biglake_table (bool): Whether to create a BigLake table.
+    """
+    create_table_and_upload_to_gcs(
+        data_path=data_path,
+        dataset_id=dataset_id,
+        table_id=table_id,
+        dump_mode=dump_mode,
+        biglake_table=biglake_table,
+    )
