@@ -470,7 +470,7 @@ if __name__ == "__main__":
         message += "**Os seguintes arquivos são afetados diretamente por alterações "
         message += "realizadas nesse pull request:**"
         for file_ in dependent_files:
-            message += f"\n\t- {file_}"
+            message += f"\n\t- `{file_}`"
         message += "\n\n"
 
     # Check for variable name conflicts.
@@ -478,7 +478,7 @@ if __name__ == "__main__":
     if len(conflicts) > 0:
         message += "**Existem conflitos entre nomes de variáveis nos seguintes objetos:**"
         for conflict in conflicts:
-            message += "\n\t- {conflict[0]} e {conflict[1]}"
+            message += "\n\t- `{conflict[0]}` e `{conflict[1]}`"
         message += "\n\n"
 
     # If there is nothing wrong, let'em know!
