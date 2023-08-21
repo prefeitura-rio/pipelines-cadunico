@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import List, Tuple, Union
 
 import networkx as nx
-import yaml
 from prefect import Flow
 
 message_id = 0
@@ -407,34 +406,7 @@ def log(message: str):
     print(f"::set-output name=pr-message::{message}")
 
 
-def identify_code_owners(files: List[str]) -> List[str]:
-    """
-    Identifies the code owners in order to warn them.
-    """
-    # Load the code owners YAML file.
-    with open("code_owners.yaml") as file_:
-        code_owners = yaml.safe_load(file_)
-
-    # Get the code owners.
-    owners = set()
-    for file_ in files:
-        path_parts = file_.split("/")
-        section = code_owners
-        for i in range(len(path_parts) - 1):
-            if path_parts[i] in section:
-                current_owners = section[path_parts[i]]["owners"]
-                if "dir" in section[path_parts[i]]:
-                    section = section[path_parts[i]]["dir"]
-            else:
-                break
-        owners.update(current_owners)
-
-    # Return the owners.
-    return list(owners)
-
-
 if __name__ == "__main__":
-
     # Assert arguments.
     if len(sys.argv) not in [2, 3]:
         print(f"Usage: python {sys.argv[0]} <changed_files> [--write-to-file]")
@@ -499,17 +471,6 @@ if __name__ == "__main__":
         message += "realizadas nesse pull request:**"
         for file_ in dependent_files:
             message += f"\n\t- {file_}"
-        message += "\n\n"
-
-    code_owners = identify_code_owners(changed_files)
-    print("These are the code owners:")
-    for owner in code_owners:
-        print(f"\t- {owner}")
-
-    if len(code_owners) > 0:
-        message += "**Os seguintes usuários devem ser avisados sobre a alteração:**"
-        for owner in code_owners:
-            message += f"\n\t- @{owner}"
         message += "\n\n"
 
     # Check for variable name conflicts.
