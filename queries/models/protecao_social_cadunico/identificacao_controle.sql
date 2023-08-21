@@ -17,9 +17,9 @@
         SUBSTRING(text,70,5) AS cod_versao_layout_hdr,
         SUBSTRING(text,75,8) AS dta_posicao_cadastro_hdr,
         SUBSTRING(text,83,8) AS dta_extracao_dados_hdr,
-    FROM `rj-iplanrio.protecao_social_cadunico_staging.registro_familia` 
+    FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
     WHERE SUBSTRING(text,38,2) = '00' AND
-        SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+          SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 
     {% if is_incremental() %}
 
