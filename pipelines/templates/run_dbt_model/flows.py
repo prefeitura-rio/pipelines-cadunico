@@ -9,10 +9,10 @@ from pipelines.templates.run_dbt_model.tasks import (
     run_dbt_model_task,
     rename_current_flow_run_msg,
 )
-from pipelines.templates.constants import constants
+from pipelines.templates.constants import constants as template_constants
 
 with Flow(
-    name=constants.FLOW_EXECUTE_DBT_MODEL_NAME.value,
+    name=template_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value,
 ) as templates__run_dbt_model__flow:
     # Parameters
     dataset_id = Parameter("dataset_id")
