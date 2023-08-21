@@ -77,16 +77,18 @@ def get_files_to_ingest(prefix: str, partitions: List[str], bucket_name: str) ->
         return f"{year}-{month}-{day}"
 
     raw_partitions = []
+    raw_partitions_blobs = []
     for blob in raw_blobs:
         try:
             raw_partitions.append(_parse_partition(blob))
+            raw_partitions_blobs.append(blob)
         except Exception as e:
             log(f"Failed to parse partition from blob {blob.name}: {e}", "warning")
     log(f"Raw partitions: {raw_partitions}")
 
     # Filter files that are not in the staging area
     files_to_ingest = []
-    for blob, partition in zip(raw_blobs, raw_partitions):
+    for blob, partition in zip(raw_partitions_blobs, raw_partitions):
         if partition not in partitions:
             files_to_ingest.append(blob)
     log(f"Files to ingest: {files_to_ingest}")
