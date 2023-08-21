@@ -5,7 +5,10 @@ from prefect.storage import GCS
 
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
-from pipelines.templates.run_dbt_model.tasks import run_dbt_model_task
+from pipelines.templates.run_dbt_model.tasks import (
+    run_dbt_model_task,
+    rename_current_flow_run_msg,
+)
 from pipelines.templates.constants import constants
 
 with Flow(
@@ -21,6 +24,10 @@ with Flow(
     flags = Parameter("flags", default=None, required=False)
     vars_ = Parameter("vars", default=None, required=False)
 
+    rename_flow_run = rename_current_flow_run_msg(
+        msg=f"Materialize: {dataset_id}.{table_id}",
+    )
+
     run_dbt_model_task(
         dataset_id=dataset_id,
         table_id=table_id,
@@ -31,6 +38,7 @@ with Flow(
         flags=flags,
         _vars=vars_,
     )
+    run_dbt_model_task.set_upstream(rename_flow_run)
 
 # Storage and run configs
 templates__run_dbt_model__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
