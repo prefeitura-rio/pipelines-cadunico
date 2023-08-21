@@ -6,9 +6,10 @@ from prefect.storage import GCS
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
 from pipelines.templates.run_dbt_model.tasks import run_dbt_model_task
+from pipelines.templates.constants import constants
 
 with Flow(
-    name="Template: Executa modelo do dbt",
+    name=constants.FLOW_EXECUTE_DBT_MODEL_NAME.value,
 ) as templates__run_dbt_model__flow:
     # Parameters
     dataset_id = Parameter("dataset_id")
