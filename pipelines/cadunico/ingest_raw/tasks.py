@@ -147,7 +147,7 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
     # Modify extension to CSV
     csv_files: List[Path] = []
     for txt_file in txt_files:
-        csv_file = txt_file.with_suffix(".csv")
+        csv_file = Path(str(txt_file) + ".csv")
         txt_file.rename(csv_file)
         csv_files.append(csv_file)
     log(f"CSV files: {csv_files}")
