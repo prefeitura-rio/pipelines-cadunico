@@ -125,4 +125,4 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
     with ZipFile(fname, "r") as zip_file:
         zip_file.extractall(unzip_output_directory)
     log(f"Unzipped {fname} to {unzip_output_directory}")
-    log(f"Unzipped files: {unzip_output_directory.glob('*')}")
+    log(f"Unzipped files: {list(unzip_output_directory.glob('*'))}")
