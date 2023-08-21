@@ -120,7 +120,7 @@ def get_root_path() -> Path:
     # If the root path is site-packages, we're running in a Docker container. Thus, we
     # need to change the root path to /app
     if str(root_path).endswith("site-packages"):
-        root_path = "/app"
+        root_path = Path("/app")
     return root_path
 
 
