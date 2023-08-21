@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 from os import system
 from pathlib import Path
 from typing import List
@@ -253,17 +254,25 @@ def append_data_to_storage(
 @task
 def get_tables_to_materialize(dataset_id):
     """
-    Upload to GCS.
+    Get tables parameters to materialize from queries/models/{dataset_id}/.
 
     Args:
-        data_path (str | Path): The path to the data.
         dataset_id (str): The dataset ID.
-        table_id (str): The table ID.
-        dump_mode (str): The dump mode.
-        biglake_table (bool): Whether to create a BigLake table.
     """
     root_path = get_root_path()
     queries_dir = root_path / f"queries/models/{dataset_id}/"
-    tables = [
-        str(q).replace(".sql", "").split("/")[-1] for q in queries_dir.iterdir() if q.is_file()
-    ]
+    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+    files_path.sort()
+    tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
+    table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
+
+    parameters_list = []
+    for table, dbt_alias in zip(tables, table_dbt_alias):
+        parameters = {
+            "dataset_id": dataset_id,
+            "table_id": table,
+            "dbt_alias": dbt_alias,
+        }
+        parameters_list.append(parameters)
+
+    return parameters_list

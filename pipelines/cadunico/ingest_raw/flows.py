@@ -70,11 +70,11 @@ with Flow(
         flow_name=unmapped(constants.FLOW_EXECUTE_DBT_MODEL_NAME.value),
         project_name=unmapped(prefect.context.get("project_name")),
         parameters=tables_to_materialize_parameters,
-        labels=unmapped(current_flow_labels),
+        labels=unmapped(prefect.context.get("config").get("cloud").get("agent").get("labels")),
         run_name=unmapped("qualquer nome q vc queira colocar, um nome unico pra todas as runs"),
     )
 
-    wait_for_flow_run.map(
+    wait_for_flow_run_ = wait_for_flow_run.map(
         flow_run_id=materialization_flow_runs,
         stream_states=unmapped(True),
         stream_logs=unmapped(True),
