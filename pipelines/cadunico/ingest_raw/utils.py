@@ -26,7 +26,7 @@ def create_cadunico_queries_from_table(dataset_id: str):
         dd = df[df["reg"] == table]
 
         columns = (
-            "    SUBSTRING(text,"
+            "SUBSTRING(text,"
             + dd["posicao"]
             + ","
             + dd["tamanho"]
@@ -35,37 +35,36 @@ def create_cadunico_queries_from_table(dataset_id: str):
             + ","
         )
         ini_query = """
-        {{
-            config(
-                materialized='incremental',
-                partition_by={
-                    "field": "data_particao",
-                    "data_type": "date",
-                    "granularity": "month",
-                }    
-            )
-            
-        }}
-        
-        SELECT
-        """
+{{
+    config(
+        materialized='incremental',
+        partition_by={
+            "field": "data_particao",
+            "data_type": "date",
+            "granularity": "month",
+        }    
+    )
+    
+}}
+
+SELECT
+    """
 
         end_query = """
-        FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
-        WHERE SUBSTRING(text,38,2) = '__table_replacer__' AND
-            SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+    SAFE_CAST(data_particao AS DATE) data_particao,
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
+WHERE SUBSTRING(text,38,2) = '__table_replacer__' AND
+    SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 
-        {% if is_incremental() %}
+{% if is_incremental() %}
 
-        {% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
+{% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
 
-        AND
-            SAFE_CAST(data_particao AS DATE) > ("{{ max_partition }}")
+AND
+    SAFE_CAST(data_particao AS DATE) > ("{{ max_partition }}")
 
-        {% endif %}
-        
-        
-        """
+{% endif %}
+"""
 
         table_query = ini_query + "\n    ".join(columns) + end_query
         table = table if len(table) > 1 else f"0{table}"

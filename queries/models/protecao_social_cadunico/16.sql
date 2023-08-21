@@ -1,39 +1,37 @@
 
-        {{
-            config(
-                materialized='incremental',
-                partition_by={
-                    "field": "data_particao",
-                    "data_type": "date",
-                    "granularity": "month",
-                }    
-            )
-            
-        }}
-        
-        SELECT
-            SUBSTRING(text,1,13) AS chv_natural_prefeitura_famt,
-        SUBSTRING(text,14,11) AS cod_familiar_famt,
-        SUBSTRING(text,25,13) AS vazio,
-        SUBSTRING(text,38,2) AS num_reg_arquivo_famt,
-        SUBSTRING(text,40,8) AS dat_transferência_famt,
-        SUBSTRING(text,48,1) AS cod_est_cadastral_atual_famt,
-        SUBSTRING(text,49,2) AS cod_munic_ibge_origem_2_famt,
-        SUBSTRING(text,51,5) AS cod_munic_ibge_origem_5_famt,
-        SUBSTRING(text,56,13) AS cod_destino_prefeitura_famt,
-        SUBSTRING(text,69,11) AS cod_destino_familia_famt,
-        FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
-        WHERE SUBSTRING(text,38,2) = '16' AND
-            SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+{{
+    config(
+        materialized='incremental',
+        partition_by={
+            "field": "data_particao",
+            "data_type": "date",
+            "granularity": "month",
+        }    
+    )
+    
+}}
 
-        {% if is_incremental() %}
+SELECT
+    SUBSTRING(text,1,13) AS chv_natural_prefeitura_famt,
+    SUBSTRING(text,14,11) AS cod_familiar_famt,
+    SUBSTRING(text,25,13) AS vazio,
+    SUBSTRING(text,38,2) AS num_reg_arquivo_famt,
+    SUBSTRING(text,40,8) AS dat_transferência_famt,
+    SUBSTRING(text,48,1) AS cod_est_cadastral_atual_famt,
+    SUBSTRING(text,49,2) AS cod_munic_ibge_origem_2_famt,
+    SUBSTRING(text,51,5) AS cod_munic_ibge_origem_5_famt,
+    SUBSTRING(text,56,13) AS cod_destino_prefeitura_famt,
+    SUBSTRING(text,69,11) AS cod_destino_familia_famt,
+    SAFE_CAST(data_particao AS DATE) data_particao,
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
+WHERE SUBSTRING(text,38,2) = '16' AND
+    SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 
-        {% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
+{% if is_incremental() %}
 
-        AND
-            SAFE_CAST(data_particao AS DATE) > ("{{ max_partition }}")
+{% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
 
-        {% endif %}
-        
-        
-        
+AND
+    SAFE_CAST(data_particao AS DATE) > ("{{ max_partition }}")
+
+{% endif %}
