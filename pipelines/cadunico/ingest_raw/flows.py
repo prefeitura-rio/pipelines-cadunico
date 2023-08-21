@@ -17,7 +17,7 @@ from pipelines.cadunico.ingest_raw.tasks import (
 )
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
-from pipelines.templates.constants import utils_constants
+from pipelines.templates.constants import constants as utils_constants
 
 with Flow(
     name="CadUnico: Ingestão de dados brutos",
