@@ -211,7 +211,10 @@ def create_table_if_not_exists(
         )
         log(f"SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}")
         # delete data from storage
-        st.delete_table(mode="staging")
+        st.delete_file(
+            filename=f"ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv",
+            mode="staging",
+        )
         log(f"SUCESSFULLY DELETED DATA FROM STORAGE: {dataset_id}.{table_id}")
     else:
         log(f"TABLE ALREADY EXISTS: {dataset_id}.{table_id}")
