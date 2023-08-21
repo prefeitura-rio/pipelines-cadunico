@@ -6,7 +6,7 @@ from prefect.utilities.edges import unmapped
 
 from pipelines.cadunico.ingest_raw.tasks import (
     append_data_to_storage,
-    create_table_if_not_existis,
+    create_table_if_not_exists,
     get_existing_partitions,
     get_files_to_ingest,
     get_project_id_task,
@@ -24,7 +24,9 @@ with Flow(
     dump_mode = Parameter("dump_mode", default="append")
     biglake_table = Parameter("biglake_table", default=True)
     ingested_files_output = Parameter("ingested_files_output", default="/tmp/ingested_files/")
-    prefix_raw_area = Parameter("prefix_raw_area", default="raw/protecao_social_cadunico/registro_familia")
+    prefix_raw_area = Parameter(
+        "prefix_raw_area", default="raw/protecao_social_cadunico/registro_familia"
+    )
     prefix_staging_area = Parameter(
         "prefix_staging_area", default="staging/protecao_social_cadunico/registro_familia"
     )
@@ -40,14 +42,14 @@ with Flow(
     ingested_files = ingest_file.map(
         blob=files_to_ingest, output_directory=unmapped(ingested_files_output)
     )
-    
-    create_table = create_table_if_not_existis(
-            dataset_id= dataset_id,
-            table_id= table_id,
-            biglake_table= biglake_table,
+
+    create_table = create_table_if_not_exists(
+        dataset_id=dataset_id,
+        table_id=table_id,
+        biglake_table=biglake_table,
     )
     create_table.set_upstream(ingested_files)
-    
+
     tb_create = append_data_to_storage(
         data_path=ingested_files_output,
         dataset_id=dataset_id,

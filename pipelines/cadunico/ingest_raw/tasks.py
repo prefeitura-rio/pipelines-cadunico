@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
+from os import system
 from pathlib import Path
 from typing import List
 from uuid import uuid4
 from zipfile import ZipFile
 
 import basedosdados as bd
-from google.cloud.storage.blob import Blob
 import pandas as pd
+from google.cloud.storage.blob import Blob
 from prefect import task
 
 from pipelines.cadunico.ingest_raw.utils import parse_partition
@@ -128,6 +129,20 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
     )
     log(f"TXT files: {txt_files}")
 
+    # Split TXT files into chunks of 1GB
+    txt_files_after_split: List[Path] = []
+    for txt_file in txt_files:
+        txt_file_size = txt_file.stat().st_size
+        if txt_file_size > 1e9:
+            log(f"Splitting {txt_file} into chunks of 1GB")
+            system(f"split -b 1G {txt_file} {txt_file}.PART_")
+            txt_file.unlink()
+            txt_files_after_split.extend(list(unzip_output_directory.glob("*.PART_*")))
+        else:
+            log(f"File {txt_file} is smaller than 1GB, not splitting")
+            txt_files_after_split.append(txt_file)
+    txt_files = txt_files_after_split
+
     # Modify extension to CSV
     csv_files: List[Path] = []
     for txt_file in txt_files:
@@ -153,7 +168,7 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
 
 
 @task
-def create_table_if_not_existis(
+def create_table_if_not_exists(
     dataset_id: str,
     table_id: str,
     biglake_table: bool = True,
@@ -167,27 +182,25 @@ def create_table_if_not_existis(
         table_id (str): The table ID.
         biglake_table (bool): Whether to create a BigLake table.
     """
-    
+
     tb = bd.Table(dataset_id=dataset_id, table_id=table_id)
     st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
-    
-    
-    
+
     table_exists = tb.table_exists(mode="staging")
-    
+
     if not table_exists:
         mock_data_path = Path("/tmp/mock_data/")
-        mock_data_path_partition = mock_data_path / "ano_particao=1970/mes_particao=1/data_particao=1970-01-01/"
+        mock_data_path_partition = (
+            mock_data_path / "ano_particao=1970/mes_particao=1/data_particao=1970-01-01/"
+        )
         mock_data_path_partition.mkdir(parents=True, exist_ok=True)
-        
-        data = {
-            "text":["delete_this_data"]
-        }
-        
-        #create mock data csv
+
+        data = {"text": ["delete_this_data"]}
+
+        # create mock data csv
         pd.DataFrame(data).to_csv(mock_data_path_partition / "delete_this_data.csv", index=False)
-        
-        #create table
+
+        # create table
         tb.create(
             path=mock_data_path,
             csv_delimiter="Æ",
@@ -195,17 +208,16 @@ def create_table_if_not_existis(
             if_storage_data_exists="replace",
             biglake_table=biglake_table,
         )
-        log(f'SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}')
-        #delete data from storage
+        log(f"SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}")
+        # delete data from storage
         st.delete_table(mode="staging")
-        log(f'SUCESSFULLY DELETED DATA FROM STORAGE: {dataset_id}.{table_id}')
+        log(f"SUCESSFULLY DELETED DATA FROM STORAGE: {dataset_id}.{table_id}")
     else:
-        log(f'TABLE ALREADY EXISTS: {dataset_id}.{table_id}')
-    
-    
+        log(f"TABLE ALREADY EXISTS: {dataset_id}.{table_id}")
+
     return table_exists
-        
-        
+
+
 @task
 def append_data_to_storage(
     data_path: str | Path,
