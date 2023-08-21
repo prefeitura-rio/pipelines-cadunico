@@ -24,7 +24,7 @@ with Flow(
     dump_mode = Parameter("dump_mode", default="append")
     biglake_table = Parameter("biglake_table", default=True)
     ingested_files_output = Parameter("ingested_files_output", default="/tmp/ingested_files/")
-    prefix_raw_area = Parameter("prefix_raw_area", default="raw/cadunico")
+    prefix_raw_area = Parameter("prefix_raw_area", default="raw/protecao_social_cadunico/registro_familia")
     prefix_staging_area = Parameter(
         "prefix_staging_area", default="staging/protecao_social_cadunico/registro_familia"
     )
