@@ -17,7 +17,7 @@ from pipelines.cadunico.ingest_raw.tasks import (
 )
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
-from pipelines.templates.constants import constants as utils_constants
+from pipelines.templates.constants import constants as templates_constants
 
 with Flow(
     name="CadUnico: Ingestão de dados brutos",
@@ -67,7 +67,7 @@ with Flow(
     tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
 
     materialization_flow_runs = create_flow_run.map(
-        flow_name=unmapped(utils_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value),
+        flow_name=unmapped(templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value),
         project_name=unmapped(prefect.context.get("project_name")),
         parameters=tables_to_materialize_parameters,
         labels=unmapped(prefect.context.get("config").get("cloud").get("agent").get("labels")),
