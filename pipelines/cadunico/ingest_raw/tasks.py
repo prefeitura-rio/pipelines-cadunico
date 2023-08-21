@@ -142,6 +142,7 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
             log(f"File {txt_file} is smaller than 1GB, not splitting")
             txt_files_after_split.append(txt_file)
     txt_files = txt_files_after_split
+    log(f"TXT files after split: {txt_files}")
 
     # Modify extension to CSV
     csv_files: List[Path] = []
