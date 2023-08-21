@@ -18,7 +18,7 @@ with Flow(
     downstream = Parameter("downstream", default=None, required=False)
     exclude = Parameter("exclude", default=None, required=False)
     flags = Parameter("flags", default=None, required=False)
-    vars = Parameter("vars", default=None, required=False)
+    vars_ = Parameter("vars", default=None, required=False)
 
     run_dbt_model_task(
         dataset_id=dataset_id,
@@ -28,7 +28,7 @@ with Flow(
         downstream=downstream,
         exclude=exclude,
         flags=flags,
-        vars=vars,
+        _vars=vars_,
     )
 
 # Storage and run configs
