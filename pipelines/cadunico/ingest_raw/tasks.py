@@ -190,7 +190,7 @@ def create_table_if_not_existis(
         #create table
         tb.create(
             path=mock_data_path,
-            csv_delimiter="_________________",
+            csv_delimiter="Æ",
             csv_allow_jagged_rows=False,
             if_storage_data_exists="replace",
             biglake_table=biglake_table,
