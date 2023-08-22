@@ -17,7 +17,7 @@ def get_flow_run_mode() -> str:
 
 
 @task
-def rename_current_flow_run_msg(msg: str, flow_run_id: str) -> None:
+def rename_current_flow_run_msg(msg: str) -> None:
     """
     Rename the current flow run.
     """
