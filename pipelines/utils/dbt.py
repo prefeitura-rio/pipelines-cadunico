@@ -8,7 +8,7 @@ from pipelines.utils.logging import log
 
 
 def run_dbt_model(
-    dataset_id: str,
+    dataset_id: str = None,
     table_id: str = None,
     dbt_alias: bool = False,
     upstream: bool = None,
@@ -37,6 +37,9 @@ def run_dbt_model(
         dbt. Defaults to None.
     """
     # Set models and upstream/downstream for dbt
+
+    log(f"RUNNING DBT MODEL: {dataset_id}.{table_id}\nDBT_ALIAS: {dbt_alias}")
+
     run_command = "dbt run --select "
 
     if upstream:

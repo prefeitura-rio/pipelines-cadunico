@@ -8,7 +8,7 @@ from pipelines.utils.dbt import run_dbt_model
 
 @task
 def run_dbt_model_task(
-    dataset_id: str,
+    dataset_id: str = None,
     table_id: str = None,
     dbt_alias: bool = False,
     upstream: bool = None,
@@ -16,7 +16,7 @@ def run_dbt_model_task(
     exclude: str = None,
     flags: str = None,
     _vars: dict | List[Dict] = None,
-):
+) -> None:
     run_dbt_model(
         dataset_id=dataset_id,
         table_id=table_id,
@@ -27,3 +27,4 @@ def run_dbt_model_task(
         flags=flags,
         _vars=_vars,
     )
+    

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from os import system
 from pathlib import Path
 from typing import List
@@ -12,6 +13,7 @@ from prefect import task
 
 from pipelines.cadunico.ingest_raw.utils import parse_partition
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
+from pipelines.utils.io import get_root_path
 from pipelines.utils.gcs import (
     get_gcs_client,
     list_blobs_with_prefix,
@@ -84,9 +86,13 @@ def get_files_to_ingest(prefix: str, partitions: List[str], bucket_name: str) ->
 
     # Filter files that are not in the staging area
     files_to_ingest = []
+    partitions_to_ingest = []
     for blob, partition in zip(raw_partitions_blobs, raw_partitions):
         if partition not in partitions:
             files_to_ingest.append(blob)
+            partitions_to_ingest.append(partition)
+
+    log(f"Partitions to ingest: {partitions_to_ingest}")
     log(f"Files to ingest: {files_to_ingest}")
     return files_to_ingest
 
@@ -173,7 +179,7 @@ def create_table_if_not_exists(
     dataset_id: str,
     table_id: str,
     biglake_table: bool = True,
-):
+) -> bool:
     """
     Create table using BD+ .
 
@@ -229,7 +235,7 @@ def append_data_to_storage(
     table_id: str,
     dump_mode: str,
     biglake_table: bool = True,
-):
+) -> None:
     """
     Upload to GCS.
 
@@ -247,3 +253,34 @@ def append_data_to_storage(
         dump_mode=dump_mode,
         biglake_table=biglake_table,
     )
+
+    return dataset_id
+
+
+@task
+def get_tables_to_materialize(dataset_id: str) -> List[dict]:
+    """
+    Get tables parameters to materialize from queries/models/{dataset_id}/.
+
+    Args:
+        dataset_id (str): The dataset ID.
+    """
+
+    root_path = get_root_path()
+    queries_dir = root_path / f"queries/models/{dataset_id}/"
+    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+    files_path.sort()
+    tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
+    table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
+
+    parameters_list = []
+    for table, dbt_alias in zip(tables, table_dbt_alias):
+        parameters = {
+            "dataset_id": dataset_id,
+            "table_id": table,
+            "dbt_alias": dbt_alias,
+        }
+        parameters_list.append(parameters)
+    parsed_parameters_to_log = json.dumps(parameters_list, indent=4)
+    log(f"Materialize tables parameters: \n{parsed_parameters_to_log}")
+    return parameters_list
