@@ -27,3 +27,5 @@ def run_dbt_model_task(
         flags=flags,
         _vars=_vars,
     )
+
+    return None

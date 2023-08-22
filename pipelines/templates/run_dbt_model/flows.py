@@ -28,7 +28,7 @@ with Flow(
         prefix="Materialize: ", dataset_id=dataset_id, table_id=table_id
     )
 
-    run_dbt_model_task(
+    run_dbt_model_task_return = run_dbt_model_task(
         dataset_id=dataset_id,
         table_id=table_id,
         dbt_alias=dbt_alias,
@@ -38,7 +38,7 @@ with Flow(
         flags=flags,
         _vars=vars_,
     )
-    run_dbt_model_task.set_upstream(rename_flow_run)
+    run_dbt_model_task_return.set_upstream(rename_flow_run)
 
 # Storage and run configs
 templates__run_dbt_model__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
