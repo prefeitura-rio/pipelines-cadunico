@@ -32,7 +32,7 @@ SELECT
     SUBSTRING(text,52,1) AS ind_ajuda_vizinho_memb,
     SUBSTRING(text,53,1) AS ind_ajuda_instituicao_memb,
     SUBSTRING(text,54,1) AS ind_ajuda_outra_memb,
-    SAFE_CAST(data_particao AS DATE) data_particao,
+    SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
 WHERE SUBSTRING(text,38,2) = '06' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')

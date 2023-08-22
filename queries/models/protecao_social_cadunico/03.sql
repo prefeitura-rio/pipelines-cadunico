@@ -54,7 +54,7 @@ SELECT
     SUBSTRING(text,444,12) AS nu_estbo_saude,
     SUBSTRING(text,456,70) AS nom_centro_assist_fam,
     SUBSTRING(text,526,12) AS cod_centro_assist_fam,
-    SAFE_CAST(data_particao AS DATE) data_particao,
+    SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
 WHERE SUBSTRING(text,38,2) = '03' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')

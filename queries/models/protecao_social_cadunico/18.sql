@@ -26,7 +26,7 @@ SELECT
     SUBSTRING(text,160,2) AS uf_pgmcu,
     SUBSTRING(text,162,7) AS mun_pgmcu,
     SUBSTRING(text,169,255) AS desc_mot_exc,
-    SAFE_CAST(data_particao AS DATE) data_particao,
+    SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
 WHERE SUBSTRING(text,38,2) = '18' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')

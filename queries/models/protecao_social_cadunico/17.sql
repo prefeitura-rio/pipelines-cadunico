@@ -42,7 +42,7 @@ SELECT
     SUBSTRING(text,407,13) AS cod_destino_prefeitura_membt,
     SUBSTRING(text,420,11) AS cod_destino_familia_membt,
     SUBSTRING(text,431,4) AS cod_pais_origem_membt,
-    SAFE_CAST(data_particao AS DATE) data_particao,
+    SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
 WHERE SUBSTRING(text,38,2) = '17' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')

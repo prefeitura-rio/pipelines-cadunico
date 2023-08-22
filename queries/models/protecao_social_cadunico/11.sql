@@ -63,7 +63,7 @@ SELECT
     SUBSTRING(text,104,1) AS ind_snas_nenhum_fam,
     SUBSTRING(text,105,1) AS ind_prog_prohab_fam,
     SUBSTRING(text,106,3) AS ind_parc_mds_fam,
-    SAFE_CAST(data_particao AS DATE) data_particao,
+    SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
 WHERE SUBSTRING(text,38,2) = '11' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')

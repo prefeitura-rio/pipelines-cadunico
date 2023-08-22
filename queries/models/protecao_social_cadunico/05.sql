@@ -42,7 +42,7 @@ SELECT
     SUBSTRING(text,287,4) AS num_secao_tit_eleitor_pessoa,
     SUBSTRING(text,291,32) AS cod_termo / matricula _certid_pessoa,
     SUBSTRING(text,323,20) AS num_identidade_pessoa,
-    SAFE_CAST(data_particao AS DATE) data_particao,
+    SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
 WHERE SUBSTRING(text,38,2) = '05' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
