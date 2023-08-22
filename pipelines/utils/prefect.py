@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from typing import List
+
 import prefect
 from prefect import task
 from prefect.client import Client
@@ -14,6 +16,14 @@ def get_flow_run_mode() -> str:
     if project_name == "production":
         return "prod"
     return "staging"
+
+
+@task
+def task_get_current_flow_run_labels() -> List[str]:
+    """
+    Returns the labels of the current flow run.
+    """
+    return prefect.context.get("config").get("cloud").get("agent").get("labels")
 
 
 @task

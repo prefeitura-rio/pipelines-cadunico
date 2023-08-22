@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import prefect
 from prefect import Parameter, case
 from prefect.run_configs import KubernetesRun
 from prefect.storage import GCS
@@ -18,7 +17,10 @@ from pipelines.cadunico.ingest_raw.tasks import (
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
 from pipelines.templates.constants import constants as templates_constants
-from pipelines.utils.prefect import task_get_flow_group_id
+from pipelines.utils.prefect import (
+    task_get_current_flow_run_labels,
+    task_get_flow_group_id,
+)
 
 with Flow(
     name="CadUnico: Ingestão de dados brutos",
@@ -73,10 +75,11 @@ with Flow(
         materialization_flow_id = task_get_flow_group_id(
             flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
         )
+        materialization_labels = task_get_current_flow_run_labels()
         materialization_flow_runs = create_flow_run.map(
             flow_id=unmapped(materialization_flow_id),
             parameters=tables_to_materialize_parameters,
-            labels=unmapped(prefect.context.get("config").get("cloud").get("agent").get("labels")),
+            labels=unmapped(materialization_labels),
         )
 
         wait_for_flow_run_ = wait_for_flow_run.map(
