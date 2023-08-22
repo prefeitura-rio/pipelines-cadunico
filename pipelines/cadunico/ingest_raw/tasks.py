@@ -175,7 +175,7 @@ def create_table_if_not_exists(
     dataset_id: str,
     table_id: str,
     biglake_table: bool = True,
-):
+) -> bool:
     """
     Create table using BD+ .
 
@@ -231,7 +231,7 @@ def append_data_to_storage(
     table_id: str,
     dump_mode: str,
     biglake_table: bool = True,
-):
+) -> None:
     """
     Upload to GCS.
 
@@ -249,10 +249,12 @@ def append_data_to_storage(
         dump_mode=dump_mode,
         biglake_table=biglake_table,
     )
+    
+    return dataset_id
 
 
 # @task
-def get_tables_to_materialize(dataset_id):
+def get_tables_to_materialize(dataset_id: str) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
 
@@ -261,7 +263,7 @@ def get_tables_to_materialize(dataset_id):
     """
 
     root_path = get_root_path()
-    queries_dir = root_path / f"queries/models/{dataset_id}/"
+    queries_dir = root_path / f"queries/models/{str(dataset_id)}/"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
     tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
