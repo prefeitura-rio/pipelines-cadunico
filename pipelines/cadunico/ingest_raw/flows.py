@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import prefect
-from prefect import Parameter
+from prefect import Parameter, case
 from prefect.run_configs import KubernetesRun
 from prefect.storage import GCS
 from prefect.utilities.edges import unmapped
@@ -35,6 +35,8 @@ with Flow(
         "prefix_staging_area", default="staging/protecao_social_cadunico/registro_familia"
     )
 
+    materialize_after_dump = Parameter("materialize_after_dump", default=False, required=False)
+
     # Tasks
     project_id = get_project_id_task()
     existing_partitions = get_existing_partitions(
@@ -66,20 +68,21 @@ with Flow(
     tables_to_materialize_parameters = get_tables_to_materialize(dataset_id=dataset_id)
     tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
 
-    materialization_flow_runs = create_flow_run.map(
-        flow_name=unmapped(templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value),
-        project_name=unmapped(prefect.context.get("project_name")),
-        parameters=tables_to_materialize_parameters,
-        labels=unmapped(prefect.context.get("config").get("cloud").get("agent").get("labels")),
-        run_name=unmapped("qualquer nome q vc queira colocar, um nome unico pra todas as runs"),
-    )
+    with case(materialize_after_dump, True):
+        materialization_flow_runs = create_flow_run.map(
+            flow_name=unmapped(templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value),
+            project_name=unmapped(prefect.context.get("project_name")),
+            parameters=tables_to_materialize_parameters,
+            labels=unmapped(prefect.context.get("config").get("cloud").get("agent").get("labels")),
+            run_name=unmapped("qualquer nome q vc queira colocar, um nome unico pra todas as runs"),
+        )
 
-    wait_for_flow_run_ = wait_for_flow_run.map(
-        flow_run_id=materialization_flow_runs,
-        stream_states=unmapped(True),
-        stream_logs=unmapped(True),
-        raise_final_state=unmapped(True),
-    )
+        wait_for_flow_run_ = wait_for_flow_run.map(
+            flow_run_id=materialization_flow_runs,
+            stream_states=unmapped(True),
+            stream_logs=unmapped(True),
+            raise_final_state=unmapped(True),
+        )
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
 cadunico__ingest_raw__flow.run_config = KubernetesRun(image=constants.DOCKER_IMAGE.value)

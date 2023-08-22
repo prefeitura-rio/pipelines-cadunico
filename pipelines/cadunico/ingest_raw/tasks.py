@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import re
+import json
 from os import system
 from pathlib import Path
 from typing import List
@@ -251,7 +251,7 @@ def append_data_to_storage(
     )
 
 
-@task
+# @task
 def get_tables_to_materialize(dataset_id):
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
@@ -259,6 +259,7 @@ def get_tables_to_materialize(dataset_id):
     Args:
         dataset_id (str): The dataset ID.
     """
+
     root_path = get_root_path()
     queries_dir = root_path / f"queries/models/{dataset_id}/"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
@@ -274,5 +275,6 @@ def get_tables_to_materialize(dataset_id):
             "dbt_alias": dbt_alias,
         }
         parameters_list.append(parameters)
-
+    parsed_parameters_to_log = json.dumps(parameters_list, indent=4)
+    log(f"Materialize tables parameters: \n{parsed_parameters_to_log}")
     return parameters_list
