@@ -16,7 +16,7 @@ def run_dbt_model_task(
     exclude: str = None,
     flags: str = None,
     _vars: dict | List[Dict] = None,
-):
+) -> None:
     run_dbt_model(
         dataset_id=dataset_id,
         table_id=table_id,
@@ -27,5 +27,4 @@ def run_dbt_model_task(
         flags=flags,
         _vars=_vars,
     )
-
-    return None
+    

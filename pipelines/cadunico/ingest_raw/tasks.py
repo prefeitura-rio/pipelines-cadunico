@@ -86,9 +86,13 @@ def get_files_to_ingest(prefix: str, partitions: List[str], bucket_name: str) ->
 
     # Filter files that are not in the staging area
     files_to_ingest = []
+    partitions_to_ingest = []
     for blob, partition in zip(raw_partitions_blobs, raw_partitions):
         if partition not in partitions:
             files_to_ingest.append(blob)
+            partitions_to_ingest.append(partition)
+
+    log(f"Partitions to ingest: {partitions_to_ingest}")
     log(f"Files to ingest: {files_to_ingest}")
     return files_to_ingest
 
