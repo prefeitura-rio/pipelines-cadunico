@@ -3,8 +3,8 @@ import prefect
 from prefect import Parameter, case
 from prefect.run_configs import KubernetesRun
 from prefect.storage import GCS
-from prefect.utilities.edges import unmapped
 from prefect.tasks.prefect import create_flow_run, wait_for_flow_run
+from prefect.utilities.edges import unmapped
 
 from pipelines.cadunico.ingest_raw.tasks import (
     append_data_to_storage,
@@ -70,8 +70,7 @@ with Flow(
 
     with case(materialize_after_dump, True):
         materialization_flow_runs = create_flow_run.map(
-            flow_name=unmapped(templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value),
-            project_name=unmapped(prefect.context.get("project_name")),
+            flow_id=unmapped(templates_constants.FLOW_EXECUTE_DBT_MODEL_GROUP_ID.value),
             parameters=tables_to_materialize_parameters,
             labels=unmapped(prefect.context.get("config").get("cloud").get("agent").get("labels")),
             run_name=unmapped("qualquer nome q vc queira colocar, um nome unico pra todas as runs"),
@@ -83,6 +82,7 @@ with Flow(
             stream_logs=unmapped(True),
             raise_final_state=unmapped(True),
         )
+
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
 cadunico__ingest_raw__flow.run_config = KubernetesRun(image=constants.DOCKER_IMAGE.value)
