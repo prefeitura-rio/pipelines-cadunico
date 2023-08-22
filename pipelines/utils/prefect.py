@@ -35,7 +35,7 @@ def task_get_flow_group_id(flow_name: str) -> str:
     response = client.graphql(
         query="""
         query ($flow_name: String!) {
-            flow (where: {name: {_eq: "$flow_name"}}) {
+            flow (where: {name: {_eq: $flow_name}}) {
                 flow_group {
                     id
                 }
