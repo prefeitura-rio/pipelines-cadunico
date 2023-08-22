@@ -40,7 +40,7 @@ SELECT
     SUBSTRING(text,368,7) AS cod_ibge_munic_nasc_pessoa,
     SUBSTRING(text,375,1) AS ind_ibge_munic_nasc_pessoa,
     SUBSTRING(text,376,40) AS nom_pais_origem_pessoa,
-    SUBSTRING(text,416,2) AS vazio,
+    SUBSTRING(text,416,2) AS vazio_2,
     SUBSTRING(text,418,1) AS ind_pais_origem_pessoa,
     SUBSTRING(text,419,1) AS cod_certidao_registrada_pessoa,
     SUBSTRING(text,420,13) AS cod_origem_prefeitura_pessoa,

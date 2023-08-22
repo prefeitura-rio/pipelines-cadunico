@@ -30,15 +30,21 @@ def create_cadunico_queries_from_table(dataset_id: str):
     for table in df["reg"].unique():
         dd = df[df["reg"] == table]
 
-        columns = (
-            "SUBSTRING(text,"
-            + dd["posicao"]
-            + ","
-            + dd["tamanho"]
-            + ") AS "
-            + dd["arquivo_base_versao_7"]
-            + ","
-        )
+        columns = []
+        column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
+
+        for index, row in dd.iterrows():
+            col_name = row["arquivo_base_versao_7"]
+            if col_name in column_counter:
+                column_counter[col_name] += 1
+                new_col_name = f"{col_name}_{column_counter[col_name]}"
+            else:
+                column_counter[col_name] = 1
+                new_col_name = col_name
+
+            col_expression = f"SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {new_col_name},"
+            columns.append(col_expression)
+
         ini_query = """
 {{
     config(
