@@ -17,7 +17,28 @@ def get_flow_run_mode() -> str:
 
 
 @task
-def rename_current_flow_run_dataset_table(prefix: str, dataset_id: str, table_id: str) -> None:
+def task_get_flow_group_id(flow_name: str) -> str:
+    """
+    Returns the flow group id for the given flow name.
+    """
+    client = Client()
+    response = client.graphql(
+        query="""
+        query ($flow_name: String!) {
+            flow (where: {name: {_eq: "$flow_name"}}) {
+                flow_group {
+                    id
+                }
+            }
+        }
+        """,
+        variables={"flow_name": flow_name},
+    )
+    return response["data"]["flow"][0]["flow_group"]["id"]
+
+
+@task
+def task_rename_current_flow_run_dataset_table(prefix: str, dataset_id: str, table_id: str) -> None:
     """
     Rename the current flow run.
     """
