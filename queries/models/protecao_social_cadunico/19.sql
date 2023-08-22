@@ -29,7 +29,7 @@ SELECT
     SUBSTRING(text,169,70) AS nom_cartorio_certid_mbo_exc,
     SUBSTRING(text,239,8) AS cod_livro_termo_certid_mbo_exc,
     SUBSTRING(text,247,4) AS cod_folha_termo_certid_mbo_exc,
-    SUBSTRING(text,251,32) AS cod_termo/matrícula_certid_mbo_exc,
+    SUBSTRING(text,251,32) AS cod_termo/matricula_certid_mbo_exc,
     SUBSTRING(text,283,8) AS dta_emissao_certid_mbo_exc,
     SUBSTRING(text,291,2) AS sig_uf_certid_mbo_exc,
     SUBSTRING(text,293,35) AS nom_munic_certid_mbo_exc,

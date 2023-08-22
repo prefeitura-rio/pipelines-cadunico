@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pandas as pd
 from google.cloud.storage.blob import Blob
+from unidecode import unidecode
 
 from pipelines.utils.io import get_root_path
 
@@ -20,6 +21,10 @@ def create_cadunico_queries_from_table(dataset_id: str):
 
     df = pd.read_csv(sheet_url, dtype=str)
     df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].fillna("sem_nome")
+    df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].apply(
+        lambda x: unidecode(x).replace("-", "_").lower().strip()
+    )
+
     df = df[df["version"] == "6.04"]
 
     for table in df["reg"].unique():
@@ -31,7 +36,7 @@ def create_cadunico_queries_from_table(dataset_id: str):
             + ","
             + dd["tamanho"]
             + ") AS "
-            + dd["arquivo_base_versao_7"].str.replace("-", "_").str.lower()
+            + dd["arquivo_base_versao_7"]
             + ","
         )
         ini_query = """

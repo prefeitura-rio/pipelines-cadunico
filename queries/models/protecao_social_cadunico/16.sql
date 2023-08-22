@@ -16,7 +16,7 @@ SELECT
     SUBSTRING(text,14,11) AS cod_familiar_famt,
     SUBSTRING(text,25,13) AS vazio,
     SUBSTRING(text,38,2) AS num_reg_arquivo_famt,
-    SUBSTRING(text,40,8) AS dat_transferência_famt,
+    SUBSTRING(text,40,8) AS dat_transferencia_famt,
     SUBSTRING(text,48,1) AS cod_est_cadastral_atual_famt,
     SUBSTRING(text,49,2) AS cod_munic_ibge_origem_2_famt,
     SUBSTRING(text,51,5) AS cod_munic_ibge_origem_5_famt,

@@ -41,7 +41,7 @@ SELECT
     SUBSTRING(text,61,1) AS cod_vive_fam_rua_memb,
     SUBSTRING(text,62,1) AS cod_contato_parente_memb,
     SUBSTRING(text,63,1) AS ind_ativ_com_escola_memb,
-    SUBSTRING(text,64,1) AS ind_ativ_com_associação_memb,
+    SUBSTRING(text,64,1) AS ind_ativ_com_associacao_memb,
     SUBSTRING(text,65,1) AS ind_ativ_com_coop_memb,
     SUBSTRING(text,66,1) AS ind_ativ_com_mov_soc_memb,
     SUBSTRING(text,67,1) AS ind_ativ_com_nao_sabe_memb,
