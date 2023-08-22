@@ -37,6 +37,9 @@ def run_dbt_model(
         dbt. Defaults to None.
     """
     # Set models and upstream/downstream for dbt
+
+    log(f"RUNNING DBT MODEL: {dataset_id}.{table_id}\nDBT_ALIAS: {dbt_alias}")
+
     run_command = "dbt run --select "
 
     if upstream:
