@@ -4,7 +4,6 @@ from typing import Dict, List
 from prefect import task
 
 from pipelines.utils.dbt import run_dbt_model
-from pipelines.utils.prefect import rename_current_flow_run_msg
 
 
 @task
