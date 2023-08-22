@@ -17,10 +17,10 @@ def get_flow_run_mode() -> str:
 
 
 @task
-def rename_current_flow_run_msg(msg: str) -> None:
+def rename_current_flow_run_dataset_table(prefix: str, dataset_id: str, table_id: str) -> None:
     """
     Rename the current flow run.
     """
     flow_run_id = prefect.context.get("flow_run_id")
     client = Client()
-    return client.set_flow_run_name(flow_run_id, msg)
+    return client.set_flow_run_name(flow_run_id, f"{prefix}{dataset_id}.{table_id}")
