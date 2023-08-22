@@ -18,7 +18,11 @@ def list_blobs():
 
 @task
 def log_context():
-    log(dict(prefect.context))
+    log(prefect.context)
+    log(prefect.context.get("config"))
+    log(prefect.context.get("config").get("cloud"))
+    log(prefect.context.get("config").get("cloud").get("agent"))
+    log(prefect.context.get("config").get("cloud").get("agent").get("labels"))
 
 
 @task
