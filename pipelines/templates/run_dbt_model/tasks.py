@@ -33,7 +33,9 @@ def run_dbt_model_task(
 @task
 def rename_current_flow_run_msg(
     msg: str,
+    flow_run_id: str,
 ):
     rename_current_flow_run_msg(
         msg=msg,
+        flow_run_id=flow_run_id,
     )

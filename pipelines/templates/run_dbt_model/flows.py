@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import prefect
 from prefect import Parameter
 from prefect.run_configs import KubernetesRun
 from prefect.storage import GCS
@@ -26,6 +27,7 @@ with Flow(
 
     rename_flow_run = rename_current_flow_run_msg(
         msg=f"Materialize: {dataset_id}.{table_id}",
+        flow_run_id=prefect.context.get("flow_run_id"),
     )
 
     run_dbt_model_task(
