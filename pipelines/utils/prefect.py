@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import prefect
+from prefect import task
 from prefect.client import Client
 
 
@@ -15,9 +16,11 @@ def get_flow_run_mode() -> str:
     return "staging"
 
 
+@task
 def rename_current_flow_run_msg(msg: str, flow_run_id: str) -> None:
     """
     Rename the current flow run.
     """
+    flow_run_id = prefect.context.get("flow_run_id")
     client = Client()
     return client.set_flow_run_name(flow_run_id, msg)
