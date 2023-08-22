@@ -6,7 +6,7 @@
             "field": "data_particao",
             "data_type": "date",
             "granularity": "month",
-        }    
+        }
     )
 }}
 
@@ -52,7 +52,7 @@ SELECT
     SUBSTRING(text,542,4) AS cod_pais_origem_pessoa,
     SUBSTRING(text,546,2) AS nu_origem_cadastro_pessoa,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
 WHERE SUBSTRING(text,38,2) = '04' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 

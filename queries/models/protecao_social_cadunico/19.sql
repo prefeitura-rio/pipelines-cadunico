@@ -6,9 +6,9 @@
             "field": "data_particao",
             "data_type": "date",
             "granularity": "month",
-        }    
+        }
     )
-    
+
 }}
 
 SELECT
@@ -36,7 +36,7 @@ SELECT
     SUBSTRING(text,328,7) AS cod_ibge_munic_certid_mbo_exc,
     SUBSTRING(text,335,255) AS desc_mot_exc,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
 WHERE SUBSTRING(text,38,2) = '19' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 

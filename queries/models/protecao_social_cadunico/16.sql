@@ -6,9 +6,9 @@
             "field": "data_particao",
             "data_type": "date",
             "granularity": "month",
-        }    
+        }
     )
-    
+
 }}
 
 SELECT
@@ -23,7 +23,7 @@ SELECT
     SUBSTRING(text,56,13) AS cod_destino_prefeitura_famt,
     SUBSTRING(text,69,11) AS cod_destino_familia_famt,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
 WHERE SUBSTRING(text,38,2) = '16' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 

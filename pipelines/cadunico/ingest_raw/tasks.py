@@ -13,12 +13,12 @@ from prefect import task
 
 from pipelines.cadunico.ingest_raw.utils import parse_partition
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
-from pipelines.utils.io import get_root_path
 from pipelines.utils.gcs import (
     get_gcs_client,
     list_blobs_with_prefix,
     parse_blobs_to_partition_list,
 )
+from pipelines.utils.io import get_root_path
 from pipelines.utils.logging import log
 
 
@@ -218,7 +218,7 @@ def create_table_if_not_exists(
         log(f"SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}")
         # delete data from storage
         st.delete_file(
-            filename=f"ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv",
+            filename="ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv",  # noqa
             mode="staging",
         )
         log(f"SUCESSFULLY DELETED DATA FROM STORAGE: {dataset_id}.{table_id}")

@@ -16,7 +16,7 @@ def parse_partition(blob: Blob) -> str:
 
 
 def create_cadunico_queries_from_table(dataset_id: str):
-    sheet_url = "https://docs.google.com/spreadsheets/d/18zrbzY9ao00tB3d1y0-pYZWKUNF1Zuct/edit#gid=552983928"
+    sheet_url = "https://docs.google.com/spreadsheets/d/18zrbzY9ao00tB3d1y0-pYZWKUNF1Zuct/edit#gid=552983928"  # noqa
     sheet_url = sheet_url.replace("/edit#gid=", "/export?format=csv&gid=")
 
     df = pd.read_csv(sheet_url, dtype=str)
@@ -53,9 +53,9 @@ def create_cadunico_queries_from_table(dataset_id: str):
             "field": "data_particao",
             "data_type": "date",
             "granularity": "month",
-        }    
+        }
     )
-    
+
 }}
 
 SELECT
@@ -63,7 +63,7 @@ SELECT
 
         end_query = """
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_staging.registro_familia` 
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
 WHERE SUBSTRING(text,38,2) = '__table_replacer__' AND
     SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
 
