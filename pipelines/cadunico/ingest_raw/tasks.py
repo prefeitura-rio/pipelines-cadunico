@@ -197,20 +197,21 @@ def create_table_if_not_exists(
 
     if not table_exists:
         mock_data_path = Path("/tmp/mock_data/")
-        mock_data_path_partition = (
-            mock_data_path / "ano_particao=1970/mes_particao=1/data_particao=1970-01-01/"
+        partition_data_path_file = Path(
+            "ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
         )
-        mock_data_path_partition.mkdir(parents=True, exist_ok=True)
-
-        data = {"text": ["delete_this_data"]}
+        mock_data_path_partition_file = mock_data_path / partition_data_path_file
+        mock_data_path_partition_file.parent.mkdir(parents=True, exist_ok=True)
 
         # create mock data csv
-        pd.DataFrame(data).to_csv(mock_data_path_partition / "delete_this_data.csv", index=False)
+        data = {"text": ["delete_this_data"]}
+        pd.DataFrame(data).to_csv(mock_data_path_partition_file, index=False)
 
         # create table
         tb.create(
             path=mock_data_path,
             csv_delimiter="Æ",
+            csv_skip_leading_rows=0,
             csv_allow_jagged_rows=False,
             if_storage_data_exists="replace",
             biglake_table=biglake_table,
@@ -218,10 +219,12 @@ def create_table_if_not_exists(
         log(f"SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}")
         # delete data from storage
         st.delete_file(
-            filename="ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv",  # noqa
+            filename=partition_data_path_file,  # noqa
             mode="staging",
         )
-        log(f"SUCESSFULLY DELETED DATA FROM STORAGE: {dataset_id}.{table_id}")
+        log(
+            f"SUCESSFULLY DELETED DATA FROM STORAGE: staging/{dataset_id}/{table_id}/{str(partition_data_path_file)}"
+        )
     else:
         log(f"TABLE ALREADY EXISTS: {dataset_id}.{table_id}")
 
