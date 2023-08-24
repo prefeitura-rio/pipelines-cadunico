@@ -219,7 +219,7 @@ def create_table_if_not_exists(
         log(f"SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}")
         # delete data from storage
         st.delete_file(
-            filename=partition_data_path_file,  # noqa
+            filename=str(partition_data_path_file),  # noqa
             mode="staging",
         )
         log(
