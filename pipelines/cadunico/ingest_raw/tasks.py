@@ -211,7 +211,7 @@ def create_table_if_not_exists(
     if not table_exists:
         mock_data_path = Path("/tmp/mock_data/")
         partition_data_path_file = Path(
-            "ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
+            "versao_layout_particao=XX.XX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
         )
         mock_data_path_partition_file = mock_data_path / partition_data_path_file
         mock_data_path_partition_file.parent.mkdir(parents=True, exist_ok=True)
