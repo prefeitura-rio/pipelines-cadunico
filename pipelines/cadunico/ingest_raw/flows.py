@@ -91,6 +91,6 @@ with Flow(
             raise_final_state=unmapped(True),
         )
 
-# Storage and run configs for prefect
+# Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
 cadunico__ingest_raw__flow.run_config = KubernetesRun(image=constants.DOCKER_IMAGE.value)

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 from os import system
 from pathlib import Path
 from typing import List
@@ -274,7 +273,9 @@ def append_data_to_storage(
 
 
 @task
-def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path) -> List[dict]:
+def get_tables_versions_to_materialize(
+    dataset_id: str, ingested_files_output: str | Path
+) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
 

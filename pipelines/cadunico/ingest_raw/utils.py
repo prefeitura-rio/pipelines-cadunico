@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
-from pathlib import Path
 import textwrap
-from typing import Union, Tuple
 
 import pandas as pd
 from google.cloud.storage.blob import Blob
