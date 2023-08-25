@@ -315,4 +315,5 @@ def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path
             if version in table_id:
                 log(f"Append table to materialize: {version} - {dataset_id}.{table_id}")
                 parameters_list.append(parameters)
+
     return parameters_list

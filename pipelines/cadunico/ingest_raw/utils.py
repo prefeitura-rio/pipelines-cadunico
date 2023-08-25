@@ -111,6 +111,9 @@ def create_cadunico_queries_from_table(
 
         root_path = get_root_path()
         filepath = root_path / f"queries/models/{dataset_id}/{table}_{version}.sql"
+        if table_id == "test":
+            filepath = root_path / f"queries/models/{dataset_id}/{table}_{version}_test.sql"
+
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
         with open(filepath, "w") as text_file:
