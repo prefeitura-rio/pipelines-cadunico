@@ -33,3 +33,6 @@ models:
     test_versao:
         +materialized: table
         +schema: test_versao
+    test:
+        +materialized: table
+        +schema: test
