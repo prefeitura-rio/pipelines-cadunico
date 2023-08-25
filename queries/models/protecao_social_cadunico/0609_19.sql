@@ -35,7 +35,7 @@ SELECT
     SUBSTRING(text,293,35) AS nom_munic_certid_mbo_exc,
     SUBSTRING(text,328,7) AS cod_ibge_munic_certid_mbo_exc,
     SUBSTRING(text,335,255) AS desc_mot_exc,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

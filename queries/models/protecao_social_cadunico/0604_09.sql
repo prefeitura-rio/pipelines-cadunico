@@ -27,7 +27,7 @@ SELECT
     SUBSTRING(text,68,1) AS ic_tipo_email_fam,
     SUBSTRING(text,69,50) AS email_fam,
     SUBSTRING(text,119,1) AS ic_envio_email_fam,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

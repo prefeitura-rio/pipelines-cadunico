@@ -312,6 +312,6 @@ def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path
                 "dbt_alias": dbt_alias,
             }
             if version in table_id:
-                log(f"Append table to materialize: {table_id} ")
+                log(f"Append table to materialize: {table_id}")
                 parameters_list.append(parameters)
     return parameters_list

@@ -43,7 +43,7 @@ SELECT
     SUBSTRING(text,100,1) AS cod_orgm_vlr_seguro_desemprego,
     SUBSTRING(text,101,1) AS cod_orgm_vlr_pensao_ali,
     SUBSTRING(text,102,1) AS cod_orgm_vlr_outra_fonte_renda,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

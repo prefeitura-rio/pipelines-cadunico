@@ -51,7 +51,7 @@ SELECT
     SUBSTRING(text,1024,9) AS numero_municipio_rl,
     SUBSTRING(text,1033,35) AS nome_municipio_rl,
     SUBSTRING(text,1068,2) AS sigla_uf_rl,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

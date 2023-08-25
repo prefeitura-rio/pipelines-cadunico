@@ -22,7 +22,7 @@ SELECT
     SUBSTRING(text,51,5) AS cod_munic_ibge_origem_5_famt,
     SUBSTRING(text,56,13) AS cod_destino_prefeitura_famt,
     SUBSTRING(text,69,11) AS cod_destino_familia_famt,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

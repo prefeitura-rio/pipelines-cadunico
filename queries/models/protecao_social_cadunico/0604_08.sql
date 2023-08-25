@@ -36,7 +36,7 @@ SELECT
     SUBSTRING(text,88,1) AS ind_val_renda_pensao_alimen_memb,
     SUBSTRING(text,89,6) AS val_outras_rendas_memb,
     SUBSTRING(text,95,1) AS ind_val_outras_rendas_memb,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

@@ -85,14 +85,13 @@ def create_cadunico_queries_from_table(
                     """
 
         end_query = """
-                SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+                SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
                 SAFE_CAST(data_particao AS DATE) AS data_particao
             FROM `rj-smas.__dataset_id_replacer___staging.__table_id_replacer__`
             WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND
                 versao_layout_particao = '__version_replacer__' AND
                 SUBSTRING(text,38,2) = '__table_replacer__'
-
-
+            
             {% if is_incremental() %}
 
             {% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}

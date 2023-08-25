@@ -19,7 +19,7 @@ SELECT
     SUBSTRING(text,42,5) AS cod_munic_ibge_5_pre,
     SUBSTRING(text,47,1) AS ind_migracao_pre,
     SUBSTRING(text,48,70) AS nom_prefeitura_pre,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

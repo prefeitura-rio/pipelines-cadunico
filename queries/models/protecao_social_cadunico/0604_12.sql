@@ -63,7 +63,7 @@ SELECT
     SUBSTRING(text,83,1) AS ind_dinh_vendas_memb,
     SUBSTRING(text,84,1) AS ind_dinh_outro_memb,
     SUBSTRING(text,85,1) AS ind_dinh_nao_resp_memb,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

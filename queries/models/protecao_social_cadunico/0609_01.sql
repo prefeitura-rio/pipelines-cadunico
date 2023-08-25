@@ -58,7 +58,7 @@ SELECT
     SUBSTRING(text,1130,100) AS nom_unidade_territorial_fam,
     SUBSTRING(text,1230,1) AS ind_formulario_sup3_fam,
     SUBSTRING(text,1231,2) AS nu_origem_cadastro_fam,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

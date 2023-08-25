@@ -38,7 +38,7 @@ SELECT
     SUBSTRING(text,220,9) AS qtd_reg_20_tlr,
     SUBSTRING(text,229,9) AS qtd_reg_98_tlr,
     SUBSTRING(text,238,9) AS qtd_reg_99_tlr,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

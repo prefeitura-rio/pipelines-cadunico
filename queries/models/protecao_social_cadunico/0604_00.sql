@@ -18,7 +18,7 @@ SELECT
     SUBSTRING(text,70,5) AS cod_versao_layout_hdr,
     SUBSTRING(text,75,8) AS dta_posicao_cadastro_hdr,
     SUBSTRING(text,83,8) AS dta_extracao_dados_hdr,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND

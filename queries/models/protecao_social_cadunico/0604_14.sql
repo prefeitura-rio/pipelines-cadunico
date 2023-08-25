@@ -61,7 +61,7 @@ SELECT
     SUBSTRING(text,81,1) AS ind_oaud_memb_mult_rg,
     SUBSTRING(text,82,1) AS ind_paud_cpf_cancel_receita,
     SUBSTRING(text,83,1) AS ind_paud_cpf_susp_receita,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND
