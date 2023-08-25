@@ -321,9 +321,7 @@ def get_version_tables_to_materialize(
 
 
 @task
-def get_harmonized_tables_to_materialize(
-    dataset_id: str, parameters_list: List[dict]
-) -> List[dict]:
+def get_harmonized_tables_to_materialize(dataset_id: str, parameters_list) -> List[dict]:
     root_path = get_root_path()
     queries_dir = root_path / f"queries/models/{dataset_id}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
