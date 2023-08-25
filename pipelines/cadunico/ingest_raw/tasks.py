@@ -211,7 +211,7 @@ def create_table_if_not_exists(
     if not table_exists:
         mock_data_path = Path("/tmp/mock_data/")
         partition_data_path_file = Path(
-            "versao_layout_particao=XX.XX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
+            "versao_layout_particao=XXXX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
         )
         mock_data_path_partition_file = mock_data_path / partition_data_path_file
         mock_data_path_partition_file.parent.mkdir(parents=True, exist_ok=True)
@@ -274,13 +274,26 @@ def append_data_to_storage(
 
 
 @task
-def get_tables_to_materialize(dataset_id: str) -> List[dict]:
+def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
 
     Args:
         dataset_id (str): The dataset ID.
     """
+
+    ## get version from path folders
+    versions = []
+    for file in Path(ingested_files_output).glob("**/*"):
+        if file.is_file():
+            for folder in file.parts:
+                if "=" in folder:
+                    key = folder.split("=")[0]
+                    value = folder.split("=")[1]
+                    if key == "versao_layout_particao":
+                        versions.append(value)
+    versions = list(set(versions))
+    log(f"FOUND Versions: {versions}")
 
     root_path = get_root_path()
     queries_dir = root_path / f"queries/models/{dataset_id}/"
@@ -290,13 +303,15 @@ def get_tables_to_materialize(dataset_id: str) -> List[dict]:
     table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
 
     parameters_list = []
-    for table, dbt_alias in zip(tables, table_dbt_alias):
-        parameters = {
-            "dataset_id": dataset_id,
-            "table_id": table,
-            "dbt_alias": dbt_alias,
-        }
-        parameters_list.append(parameters)
-    parsed_parameters_to_log = json.dumps(parameters_list, indent=4)
-    log(f"Materialize tables parameters: \n{parsed_parameters_to_log}")
-    return parameters_list
+    for version in versions:
+        for table, dbt_alias in zip(tables, table_dbt_alias):
+            parameters = {
+                "dataset_id": dataset_id,
+                "table_id": f"{table}",
+                "dbt_alias": dbt_alias,
+            }
+            if version in table:
+                parameters_list.append(parameters)
+        parsed_parameters_to_log = json.dumps(parameters_list, indent=4)
+        log(f"Materialize tables parameters: \n{parsed_parameters_to_log}")
+        return parameters_list
