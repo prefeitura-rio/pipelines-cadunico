@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from pathlib import Path
 import textwrap
 from typing import Union, Tuple
@@ -12,24 +13,20 @@ from pipelines.utils.io import get_root_path
 
 def parse_partition(blob: Blob) -> str:
     name_parts = blob.name.split(".")
-    partition_info = name_parts[-3]
-    year = str(2000 + int(partition_info[1:3]))
-    month = partition_info[3:5]
-    day = partition_info[5:7]
-    return f"{year}-{month}-{day}"
+    for name_part in name_parts:
+        if name_part.startswith("A"):
+            partition_info = name_part.replace("A", "")
+            break
+    parsed_date = datetime.strptime(partition_info, "%y%m%d").strftime("%Y-%m-%d")
+    return str(parsed_date)
 
 
-def parse_txt_first_line(filepath: Union[str, Path]) -> Tuple[str, str]:
+def parse_txt_first_line(filepath):
     with open(filepath) as f:
         first_line = f.readline()
-
     txt_layout_version = first_line[69:74].strip().replace(".", "")
     dta_extracao_dados_hdr = first_line[82:90].strip()
-    day = dta_extracao_dados_hdr[:2]
-    txt_month = dta_extracao_dados_hdr[2:4]
-    text_year = dta_extracao_dados_hdr[4:]
-    txt_date = f"{text_year}-{txt_month}-{day}"
-
+    txt_date = datetime.strptime(dta_extracao_dados_hdr, "%d%m%Y").strftime("%Y-%m-%d")
     return txt_layout_version, txt_date
 
 
