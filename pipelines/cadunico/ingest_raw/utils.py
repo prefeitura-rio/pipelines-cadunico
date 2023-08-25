@@ -33,7 +33,9 @@ def parse_txt_first_line(filepath: Union[str, Path]) -> Tuple[str, str]:
     return txt_layout_version, txt_date
 
 
-def create_cadunico_queries_from_table(dataset_id: str, filter_versions: list = None):
+def create_cadunico_queries_from_table(
+    dataset_id: str, table_id: str, filter_versions: list = None
+):
     sheet_url = "https://docs.google.com/spreadsheets/d/18zrbzY9ao00tB3d1y0-pYZWKUNF1Zuct/edit#gid=218743142"  # noqa
     sheet_url = sheet_url.replace("/edit#gid=", "/export?format=csv&gid=")
 
@@ -64,7 +66,9 @@ def create_cadunico_queries_from_table(dataset_id: str, filter_versions: list = 
                 column_counter[col_name] = 1
                 new_col_name = col_name
 
-            col_expression = f"SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {new_col_name},"
+            col_expression = (
+                f"    SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {new_col_name},"
+            )
             columns.append(col_expression)
 
         ini_query = """
@@ -81,12 +85,12 @@ def create_cadunico_queries_from_table(dataset_id: str, filter_versions: list = 
                 }}
 
                 SELECT
-        """
+                    """
 
         end_query = """
                 SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao
                 SAFE_CAST(data_particao AS DATE) AS data_particao
-            FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
+            FROM `rj-smas.__dataset_id_replacer___staging.__table_id_replacer__`
             WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo') AND
                 versao_layout_particao = '__version_replacer__' AND
                 SUBSTRING(text,38,2) = '__table_replacer__'
@@ -103,9 +107,11 @@ def create_cadunico_queries_from_table(dataset_id: str, filter_versions: list = 
         """
         ini_query = textwrap.dedent(ini_query)
         end_query = textwrap.dedent(end_query)
-        table_query = ini_query + "\n    ".join(columns) + end_query
+        table_query = ini_query + "\n".join(columns) + end_query
         table_query = table_query.replace("__table_replacer__", table)
         table_query = table_query.replace("__version_replacer__", version)
+        table_query = table_query.replace("__dataset_id_replacer__", dataset_id)
+        table_query = table_query.replace("__table_id_replacer__", table_id)
 
         root_path = get_root_path()
         filepath = root_path / f"queries/models/{dataset_id}/{version}_{table}.sql"
