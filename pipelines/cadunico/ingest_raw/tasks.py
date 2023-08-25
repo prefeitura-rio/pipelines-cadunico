@@ -273,7 +273,7 @@ def append_data_to_storage(
 
 
 @task
-def get_tables_versions_to_materialize(
+def get_version_tables_to_materialize(
     dataset_id: str, ingested_files_output: str | Path
 ) -> List[dict]:
     """
@@ -314,7 +314,30 @@ def get_tables_versions_to_materialize(
                 "dbt_alias": dbt_alias,
             }
             if version in table_id:
-                log(f"Append table to materialize: {version} - {dataset_id}.{table_id}")
+                log(f"Append VERSION table to materialize: {version} - {dataset_id}.{table_id}")
                 parameters_list.append(parameters)
+
+    return parameters_list
+
+
+@task
+def get_harmonized_tables_to_materialize(
+    dataset_id: str, parameters_list: List[dict]
+) -> List[dict]:
+    root_path = get_root_path()
+    queries_dir = root_path / f"queries/models/{dataset_id}"
+    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+    files_path.sort()
+    tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
+    table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
+
+    for table_id, dbt_alias in zip(tables, table_dbt_alias):
+        parameters = {
+            "dataset_id": dataset_id,
+            "table_id": f"{table_id}",
+            "dbt_alias": dbt_alias,
+        }
+        log(f"Append HARMONIZED table to materialize: {dataset_id}.{table_id}")
+        parameters_list.append(parameters)
 
     return parameters_list
