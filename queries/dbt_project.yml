@@ -27,6 +27,9 @@ models:
     protecao_social_cadunico:
         +materialized: table
         +schema: protecao_social_cadunico
-    protecao_social_cadunico_versoes:
+    protecao_social_cadunico_versao:
         +materialized: table
-        +schema: protecao_social_cadunico_versoes
+        +schema: protecao_social_cadunico_versao
+    test_versao:
+        +materialized: table
+        +schema: test_versao

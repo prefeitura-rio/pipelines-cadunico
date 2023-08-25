@@ -282,7 +282,7 @@ def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path
         dataset_id (str): The dataset ID.
         ingested_files_output (str | Path): The path to the ingested files.
     """
-    dataset_id = dataset_id + "_versoes"
+    dataset_id = dataset_id + "_versao"
 
     ## get version from path folders
     versions = []
