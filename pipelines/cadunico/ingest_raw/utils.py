@@ -22,7 +22,7 @@ def parse_txt_first_line(filepath: Union[str, Path]) -> Tuple[str, str]:
     with open(filepath) as f:
         first_line = f.readline()
 
-    txt_layout_version = str(float(first_line[69:74].strip()))
+    txt_layout_version = first_line[69:74].strip().lstrip("0")
     dta_extracao_dados_hdr = first_line[82:90].strip()
     day = dta_extracao_dados_hdr[:2]
     txt_month = dta_extracao_dados_hdr[2:4]
