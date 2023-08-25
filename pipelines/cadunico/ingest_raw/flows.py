@@ -10,7 +10,6 @@ from pipelines.cadunico.ingest_raw.tasks import (
     create_table_if_not_exists,
     get_existing_partitions,
     get_files_to_ingest,
-    get_harmonized_tables_to_materialize,
     get_project_id_task,
     get_version_tables_to_materialize,
     ingest_file,
@@ -73,7 +72,6 @@ with Flow(
         dataset_id=dataset_id, ingested_files_output=ingested_files_output
     )
     tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
-
 
     with case(materialize_after_dump, True):
         materialization_flow_id = task_get_flow_group_id(
