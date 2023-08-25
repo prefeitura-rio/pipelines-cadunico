@@ -305,14 +305,13 @@ def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path
 
     parameters_list = []
     for version in versions:
-        for table, dbt_alias in zip(tables, table_dbt_alias):
+        for table_id, dbt_alias in zip(tables, table_dbt_alias):
             parameters = {
                 "dataset_id": dataset_id,
-                "table_id": f"{table}",
+                "table_id": f"{table_id}",
                 "dbt_alias": dbt_alias,
             }
-            if version in table:
+            if version in table_id:
+                log(f"Append table to materialize: {table_id} ")
                 parameters_list.append(parameters)
-        parsed_parameters_to_log = json.dumps(parameters_list, indent=4)
-        log(f"Materialize tables parameters: \n{parsed_parameters_to_log}")
-        return parameters_list
+    return parameters_list
