@@ -308,6 +308,7 @@ def get_version_tables_to_materialize(
     table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
 
     parameters_list = []
+    ## add version tables to materialize
     for version in versions:
         for table_id, dbt_alias in zip(tables, table_dbt_alias):
             parameters = {
@@ -334,5 +335,5 @@ def get_version_tables_to_materialize(
         parameters_list.append(parameters)
 
     parameters_list_log = json.dumps(parameters_list, indent=4)
-    log(f"TABLES TO MATERIALIZE: {parameters_list_log}")
+    log(f"TABLES TO MATERIALIZE:\n{parameters_list_log}")
     return parameters_list
