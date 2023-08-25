@@ -282,6 +282,7 @@ def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path
         dataset_id (str): The dataset ID.
         ingested_files_output (str | Path): The path to the ingested files.
     """
+    dataset_id = dataset_id + "_staging"
 
     ## get version from path folders
     versions = []
@@ -297,7 +298,7 @@ def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path
     log(f"FOUND Versions: {versions}")
 
     root_path = get_root_path()
-    queries_dir = root_path / f"queries/models/{dataset_id}/"
+    queries_dir = root_path / f"queries/models/{dataset_id}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
     tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
@@ -312,6 +313,6 @@ def get_tables_to_materialize(dataset_id: str, ingested_files_output: str | Path
                 "dbt_alias": dbt_alias,
             }
             if version in table_id:
-                log(f"Append table to materialize: {table_id}")
+                log(f"Append table to materialize: {dataset_id}.{table_id}")
                 parameters_list.append(parameters)
     return parameters_list

@@ -33,7 +33,7 @@ def parse_txt_first_line(filepath):
 def create_cadunico_queries_from_table(
     dataset_id: str, table_id: str, filter_versions: list = None
 ):
-    sheet_url = "https://docs.google.com/spreadsheets/d/18zrbzY9ao00tB3d1y0-pYZWKUNF1Zuct/edit#gid=218743142"  # noqa
+    sheet_url = "https://docs.google.com/spreadsheets/d/18zrbzY9ao00tB3d1y0-pYZWKUNF1Zuct/edit#gid=53978399"  # noqa
     sheet_url = sheet_url.replace("/edit#gid=", "/export?format=csv&gid=")
 
     df = pd.read_csv(sheet_url, dtype=str)
@@ -87,7 +87,7 @@ def create_cadunico_queries_from_table(
         end_query = """
                 SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
                 SAFE_CAST(data_particao AS DATE) AS data_particao
-            FROM `rj-smas.__dataset_id_replacer___staging.__table_id_replacer__`
+            FROM `rj-smas.protecao_solical_cadunico_staging.__table_id_replacer__`
             WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
                 AND versao_layout_particao = '__version_replacer__'
                 AND SUBSTRING(text,38,2) = '__table_replacer__'
@@ -110,7 +110,7 @@ def create_cadunico_queries_from_table(
         table_query = table_query.replace("__table_id_replacer__", table_id)
 
         root_path = get_root_path()
-        filepath = root_path / f"queries/models/{dataset_id}/{version}_{table}.sql"
+        filepath = root_path / f"queries/models/{dataset_id}/{table}_{version}.sql"
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
         with open(filepath, "w") as text_file:
