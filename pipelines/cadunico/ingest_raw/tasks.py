@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from os import system
 from pathlib import Path
 from typing import List
@@ -283,6 +284,7 @@ def get_version_tables_to_materialize(
         dataset_id (str): The dataset ID.
         ingested_files_output (str | Path): The path to the ingested files.
     """
+    dataset_id_original = dataset_id
     dataset_id = dataset_id + "_versao"
 
     ## get version from path folders
@@ -314,16 +316,10 @@ def get_version_tables_to_materialize(
                 "dbt_alias": dbt_alias,
             }
             if version in table_id:
-                log(f"Append VERSION table to materialize: {version} - {dataset_id}.{table_id}")
                 parameters_list.append(parameters)
 
-    return parameters_list
-
-
-@task
-def get_harmonized_tables_to_materialize(dataset_id: str, parameters_list) -> List[dict]:
-    root_path = get_root_path()
-    queries_dir = root_path / f"queries/models/{dataset_id}"
+    ## add hamonized tables to materialize
+    queries_dir = root_path / f"queries/models/{dataset_id_original}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
     tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
@@ -331,11 +327,12 @@ def get_harmonized_tables_to_materialize(dataset_id: str, parameters_list) -> Li
 
     for table_id, dbt_alias in zip(tables, table_dbt_alias):
         parameters = {
-            "dataset_id": dataset_id,
+            "dataset_id": dataset_id_original,
             "table_id": f"{table_id}",
             "dbt_alias": dbt_alias,
         }
-        log(f"Append HARMONIZED table to materialize: {dataset_id}.{table_id}")
         parameters_list.append(parameters)
 
+    parameters_list_log = json.dumps(parameters_list, indent=4)
+    log(f"TABLES TO MATERIALIZE: {parameters_list_log}")
     return parameters_list
