@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from pathlib import Path
+from typing import Union, Tuple
+
 import pandas as pd
 from google.cloud.storage.blob import Blob
 from unidecode import unidecode
@@ -13,6 +16,20 @@ def parse_partition(blob: Blob) -> str:
     month = partition_info[3:5]
     day = partition_info[5:7]
     return f"{year}-{month}-{day}"
+
+
+def parse_txt_first_line(filepath: Union[str, Path]) -> Tuple[str, str]:
+    with open(filepath) as f:
+        first_line = f.readline()
+
+    txt_layout_version = first_line[69:74].strip()
+    dta_extracao_dados_hdr = first_line[82:90].strip()
+    day = dta_extracao_dados_hdr[:2]
+    txt_month = dta_extracao_dados_hdr[2:4]
+    text_year = dta_extracao_dados_hdr[4:]
+    txt_date = f"{text_year}-{txt_month}-{day}"
+
+    return txt_layout_version, txt_date
 
 
 def create_cadunico_queries_from_table(dataset_id: str):

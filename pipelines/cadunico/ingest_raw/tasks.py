@@ -11,7 +11,7 @@ import pandas as pd
 from google.cloud.storage.blob import Blob
 from prefect import task
 
-from pipelines.cadunico.ingest_raw.utils import parse_partition
+from pipelines.cadunico.ingest_raw.utils import parse_partition, parse_txt_first_line
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
 from pipelines.utils.gcs import (
     get_gcs_client,
@@ -135,9 +135,13 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
     )
     log(f"TXT files: {txt_files}")
 
-    # Split TXT files into chunks of 1GB
+    # Split TXT files into chunks of 1GB\
+    txt_layout_version = None
+    txt_date = None
     txt_files_after_split: List[Path] = []
     for txt_file in txt_files:
+        txt_layout_version, txt_date = parse_txt_first_line(filepath=txt_file)
+        log(f"TXT layout version: {txt_layout_version}")
         txt_file_size = txt_file.stat().st_size
         if txt_file_size > 1e9:
             log(f"Splitting {txt_file} into chunks of 1GB")
@@ -160,9 +164,18 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
 
     # Create partition directories
     partition = parse_partition(blob)
+    if partition == txt_date:
+        log(f"Partition {partition} is equal to date inside TXT {txt_date}")
+    else:
+        log(
+            f"Partition {partition} is different from date inside TXT {txt_date}",
+            "warning",
+        )
+
     year, month, _ = partition.split("-")
     partition_directory = (
         output_directory
+        / f"versao_layout_particao={txt_layout_version}"
         / f"ano_particao={int(year)}"
         / f"mes_particao={int(month)}"
         / f"data_particao={partition}"
