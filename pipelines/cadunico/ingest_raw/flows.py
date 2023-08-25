@@ -68,7 +68,9 @@ with Flow(
     )
     append_data_to_gcs.set_upstream(create_table)
 
-    tables_to_materialize_parameters = get_tables_to_materialize(dataset_id=dataset_id)
+    tables_to_materialize_parameters = get_tables_to_materialize(
+        dataset_id=dataset_id, ingested_files_output=ingested_files_output
+    )
     tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
 
     with case(materialize_after_dump, True):
