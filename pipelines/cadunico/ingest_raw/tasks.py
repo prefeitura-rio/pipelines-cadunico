@@ -358,8 +358,8 @@ def update_layout_from_storage_and_create_versions_dbt_models_task(
     """
     update_layout_from_storage_and_create_versions_dbt_models(
         project_id=project_id,
-        dataset_id=layout_dataset_id,
-        table_id=layout_table_id,
+        layout_dataset_id=layout_dataset_id,
+        layout_table_id=layout_table_id,
         output_path=output_path,
         model_dataset_id=model_dataset_id,
         model_table_id=model_table_id,

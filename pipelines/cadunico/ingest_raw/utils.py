@@ -238,7 +238,9 @@ def get_layout_table_from_staging(project_id, dataset_id, table_id, raw_versions
     return bd.read_sql(query=query)
 
 
-def create_cadunico_queries_from_table(df: pd.DataFrame, dataset_id: str, table_id: str):
+def create_cadunico_queries_from_table(
+    df: pd.DataFrame, model_dataset_id: str, model_table_id: str
+):
     df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].fillna("sem_nome")
     df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].apply(
         lambda x: unidecode(x).replace("-", "_").replace(" ", "_").replace("/", "_").lower().strip()
@@ -306,14 +308,16 @@ def create_cadunico_queries_from_table(df: pd.DataFrame, dataset_id: str, table_
         table_query = ini_query + "\n".join(columns) + end_query
         table_query = table_query.replace("__table_replacer__", table)
         table_query = table_query.replace("__version_replacer__", version)
-        table_query = table_query.replace("__dataset_id_replacer__", dataset_id)
-        table_query = table_query.replace("__table_id_replacer__", table_id)
+        table_query = table_query.replace("__dataset_id_replacer__", model_dataset_id)
+        table_query = table_query.replace("__table_id_replacer__", model_table_id)
 
         root_path = get_root_path()
 
-        filepath = root_path / f"queries/models/{dataset_id}_versao/{table}_{version}.sql"
-        if table_id == "test":
-            filepath = root_path / f"queries/models/{dataset_id}_versao/{table}_{version}_test.sql"
+        filepath = root_path / f"queries/models/{model_dataset_id}_versao/{table}_{version}.sql"
+        if model_table_id == "test":
+            filepath = (
+                root_path / f"queries/models/{model_dataset_id}_versao/{table}_{version}_test.sql"
+            )
 
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
@@ -323,12 +327,14 @@ def create_cadunico_queries_from_table(df: pd.DataFrame, dataset_id: str, table_
 
 
 def update_layout_from_storage_and_create_versions_dbt_models(
-    project_id, dataset_id, table_id, output_path, model_dataset_id, model_table_id
+    project_id, layout_dataset_id, layout_table_id, output_path, model_dataset_id, model_table_id
 ):
-    staging_partitions_list = get_partitions_to_ingest(dataset_id=dataset_id, table_id=table_id)
+    staging_partitions_list = get_partitions_to_ingest(
+        dataset_id=layout_dataset_id, table_id=layout_table_id
+    )
     raw_filespaths_to_ingest, raw_versions_to_ingest = download_files_from_storage_raw(
-        dataset_id=dataset_id,
-        table_id=table_id,
+        dataset_id=layout_dataset_id,
+        table_id=layout_table_id,
         staging_partitions_list=staging_partitions_list,
         output_path="/tmp/cadunico/raw",
     )
@@ -340,17 +346,17 @@ def update_layout_from_storage_and_create_versions_dbt_models(
             raw_filespaths_to_ingest=raw_filespaths_to_ingest,
         )
         output_path = create_table_and_upload_to_storage(
-            dataset_id=dataset_id, table_id=table_id, output_path=output_path
+            dataset_id=layout_dataset_id, table_id=layout_table_id, output_path=output_path
         )
         df = get_layout_table_from_staging(
             project_id=project_id,
-            dataset_id=dataset_id,
-            table_id=table_id,
+            dataset_id=layout_dataset_id,
+            table_id=layout_table_id,
             raw_versions_to_ingest=raw_versions_to_ingest,
         )
 
         create_cadunico_queries_from_table(
-            df=df, dataset_id=model_dataset_id, table_id=model_table_id
+            df=df, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
     else:
         log("No LAYOUT files to ingest or Models do Create")

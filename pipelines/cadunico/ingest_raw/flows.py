@@ -73,19 +73,21 @@ with Flow(
 
     append_data_to_gcs.set_upstream(create_table)
 
-    update_layout_from_storage_and_create_versions_dbt_models_task(
+    update_layout = update_layout_from_storage_and_create_versions_dbt_models_task(
         project_id=project_id,
-        dataset_id=layout_dataset_id,
-        table_id=layout_table_id,
+        layout_dataset_id=layout_dataset_id,
+        layout_table_id=layout_table_id,
         output_path=layout_output_path,
         model_dataset_id=dataset_id,
         model_table_id=table_id,
     )
 
+    update_layout.set_upstream(append_data_to_gcs)
+
     tables_to_materialize_parameters = get_version_tables_to_materialize(
         dataset_id=dataset_id, ingested_files_output=ingested_files_output
     )
-    tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
+    tables_to_materialize_parameters.set_upstream(update_layout)
 
     with case(materialize_after_dump, True):
         materialization_flow_id = task_get_flow_group_id(
