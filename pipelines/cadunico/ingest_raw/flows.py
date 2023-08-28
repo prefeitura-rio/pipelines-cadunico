@@ -2,12 +2,11 @@
 from prefect import Parameter, case
 from prefect.run_configs import KubernetesRun
 from prefect.storage import GCS
-from prefect.tasks.prefect import wait_for_flow_run
+from prefect.tasks.prefect import create_flow_run, wait_for_flow_run
 from prefect.utilities.edges import unmapped
 
 from pipelines.cadunico.ingest_raw.tasks import (
     append_data_to_storage,
-    create_flow_run,
     create_table_if_not_exists,
     get_existing_partitions,
     get_files_to_ingest,
