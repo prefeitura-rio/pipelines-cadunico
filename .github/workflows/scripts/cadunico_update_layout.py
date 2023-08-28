@@ -224,7 +224,7 @@ def get_layout_table_from_staging(project_id, dataset_id, table_id, raw_versions
 def create_cadunico_queries_from_table(df: pd.DataFrame, dataset_id: str, table_id: str):
     df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].fillna("sem_nome")
     df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].apply(
-        lambda x: unidecode(x).replace("-", "_").lower().strip()
+        lambda x: unidecode(x).replace("-", "_").replace(" ", "_").replace("/", "_").lower().strip()
     )
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
@@ -270,7 +270,7 @@ def create_cadunico_queries_from_table(df: pd.DataFrame, dataset_id: str, table_
         end_query = """
                 SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
                 SAFE_CAST(data_particao AS DATE) AS data_particao
-            FROM `rj-smas.protecao_social_cadunico_staging.__table_id_replacer__`
+            FROM `rj-smas.__dataset_id_replacer___staging.__table_id_replacer__`
             WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
                 AND versao_layout_particao = '__version_replacer__'
                 AND SUBSTRING(text,38,2) = '__table_replacer__'

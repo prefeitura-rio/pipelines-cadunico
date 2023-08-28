@@ -29,7 +29,7 @@ SELECT
     SUBSTRING(text,169,70) AS nom_cartorio_certid_mbo_exc,
     SUBSTRING(text,239,8) AS cod_livro_termo_certid_mbo_exc,
     SUBSTRING(text,247,4) AS cod_folha_termo_certid_mbo_exc,
-    SUBSTRING(text,251,32) AS cod_termo/matricula_certid_mbo_exc,
+    SUBSTRING(text,251,32) AS cod_termo_matricula_certid_mbo_exc,
     SUBSTRING(text,283,8) AS dta_emissao_certid_mbo_exc,
     SUBSTRING(text,291,2) AS sig_uf_certid_mbo_exc,
     SUBSTRING(text,293,35) AS nom_munic_certid_mbo_exc,
@@ -37,7 +37,7 @@ SELECT
     SUBSTRING(text,335,255) AS desc_mot_exc,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_staging.test`
+FROM `rj-smas.test_versao_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
     AND versao_layout_particao = '0604'
     AND SUBSTRING(text,38,2) = '19'

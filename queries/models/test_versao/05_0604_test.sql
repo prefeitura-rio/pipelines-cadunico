@@ -40,11 +40,11 @@ SELECT
     SUBSTRING(text,270,13) AS num_titulo_eleitor_pessoa,
     SUBSTRING(text,283,4) AS num_zona_tit_eleitor_pessoa,
     SUBSTRING(text,287,4) AS num_secao_tit_eleitor_pessoa,
-    SUBSTRING(text,291,32) AS cod_termo / matricula _certid_pessoa,
+    SUBSTRING(text,291,32) AS cod_termo___matricula__certid_pessoa,
     SUBSTRING(text,323,20) AS num_identidade_pessoa,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_staging.test`
+FROM `rj-smas.test_versao_staging.test`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
     AND versao_layout_particao = '0604'
     AND SUBSTRING(text,38,2) = '05'
