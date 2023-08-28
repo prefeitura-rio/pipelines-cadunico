@@ -11,7 +11,7 @@ import pandas as pd
 from google.cloud.storage.blob import Blob
 from prefect import task
 
-from pipelines.cadunico.ingest_raw.utils import parse_partition
+from pipelines.cadunico.ingest_raw.utils import parse_partition, parse_txt_first_line
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
 from pipelines.utils.gcs import (
     get_gcs_client,
@@ -135,9 +135,13 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
     )
     log(f"TXT files: {txt_files}")
 
-    # Split TXT files into chunks of 1GB
+    # Split TXT files into chunks of 1GB\
+    txt_layout_version = None
+    txt_date = None
     txt_files_after_split: List[Path] = []
     for txt_file in txt_files:
+        txt_layout_version, txt_date = parse_txt_first_line(filepath=txt_file)
+        log(f"TXT layout version: {txt_layout_version}")
         txt_file_size = txt_file.stat().st_size
         if txt_file_size > 1e9:
             log(f"Splitting {txt_file} into chunks of 1GB")
@@ -160,9 +164,18 @@ def ingest_file(blob: Blob, output_directory: str) -> None:
 
     # Create partition directories
     partition = parse_partition(blob)
+    if partition == txt_date:
+        log(f"Partition {partition} is equal to date inside TXT {txt_date}")
+    else:
+        log(
+            f"Partition {partition} is different from date inside TXT {txt_date}",
+            "warning",
+        )
+
     year, month, _ = partition.split("-")
     partition_directory = (
         output_directory
+        / f"versao_layout_particao={txt_layout_version}"
         / f"ano_particao={int(year)}"
         / f"mes_particao={int(month)}"
         / f"data_particao={partition}"
@@ -197,20 +210,21 @@ def create_table_if_not_exists(
 
     if not table_exists:
         mock_data_path = Path("/tmp/mock_data/")
-        mock_data_path_partition = (
-            mock_data_path / "ano_particao=1970/mes_particao=1/data_particao=1970-01-01/"
+        partition_data_path_file = Path(
+            "versao_layout_particao=XXXX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
         )
-        mock_data_path_partition.mkdir(parents=True, exist_ok=True)
-
-        data = {"text": ["delete_this_data"]}
+        mock_data_path_partition_file = mock_data_path / partition_data_path_file
+        mock_data_path_partition_file.parent.mkdir(parents=True, exist_ok=True)
 
         # create mock data csv
-        pd.DataFrame(data).to_csv(mock_data_path_partition / "delete_this_data.csv", index=False)
+        data = {"text": ["delete_this_data"]}
+        pd.DataFrame(data).to_csv(mock_data_path_partition_file, index=False)
 
         # create table
         tb.create(
             path=mock_data_path,
             csv_delimiter="Æ",
+            csv_skip_leading_rows=0,
             csv_allow_jagged_rows=False,
             if_storage_data_exists="replace",
             biglake_table=biglake_table,
@@ -218,10 +232,12 @@ def create_table_if_not_exists(
         log(f"SUCESSFULLY CREATED TABLE: {dataset_id}.{table_id}")
         # delete data from storage
         st.delete_file(
-            filename="ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv",  # noqa
+            filename=str(partition_data_path_file),  # noqa
             mode="staging",
         )
-        log(f"SUCESSFULLY DELETED DATA FROM STORAGE: {dataset_id}.{table_id}")
+        log(
+            f"SUCESSFULLY DELETED DATA FROM STORAGE: staging/{dataset_id}/{table_id}/{str(partition_data_path_file)}"
+        )
     else:
         log(f"TABLE ALREADY EXISTS: {dataset_id}.{table_id}")
 
@@ -258,29 +274,66 @@ def append_data_to_storage(
 
 
 @task
-def get_tables_to_materialize(dataset_id: str) -> List[dict]:
+def get_version_tables_to_materialize(
+    dataset_id: str, ingested_files_output: str | Path
+) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
 
     Args:
         dataset_id (str): The dataset ID.
+        ingested_files_output (str | Path): The path to the ingested files.
     """
+    dataset_id_original = dataset_id
+    dataset_id = dataset_id + "_versao"
+
+    ## get version from path folders
+    versions = []
+    for file in Path(ingested_files_output).glob("**/*"):
+        if file.is_file():
+            for folder in file.parts:
+                if "=" in folder:
+                    key = folder.split("=")[0]
+                    value = folder.split("=")[1]
+                    if key == "versao_layout_particao":
+                        versions.append(value)
+    versions = list(set(versions))
+    log(f"FOUND VERSIONS: {versions}")
 
     root_path = get_root_path()
-    queries_dir = root_path / f"queries/models/{dataset_id}/"
+    queries_dir = root_path / f"queries/models/{dataset_id}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
     tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
     table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
 
     parameters_list = []
-    for table, dbt_alias in zip(tables, table_dbt_alias):
+    ## add version tables to materialize
+    for version in versions:
+        for table_id, dbt_alias in zip(tables, table_dbt_alias):
+            parameters = {
+                "dataset_id": dataset_id,
+                "table_id": f"{table_id}",
+                "dbt_alias": dbt_alias,
+            }
+            if version in table_id:
+                parameters_list.append(parameters)
+
+    ## add hamonized tables to materialize
+    queries_dir = root_path / f"queries/models/{dataset_id_original}"
+    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+    files_path.sort()
+    tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
+    table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
+
+    for table_id, dbt_alias in zip(tables, table_dbt_alias):
         parameters = {
-            "dataset_id": dataset_id,
-            "table_id": table,
+            "dataset_id": dataset_id_original,
+            "table_id": f"{table_id}",
             "dbt_alias": dbt_alias,
         }
         parameters_list.append(parameters)
-    parsed_parameters_to_log = json.dumps(parameters_list, indent=4)
-    log(f"Materialize tables parameters: \n{parsed_parameters_to_log}")
+
+    parameters_list_log = json.dumps(parameters_list, indent=4)
+    log(f"TABLES TO MATERIALIZE:\n{parameters_list_log}")
     return parameters_list
