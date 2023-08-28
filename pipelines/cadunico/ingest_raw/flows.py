@@ -13,6 +13,7 @@ from pipelines.cadunico.ingest_raw.tasks import (
     get_project_id_task,
     get_version_tables_to_materialize,
     ingest_file,
+    need_to_ingest,
     update_layout_from_storage_and_create_versions_dbt_models_task,
 )
 from pipelines.constants import constants
@@ -46,32 +47,6 @@ with Flow(
 
     # Tasks
     project_id = get_project_id_task()
-    existing_partitions = get_existing_partitions(
-        prefix=prefix_staging_area, bucket_name=project_id
-    )
-    files_to_ingest = get_files_to_ingest(
-        prefix=prefix_raw_area, partitions=existing_partitions, bucket_name=project_id
-    )
-    ingested_files = ingest_file.map(
-        blob=files_to_ingest, output_directory=unmapped(ingested_files_output)
-    )
-
-    create_table = create_table_if_not_exists(
-        dataset_id=dataset_id,
-        table_id=table_id,
-        biglake_table=biglake_table,
-    )
-    create_table.set_upstream(ingested_files)
-
-    append_data_to_gcs = append_data_to_storage(
-        data_path=ingested_files_output,
-        dataset_id=dataset_id,
-        table_id=table_id,
-        dump_mode=dump_mode,
-        biglake_table=biglake_table,
-    )
-
-    append_data_to_gcs.set_upstream(create_table)
 
     update_layout = update_layout_from_storage_and_create_versions_dbt_models_task(
         project_id=project_id,
@@ -81,31 +56,65 @@ with Flow(
         model_dataset_id=dataset_id,
         model_table_id=table_id,
     )
+    update_layout.set_upstream(project_id)
 
-    update_layout.set_upstream(append_data_to_gcs)
-
-    tables_to_materialize_parameters = get_version_tables_to_materialize(
-        dataset_id=dataset_id, ingested_files_output=ingested_files_output
+    existing_partitions = get_existing_partitions(
+        prefix=prefix_staging_area, bucket_name=project_id
     )
-    tables_to_materialize_parameters.set_upstream(update_layout)
+    existing_partitions.set_upstream(update_layout)
 
-    with case(materialize_after_dump, True):
-        materialization_flow_id = task_get_flow_group_id(
-            flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
-        )
-        materialization_labels = task_get_current_flow_run_labels()
-        materialization_flow_runs = create_flow_run.map(
-            flow_id=unmapped(materialization_flow_id),
-            parameters=tables_to_materialize_parameters,
-            labels=unmapped(materialization_labels),
+    files_to_ingest = get_files_to_ingest(
+        prefix=prefix_raw_area, partitions=existing_partitions, bucket_name=project_id
+    )
+    files_to_ingest.set_upstream(existing_partitions)
+
+    need_to_ingest_bool = need_to_ingest(files_to_ingest=files_to_ingest)
+    need_to_ingest_bool.set_upstream(files_to_ingest)
+
+    with case(need_to_ingest_bool, True):
+        ingested_files = ingest_file.map(
+            blob=files_to_ingest, output_directory=unmapped(ingested_files_output)
         )
 
-        wait_for_flow_run_ = wait_for_flow_run.map(
-            flow_run_id=materialization_flow_runs,
-            stream_states=unmapped(True),
-            stream_logs=unmapped(True),
-            raise_final_state=unmapped(True),
+        create_table = create_table_if_not_exists(
+            dataset_id=dataset_id,
+            table_id=table_id,
+            biglake_table=biglake_table,
         )
+        create_table.set_upstream(ingested_files)
+
+        append_data_to_gcs = append_data_to_storage(
+            data_path=ingested_files_output,
+            dataset_id=dataset_id,
+            table_id=table_id,
+            dump_mode=dump_mode,
+            biglake_table=biglake_table,
+        )
+
+        append_data_to_gcs.set_upstream(create_table)
+
+        tables_to_materialize_parameters = get_version_tables_to_materialize(
+            dataset_id=dataset_id, ingested_files_output=ingested_files_output
+        )
+        tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
+
+        with case(materialize_after_dump, True):
+            materialization_flow_id = task_get_flow_group_id(
+                flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
+            )
+            materialization_labels = task_get_current_flow_run_labels()
+            materialization_flow_runs = create_flow_run.map(
+                flow_id=unmapped(materialization_flow_id),
+                parameters=tables_to_materialize_parameters,
+                labels=unmapped(materialization_labels),
+            )
+
+            wait_for_flow_run_ = wait_for_flow_run.map(
+                flow_run_id=materialization_flow_runs,
+                stream_states=unmapped(True),
+                stream_logs=unmapped(True),
+                raise_final_state=unmapped(True),
+            )
 
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)

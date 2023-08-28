@@ -102,6 +102,14 @@ def get_files_to_ingest(prefix: str, partitions: List[str], bucket_name: str) ->
 
 
 @task
+def need_to_ingest(files_to_ingest: list) -> bool:
+    """
+    Check if there are files to ingest.
+    """
+    return files_to_ingest != []
+
+
+@task
 def ingest_file(blob: Blob, output_directory: str) -> None:
     """
     Ingest a file from the raw area to the staging area.
