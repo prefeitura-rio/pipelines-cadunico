@@ -25,6 +25,7 @@ from pipelines.utils.gcs import (
 )
 from pipelines.utils.io import get_root_path
 from pipelines.utils.logging import log
+from pipelines.utils.prefect import get_flow_run_url
 
 
 @task
@@ -433,7 +434,7 @@ def create_flow_run(
         idempotency_key=idempotency_key,
     )
 
-    run_url = client.get_cloud_url("flow-run", flow_run_id)
+    run_url = get_flow_run_url(flow_run_id)
     log(f"Created flow run {run_name_dsp!r}: {run_url}")
 
     return flow_run_id

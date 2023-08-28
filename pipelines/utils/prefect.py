@@ -18,6 +18,47 @@ def get_flow_run_mode() -> str:
     return "staging"
 
 
+def get_flow_run_url(id: str, prefix: str = "https://prefect-dev.dados.rio") -> str:
+    """
+    Returns the URL of a flow run.
+
+    Args:
+        id (str): Flow run id.
+
+    Returns:
+        str: Flow run URL in the format <prefix>/<slug>/flow-run/<id>.
+    """
+    prefix = prefix.rstrip("/")
+    tenant_id = prefect.context.get("cloud")["tenant_id"]
+    tenant_slug = get_tenant_slug(tenant_id)
+    url = f"{prefix}/{tenant_slug}/flow-run/{id}"
+    return url
+
+
+def get_tenant_slug(tenant_id: str) -> str:
+    """
+    Returns the slug of a tenant.
+
+    Args:
+        tenant_id (str): Tenant id.
+
+    Returns:
+        str: Tenant slug.
+    """
+    client = Client()
+    response = client.graphql(
+        query="""
+        query ($tenant_id: uuid!) {
+            tenant (where: {id: {_eq: $tenant_id}}) {
+                slug
+            }
+        }
+        """,
+        variables={"tenant_id": tenant_id},
+    )
+    return response["data"]["tenant"][0]["slug"]
+
+
 @task
 def task_get_current_flow_run_labels() -> List[str]:
     """
