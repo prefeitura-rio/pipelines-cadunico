@@ -1,15 +1,20 @@
 # -*- coding: utf-8 -*-
+import datetime
 import json
 from os import system
 from pathlib import Path
-from typing import List
+from typing import Iterable, List, Optional, Union
 from uuid import uuid4
 from zipfile import ZipFile
 
 import basedosdados as bd
 import pandas as pd
+import pendulum
+import prefect
 from google.cloud.storage.blob import Blob
-from prefect import task
+from prefect import Client, task
+from prefect.backend.flow_run import FlowView
+from prefect.run_configs import RunConfig
 
 from pipelines.cadunico.ingest_raw.utils import parse_partition, parse_txt_first_line
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
@@ -211,7 +216,7 @@ def create_table_if_not_exists(
     if not table_exists:
         mock_data_path = Path("/tmp/mock_data/")
         partition_data_path_file = Path(
-            "versao_layout_particao=XXXX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
+            "versao_layout_particao=XXXX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"  # noqa
         )
         mock_data_path_partition_file = mock_data_path / partition_data_path_file
         mock_data_path_partition_file.parent.mkdir(parents=True, exist_ok=True)
@@ -236,7 +241,7 @@ def create_table_if_not_exists(
             mode="staging",
         )
         log(
-            f"SUCESSFULLY DELETED DATA FROM STORAGE: staging/{dataset_id}/{table_id}/{str(partition_data_path_file)}"
+            f"SUCESSFULLY DELETED DATA FROM STORAGE: staging/{dataset_id}/{table_id}/{str(partition_data_path_file)}"  # noqa
         )
     else:
         log(f"TABLE ALREADY EXISTS: {dataset_id}.{table_id}")
@@ -287,7 +292,7 @@ def get_version_tables_to_materialize(
     dataset_id_original = dataset_id
     dataset_id = dataset_id + "_versao"
 
-    ## get version from path folders
+    # get version from path folders
     versions = []
     for file in Path(ingested_files_output).glob("**/*"):
         if file.is_file():
@@ -308,7 +313,7 @@ def get_version_tables_to_materialize(
     table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
 
     parameters_list = []
-    ## add version tables to materialize
+    # add version tables to materialize
     for version in versions:
         for table_id, dbt_alias in zip(tables, table_dbt_alias):
             parameters = {
@@ -319,7 +324,7 @@ def get_version_tables_to_materialize(
             if version in table_id:
                 parameters_list.append(parameters)
 
-    ## add hamonized tables to materialize
+    # add hamonized tables to materialize
     queries_dir = root_path / f"queries/models/{dataset_id_original}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
@@ -337,3 +342,98 @@ def get_version_tables_to_materialize(
     parameters_list_log = json.dumps(parameters_list, indent=4)
     log(f"TABLES TO MATERIALIZE:\n{parameters_list_log}")
     return parameters_list
+
+
+@task
+def create_flow_run(
+    flow_id: str = None,
+    flow_name: str = None,
+    project_name: str = "",
+    parameters: dict = None,
+    context: dict = None,
+    labels: Iterable[str] = None,
+    run_name: str = None,
+    run_config: Optional[RunConfig] = None,
+    scheduled_start_time: Optional[
+        Union[
+            pendulum.DateTime,
+            datetime.datetime,
+            pendulum.Duration,
+            datetime.timedelta,
+        ]
+    ] = None,
+    idempotency_key: str = None,
+) -> str:
+    """
+    Extracted from prefect.tasks.prefect.flow_run for debugging purposes.
+    """
+    log("create_flow_run parameters:")
+    log(f"flow_id: {flow_id}")
+    log(f"flow_name: {flow_name}")
+    log(f"project_name: {project_name}")
+    log(f"parameters: {parameters}")
+    log(f"context: {context}")
+    log(f"labels: {labels}")
+    log(f"run_name: {run_name}")
+    log(f"run_config: {run_config}")
+    log(f"scheduled_start_time: {scheduled_start_time}")
+    log(f"idempotency_key: {idempotency_key}")
+    if flow_id and flow_name:
+        raise ValueError(
+            "Received both `flow_id` and `flow_name`. Only one flow identifier " "can be passed."
+        )
+    if not flow_id and not flow_name:
+        raise ValueError(
+            "Both `flow_id` and `flow_name` are null. You must pass a flow " "identifier"
+        )
+
+    log("Looking up flow metadata...")
+
+    if flow_id:
+        flow = FlowView.from_id(flow_id)
+
+    if flow_name:
+        flow = FlowView.from_flow_name(flow_name, project_name=project_name)
+
+    log(f"Found flow {flow.name!r} with ID {flow.flow_id!r}")
+
+    # Generate a 'sub-flow' run name
+    if not run_name:
+        current_run = prefect.context.get("flow_run_name")
+        if current_run:
+            run_name = f"{current_run}-{flow.name}"
+
+    # A run name for logging display; robust to 'run_name' being empty
+    run_name_dsp = run_name or "<generated-name>"
+
+    log(f"Creating flow run {run_name_dsp!r} for flow {flow.name!r}...")
+
+    if idempotency_key is None:
+        # Generate a default key, if the context is missing this data just fall through
+        # to `None`
+        idempotency_key = prefect.context.get("task_run_id")
+        map_index = prefect.context.get("map_index")
+        if idempotency_key and map_index is not None:
+            idempotency_key += f"-{map_index}"
+
+    log(f"Using idempotency key {idempotency_key!r}")
+
+    if isinstance(scheduled_start_time, (pendulum.Duration, datetime.timedelta)):
+        scheduled_start_time = pendulum.now("utc") + scheduled_start_time
+
+    client = Client()
+    flow_run_id = client.create_flow_run(
+        flow_id=flow.flow_id,
+        parameters=parameters,
+        context=context,
+        labels=labels,
+        run_name=run_name,
+        run_config=run_config,
+        scheduled_start_time=scheduled_start_time,
+        idempotency_key=idempotency_key,
+    )
+
+    run_url = client.get_cloud_url("flow-run", flow_run_id)
+    log(f"Created flow run {run_name_dsp!r}: {run_url}")
+
+    return flow_run_id
