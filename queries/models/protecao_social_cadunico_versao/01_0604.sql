@@ -60,7 +60,7 @@ SELECT
     SUBSTRING(text,1231,2) AS nu_origem_cadastro_fam,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_solical_cadunico_staging.registro_familia`
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
 WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
     AND versao_layout_particao = '0604'
     AND SUBSTRING(text,38,2) = '01'

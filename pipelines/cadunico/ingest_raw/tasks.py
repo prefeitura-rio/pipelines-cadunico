@@ -211,7 +211,7 @@ def create_table_if_not_exists(
     if not table_exists:
         mock_data_path = Path("/tmp/mock_data/")
         partition_data_path_file = Path(
-            "versao_layout_particao=XXXX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"
+            "versao_layout_particao=XXXX/ano_particao=1970/mes_particao=1/data_particao=1970-01-01/delete_this_data.csv"  # noqa
         )
         mock_data_path_partition_file = mock_data_path / partition_data_path_file
         mock_data_path_partition_file.parent.mkdir(parents=True, exist_ok=True)
@@ -236,7 +236,7 @@ def create_table_if_not_exists(
             mode="staging",
         )
         log(
-            f"SUCESSFULLY DELETED DATA FROM STORAGE: staging/{dataset_id}/{table_id}/{str(partition_data_path_file)}"
+            f"SUCESSFULLY DELETED DATA FROM STORAGE: staging/{dataset_id}/{table_id}/{str(partition_data_path_file)}"  # noqa
         )
     else:
         log(f"TABLE ALREADY EXISTS: {dataset_id}.{table_id}")
@@ -287,7 +287,7 @@ def get_version_tables_to_materialize(
     dataset_id_original = dataset_id
     dataset_id = dataset_id + "_versao"
 
-    ## get version from path folders
+    # get version from path folders
     versions = []
     for file in Path(ingested_files_output).glob("**/*"):
         if file.is_file():
@@ -308,7 +308,7 @@ def get_version_tables_to_materialize(
     table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
 
     parameters_list = []
-    ## add version tables to materialize
+    # add version tables to materialize
     for version in versions:
         for table_id, dbt_alias in zip(tables, table_dbt_alias):
             parameters = {
@@ -319,7 +319,7 @@ def get_version_tables_to_materialize(
             if version in table_id:
                 parameters_list.append(parameters)
 
-    ## add hamonized tables to materialize
+    # add hamonized tables to materialize
     queries_dir = root_path / f"queries/models/{dataset_id_original}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
