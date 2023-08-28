@@ -8,6 +8,7 @@ from pathlib import Path
 import basedosdados as bd
 import numpy as np
 import pandas as pd
+import ruamel.yaml as ryaml
 from google.cloud.storage.blob import Blob
 from unidecode import unidecode
 
@@ -205,36 +206,51 @@ def create_table_and_upload_to_storage(dataset_id, table_id, output_path):
     log(f"Ingest files from outputpath: {output_path}")
 
     if not tb.table_exists(mode="staging"):
-        log("Table does not exist in STAGING, need to create first")
+        log(f"Table {dataset_id}.{table_id} does not exist in STAGING, need to create first")
         tb.create(
             path=output_path,
             if_storage_data_exists="replace",
             biglake_table=True,
         )
-        log("Successfully created table in STAGING")
+        log(f"Successfully created table  {dataset_id}.{table_id} in STAGING")
     else:
-        log("Table exists in STAGING, will append data")
+        log(f"Table  {dataset_id}.{table_id} exists in STAGING, will append data")
         tb.append(filepath=output_path, if_exists="replace")
-        log("Successfully uploaded data to Storage")
+        log(f"Successfully uploaded data to Storage for table  {dataset_id}.{table_id}")
     return output_path
 
 
-def get_layout_table_from_staging(project_id, dataset_id, table_id, raw_versions_to_ingest):
+def get_layout_table_from_staging(project_id, dataset_id, table_id):
     bd.config.billing_project_id = project_id
     bd.config.from_file = True
 
-    log(f"versao_layout_particao: {raw_versions_to_ingest}")
     query = f"""
         SELECT
             *
         FROM `{project_id}.{dataset_id}_staging.{table_id}`
     """
-    if raw_versions_to_ingest:
-        query += f"""
-        WHERE versao_layout_particao IN ({', '.join([f"'{v}'" for v in raw_versions_to_ingest])})
-        """
     log(query)
     return bd.read_sql(query=query)
+
+
+def load_ruamel():
+    """
+    Loads a YAML file.
+    """
+    ruamel = ryaml.YAML()
+    ruamel.default_flow_style = False
+    ruamel.top_level_colon_align = True
+    ruamel.indent(mapping=2, sequence=4, offset=2)
+    return ruamel
+
+
+def dump_dict_to_dbt_yaml(schema, schema_yaml_path):
+    ruamel = load_ruamel()
+    log(f"Dumping schema to {schema_yaml_path}")
+    ruamel.dump(
+        schema,
+        open(Path(schema_yaml_path), "w", encoding="utf-8"),
+    )
 
 
 def create_cadunico_queries_from_table(
@@ -248,10 +264,19 @@ def create_cadunico_queries_from_table(
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
     df["reg_version"] = df["reg"] + "____" + df["version"]
 
+    schema = {"version": 2, "models": []}
+
     for table_version in df["reg_version"].unique():
+        table_schema = {}
+
         dd = df[df["reg_version"] == table_version]
         table = table_version.split("____")[0]
         version = table_version.split("____")[1]
+
+        table_name = f"{table}_{version}_test" if model_table_id == "test" else f"{table}_{version}"
+        table_schema["name"] = table_name
+        table_schema["description"] = f"Table {table} version {version}"
+        table_schema["columns"] = []
         columns = []
         column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
 
@@ -268,6 +293,9 @@ def create_cadunico_queries_from_table(
                 f"    SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {new_col_name},"
             )
             columns.append(col_expression)
+            table_schema["columns"].append({"name": new_col_name, "description": row["descricao"]})
+
+        schema["models"].append(table_schema)
 
         ini_query = """
                 {{
@@ -311,18 +339,16 @@ def create_cadunico_queries_from_table(
         table_query = table_query.replace("__table_id_replacer__", model_table_id)
 
         root_path = get_root_path()
+        model_path = root_path / f"queries/models/{model_dataset_id}_versao/"
+        sql_filepath = model_path / f"{table_name}.sql"
 
-        filepath = root_path / f"queries/models/{model_dataset_id}_versao/{table}_{version}.sql"
-        if model_table_id == "test":
-            filepath = (
-                root_path / f"queries/models/{model_dataset_id}_versao/{table}_{version}_test.sql"
-            )
+        sql_filepath.parent.mkdir(parents=True, exist_ok=True)
 
-        filepath.parent.mkdir(parents=True, exist_ok=True)
-
-        with open(filepath, "w") as text_file:
+        with open(sql_filepath, "w") as text_file:
             text_file.write(table_query)
-        log(f"created model: {filepath}")
+        log(f"created model: {sql_filepath}")
+
+    dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path / "schema.yml")
 
 
 def update_layout_from_storage_and_create_versions_dbt_models(
@@ -347,11 +373,11 @@ def update_layout_from_storage_and_create_versions_dbt_models(
         output_path = create_table_and_upload_to_storage(
             dataset_id=layout_dataset_id, table_id=layout_table_id, output_path=output_path
         )
+
         df = get_layout_table_from_staging(
             project_id=project_id,
             dataset_id=layout_dataset_id,
             table_id=layout_table_id,
-            raw_versions_to_ingest=raw_versions_to_ingest,
         )
 
         create_cadunico_queries_from_table(
