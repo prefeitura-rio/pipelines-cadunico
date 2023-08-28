@@ -293,10 +293,7 @@ def create_cadunico_queries_from_table(df: pd.DataFrame, dataset_id: str, table_
         table_query = table_query.replace("__table_id_replacer__", table_id)
 
         root_path = get_root_path()
-        filepath = root_path / f"queries/models/{dataset_id}/{table}_{version}.sql"
-        if table_id == "test":
-            filepath = root_path / f"queries/models/{dataset_id}/{table}_{version}_test.sql"
-
+        filepath = root_path / f"queries/models/{dataset_id}_versao/{table}_{version}.sql"
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
         with open(filepath, "w") as text_file:
@@ -336,7 +333,7 @@ def main(project_id, dataset_id, table_id, output_path, model_dataset_id, model_
 project_id = "rj-escritorio-dev"
 dataset_id = "protecao_social_cadunico"
 table_id = "layout"
-model_dataset_id = "test_versao"
+model_dataset_id = "test"
 model_table_id = "test"
 
 
