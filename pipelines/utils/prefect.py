@@ -29,7 +29,7 @@ def get_flow_run_url(id: str, prefix: str = "https://prefect-dev.dados.rio") -> 
         str: Flow run URL in the format <prefix>/<slug>/flow-run/<id>.
     """
     prefix = prefix.rstrip("/")
-    tenant_id = prefect.context.get("cloud")["tenant_id"]
+    tenant_id = prefect.context.get("config").get("cloud").get("tenant_id")
     tenant_slug = get_tenant_slug(tenant_id)
     url = f"{prefix}/{tenant_slug}/flow-run/{id}"
     return url
