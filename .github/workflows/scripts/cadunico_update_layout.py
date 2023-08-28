@@ -6,8 +6,8 @@ from pipelines.cadunico.ingest_raw.utils import (
 project_id = "rj-escritorio-dev"
 layout_dataset_id = "protecao_social_cadunico"
 layout_table_id = "layout"
-model_dataset_id = "test"
-model_table_id = "test"
+model_dataset_id = "protecao_social_cadunico"
+model_table_id = "registro_familia"
 
 
 output_path = f"/tmp/cadunico/layout_parsed/{layout_dataset_id}/{layout_table_id}"

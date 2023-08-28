@@ -39,7 +39,7 @@ SELECT
     SUBSTRING(text,61,20) AS cod_cta_energ_unid_consum_fam,
     SUBSTRING(text,81,1) AS ind_snas_bpc_deficiente_fam,
     SUBSTRING(text,82,1) AS ind_snas_bpc_idoso_fam,
-    SUBSTRING(text,83,1) AS ind_snas_paif_fam,
+    SUBSTRING(text,83,1) AS ind_snas_paif_fam__,
     SUBSTRING(text,84,1) AS ind_snas_crianca_0_6_anos_fam,
     SUBSTRING(text,85,1) AS ind_snas_grupos_idosos_fam,
     SUBSTRING(text,86,1) AS ind_snas_abrigo_mulher_vitima_fam,
