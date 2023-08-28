@@ -293,7 +293,8 @@ def create_cadunico_queries_from_table(
                 f"    SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {new_col_name},"
             )
             columns.append(col_expression)
-            table_schema["columns"].append({"name": new_col_name, "description": row["descricao"]})
+            col_description = row["descricao"] if row["descricao"] is not None else "Sem descrição"
+            table_schema["columns"].append({"name": new_col_name, "description": col_description})
 
         schema["models"].append(table_schema)
 
