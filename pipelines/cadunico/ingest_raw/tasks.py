@@ -11,7 +11,11 @@ import pandas as pd
 from google.cloud.storage.blob import Blob
 from prefect import task
 
-from pipelines.cadunico.ingest_raw.utils import parse_partition, parse_txt_first_line
+from pipelines.cadunico.ingest_raw.utils import (
+    parse_partition,
+    parse_txt_first_line,
+    update_layout_from_storage_and_create_versions_dbt_models,
+)
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
 from pipelines.utils.gcs import (
     get_gcs_client,
@@ -337,3 +341,26 @@ def get_version_tables_to_materialize(
     parameters_list_log = json.dumps(parameters_list, indent=4)
     log(f"TABLES TO MATERIALIZE:\n{parameters_list_log}")
     return parameters_list
+
+
+@task
+def update_layout_from_storage_and_create_versions_dbt_models_task(
+    project_id: str,
+    layout_dataset_id: str,
+    layout_table_id: str,
+    output_path: str | Path,
+    model_dataset_id: str,
+    model_table_id: str,
+):
+    """
+    Update layout from storage and create versions dbt models.
+
+    """
+    update_layout_from_storage_and_create_versions_dbt_models(
+        project_id=project_id,
+        dataset_id=layout_dataset_id,
+        table_id=layout_table_id,
+        output_path=output_path,
+        model_dataset_id=model_dataset_id,
+        model_table_id=model_table_id,
+    )

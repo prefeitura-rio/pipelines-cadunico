@@ -13,6 +13,7 @@ from pipelines.cadunico.ingest_raw.tasks import (
     get_project_id_task,
     get_version_tables_to_materialize,
     ingest_file,
+    update_layout_from_storage_and_create_versions_dbt_models_task,
 )
 from pipelines.constants import constants
 from pipelines.custom import CustomFlow as Flow
@@ -39,6 +40,9 @@ with Flow(
     )
 
     materialize_after_dump = Parameter("materialize_after_dump", default=False, required=False)
+    layout_dataset_id = Parameter("layout_dataset_id", default="protecao_social_cadunico")
+    layout_table_id = Parameter("layout_table_id", default="layout")
+    layout_output_path = Parameter("layout_output_path", default="/tmp/cadunico/layout_parsed/")
 
     # Tasks
     project_id = get_project_id_task()
@@ -66,7 +70,17 @@ with Flow(
         dump_mode=dump_mode,
         biglake_table=biglake_table,
     )
+
     append_data_to_gcs.set_upstream(create_table)
+
+    update_layout_from_storage_and_create_versions_dbt_models_task(
+        project_id=project_id,
+        dataset_id=layout_dataset_id,
+        table_id=layout_table_id,
+        output_path=layout_output_path,
+        model_dataset_id=dataset_id,
+        model_table_id=table_id,
+    )
 
     tables_to_materialize_parameters = get_version_tables_to_materialize(
         dataset_id=dataset_id, ingested_files_output=ingested_files_output
