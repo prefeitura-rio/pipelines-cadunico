@@ -181,16 +181,15 @@ def download_files_from_storage_raw(dataset_id, table_id, staging_partitions_lis
 
 
 def parse_xlsx_files_and_save_partition(output_path, raw_filespaths_to_ingest):
+    shutil.rmtree(output_path, ignore_errors=True)
     for raw_file in raw_filespaths_to_ingest:
         name = str(raw_file).split("/")[-1]
         version = parse_version_from_blob(name=name)
-
-        shutil.rmtree(output_path, ignore_errors=True)
-
         csv_output = Path(output_path) / f"versao_layout_particao={version}"
         csv_output.mkdir(parents=True, exist_ok=True)
         csv_name = name.replace(".xlsx", ".csv").replace(".xls", ".csv")
         version_float = str(float(version[:2] + "." + version[2:]))
+
         parse_tables_from_xlsx(
             xlsx_input=raw_file,
             csv_output=csv_output / csv_name,
