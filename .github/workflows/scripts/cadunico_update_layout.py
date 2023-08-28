@@ -294,6 +294,9 @@ def create_cadunico_queries_from_table(df: pd.DataFrame, dataset_id: str, table_
 
         root_path = get_root_path()
         filepath = root_path / f"queries/models/{dataset_id}_versao/{table}_{version}.sql"
+        if table_id == "test":
+            filepath = root_path / f"queries/models/{dataset_id}_versao/{table}_{version}_test.sql"
+
         filepath.parent.mkdir(parents=True, exist_ok=True)
 
         with open(filepath, "w") as text_file:
