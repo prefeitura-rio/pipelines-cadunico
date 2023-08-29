@@ -12,7 +12,8 @@ import ruamel.yaml as ryaml
 from google.cloud.storage.blob import Blob
 from unidecode import unidecode
 
-from pipelines.utils.io import get_root_path
+from pipelines.utils.bd import create_table_and_upload_to_gcs
+from pipelines.utils.io import get_root_path, to_partitions
 from pipelines.utils.logging import log
 
 
@@ -362,6 +363,57 @@ def create_cadunico_queries_from_table(
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path / "schema.yml")
 
 
+def parse_columns_version_control(df):
+    df = df.sort_values(["reg", "versao_layout_particao"])
+    df_final = pd.DataFrame()
+    for reg in df["reg"].unique().tolist():
+        df_table = df[df["reg"] == reg]
+        table_versions = df_table["versao_layout_particao"].unique().tolist()
+        table_versions = [table_versions[0]] + table_versions
+
+        for i in range(len(table_versions) - 1):
+            current_version = table_versions[i]
+            df_version = df_table[df_table["versao_layout_particao"] == current_version]
+            version_columns = df_version["arquivo_base_versao_7"].tolist()
+
+            next_version = table_versions[i + 1]
+            df_next_version = df_table[df_table["versao_layout_particao"] == next_version]
+            next_version_columns = df_next_version["arquivo_base_versao_7"].tolist()
+
+            control_column_version = []
+            prev_versions = []
+            for nv_col in next_version_columns:
+                prev_versions.append(current_version)
+                if nv_col not in version_columns:
+                    control_column_version.append(False)
+                else:
+                    control_column_version.append(True)
+
+            df_next_version["versao_layout_anterior"] = prev_versions
+            df_next_version["coluna_esta_versao_anterior"] = control_column_version
+
+            df_final = pd.concat([df_final, df_next_version])
+
+    return df_final
+
+
+def create_layout_final_bq_table(dataframe, dataset_id, table_id):
+    dataframe = parse_columns_version_control(df=dataframe)
+    output_path = Path("/tmp/cadunico/final_layout")
+    shutil.rmtree(output_path, ignore_errors=True)
+    to_partitions(
+        data=dataframe, partition_columns=["versao_layout_particao"], savepath=output_path
+    )
+    table_id = table_id + "_columns_version_control"
+    create_table_and_upload_to_gcs(
+        data_path=output_path,
+        dataset_id=dataset_id,
+        table_id=table_id,
+        dump_mode="append",
+        biglake_table=True,
+    )
+
+
 def update_layout_from_storage_and_create_versions_dbt_models(
     project_id,
     layout_dataset_id,
@@ -400,6 +452,8 @@ def update_layout_from_storage_and_create_versions_dbt_models(
             table_id=layout_table_id,
         )
 
+        df_final = create_layout_final_bq_table(df)
+        df_final.head()
         create_cadunico_queries_from_table(
             df=df, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
