@@ -325,7 +325,7 @@ def create_cadunico_queries_from_table(
         ini_query = """
                 {{
                     config(
-                        materialized= "incremental" if run_query("SELECT COUNT(*) FROM {{ this }} WHERE data_particao > (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) FROM " ~ this ~ " WHERE versao_layout_particao = __version_replacer__)").columns[0].values()[0] > 0 else "ephemeral",
+                        materialized= "incremental" if run_query("SELECT COUNT(*) FROM " ~ this ~ " WHERE data_particao > (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) FROM " ~ this ~ " WHERE versao_layout_particao = '__version_replacer__')").columns[0].values()[0] > 0 else "ephemeral",
                         partition_by={
                             "field": "data_particao",
                             "data_type": "date",
