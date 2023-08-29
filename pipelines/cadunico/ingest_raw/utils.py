@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 import re
 import shutil
 import textwrap
@@ -256,16 +257,12 @@ def dump_dict_to_dbt_yaml(schema, schema_yaml_path):
 def create_cadunico_queries_from_table(
     df: pd.DataFrame, model_dataset_id: str, model_table_id: str
 ):
-    df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].fillna("sem_nome")
-    df["arquivo_base_versao_7"] = df["arquivo_base_versao_7"].apply(
-        lambda x: unidecode(x).replace("-", "_").replace(" ", "_").replace("/", "_").lower().strip()
-    )
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
     df["reg_version"] = df["reg"] + "____" + df["version"]
 
     schema = {"version": 2, "models": []}
-
+    log_created_models = []
     for table_version in df["reg_version"].unique():
         table_schema = {}
 
@@ -281,7 +278,7 @@ def create_cadunico_queries_from_table(
         column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
 
         for index, row in dd.iterrows():
-            col_name = row["arquivo_base_versao_7"]
+            col_name = row["column"]
             if col_name in column_counter:
                 column_counter[col_name] += 1
                 new_col_name = f"{col_name}_{column_counter[col_name]}"
@@ -358,13 +355,21 @@ def create_cadunico_queries_from_table(
 
         with open(sql_filepath, "w") as text_file:
             text_file.write(table_query)
-        log(f"created model: {sql_filepath}")
+
+        log_created_models.append(str(sql_filepath))
+    json_log = json.dumps(log_created_models, indent=4)
+    log(f"created models: {json_log}")
 
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path / "schema.yml")
 
 
 def parse_columns_version_control(df):
     df = df.sort_values(["reg", "versao_layout_particao"])
+    df["column"] = df["arquivo_base_versao_7"].fillna("sem_nome")
+    df["column"] = df["column"].apply(
+        lambda x: unidecode(x).replace("-", "_").replace(" ", "_").replace("/", "_").lower().strip()
+    )
+
     df_final = pd.DataFrame()
     for reg in df["reg"].unique().tolist():
         df_table = df[df["reg"] == reg]
@@ -374,11 +379,11 @@ def parse_columns_version_control(df):
         for i in range(len(table_versions) - 1):
             current_version = table_versions[i]
             df_version = df_table[df_table["versao_layout_particao"] == current_version]
-            version_columns = df_version["arquivo_base_versao_7"].tolist()
+            version_columns = df_version["column"].tolist()
 
             next_version = table_versions[i + 1]
             df_next_version = df_table[df_table["versao_layout_particao"] == next_version]
-            next_version_columns = df_next_version["arquivo_base_versao_7"].tolist()
+            next_version_columns = df_next_version["column"].tolist()
 
             control_column_version = []
             prev_versions = []
@@ -386,6 +391,11 @@ def parse_columns_version_control(df):
                 prev_versions.append(current_version)
                 if nv_col not in version_columns:
                     control_column_version.append(False)
+                    log_msg = (
+                        f"Table {reg} version {next_version}\n"
+                        + f"Column {nv_col} not found in version {current_version}"
+                    )
+                    log(log_msg, level="warning")
                 else:
                     control_column_version.append(True)
 
@@ -398,20 +408,23 @@ def parse_columns_version_control(df):
 
 
 def create_layout_final_bq_table(dataframe, dataset_id, table_id):
-    dataframe = parse_columns_version_control(df=dataframe)
+    new_dataframe = parse_columns_version_control(df=dataframe)
     output_path = Path("/tmp/cadunico/final_layout")
     shutil.rmtree(output_path, ignore_errors=True)
     to_partitions(
-        data=dataframe, partition_columns=["versao_layout_particao"], savepath=output_path
+        data=new_dataframe, partition_columns=["versao_layout_particao"], savepath=output_path
     )
     table_id = table_id + "_columns_version_control"
     create_table_and_upload_to_gcs(
         data_path=output_path,
         dataset_id=dataset_id,
         table_id=table_id,
-        dump_mode="append",
+        dump_mode="replace",
         biglake_table=True,
     )
+    log(f"Table {dataset_id}.{table_id} created in STAGING")
+
+    return new_dataframe
 
 
 def update_layout_from_storage_and_create_versions_dbt_models(
@@ -451,9 +464,10 @@ def update_layout_from_storage_and_create_versions_dbt_models(
             dataset_id=layout_dataset_id,
             table_id=layout_table_id,
         )
-
-        df_final = create_layout_final_bq_table(df)
-        df_final.head()
+        log("Parse and create table columns version control")
+        df_final = create_layout_final_bq_table(
+            dataframe=df, dataset_id=layout_dataset_id, table_id=layout_table_id
+        )
         create_cadunico_queries_from_table(
-            df=df, model_dataset_id=model_dataset_id, model_table_id=model_table_id
+            df=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
