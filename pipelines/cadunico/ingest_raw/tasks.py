@@ -312,7 +312,7 @@ def get_version_tables_to_materialize(dataset_id: str, table_id: str) -> List[di
     #                     if key == "versao_layout_particao":
     #                         versions.append(value)
     #     versions = list(set(versions))
-    # log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
+    log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
 
     root_path = get_root_path()
     queries_dir = root_path / f"queries/models/{dataset_id}"
