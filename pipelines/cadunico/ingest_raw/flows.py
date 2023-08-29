@@ -40,7 +40,7 @@ with Flow(
         "prefix_staging_area", default="staging/protecao_social_cadunico/registro_familia"
     )
 
-    materialize_after_dump = Parameter("materialize_after_dump", default=False, required=False)
+    materialize_after_dump = Parameter("materialize_after_dump", default=True, required=False)
     layout_dataset_id = Parameter("layout_dataset_id", default="protecao_social_cadunico")
     layout_table_id = Parameter("layout_table_id", default="layout")
     layout_output_path = Parameter("layout_output_path", default="/tmp/cadunico/layout_parsed/")
