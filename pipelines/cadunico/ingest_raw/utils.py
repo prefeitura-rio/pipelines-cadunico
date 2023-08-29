@@ -131,7 +131,7 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
     # return df_to_save
 
 
-def get_partitions_to_ingest(dataset_id, table_id):
+def get_staging_partitions_versions(dataset_id, table_id):
     st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
     blobs = list(
         st.client["storage_staging"]
@@ -147,7 +147,7 @@ def get_partitions_to_ingest(dataset_id, table_id):
                 value = folder.split("=")[1]
                 if key == "versao_layout_particao":
                     partitions_list.append(value)
-    return partitions_list
+    return list(set(partitions_list))
 
 
 def parse_version_from_blob(name):
@@ -325,7 +325,7 @@ def create_cadunico_queries_from_table(
         ini_query = """
                 {{
                     config(
-                        materialized= "incremental" if run_query("SELECT COUNT(*) FROM " ~ this ~ " WHERE data_particao > (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) FROM " ~ this ~ " WHERE versao_layout_particao = '__version_replacer__')").columns[0].values()[0] > 0 else "ephemeral",
+                        materialized= "incremental",
                         partition_by={
                             "field": "data_particao",
                             "data_type": "date",
@@ -385,7 +385,7 @@ def update_layout_from_storage_and_create_versions_dbt_models(
     model_table_id,
     force_create_models,
 ):
-    staging_partitions_list = get_partitions_to_ingest(
+    staging_partitions_list = get_staging_partitions_versions(
         dataset_id=layout_dataset_id, table_id=layout_table_id
     )
     raw_filespaths_to_ingest = download_files_from_storage_raw(

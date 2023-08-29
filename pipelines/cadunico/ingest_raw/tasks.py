@@ -12,6 +12,7 @@ from google.cloud.storage.blob import Blob
 from prefect import task
 
 from pipelines.cadunico.ingest_raw.utils import (
+    get_staging_partitions_versions,
     parse_partition,
     parse_txt_first_line,
     update_layout_from_storage_and_create_versions_dbt_models,
@@ -286,9 +287,7 @@ def append_data_to_storage(
 
 
 @task
-def get_version_tables_to_materialize(
-    dataset_id: str, ingested_files_output: str | Path = None
-) -> List[dict]:
+def get_version_tables_to_materialize(dataset_id: str, table_id: str) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
 
@@ -299,19 +298,21 @@ def get_version_tables_to_materialize(
     dataset_id_original = dataset_id
     dataset_id = dataset_id + "_versao"
 
+    versions = get_staging_partitions_versions(dataset_id=dataset_id_original, table_id=table_id)
+
     # get version from path folders
-    versions = []
-    if ingested_files_output is not None:
-        for file in Path(ingested_files_output).glob("**/*"):
-            if file.is_file():
-                for folder in file.parts:
-                    if "=" in folder:
-                        key = folder.split("=")[0]
-                        value = folder.split("=")[1]
-                        if key == "versao_layout_particao":
-                            versions.append(value)
-        versions = list(set(versions))
-        log(f"FOUND VERSIONS: {versions}")
+    # versions = []
+    # if ingested_files_output is not None:
+    #     for file in Path(ingested_files_output).glob("**/*"):
+    #         if file.is_file():
+    #             for folder in file.parts:
+    #                 if "=" in folder:
+    #                     key = folder.split("=")[0]
+    #                     value = folder.split("=")[1]
+    #                     if key == "versao_layout_particao":
+    #                         versions.append(value)
+    #     versions = list(set(versions))
+    # log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
 
     root_path = get_root_path()
     queries_dir = root_path / f"queries/models/{dataset_id}"
@@ -328,15 +329,15 @@ def get_version_tables_to_materialize(
 
     parameters_list = []
     # add version tables to materialize
-    for table_id, dbt_alias in zip(tables, table_dbt_alias):
+    for _table_id, dbt_alias in zip(tables, table_dbt_alias):
         parameters = {
             "dataset_id": dataset_id,
-            "table_id": f"{table_id}",
+            "table_id": f"{_table_id}",
             "dbt_alias": dbt_alias,
         }
         if versions:
             for version in versions:
-                if version in table_id:
+                if version in _table_id:
                     parameters_list.append(parameters)
         else:
             parameters_list.append(parameters)
@@ -354,10 +355,10 @@ def get_version_tables_to_materialize(
         True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
     ]
 
-    for table_id, dbt_alias in zip(tables, table_dbt_alias):
+    for _table_id_, dbt_alias in zip(tables, table_dbt_alias):
         parameters = {
             "dataset_id": dataset_id_original,
-            "table_id": f"{table_id}",
+            "table_id": f"{_table_id_}",
             "dbt_alias": dbt_alias,
         }
         parameters_list.append(parameters)

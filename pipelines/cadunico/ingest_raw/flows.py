@@ -98,7 +98,7 @@ with Flow(
         append_data_to_gcs.set_upstream(create_table)
 
         tables_to_materialize_parameters = get_version_tables_to_materialize(
-            dataset_id=dataset_id, ingested_files_output=ingested_files_output
+            dataset_id=dataset_id, table_id=table_id
         )
         tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
 
@@ -122,7 +122,7 @@ with Flow(
 
     with case(force_materialize_all_models, True):
         tables_to_materialize_parameters = get_version_tables_to_materialize(
-            dataset_id=dataset_id, ingested_files_output=None
+            dataset_id=dataset_id, table_id=table_id
         )
         tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
         materialization_flow_id = task_get_flow_group_id(

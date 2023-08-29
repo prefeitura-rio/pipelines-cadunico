@@ -1,7 +1,7 @@
 
 {{
     config(
-        materialized= "incremental" if run_query("SELECT COUNT(*) FROM {{ this }} WHERE data_particao > (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) FROM " ~ this ~ " WHERE versao_layout_particao = 0604)").columns[0].values()[0] > 0 else "ephemeral",
+        materialized= "incremental",
         partition_by={
             "field": "data_particao",
             "data_type": "date",
