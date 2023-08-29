@@ -115,20 +115,6 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
     output_filepath = Path(csv_output)
     log(f"Parsed csv file: {output_filepath}")
     df_final.to_csv(output_filepath, index=False)
-    # if output_filepath.exists():
-    #     df_output = pd.read_excel(output_filepath, dtype="str")
-    #     for _version in filter_versions:
-    #         if _version in df_output["version"].unique().tolist():
-    #             print(f"Version {_version} already in {output_filepath}")
-    #             df_final = df_final[~df_final["version"].isin([_version])]
-    #         else:
-    #             print(f"Version {_version} will be append to {output_filepath}")
-    #     df_to_save = pd.concat([df_output, df_final])
-    # else:
-    #     df_to_save = df_final.copy()
-
-    # df_to_save.to_excel(output_filepath, index=False)
-    # return df_to_save
 
 
 def get_staging_partitions_versions(dataset_id, table_id):

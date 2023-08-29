@@ -299,19 +299,6 @@ def get_version_tables_to_materialize(dataset_id: str, table_id: str) -> List[di
     dataset_id = dataset_id + "_versao"
 
     versions = get_staging_partitions_versions(dataset_id=dataset_id_original, table_id=table_id)
-
-    # get version from path folders
-    # versions = []
-    # if ingested_files_output is not None:
-    #     for file in Path(ingested_files_output).glob("**/*"):
-    #         if file.is_file():
-    #             for folder in file.parts:
-    #                 if "=" in folder:
-    #                     key = folder.split("=")[0]
-    #                     value = folder.split("=")[1]
-    #                     if key == "versao_layout_particao":
-    #                         versions.append(value)
-    #     versions = list(set(versions))
     log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
 
     root_path = get_root_path()
