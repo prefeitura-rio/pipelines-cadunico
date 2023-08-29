@@ -317,8 +317,14 @@ def get_version_tables_to_materialize(
     queries_dir = root_path / f"queries/models/{dataset_id}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
-    tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
-    table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
+    tables = [
+        q.replace(".sql", "").split("/")[-1].split("__")[-1]
+        for q in files_path
+        if q.endswith(".sql")
+    ]
+    table_dbt_alias = [
+        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
+    ]
 
     parameters_list = []
     # add version tables to materialize
@@ -339,8 +345,14 @@ def get_version_tables_to_materialize(
     queries_dir = root_path / f"queries/models/{dataset_id_original}"
     files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
     files_path.sort()
-    tables = [q.replace(".sql", "").split("/")[-1].split("__")[-1] for q in files_path]
-    table_dbt_alias = [True if "__" in q.split("/")[-1] else False for q in files_path]
+    tables = [
+        q.replace(".sql", "").split("/")[-1].split("__")[-1]
+        for q in files_path
+        if q.endswith(".sql")
+    ]
+    table_dbt_alias = [
+        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
+    ]
 
     for table_id, dbt_alias in zip(tables, table_dbt_alias):
         parameters = {
