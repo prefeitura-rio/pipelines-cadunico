@@ -390,6 +390,9 @@ def update_layout_from_storage_and_create_versions_dbt_models(
         output_path = create_table_and_upload_to_storage(
             dataset_id=layout_dataset_id, table_id=layout_table_id, output_path=output_path
         )
+    else:
+        log("No LAYOUT files to ingest or Models do Create")
+
     if raw_filespaths_to_ingest or force_create_models:
         df = get_layout_table_from_staging(
             project_id=project_id,
@@ -400,5 +403,3 @@ def update_layout_from_storage_and_create_versions_dbt_models(
         create_cadunico_queries_from_table(
             df=df, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
-    else:
-        log("No LAYOUT files to ingest or Models do Create")
