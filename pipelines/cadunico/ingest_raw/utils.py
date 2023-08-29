@@ -246,6 +246,19 @@ def load_ruamel():
 
 def dump_dict_to_dbt_yaml(schema, schema_yaml_path):
     ruamel = load_ruamel()
+    for model in schema["models"]:
+        for col in model["columns"]:
+            if len(col["description"]) > 1024:
+                model_name = model["name"]
+                col_name = col["name"]
+                col_description_lenght = len(col["description"])
+                log_msg = (
+                    "Column exced max bigquery description lenght"
+                    + f"Model: {model_name}\n"
+                    + f"Column: {col_name}\n"
+                    + f"Description lenght:{col_description_lenght}"
+                )
+                log(log_msg, level="warning")
     log(f"Dumping schema to {schema_yaml_path}")
     ruamel.dump(
         schema,
@@ -300,8 +313,10 @@ def create_cadunico_queries_from_table(
                 .replace("\\", "")
                 .replace(". ", "\n")
                 .replace("\n ", "\n")
-                .replace(" - ", "-")[:1024]  # bigquery limits the description to 1024 characters
+                .replace(" - ", "-")
             )
+            # bigquery limits the description to 1024 characters
+            col_description = col_description[:1020]
 
             table_schema["columns"].append({"name": new_col_name, "description": col_description})
 

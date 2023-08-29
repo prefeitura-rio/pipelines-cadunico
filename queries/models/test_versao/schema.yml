@@ -4938,7 +4938,7 @@ models :
           13-Exclusão de todos os integrantes da família\n14-Exclusão/Transferência
           de todos os integrantes da família\n15-Averiguação-Suspeita de fraude\n
           16-Averiguação-Suspeita de fraude identificada pelo município\n17-Família
-          com renda per capita acima de meio salário mínimo e que não esteja v"
+          com renda per capita acima de meio salário mínimo e que não este"
       - name: num_pgmcu
         description: Número do Parecer da Gestão Municipal do Cadastro Único
       - name: dat_emi_pgmcu
@@ -4990,7 +4990,7 @@ models :
           17-Membro excluído por ter sido incluído pelo próprio operador/Entrevistador
           da família\n18-Identificação de cadastros incluídos ou alterados indevidamente
           por agente público por má fé\n19-Indicativo de óbito há mais de 12 meses-exclusão
-          batch 99 – Exclusão da família (para casos em que a pessoa tenha sido excluí"
+          batch 99 – Exclusão da família (para casos em que a pessoa tenha sido ex"
       - name: num_pgmcu_mbo
         description: Número do Parecer da Gestão Municipal do Cadastro Único do Membro
           Excluído
