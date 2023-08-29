@@ -287,7 +287,7 @@ def append_data_to_storage(
 
 @task
 def get_version_tables_to_materialize(
-    dataset_id: str, ingested_files_output: str | Path
+    dataset_id: str, ingested_files_output: str | Path = None
 ) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
@@ -301,16 +301,17 @@ def get_version_tables_to_materialize(
 
     # get version from path folders
     versions = []
-    for file in Path(ingested_files_output).glob("**/*"):
-        if file.is_file():
-            for folder in file.parts:
-                if "=" in folder:
-                    key = folder.split("=")[0]
-                    value = folder.split("=")[1]
-                    if key == "versao_layout_particao":
-                        versions.append(value)
-    versions = list(set(versions))
-    log(f"FOUND VERSIONS: {versions}")
+    if ingested_files_output is not None:
+        for file in Path(ingested_files_output).glob("**/*"):
+            if file.is_file():
+                for folder in file.parts:
+                    if "=" in folder:
+                        key = folder.split("=")[0]
+                        value = folder.split("=")[1]
+                        if key == "versao_layout_particao":
+                            versions.append(value)
+        versions = list(set(versions))
+        log(f"FOUND VERSIONS: {versions}")
 
     root_path = get_root_path()
     queries_dir = root_path / f"queries/models/{dataset_id}"
@@ -321,15 +322,18 @@ def get_version_tables_to_materialize(
 
     parameters_list = []
     # add version tables to materialize
-    for version in versions:
-        for table_id, dbt_alias in zip(tables, table_dbt_alias):
-            parameters = {
-                "dataset_id": dataset_id,
-                "table_id": f"{table_id}",
-                "dbt_alias": dbt_alias,
-            }
-            if version in table_id:
-                parameters_list.append(parameters)
+    for table_id, dbt_alias in zip(tables, table_dbt_alias):
+        parameters = {
+            "dataset_id": dataset_id,
+            "table_id": f"{table_id}",
+            "dbt_alias": dbt_alias,
+        }
+        if versions:
+            for version in versions:
+                if version in table_id:
+                    parameters_list.append(parameters)
+        else:
+            parameters_list.append(parameters)
 
     # add hamonized tables to materialize
     queries_dir = root_path / f"queries/models/{dataset_id_original}"
@@ -359,6 +363,7 @@ def update_layout_from_storage_and_create_versions_dbt_models_task(
     output_path: str | Path,
     model_dataset_id: str,
     model_table_id: str,
+    force_create_models: bool,
 ):
     """
     Update layout from storage and create versions dbt models.
@@ -371,4 +376,5 @@ def update_layout_from_storage_and_create_versions_dbt_models_task(
         output_path=output_path,
         model_dataset_id=model_dataset_id,
         model_table_id=model_table_id,
+        force_create_models=force_create_models,
     )

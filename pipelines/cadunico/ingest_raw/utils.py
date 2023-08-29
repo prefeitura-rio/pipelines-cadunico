@@ -178,7 +178,7 @@ def download_files_from_storage_raw(dataset_id, table_id, staging_partitions_lis
             raw_filespaths_to_ingest.append(download_file_path)
             raw_versions_to_ingest.append(version)
             log(f"Downloaded file: {download_file_path}")
-    return raw_filespaths_to_ingest, raw_versions_to_ingest
+    return raw_filespaths_to_ingest
 
 
 def parse_xlsx_files_and_save_partition(output_path, raw_filespaths_to_ingest):
@@ -294,6 +294,15 @@ def create_cadunico_queries_from_table(
             )
             columns.append(col_expression)
             col_description = row["descricao"] if row["descricao"] is not None else "Sem descrição"
+            col_description = (
+                re.sub(r"\s+", " ", col_description)
+                .replace(";", "\n")
+                .replace("\\", "")
+                .replace(". ", "\n")
+                .replace("\n ", "\n")
+                .replace(" - ", "-")[:1024]  # bigquery limits the description to 1024 characters
+            )
+
             table_schema["columns"].append({"name": new_col_name, "description": col_description})
 
         schema["models"].append(table_schema)
@@ -353,12 +362,18 @@ def create_cadunico_queries_from_table(
 
 
 def update_layout_from_storage_and_create_versions_dbt_models(
-    project_id, layout_dataset_id, layout_table_id, output_path, model_dataset_id, model_table_id
+    project_id,
+    layout_dataset_id,
+    layout_table_id,
+    output_path,
+    model_dataset_id,
+    model_table_id,
+    force_create_models,
 ):
     staging_partitions_list = get_partitions_to_ingest(
         dataset_id=layout_dataset_id, table_id=layout_table_id
     )
-    raw_filespaths_to_ingest, raw_versions_to_ingest = download_files_from_storage_raw(
+    raw_filespaths_to_ingest = download_files_from_storage_raw(
         dataset_id=layout_dataset_id,
         table_id=layout_table_id,
         staging_partitions_list=staging_partitions_list,
@@ -374,7 +389,7 @@ def update_layout_from_storage_and_create_versions_dbt_models(
         output_path = create_table_and_upload_to_storage(
             dataset_id=layout_dataset_id, table_id=layout_table_id, output_path=output_path
         )
-
+    if raw_filespaths_to_ingest or force_create_models:
         df = get_layout_table_from_staging(
             project_id=project_id,
             dataset_id=layout_dataset_id,

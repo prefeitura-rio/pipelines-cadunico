@@ -44,7 +44,10 @@ with Flow(
     layout_dataset_id = Parameter("layout_dataset_id", default="protecao_social_cadunico")
     layout_table_id = Parameter("layout_table_id", default="layout")
     layout_output_path = Parameter("layout_output_path", default="/tmp/cadunico/layout_parsed/")
-
+    force_create_models = Parameter("force_create_models", default=False, required=False)
+    force_materialize_all_models = Parameter(
+        "force_materialize_all_models", default=False, required=False
+    )
     # Tasks
     project_id = get_project_id_task()
 
@@ -55,6 +58,7 @@ with Flow(
         output_path=layout_output_path,
         model_dataset_id=dataset_id,
         model_table_id=table_id,
+        force_create_models=force_create_models,
     )
     update_layout.set_upstream(project_id)
 
@@ -116,6 +120,27 @@ with Flow(
                 raise_final_state=unmapped(True),
             )
 
+    with case(force_materialize_all_models, True):
+        tables_to_materialize_parameters = get_version_tables_to_materialize(
+            dataset_id=dataset_id, ingested_files_output=None
+        )
+        tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
+        materialization_flow_id = task_get_flow_group_id(
+            flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
+        )
+        materialization_labels = task_get_current_flow_run_labels()
+        materialization_flow_runs = create_flow_run.map(
+            flow_id=unmapped(materialization_flow_id),
+            parameters=tables_to_materialize_parameters,
+            labels=unmapped(materialization_labels),
+        )
+
+        wait_for_flow_run_ = wait_for_flow_run.map(
+            flow_run_id=materialization_flow_runs,
+            stream_states=unmapped(True),
+            stream_logs=unmapped(True),
+            raise_final_state=unmapped(True),
+        )
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
 cadunico__ingest_raw__flow.run_config = KubernetesRun(image=constants.DOCKER_IMAGE.value)
