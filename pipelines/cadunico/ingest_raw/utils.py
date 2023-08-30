@@ -419,7 +419,7 @@ def create_layout_final_bq_table(dataframe, dataset_id, table_id):
         data_path=output_path,
         dataset_id=dataset_id,
         table_id=table_id,
-        dump_mode="replace",
+        dump_mode="overwrite",
         biglake_table=True,
     )
     log(f"Table {dataset_id}.{table_id} created in STAGING")
