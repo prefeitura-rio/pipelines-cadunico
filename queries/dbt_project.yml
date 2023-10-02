@@ -30,9 +30,9 @@ models:
     protecao_social_cadunico_versao:
         +materialized: table
         +schema: protecao_social_cadunico_versao
-    test_versao:
+    protecao_social_cadunico_test:
         +materialized: table
-        +schema: test_versao
-    test:
+        +schema: protecao_social_cadunico_test
+    protecao_social_cadunico_test_versao:
         +materialized: view
-        +schema: test
+        +schema: protecao_social_cadunico_test_versao
