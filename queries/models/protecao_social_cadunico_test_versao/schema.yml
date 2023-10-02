@@ -1,6 +1,6 @@
 version: 2
 models :
-  - name: '00_0601'
+  - name: 00_0601_test
     description: Table 00 version 0601
     columns:
       - name: vazio
@@ -15,7 +15,7 @@ models :
         description: Posição cadastral extraída no formato DDMMAAAA
       - name: dta_extracao_dados_hdr
         description: Data da extração no formato DDMMAAAA
-  - name: '00_0604'
+  - name: 00_0604_test
     description: Table 00 version 0604
     columns:
       - name: vazio
@@ -30,7 +30,7 @@ models :
         description: Posição cadastral extraída no formato DDMMAAAA
       - name: dta_extracao_dados_hdr
         description: Data da extração no formato DDMMAAAA
-  - name: '00_0609'
+  - name: 00_0609_test
     description: Table 00 version 0609
     columns:
       - name: vazio
@@ -45,7 +45,7 @@ models :
         description: Posição cadastral extraída no formato DDMMAAAA
       - name: dta_extracao_dados_hdr
         description: Data da extração no formato DDMMAAAA
-  - name: '01_0601'
+  - name: 01_0601_test
     description: Table 01 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -153,7 +153,7 @@ models :
         description: O conteúdo deste campo é 1 se na Opção '1.09 – Formulários Preenchidos’
           for marcada a opção 5 – Formulário Suplementar 3, caso contrário o conteúdo
           é 0
-  - name: '01_0604'
+  - name: 01_0604_test
     description: Table 01 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -265,7 +265,7 @@ models :
       - name: nu_origem_cadastro_fam
         description: "Valor contendo o domínio da origem\nAtualmente temos as origens:
           01 – Online\n02 – APP"
-  - name: '01_0609'
+  - name: 01_0609_test
     description: Table 01 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -377,7 +377,7 @@ models :
       - name: nu_origem_cadastro_fam
         description: "Valor contendo o domínio da origem\nAtualmente temos as origens:
           01 – Online\n02 – APP"
-  - name: '11_0601'
+  - name: 11_0601_test
     description: Table 11 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -542,7 +542,7 @@ models :
           Fundiário 303 Família Acampada 304 Família Atingida por Empreendimentos
           de Infraestrutura 305 Família de Preso do Sistema Carcerário 306 Família
           de Catadores de Material Reciclável 000 Nenhuma
-  - name: '11_0604'
+  - name: 11_0604_test
     description: Table 11 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -707,7 +707,7 @@ models :
           Fundiário 303 Família Acampada 304 Família Atingida por Empreendimentos
           de Infraestrutura 305 Família de Preso do Sistema Carcerário 306 Família
           de Catadores de Material Reciclável 000 Nenhuma
-  - name: '11_0609'
+  - name: 11_0609_test
     description: Table 11 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -872,7 +872,7 @@ models :
           Fundiário 303 Família Acampada 304 Família Atingida por Empreendimentos
           de Infraestrutura 305 Família de Preso do Sistema Carcerário 306 Família
           de Catadores de Material Reciclável 000 Nenhuma
-  - name: '12_0601'
+  - name: 12_0601_test
     description: Table 12 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -1017,7 +1017,7 @@ models :
       - name: ind_dinh_nao_resp_memb
         description: 'Não respondeu como ganha dinheiro: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '12_0604'
+  - name: 12_0604_test
     description: Table 12 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -1162,7 +1162,7 @@ models :
       - name: ind_dinh_nao_resp_memb
         description: 'Não respondeu como ganha dinheiro: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '12_0609'
+  - name: 12_0609_test
     description: Table 12 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -1307,7 +1307,7 @@ models :
       - name: ind_dinh_nao_resp_memb
         description: 'Não respondeu como ganha dinheiro: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '13_0601'
+  - name: 13_0601_test
     description: Table 13 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -1470,7 +1470,7 @@ models :
         description: "Existência de pendência • \"Família sem Responsável Familiar
           cadastrado\" para a famílias atualizadas na V7\n0- Não Existe 1- Existe
           NULO"
-  - name: '13_0604'
+  - name: 13_0604_test
     description: Table 13 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -1633,7 +1633,7 @@ models :
         description: "Existência de pendência • \"Família sem Responsável Familiar
           cadastrado\" para a famílias atualizadas na V7\n0- Não Existe 1- Existe
           NULO"
-  - name: '13_0609'
+  - name: 13_0609_test
     description: Table 13 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -1796,7 +1796,7 @@ models :
         description: "Existência de pendência • \"Família sem Responsável Familiar
           cadastrado\" para a famílias atualizadas na V7\n0- Não Existe 1- Existe
           NULO"
-  - name: '14_0601'
+  - name: 14_0601_test
     description: Table 14 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -1948,7 +1948,7 @@ models :
       - name: ind_paud_cpf_cancel_receita
         description: Existência de pendência “CPF cancelado na base da Receita Federal”
           0 – Não Existe 1 – Existe NULO
-  - name: '14_0604'
+  - name: 14_0604_test
     description: Table 14 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -2100,7 +2100,7 @@ models :
       - name: ind_paud_cpf_susp_receita
         description: Existência de pendência “CPF cancelado na base da Receita Federal”
           0 – Não Existe 1 – Existe NULO
-  - name: '14_0609'
+  - name: 14_0609_test
     description: Table 14 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -2252,7 +2252,7 @@ models :
       - name: ind_paud_cpf_susp_receita
         description: Existência de pendência “CPF cancelado na base da Receita Federal”
           0 – Não Existe 1 – Existe NULO
-  - name: '15_0601'
+  - name: 15_0601_test
     description: Table 15 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -2272,7 +2272,7 @@ models :
         description: Natureza do benefício do programa
       - name: cod_contrato_prohab_memb
         description: Número do contrato do programa
-  - name: '15_0604'
+  - name: 15_0604_test
     description: Table 15 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -2292,7 +2292,7 @@ models :
         description: Natureza do benefício do programa
       - name: cod_contrato_prohab_memb
         description: Número do contrato do programa
-  - name: '15_0609'
+  - name: 15_0609_test
     description: Table 15 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -2312,7 +2312,7 @@ models :
         description: Natureza do benefício do programa
       - name: cod_contrato_prohab_memb
         description: Número do contrato do programa
-  - name: '16_0601'
+  - name: 16_0601_test
     description: Table 16 version 0601
     columns:
       - name: chv_natural_prefeitura_famt
@@ -2339,7 +2339,7 @@ models :
         description: CÓDIGO DA PREFEITURA DE DESTINO APÓS TRANFERÊNCIA
       - name: cod_destino_familia_famt
         description: CÓDIGO DA FAMÍLIA DE DESTINO APÓS TRANFERÊNCIA
-  - name: '16_0604'
+  - name: 16_0604_test
     description: Table 16 version 0604
     columns:
       - name: chv_natural_prefeitura_famt
@@ -2366,7 +2366,7 @@ models :
         description: CÓDIGO DA PREFEITURA DE DESTINO APÓS TRANFERÊNCIA
       - name: cod_destino_familia_famt
         description: CÓDIGO DA FAMÍLIA DE DESTINO APÓS TRANFERÊNCIA
-  - name: '16_0609'
+  - name: 16_0609_test
     description: Table 16 version 0609
     columns:
       - name: chv_natural_prefeitura_famt
@@ -2393,7 +2393,7 @@ models :
         description: CÓDIGO DA PREFEITURA DE DESTINO APÓS TRANFERÊNCIA
       - name: cod_destino_familia_famt
         description: CÓDIGO DA FAMÍLIA DE DESTINO APÓS TRANFERÊNCIA
-  - name: '17_0601'
+  - name: 17_0601_test
     description: Table 17 version 0601
     columns:
       - name: chv_natural_prefeitura_membt
@@ -2469,7 +2469,7 @@ models :
       - name: cod_pais_origem_membt
         description: "Código do País de nascimento da Pessoa\nCampo numérico de 4
           posições formato NNNN"
-  - name: '17_0604'
+  - name: 17_0604_test
     description: Table 17 version 0604
     columns:
       - name: chv_natural_prefeitura_membt
@@ -2545,7 +2545,7 @@ models :
       - name: cod_pais_origem_membt
         description: "Código do País de nascimento da Pessoa\nCampo numérico de 4
           posições formato NNNN"
-  - name: '17_0609'
+  - name: 17_0609_test
     description: Table 17 version 0609
     columns:
       - name: chv_natural_prefeitura_membt
@@ -2621,7 +2621,7 @@ models :
       - name: cod_pais_origem_membt
         description: "Código do País de nascimento da Pessoa\nCampo numérico de 4
           posições formato NNNN"
-  - name: '18_0601'
+  - name: 18_0601_test
     description: Table 18 version 0601
     columns:
       - name: chv_natural_prefeitura_fam_exc
@@ -2668,7 +2668,7 @@ models :
           Único
       - name: desc_mot_exc
         description: Descrição do complemento do Motivo de Exclusão
-  - name: '18_0604'
+  - name: 18_0604_test
     description: Table 18 version 0604
     columns:
       - name: chv_natural_prefeitura_fam_exc
@@ -2715,7 +2715,7 @@ models :
           Único
       - name: desc_mot_exc
         description: Descrição do complemento do Motivo de Exclusão
-  - name: '18_0609'
+  - name: 18_0609_test
     description: Table 18 version 0609
     columns:
       - name: chv_natural_prefeitura_fam_exc
@@ -2763,7 +2763,7 @@ models :
           Único
       - name: desc_mot_exc
         description: Descrição do complemento do Motivo de Exclusão
-  - name: '19_0601'
+  - name: 19_0601_test
     description: Table 19 version 0601
     columns:
       - name: chv_natural_prefeitura_exc_mbo
@@ -2834,7 +2834,7 @@ models :
         description: Código IBGE do município da certidão de óbito da pessoa excluída
       - name: desc_mot_exc
         description: Descrição do complemento do Motivo de Exclusão da pessoa
-  - name: '19_0604'
+  - name: 19_0604_test
     description: Table 19 version 0604
     columns:
       - name: chv_natural_prefeitura_exc_mbo
@@ -2905,7 +2905,7 @@ models :
         description: Código IBGE do município da certidão de óbito da pessoa excluída
       - name: desc_mot_exc
         description: Descrição do complemento do Motivo de Exclusão da pessoa
-  - name: '19_0609'
+  - name: 19_0609_test
     description: Table 19 version 0609
     columns:
       - name: chv_natural_prefeitura_exc_mbo
@@ -2977,7 +2977,7 @@ models :
         description: Código IBGE do município da certidão de óbito da pessoa excluída
       - name: desc_mot_exc
         description: Descrição do complemento do Motivo de Exclusão da pessoa
-  - name: '02_0601'
+  - name: 02_0601_test
     description: Table 02 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3023,7 +3023,7 @@ models :
           da opção marcada no formulário'
       - name: cod_calcamento_domic_fam
         description: 'Calçamento: 1-Total, 2-Parcial, 3-Não Existe'
-  - name: '02_0604'
+  - name: 02_0604_test
     description: Table 02 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3069,7 +3069,7 @@ models :
           da opção marcada no formulário'
       - name: cod_calcamento_domic_fam
         description: 'Calçamento: 1-Total, 2-Parcial, 3-Não Existe'
-  - name: '02_0609'
+  - name: 02_0609_test
     description: Table 02 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3115,7 +3115,7 @@ models :
           da opção marcada no formulário'
       - name: cod_calcamento_domic_fam
         description: 'Calçamento: 1-Total, 2-Parcial, 3-Não Existe'
-  - name: '20_0601'
+  - name: 20_0601_test
     description: Table 20 version 0601
     columns:
       - name: chv_natural_prefeitura_rl
@@ -3205,7 +3205,7 @@ models :
         description: Nome do município
       - name: sigla_uf_rl
         description: UF do Estado do logradouro
-  - name: '20_0604'
+  - name: 20_0604_test
     description: Table 20 version 0604
     columns:
       - name: chv_natural_prefeitura_rl
@@ -3295,7 +3295,7 @@ models :
         description: Nome do município
       - name: sigla_uf_rl
         description: UF do Estado do logradouro
-  - name: '20_0609'
+  - name: 20_0609_test
     description: Table 20 version 0609
     columns:
       - name: chv_natural_prefeitura_rl
@@ -3385,7 +3385,7 @@ models :
         description: Nome do município
       - name: sigla_uf_rl
         description: UF do Estado do logradouro
-  - name: '03_0601'
+  - name: 03_0601_test
     description: Table 03 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3499,7 +3499,7 @@ models :
         description: Nome do CRAS/CREAS
       - name: cod_centro_assist_fam
         description: Código do CRAS/CREAS
-  - name: '03_0604'
+  - name: 03_0604_test
     description: Table 03 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3613,7 +3613,7 @@ models :
         description: Nome do CRAS/CREAS
       - name: cod_centro_assist_fam
         description: Código do CRAS/CREAS
-  - name: '03_0609'
+  - name: 03_0609_test
     description: Table 03 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3727,7 +3727,7 @@ models :
         description: Nome do CRAS/CREAS
       - name: cod_centro_assist_fam
         description: Código do CRAS/CREAS
-  - name: '04_0601'
+  - name: 04_0601_test
     description: Table 04 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3828,7 +3828,7 @@ models :
           posições formato NNNN Número do NIS original\nNúmero de NIS localizado ou
           atribuído à pessoa no momento de sua inclusão no Cadastro Único\nO número
           de NIS original do membro nunca será alterado."
-  - name: '04_0604'
+  - name: 04_0604_test
     description: Table 04 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -3932,7 +3932,7 @@ models :
           01 – Online\n02 – APP Número de NIS localizado ou atribuído à pessoa no
           momento de sua inclusão no Cadastro Único\nO número de NIS original do membro
           nunca será alterado."
-  - name: '04_0609'
+  - name: 04_0609_test
     description: Table 04 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4036,7 +4036,7 @@ models :
           01 – Online\n02 – APP Número de NIS localizado ou atribuído à pessoa no
           momento de sua inclusão no Cadastro Único\nO número de NIS original do membro
           nunca será alterado."
-  - name: '05_0601'
+  - name: 05_0601_test
     description: Table 05 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4101,7 +4101,7 @@ models :
         description: "Número do Termo / Matrícula.da Certidão\n"
       - name: num_identidade_pessoa
         description: Número da CI da Pessoa
-  - name: '05_0604'
+  - name: 05_0604_test
     description: Table 05 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4166,7 +4166,7 @@ models :
         description: "Número do Termo / Matrícula.da Certidão\n"
       - name: num_identidade_pessoa
         description: Número da CI da Pessoa
-  - name: '05_0609'
+  - name: 05_0609_test
     description: Table 05 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4231,7 +4231,7 @@ models :
         description: "Número do Termo / Matrícula.da Certidão\n"
       - name: num_identidade_pessoa
         description: Número da CI da Pessoa
-  - name: '06_0601'
+  - name: 06_0601_test
     description: Table 06 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4288,7 +4288,7 @@ models :
       - name: ind_ajuda_outra_memb
         description: 'Ajuda Terceiros outra forma: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '06_0604'
+  - name: 06_0604_test
     description: Table 06 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4345,7 +4345,7 @@ models :
       - name: ind_ajuda_outra_memb
         description: 'Ajuda Terceiros outra forma: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '06_0609'
+  - name: 06_0609_test
     description: Table 06 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4402,7 +4402,7 @@ models :
       - name: ind_ajuda_outra_memb
         description: 'Ajuda Terceiros outra forma: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '07_0601'
+  - name: 07_0601_test
     description: Table 07 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4450,7 +4450,7 @@ models :
           2 posições variando de 1 a 10, dependendo da opção marcada no formulário'
       - name: cod_concluiu_frequentou_memb
         description: 'A pessoa concluiu o curso frequentado: 1-Sim, 2-Não'
-  - name: '07_0604'
+  - name: 07_0604_test
     description: Table 07 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4498,7 +4498,7 @@ models :
           2 posições variando de 1 a 10, dependendo da opção marcada no formulário'
       - name: cod_concluiu_frequentou_memb
         description: 'A pessoa concluiu o curso frequentado: 1-Sim, 2-Não'
-  - name: '07_0609'
+  - name: 07_0609_test
     description: Table 07 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4546,7 +4546,7 @@ models :
           2 posições variando de 1 a 10, dependendo da opção marcada no formulário'
       - name: cod_concluiu_frequentou_memb
         description: 'A pessoa concluiu o curso frequentado: 1-Sim, 2-Não'
-  - name: '08_0601'
+  - name: 08_0601_test
     description: Table 08 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4617,7 +4617,7 @@ models :
       - name: ind_val_outras_rendas_memb
         description: 'Não recebe de outras fontes: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '08_0604'
+  - name: 08_0604_test
     description: Table 08 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4688,7 +4688,7 @@ models :
       - name: ind_val_outras_rendas_memb
         description: 'Não recebe de outras fontes: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário'
-  - name: '08_0609'
+  - name: 08_0609_test
     description: Table 08 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4780,7 +4780,7 @@ models :
       - name: cod_orgm_vlr_outra_fonte_renda
         description: "Flag indicadora da origem do valor do campo VAL-OUTRAS-RENDAS-MEMB\n
           Origem da renda:1 – Auto declarada\n2 – CNIS\n"
-  - name: '09_0601'
+  - name: 09_0601_test
     description: Table 09 version 0601
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4824,7 +4824,7 @@ models :
           Caso este campo esteja nulo deverá ficar em branco\nCaso o campo “IC-TIPO-EMAIL”
           esteja marcado com os valores “N-Não Tem” ou “D-Não Declarado” este campo
           deve ser preenchido com “0” (Zero)"
-  - name: '09_0604'
+  - name: 09_0604_test
     description: Table 09 version 0604
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4868,7 +4868,7 @@ models :
           Caso este campo esteja nulo deverá ficar em branco\nCaso o campo “IC-TIPO-EMAIL”
           esteja marcado com os valores “N-Não Tem” ou “D-Não Declarado” este campo
           deve ser preenchido com “0” (Zero)"
-  - name: '09_0609'
+  - name: 09_0609_test
     description: Table 09 version 0609
     columns:
       - name: chv_natural_prefeitura_fam
@@ -4912,7 +4912,7 @@ models :
           Caso este campo esteja nulo deverá ficar em branco\nCaso o campo “IC-TIPO-EMAIL”
           esteja marcado com os valores “N-Não Tem” ou “D-Não Declarado” este campo
           deve ser preenchido com “0” (Zero)"
-  - name: '98_0601'
+  - name: 98_0601_test
     description: Table 98 version 0601
     columns:
       - name: chv_natural_prefeitura
@@ -4930,7 +4930,7 @@ models :
         description: 1 se a Prefeitura migrou, senão 0
       - name: nom_prefeitura_pre
         description: Nome da Prefeitura
-  - name: '98_0604'
+  - name: 98_0604_test
     description: Table 98 version 0604
     columns:
       - name: chv_natural_prefeitura
@@ -4948,7 +4948,7 @@ models :
         description: 1 se a Prefeitura migrou, senão 0
       - name: nom_prefeitura_pre
         description: Nome da Prefeitura
-  - name: '98_0609'
+  - name: 98_0609_test
     description: Table 98 version 0609
     columns:
       - name: chv_natural_prefeitura
@@ -4966,7 +4966,7 @@ models :
         description: 1 se a Prefeitura migrou, senão 0
       - name: nom_prefeitura_pre
         description: Nome da Prefeitura
-  - name: '99_0601'
+  - name: 99_0601_test
     description: Table 99 version 0601
     columns:
       - name: vazio
@@ -5042,7 +5042,7 @@ models :
       - name: qtd_reg_99_tlr
         description: Quantidade de registros do tipo 99, campo numérico de 9 posições,
           formato 999999999
-  - name: '99_0604'
+  - name: 99_0604_test
     description: Table 99 version 0604
     columns:
       - name: vazio
@@ -5118,7 +5118,7 @@ models :
       - name: qtd_reg_99_tlr
         description: Quantidade de registros do tipo 99, campo numérico de 9 posições,
           formato 999999999
-  - name: '99_0609'
+  - name: 99_0609_test
     description: Table 99 version 0609
     columns:
       - name: vazio

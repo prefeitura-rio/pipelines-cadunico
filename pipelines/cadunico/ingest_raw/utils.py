@@ -111,7 +111,13 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
 
                     df_final = pd.concat([df_final, table_data])
 
+    found_versions = df_final["version"].unique().tolist()
+    found_versions.sort()
+    log(f"PARSED VERSIONS: {found_versions}")
+
     df_final = df_final[df_final["version"].isin(filter_versions)]
+    log(f"Filtered versions: {filter_versions}")
+
     df_final = df_final.reset_index(drop=True)
 
     output_filepath = Path(csv_output)
@@ -269,8 +275,10 @@ def create_cadunico_queries_from_table(
         dd = df[df["reg_version"] == table_version]
         table = table_version.split("____")[0]
         version = table_version.split("____")[1]
-
-        table_name = f"{table}_{version}_test" if model_table_id == "test" else f"{table}_{version}"
+        table_name_original = f"{table}_{version}"
+        table_name = (
+            f"{table_name_original}_test" if "test" in model_dataset_id else table_name_original
+        )
         table_schema["name"] = table_name
         table_schema["description"] = f"Table {table} version {version}"
         table_schema["columns"] = []
@@ -348,8 +356,9 @@ def create_cadunico_queries_from_table(
         table_query = table_query.replace("__table_id_replacer__", model_table_id)
 
         root_path = get_root_path()
-        model_path = root_path / f"queries/models/{model_dataset_id}_versao/"
-        sql_filepath = model_path / f"{table_name}.sql"
+
+        model_path_versao = root_path / f"queries/models/{model_dataset_id}_versao"
+        sql_filepath = model_path_versao / f"{table_name}.sql"
 
         sql_filepath.parent.mkdir(parents=True, exist_ok=True)
 
@@ -360,7 +369,13 @@ def create_cadunico_queries_from_table(
     json_log = json.dumps(log_created_models, indent=4)
     log(f"created models: {json_log}")
 
-    dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path / "schema.yml")
+    dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
+
+    model_path = root_path / f"queries/models/{model_dataset_id}"
+    sql_filepath = model_path / f"{table_name_original}.sql"
+    sql_filepath.parent.mkdir(parents=True, exist_ok=True)
+    with open(sql_filepath, "w") as text_file:
+        text_file.write("")
 
 
 def parse_columns_version_control(df):
@@ -403,6 +418,7 @@ def parse_columns_version_control(df):
             df_next_version["coluna_esta_versao_anterior"] = control_column_version
 
             df_final = pd.concat([df_final, df_next_version])
+    df_final = df_final.sort_values(["reg", "versao_layout_particao"])
 
     return df_final
 
