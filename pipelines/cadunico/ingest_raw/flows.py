@@ -80,6 +80,7 @@ with Flow(
         ingested_files = ingest_file.map(
             blob=files_to_ingest, output_directory=unmapped(ingested_files_output)
         )
+        ingested_files.set_upstream(need_to_ingest_bool)
 
         create_table = create_table_if_not_exists(
             dataset_id=dataset_id,
