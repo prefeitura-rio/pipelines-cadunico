@@ -371,11 +371,113 @@ def create_cadunico_queries_from_table(
 
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
 
-    model_path = root_path / f"queries/models/{model_dataset_id}"
-    sql_filepath = model_path / f"{table_name_original}.sql"
-    sql_filepath.parent.mkdir(parents=True, exist_ok=True)
-    with open(sql_filepath, "w") as text_file:
-        text_file.write("")
+
+def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id: str):
+    df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
+    df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
+    df = df.sort_values(["reg", "versao_layout_particao"])
+    diff = df[df["coluna_esta_versao_anterior"] == "False"]
+    diff["version"] = diff["versao_layout_anterior"]
+
+    df = pd.concat([df, diff])
+    df = df.sort_values(["reg", "versao_layout_particao"])
+
+    schema = {"version": 2, "models": []}
+    log_created_models = []
+    for reg in df["reg"].unique():
+        table_schema = {}
+
+        tables = df[df["reg"] == reg]
+        versions = tables["version"].unique()
+        table_schema["name"] = reg
+        table_schema["description"] = f"Table {reg}"
+        table_schema["columns"] = []
+        final_query = ""
+        ini_query = """
+            SELECT
+        """
+        end_query = """
+                SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+                SAFE_CAST(data_particao AS DATE) AS data_particao
+            FROM `rj-smas.__dataset_id_replacer___versao.__table_id_replacer__`
+
+            UNION ALL
+
+        """
+        ini_query = textwrap.dedent(ini_query)
+        end_query = textwrap.dedent(end_query)
+
+        for version in versions:
+            table_version = tables[tables["version"] == version]
+            columns = table_version["column"].tolist()
+            table_name_original = f"{reg}_{version}"
+            table_name = (
+                f"{table_name_original}_test" if "test" in model_dataset_id else table_name_original
+            )
+            columns = []
+            column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
+            for index, row in table_version.iterrows():
+                col_name = row["column"]
+                col_in_last_version = row["coluna_esta_versao_anterior"]
+                if col_name in column_counter:
+                    column_counter[col_name] += 1
+                    new_col_name = f"{col_name}_{column_counter[col_name]}"
+                else:
+                    column_counter[col_name] = 1
+                    new_col_name = col_name
+
+                if col_in_last_version == "False":
+                    col_expression = (
+                        f"    NULL AS {col_name}, --Essa coluna não esta na versao posterior"
+                    )
+                    print(col_expression)
+                else:
+                    col_expression = f"    CAST({new_col_name} AS STRING) AS {new_col_name},"
+                columns.append(col_expression)
+                col_description = (
+                    row["descricao"] if row["descricao"] is not None else "Sem descrição"
+                )
+                col_description = (
+                    re.sub(r"\s+", " ", col_description)
+                    .replace(";", "\n")
+                    .replace("\\", "")
+                    .replace(". ", "\n")
+                    .replace("\n ", "\n")
+                    .replace(" - ", "-")
+                )
+                col_description = col_description + f" | version: {version}"
+                # bigquery limits the description to 1024 characters
+                col_description = col_description[:1020]
+
+                col_schema = {"name": new_col_name, "description": col_description}
+                table_schema["columns"].append(col_schema)
+
+            column_dict = {}
+
+            table_query = ini_query + "\n".join(columns) + end_query
+            table_query = table_query.replace("__dataset_id_replacer__", model_dataset_id)
+            table_query = table_query.replace("__table_id_replacer__", table_name)
+            final_query += table_query
+        final_query = final_query.rsplit("UNION ALL", 1)[0]
+        for item in table_schema["columns"]:
+            column_dict[item["name"]] = item
+        table_schema["columns"] = list(column_dict.values())
+        schema["models"].append(table_schema)
+
+        root_path = get_root_path()
+
+        model_path_versao = root_path / f"queries/models/{model_dataset_id}"
+        sql_filepath = model_path_versao / f"{reg}.sql"
+
+        sql_filepath.parent.mkdir(parents=True, exist_ok=True)
+        log_created_models.append(str(sql_filepath))
+
+        with open(sql_filepath, "w") as text_file:
+            text_file.write(final_query)
+
+    dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
+    json_log = json.dumps(log_created_models, indent=4)
+    log(f"created models: {json_log}")
 
 
 def parse_columns_version_control(df):
@@ -405,14 +507,14 @@ def parse_columns_version_control(df):
             for nv_col in next_version_columns:
                 prev_versions.append(current_version)
                 if nv_col not in version_columns:
-                    control_column_version.append(False)
+                    control_column_version.append("False")
                     log_msg = (
                         f"Table {reg} version {next_version}\n"
                         + f"Column {nv_col} not found in version {current_version}"
                     )
                     log(log_msg, level="warning")
                 else:
-                    control_column_version.append(True)
+                    control_column_version.append("True")
 
             df_next_version["versao_layout_anterior"] = prev_versions
             df_next_version["coluna_esta_versao_anterior"] = control_column_version
@@ -487,3 +589,4 @@ def update_layout_from_storage_and_create_versions_dbt_models(
         create_cadunico_queries_from_table(
             df=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
+        create_cadunico_final_queries_from_table(df=df_final, model_dataset_id=model_dataset_id)
