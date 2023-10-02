@@ -107,7 +107,9 @@ def need_to_ingest(files_to_ingest: list) -> bool:
     """
     Check if there are files to ingest, to be used in a Prefect case.
     """
-    return files_to_ingest != []
+    variable = files_to_ingest != []
+    log(variable)
+    return variable
 
 
 @task
