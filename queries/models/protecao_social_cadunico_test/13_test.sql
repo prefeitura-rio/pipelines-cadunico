@@ -54,7 +54,7 @@ SELECT
     CAST(ind_paud_sem_rf_fam AS string) AS paud_sem_responsavel_cadastrado,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.13_0601_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.13_test_0601_test`
 
 UNION ALL
 
@@ -114,7 +114,7 @@ SELECT
     CAST(ind_paud_sem_rf_fam AS string) AS paud_sem_responsavel_cadastrado,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.13_0604_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.13_test_0604_test`
 
 UNION ALL
 
@@ -174,5 +174,5 @@ SELECT
     CAST(ind_paud_sem_rf_fam AS string) AS paud_sem_responsavel_cadastrado,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.13_0609_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.13_test_0609_test`
 

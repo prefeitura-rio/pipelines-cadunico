@@ -21,6 +21,35 @@ bd.config.from_file = True
 bd.config.billing_project_id = "rj-escritorio-dev"
 
 
+def get_tables_names_dict(name: str) -> dict:
+    table_dict = {
+        "00": "controle",
+        "01": "identificacao_controle",
+        "02": "domicilio",
+        "03": "familia",
+        "04": "identificacao_primeira_pessoa",
+        "05": "documento",
+        "06": "pessoa_deficiencia",
+        "07": "escolaridade",
+        "08": "trabalho_remuneracao",
+        "09": "contato",
+        "11": "11",
+        "12": "12",
+        "13": "13",
+        "14": "14",
+        "15": "15",
+        "16": "transferencia_familia",
+        "17": "identificacao_membro",
+        "18": "exclusao_servidor",
+        "19": "exclusao_membro",
+        "20": "representante_legal",
+        "98": "prefeitura",
+        "99": "registros",
+    }
+
+    return table_dict[name]
+
+
 def parse_partition(blob: Blob) -> str:
     name_parts = blob.name.split(".")
     for name_part in name_parts:
@@ -276,14 +305,15 @@ def create_cadunico_queries_from_table(
         table_schema = {}
 
         dd = df[df["reg_version"] == table_version]
-        table = table_version.split("____")[0]
+        table_number = table_version.split("____")[0]
+        table_model_name = get_tables_names_dict(table_number)
         version = table_version.split("____")[1]
-        table_name_original = f"{table}_{version}"
+        table_name_original = f"{table_model_name}_{version}"
         table_name = (
             f"{table_name_original}_test" if "test" in model_dataset_id else table_name_original
         )
         table_schema["name"] = table_name
-        table_schema["description"] = f"Table {table} version {version}"
+        table_schema["description"] = f"Table {table_model_name} version {version}"
         table_schema["columns"] = []
         columns = []
         column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
@@ -339,7 +369,7 @@ def create_cadunico_queries_from_table(
             FROM `rj-smas.__dataset_id_replacer___staging.__table_id_replacer__`
             WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
                 AND versao_layout_particao = '__version_replacer__'
-                AND SUBSTRING(text,38,2) = '__table_replacer__'
+                AND SUBSTRING(text,38,2) = '__table_number_replacer__'
 
             {% if is_incremental() %}
 
@@ -353,7 +383,7 @@ def create_cadunico_queries_from_table(
         ini_query = textwrap.dedent(ini_query)
         end_query = textwrap.dedent(end_query)
         table_query = ini_query + "\n".join(columns) + end_query
-        table_query = table_query.replace("__table_replacer__", table)
+        table_query = table_query.replace("__table_number_replacer__", table_number)
         table_query = table_query.replace("__version_replacer__", version)
         table_query = table_query.replace("__dataset_id_replacer__", model_dataset_id)
         table_query = table_query.replace("__table_id_replacer__", model_table_id)
@@ -398,11 +428,14 @@ def create_cadunico_final_queries_from_table(model_dataset_id: str):
 
     schema = {"version": 2, "models": []}
     log_created_models = []
-    for reg in df["reg"].unique():
+    for table_number in df["reg"].unique():
         table_schema = {}
-        model_name = reg if "test" not in model_dataset_id else f"{reg}_test"
+        table_model_name = get_tables_names_dict(table_number)
+        model_name = (
+            table_model_name if "test" not in model_dataset_id else f"{table_model_name}_test"
+        )
 
-        tables = df[df["reg"] == reg]
+        tables = df[df["reg"] == table_number]
         versions = tables["version"].unique()
         table_schema["name"] = model_name
         table_schema["description"] = f"Table {model_name}"
@@ -425,7 +458,7 @@ def create_cadunico_final_queries_from_table(model_dataset_id: str):
         for version in versions:
             table_version = tables[tables["version"] == version]
             columns = table_version["column"].tolist()
-            table_name_original = f"{reg}_{version}"
+            table_name_original = f"{model_name}_{version}"
             table_name = (
                 f"{table_name_original}_test" if "test" in model_dataset_id else table_name_original
             )

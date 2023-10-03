@@ -10,7 +10,7 @@ SELECT
     CAST(cod_contrato_prohab_memb AS string) AS contrato_pro_habitacao,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.15_0601_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.15_test_0601_test`
 
 UNION ALL
 
@@ -26,7 +26,7 @@ SELECT
     CAST(cod_contrato_prohab_memb AS string) AS contrato_pro_habitacao,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.15_0604_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.15_test_0604_test`
 
 UNION ALL
 
@@ -42,5 +42,5 @@ SELECT
     CAST(cod_contrato_prohab_memb AS string) AS contrato_pro_habitacao,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.15_0609_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.15_test_0609_test`
 

@@ -357,7 +357,7 @@ def get_version_tables_to_materialize(
             parameters_list.append(parameters)
 
     parameters_list_log = json.dumps(parameters_list, indent=4)
-    log(f"TABLES TO MATERIALIZE:\n{parameters_list_log}")
+    log(f"{len(parameters_list)} TABLES TO MATERIALIZE:\n{parameters_list_log}")
     return parameters_list
 
 

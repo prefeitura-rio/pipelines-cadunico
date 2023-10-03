@@ -53,7 +53,7 @@ SELECT
     CAST(ind_dinh_nao_resp_memb AS string) AS ganha_dinheiro_nao_respondeu,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.12_0601_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.12_test_0601_test`
 
 UNION ALL
 
@@ -112,7 +112,7 @@ SELECT
     CAST(ind_dinh_nao_resp_memb AS string) AS ganha_dinheiro_nao_respondeu,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.12_0604_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.12_test_0604_test`
 
 UNION ALL
 
@@ -171,5 +171,5 @@ SELECT
     CAST(ind_dinh_nao_resp_memb AS string) AS ganha_dinheiro_nao_respondeu,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.12_0609_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.12_test_0609_test`
 
