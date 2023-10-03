@@ -17,6 +17,9 @@ from pipelines.utils.bd import create_table_and_upload_to_gcs
 from pipelines.utils.io import get_root_path, to_partitions
 from pipelines.utils.logging import log
 
+bd.config.from_file = True
+bd.config.billing_project_id = "rj-escritorio-dev"
+
 
 def parse_partition(blob: Blob) -> str:
     name_parts = blob.name.split(".")
@@ -372,7 +375,18 @@ def create_cadunico_queries_from_table(
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
 
 
-def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id: str):
+def create_cadunico_final_queries_from_table(model_dataset_id: str):
+    query = f"""
+        SELECT
+            t1.*,
+            t2.nome_padronizado,
+            t2.bigquery_type
+        FROM `rj-smas.{model_dataset_id}_staging.layout_columns_version_control` t1
+        LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
+        ON t1.column = t2.column
+    """
+    df = bd.read_sql(query=query)
+
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
     df = df.sort_values(["reg", "versao_layout_particao"])
@@ -419,6 +433,10 @@ def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id:
             column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
             for index, row in table_version.iterrows():
                 col_name = row["column"]
+                col_name_padronizado = row["nome_padronizado"]
+                bigquery_type = row["bigquery_type"]
+                bigquery_type = bigquery_type if bigquery_type is not None else "STRING"
+
                 col_in_last_version = row["coluna_esta_versao_anterior"]
                 if col_name in column_counter:
                     column_counter[col_name] += 1
@@ -427,12 +445,16 @@ def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id:
                     column_counter[col_name] = 1
                     new_col_name = col_name
 
+                col_name_padronizado = (
+                    col_name_padronizado if col_name_padronizado is not None else new_col_name
+                )
+
                 if col_in_last_version == "False":
-                    col_expression = (
-                        f"    NULL AS {col_name}, --Essa coluna não esta na versao posterior"
-                    )
+                    col_expression = f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
                 else:
-                    col_expression = f"    CAST({new_col_name} AS STRING) AS {new_col_name},"
+                    col_expression = (
+                        f"    CAST({new_col_name} AS {bigquery_type}) AS {col_name_padronizado},"
+                    )
                 columns.append(col_expression)
                 col_description = (
                     row["descricao"] if row["descricao"] is not None else "Sem descrição"
@@ -449,7 +471,7 @@ def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id:
                 # bigquery limits the description to 1024 characters
                 col_description = col_description[:1020]
 
-                col_schema = {"name": new_col_name, "description": col_description}
+                col_schema = {"name": col_name_padronizado, "description": col_description}
                 table_schema["columns"].append(col_schema)
 
             column_dict = {}
@@ -589,4 +611,4 @@ def update_layout_from_storage_and_create_versions_dbt_models(
         create_cadunico_queries_from_table(
             df=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
-        create_cadunico_final_queries_from_table(df=df_final, model_dataset_id=model_dataset_id)
+        create_cadunico_final_queries_from_table(model_dataset_id=model_dataset_id)

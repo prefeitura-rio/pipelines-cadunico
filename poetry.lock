@@ -65,13 +65,13 @@ files = [
 
 [[package]]
 name = "basedosdados"
-version = "2.0.0b13"
+version = "2.0.0b15"
 description = "Organizar e facilitar o acesso a dados brasileiros através de tabelas públicas no BigQuery."
 optional = false
 python-versions = ">=3.8.1,<4"
 files = [
-    {file = "basedosdados-2.0.0b13-py3-none-any.whl", hash = "sha256:0cd014af88f5613743583b5b9e8fff2550714e59660da2c95171942299df2f4a"},
-    {file = "basedosdados-2.0.0b13.tar.gz", hash = "sha256:d32ca661b42e8c59f610daf269146e51d7e61eed1a0f9f849a6e32d56f5bf08d"},
+    {file = "basedosdados-2.0.0b15-py3-none-any.whl", hash = "sha256:2832cc2e93e6207ef4600516d90dc0858794e56d19674cc8493d77c2ae0a7e38"},
+    {file = "basedosdados-2.0.0b15.tar.gz", hash = "sha256:4fb669a087e8d12e30978efaca375d6760324eb3da6635e7ab35ed761cfdaef3"},
 ]
 
 [package.dependencies]
@@ -80,16 +80,17 @@ google-cloud-bigquery = ">=3.10,<4.0"
 google-cloud-bigquery-connection = ">=1.12,<2.0"
 google-cloud-bigquery-storage = ">=2.19,<3.0"
 google-cloud-storage = ">=2.9,<3.0"
-gql = {version = ">=3.4,<4.0", optional = true, markers = "extra == \"upload\""}
+gql = {version = ">=3.4,<4.0", optional = true, markers = "extra == \"all\" or extra == \"upload\""}
 loguru = "0.7.0"
 pandas = ">=2.0,<3.0"
 pandas-gbq = ">=0.19,<0.20"
 pydata-google-auth = ">=1.8,<2.0"
-requests-toolbelt = {version = ">=1,<2", optional = true, markers = "extra == \"upload\""}
+requests-toolbelt = {version = ">=1,<2", optional = true, markers = "extra == \"all\" or extra == \"upload\""}
 tomlkit = ">=0.11,<0.12"
 tqdm = ">=4,<5"
 
 [package.extras]
+all = ["click (>=8.1,<9)", "gql (>=3.4,<4.0)", "pandavro (>=1.7,<2.0)", "requests-toolbelt (>=1,<2)"]
 avro = ["pandavro (>=1.7,<2.0)"]
 cli = ["click (>=8.1,<9)"]
 upload = ["gql (>=3.4,<4.0)", "requests-toolbelt (>=1,<2)"]
@@ -3249,4 +3250,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "c0864917189a36d7c7264c259f9081d9c5addaf710d1d4883ac82ccb28c6ce68"
+content-hash = "d797703f8182c4dc01f4b131cbd879f8edd1b9257d0428e82dd0d3acc886fbba"
