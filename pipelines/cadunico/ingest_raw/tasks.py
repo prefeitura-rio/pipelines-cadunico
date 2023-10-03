@@ -289,7 +289,9 @@ def append_data_to_storage(
 
 
 @task
-def get_version_tables_to_materialize(dataset_id: str, table_id: str) -> List[dict]:
+def get_version_tables_to_materialize(
+    dataset_id: str, table_id: str, version_tables: bool
+) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
 
@@ -331,26 +333,28 @@ def get_version_tables_to_materialize(dataset_id: str, table_id: str) -> List[di
         else:
             parameters_list.append(parameters)
 
-    # add hamonized tables to materialize
-    queries_dir = root_path / f"queries/models/{dataset_id_original}"
-    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
-    files_path.sort()
-    tables = [
-        q.replace(".sql", "").split("/")[-1].split("__")[-1]
-        for q in files_path
-        if q.endswith(".sql")
-    ]
-    table_dbt_alias = [
-        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
-    ]
+    if not version_tables:
+        parameters_list = []
+        # add hamonized tables to materialize
+        queries_dir = root_path / f"queries/models/{dataset_id_original}"
+        files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+        files_path.sort()
+        tables = [
+            q.replace(".sql", "").split("/")[-1].split("__")[-1]
+            for q in files_path
+            if q.endswith(".sql")
+        ]
+        table_dbt_alias = [
+            True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
+        ]
 
-    for _table_id_, dbt_alias in zip(tables, table_dbt_alias):
-        parameters = {
-            "dataset_id": dataset_id_original,
-            "table_id": f"{_table_id_}",
-            "dbt_alias": dbt_alias,
-        }
-        parameters_list.append(parameters)
+        for _table_id_, dbt_alias in zip(tables, table_dbt_alias):
+            parameters = {
+                "dataset_id": dataset_id_original,
+                "table_id": f"{_table_id_}",
+                "dbt_alias": dbt_alias,
+            }
+            parameters_list.append(parameters)
 
     parameters_list_log = json.dumps(parameters_list, indent=4)
     log(f"TABLES TO MATERIALIZE:\n{parameters_list_log}")

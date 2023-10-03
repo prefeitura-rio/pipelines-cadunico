@@ -98,19 +98,21 @@ with Flow(
 
         append_data_to_gcs.set_upstream(create_table)
 
-        tables_to_materialize_parameters = get_version_tables_to_materialize(
-            dataset_id=dataset_id, table_id=table_id
+        # VERSION TABLES
+        version_tables_to_materialize_parameters = get_version_tables_to_materialize(
+            dataset_id=dataset_id, table_id=table_id, version_tables=True
         )
-        tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
+        version_tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
 
         with case(materialize_after_dump, True):
             materialization_flow_id = task_get_flow_group_id(
                 flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
             )
+
             materialization_labels = task_get_current_flow_run_labels()
             materialization_flow_runs = create_flow_run.map(
                 flow_id=unmapped(materialization_flow_id),
-                parameters=tables_to_materialize_parameters,
+                parameters=version_tables_to_materialize_parameters,
                 labels=unmapped(materialization_labels),
             )
 
@@ -121,23 +123,63 @@ with Flow(
                 raise_final_state=unmapped(True),
             )
 
+            # PROD TABLES
+            prod_tables_to_materialize_parameters = get_version_tables_to_materialize(
+                dataset_id=dataset_id, table_id=table_id, version_tables=False
+            )
+            prod_tables_to_materialize_parameters.set_upstream(wait_for_flow_run_)
+
+            prod_materialization_flow_runs = create_flow_run.map(
+                flow_id=unmapped(materialization_flow_id),
+                parameters=prod_tables_to_materialize_parameters,
+                labels=unmapped(materialization_labels),
+            )
+
+            prod_wait_for_flow_run = wait_for_flow_run.map(
+                flow_run_id=prod_materialization_flow_runs,
+                stream_states=unmapped(True),
+                stream_logs=unmapped(True),
+                raise_final_state=unmapped(True),
+            )
+
     with case(force_materialize_all_models, True):
-        tables_to_materialize_parameters = get_version_tables_to_materialize(
+        # VERSION TABLES
+        version_tables_to_materialize_parameters = get_version_tables_to_materialize(
             dataset_id=dataset_id, table_id=table_id
         )
-        tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
+        version_tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
         materialization_flow_id = task_get_flow_group_id(
             flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
         )
+
         materialization_labels = task_get_current_flow_run_labels()
         materialization_flow_runs = create_flow_run.map(
             flow_id=unmapped(materialization_flow_id),
-            parameters=tables_to_materialize_parameters,
+            parameters=version_tables_to_materialize_parameters,
             labels=unmapped(materialization_labels),
         )
 
         wait_for_flow_run_ = wait_for_flow_run.map(
             flow_run_id=materialization_flow_runs,
+            stream_states=unmapped(True),
+            stream_logs=unmapped(True),
+            raise_final_state=unmapped(True),
+        )
+
+        # PROD TABLES
+        prod_tables_to_materialize_parameters = get_version_tables_to_materialize(
+            dataset_id=dataset_id, table_id=table_id, version_tables=False
+        )
+        prod_tables_to_materialize_parameters.set_upstream(wait_for_flow_run_)
+
+        prod_materialization_flow_runs = create_flow_run.map(
+            flow_id=unmapped(materialization_flow_id),
+            parameters=prod_tables_to_materialize_parameters,
+            labels=unmapped(materialization_labels),
+        )
+
+        prod_wait_for_flow_run = wait_for_flow_run.map(
+            flow_run_id=prod_materialization_flow_runs,
             stream_states=unmapped(True),
             stream_logs=unmapped(True),
             raise_final_state=unmapped(True),
