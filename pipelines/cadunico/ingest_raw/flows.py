@@ -145,7 +145,7 @@ with Flow(
     with case(force_materialize_all_models, True):
         # VERSION TABLES
         version_tables_to_materialize_parameters = get_version_tables_to_materialize(
-            dataset_id=dataset_id, table_id=table_id
+            dataset_id=dataset_id, table_id=table_id, version_tables=True
         )
         version_tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
         materialization_flow_id = task_get_flow_group_id(
