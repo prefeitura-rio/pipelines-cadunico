@@ -1,7 +1,7 @@
 version: 2
 models :
-  - name: '00'
-    description: Table 00
+  - name: 00_test
+    description: Table 00_test
     columns:
       - name: vazio
         description: 'Espaços em branco | version: 0609'
@@ -15,8 +15,8 @@ models :
         description: 'Posição cadastral extraída no formato DDMMAAAA | version: 0609'
       - name: dta_extracao_dados_hdr
         description: 'Data da extração no formato DDMMAAAA | version: 0609'
-  - name: '01'
-    description: Table 01
+  - name: 01_test
+    description: Table 01_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Prefeitura | version: 0609'
@@ -135,8 +135,8 @@ models :
       - name: nu_origem_cadastro_fam
         description: "Valor contendo o domínio da origem\nAtualmente temos as origens:
           01 – Online\n02 – APP | version: 0609"
-  - name: '02'
-    description: Table 02
+  - name: 02_test
+    description: Table 02_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -185,8 +185,8 @@ models :
           da opção marcada no formulário | version: 0609'
       - name: cod_calcamento_domic_fam
         description: 'Calçamento: 1-Total, 2-Parcial, 3-Não Existe | version: 0609'
-  - name: '03'
-    description: Table 03
+  - name: 03_test
+    description: Table 03_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -299,8 +299,8 @@ models :
         description: 'Nome do CRAS/CREAS | version: 0609'
       - name: cod_centro_assist_fam
         description: 'Código do CRAS/CREAS | version: 0609'
-  - name: '04'
-    description: Table 04
+  - name: 04_test
+    description: Table 04_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -411,8 +411,8 @@ models :
           01 – Online\n02 – APP Número de NIS localizado ou atribuído à pessoa no
           momento de sua inclusão no Cadastro Único\nO número de NIS original do membro
           nunca será alterado. | version: 0609"
-  - name: '05'
-    description: Table 05
+  - name: 05_test
+    description: Table 05_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -478,8 +478,8 @@ models :
         description: "Número do Termo / Matrícula.da Certidão\n | version: 0609"
       - name: num_identidade_pessoa
         description: 'Número da CI da Pessoa | version: 0609'
-  - name: '06'
-    description: Table 06
+  - name: 06_test
+    description: Table 06_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -535,8 +535,8 @@ models :
       - name: ind_ajuda_outra_memb
         description: 'Ajuda Terceiros outra forma: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário | version: 0609'
-  - name: '07'
-    description: Table 07
+  - name: 07_test
+    description: Table 07_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -587,8 +587,8 @@ models :
       - name: cod_concluiu_frequentou_memb
         description: 'A pessoa concluiu o curso frequentado: 1-Sim, 2-Não | version:
           0609'
-  - name: '08'
-    description: Table 08
+  - name: 08_test
+    description: Table 08_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -681,8 +681,8 @@ models :
       - name: cod_orgm_vlr_outra_fonte_renda
         description: "Flag indicadora da origem do valor do campo VAL-OUTRAS-RENDAS-MEMB\n
           Origem da renda:1 – Auto declarada\n2 – CNIS\n | version: 0609"
-  - name: '09'
-    description: Table 09
+  - name: 09_test
+    description: Table 09_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -728,8 +728,8 @@ models :
           Caso este campo esteja nulo deverá ficar em branco\nCaso o campo “IC-TIPO-EMAIL”
           esteja marcado com os valores “N-Não Tem” ou “D-Não Declarado” este campo
           deve ser preenchido com “0” (Zero) | version: 0609"
-  - name: '11'
-    description: Table 11
+  - name: 11_test
+    description: Table 11_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -903,8 +903,8 @@ models :
           Fundiário 303 Família Acampada 304 Família Atingida por Empreendimentos
           de Infraestrutura 305 Família de Preso do Sistema Carcerário 306 Família
           de Catadores de Material Reciclável 000 Nenhuma | version: 0609'
-  - name: '12'
-    description: Table 12
+  - name: 12_test
+    description: Table 12_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -1053,8 +1053,8 @@ models :
       - name: ind_dinh_nao_resp_memb
         description: 'Não respondeu como ganha dinheiro: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário | version: 0609'
-  - name: '13'
-    description: Table 13
+  - name: 13_test
+    description: Table 13_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Prefeitura | version: 0609'
@@ -1219,8 +1219,8 @@ models :
         description: "Existência de pendência • \"Família sem Responsável Familiar
           cadastrado\" para a famílias atualizadas na V7\n0- Não Existe 1- Existe
           NULO | version: 0609"
-  - name: '14'
-    description: Table 14
+  - name: 14_test
+    description: Table 14_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -1381,8 +1381,8 @@ models :
       - name: ind_paud_cpf_cancel_receita
         description: 'Existência de pendência “CPF suspenso na base da Receita Federal”
           0 – Não Existe 1 – Existe NULO | version: 0609'
-  - name: '15'
-    description: Table 15
+  - name: 15_test
+    description: Table 15_test
     columns:
       - name: chv_natural_prefeitura_fam
         description: 'Chave única de identificação da Família | version: 0609'
@@ -1402,8 +1402,8 @@ models :
         description: 'Natureza do benefício do programa | version: 0609'
       - name: cod_contrato_prohab_memb
         description: 'Número do contrato do programa | version: 0609'
-  - name: '16'
-    description: Table 16
+  - name: 16_test
+    description: Table 16_test
     columns:
       - name: chv_natural_prefeitura_famt
         description: 'Chave única de identificação da Prefeitura de origem antes da
@@ -1431,8 +1431,8 @@ models :
           0609'
       - name: cod_destino_familia_famt
         description: 'CÓDIGO DA FAMÍLIA DE DESTINO APÓS TRANFERÊNCIA | version: 0609'
-  - name: '17'
-    description: Table 17
+  - name: 17_test
+    description: Table 17_test
     columns:
       - name: chv_natural_prefeitura_membt
         description: 'Chave única de identificação da Prefeitura de origem antes da
@@ -1512,8 +1512,8 @@ models :
       - name: cod_pais_origem_membt
         description: "Código do País de nascimento da Pessoa\nCampo numérico de 4
           posições formato NNNN | version: 0609"
-  - name: '18'
-    description: Table 18
+  - name: 18_test
+    description: Table 18_test
     columns:
       - name: chv_natural_prefeitura_fam_exc
         description: 'Chave única de identificação da Prefeitura da família excluída
@@ -1567,8 +1567,8 @@ models :
           Único | version: 0609'
       - name: desc_mot_exc
         description: 'Descrição do complemento do Motivo de Exclusão | version: 0609'
-  - name: '19'
-    description: Table 19
+  - name: 19_test
+    description: Table 19_test
     columns:
       - name: chv_natural_prefeitura_exc_mbo
         description: 'Chave única de identificação da Prefeitura da família a qual
@@ -1645,8 +1645,8 @@ models :
       - name: desc_mot_exc
         description: 'Descrição do complemento do Motivo de Exclusão da pessoa | version:
           0609'
-  - name: '20'
-    description: Table 20
+  - name: 20_test
+    description: Table 20_test
     columns:
       - name: chv_natural_prefeitura_rl
         description: 'Chave única de identificação da Prefeitura da família a qual
@@ -1738,8 +1738,8 @@ models :
         description: 'Nome do município | version: 0609'
       - name: sigla_uf_rl
         description: 'UF do Estado do logradouro | version: 0609'
-  - name: '98'
-    description: Table 98
+  - name: 98_test
+    description: Table 98_test
     columns:
       - name: chv_natural_prefeitura
         description: 'Chave de identificação da Prefeitura | version: 0609'
@@ -1756,8 +1756,8 @@ models :
         description: '1 se a Prefeitura migrou, senão 0 | version: 0609'
       - name: nom_prefeitura_pre
         description: 'Nome da Prefeitura | version: 0609'
-  - name: '99'
-    description: Table 99
+  - name: 99_test
+    description: Table 99_test
     columns:
       - name: vazio
         description: 'Espaços em branco | version: 0609'

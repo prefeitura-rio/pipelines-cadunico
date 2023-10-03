@@ -386,11 +386,12 @@ def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id:
     log_created_models = []
     for reg in df["reg"].unique():
         table_schema = {}
+        model_name = reg if "test" not in model_dataset_id else f"{reg}_test"
 
         tables = df[df["reg"] == reg]
         versions = tables["version"].unique()
-        table_schema["name"] = reg
-        table_schema["description"] = f"Table {reg}"
+        table_schema["name"] = model_name
+        table_schema["description"] = f"Table {model_name}"
         table_schema["columns"] = []
         final_query = ""
         ini_query = """
@@ -466,7 +467,6 @@ def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id:
         root_path = get_root_path()
 
         model_path_versao = root_path / f"queries/models/{model_dataset_id}"
-        model_name = reg if "test" not in model_dataset_id else f"{reg}_test"
         sql_filepath = model_path_versao / f"{model_name}.sql"
 
         sql_filepath.parent.mkdir(parents=True, exist_ok=True)
