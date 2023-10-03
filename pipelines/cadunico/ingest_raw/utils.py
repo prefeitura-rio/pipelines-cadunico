@@ -370,7 +370,7 @@ def create_cadunico_queries_from_table(
 
         log_created_models.append(str(sql_filepath))
     json_log = json.dumps(log_created_models, indent=4)
-    log(f"created models: {json_log}")
+    log(f"created {len(log_created_models)} version models : {json_log}")
 
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
 
@@ -499,7 +499,7 @@ def create_cadunico_final_queries_from_table(model_dataset_id: str):
 
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
     json_log = json.dumps(log_created_models, indent=4)
-    log(f"created models: {json_log}")
+    log(f"created {len(log_created_models)} prod models : {json_log}")
 
 
 def parse_columns_version_control(df):
