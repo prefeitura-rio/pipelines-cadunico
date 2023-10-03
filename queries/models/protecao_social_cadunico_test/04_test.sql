@@ -39,7 +39,7 @@ SELECT
     CAST(chv_nat_pes_original AS STRING) AS chv_nat_pes_original,
     CAST(nu_nis_original AS STRING) AS nu_nis_original,
     CAST(cod_pais_origem_pessoa AS STRING) AS cod_pais_origem_pessoa,
-    NULL AS nu_origem_cadastro_pessoa, --##Essa coluna não esta na versao posterior
+    NULL AS nu_origem_cadastro_pessoa, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_test_versao.04_0601_test`
@@ -87,7 +87,7 @@ SELECT
     CAST(chv_nat_pes_original AS STRING) AS chv_nat_pes_original,
     CAST(nu_nis_original AS STRING) AS nu_nis_original,
     CAST(cod_pais_origem_pessoa AS STRING) AS cod_pais_origem_pessoa,
-    NULL AS nu_origem_cadastro_pessoa, --##Essa coluna não esta na versao posterior
+    NULL AS nu_origem_cadastro_pessoa, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_test_versao.04_0604_test`

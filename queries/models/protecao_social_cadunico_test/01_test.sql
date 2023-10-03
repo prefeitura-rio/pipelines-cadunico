@@ -45,7 +45,7 @@ SELECT
     CAST(cod_unidade_territorial_fam AS STRING) AS cod_unidade_territorial_fam,
     CAST(nom_unidade_territorial_fam AS STRING) AS nom_unidade_territorial_fam,
     CAST(ind_formulario_sup3_fam AS STRING) AS ind_formulario_sup3_fam,
-    NULL AS nu_origem_cadastro_fam, --##Essa coluna não esta na versao posterior
+    NULL AS nu_origem_cadastro_fam, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_test_versao.01_0601_test`
@@ -99,7 +99,7 @@ SELECT
     CAST(cod_unidade_territorial_fam AS STRING) AS cod_unidade_territorial_fam,
     CAST(nom_unidade_territorial_fam AS STRING) AS nom_unidade_territorial_fam,
     CAST(ind_formulario_sup3_fam AS STRING) AS ind_formulario_sup3_fam,
-    NULL AS nu_origem_cadastro_fam, --##Essa coluna não esta na versao posterior
+    NULL AS nu_origem_cadastro_fam, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_test_versao.01_0604_test`

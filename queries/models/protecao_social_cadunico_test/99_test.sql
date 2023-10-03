@@ -58,7 +58,7 @@ SELECT
     CAST(qtd_reg_20_tlr AS STRING) AS qtd_reg_20_tlr,
     CAST(qtd_reg_98_tlr AS STRING) AS qtd_reg_98_tlr,
     CAST(qtd_reg_99_tlr AS STRING) AS qtd_reg_99_tlr,
-    NULL AS qtd_reg_21_tlr, --##Essa coluna não esta na versao posterior
+    NULL AS qtd_reg_21_tlr, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_test_versao.99_0604_test`
@@ -89,7 +89,7 @@ SELECT
     CAST(qtd_reg_17_tlr AS STRING) AS qtd_reg_17_tlr,
     CAST(qtd_reg_18_tlr AS STRING) AS qtd_reg_18_tlr,
     CAST(qtd_reg_19_tlr AS STRING) AS qtd_reg_19_tlr,
-    NULL AS qtd_reg_21_tlr, --##Essa coluna não esta na versao posterior
+    NULL AS qtd_reg_21_tlr, --Essa coluna não esta na versao posterior
     CAST(qtd_reg_20_tlr AS STRING) AS qtd_reg_20_tlr,
     CAST(qtd_reg_98_tlr AS STRING) AS qtd_reg_98_tlr,
     CAST(qtd_reg_99_tlr AS STRING) AS qtd_reg_99_tlr,

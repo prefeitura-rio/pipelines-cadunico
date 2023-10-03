@@ -430,7 +430,6 @@ def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id:
                     col_expression = (
                         f"    NULL AS {col_name}, --Essa coluna não esta na versao posterior"
                     )
-                    print(col_expression)
                 else:
                     col_expression = f"    CAST({new_col_name} AS STRING) AS {new_col_name},"
                 columns.append(col_expression)
@@ -467,7 +466,8 @@ def create_cadunico_final_queries_from_table(df: pd.DataFrame, model_dataset_id:
         root_path = get_root_path()
 
         model_path_versao = root_path / f"queries/models/{model_dataset_id}"
-        sql_filepath = model_path_versao / f"{reg}.sql"
+        model_name = reg if "test" not in model_dataset_id else f"{reg}_test"
+        sql_filepath = model_path_versao / f"{model_name}.sql"
 
         sql_filepath.parent.mkdir(parents=True, exist_ok=True)
         log_created_models.append(str(sql_filepath))
