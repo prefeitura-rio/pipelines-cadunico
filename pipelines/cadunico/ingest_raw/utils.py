@@ -252,13 +252,17 @@ def get_layout_table_from_staging(
 ):
     query = f"""
         SELECT
-            *
-        FROM `{project_id}.{layout_dataset_id}_staging.{layout_table_id}` t1
+            t1.*,
+            t2.nome_padronizado,
+            t2.bigquery_type,
+            t2.date_format,
+        FROM `{project_id}.{layout_dataset_id}.{layout_table_id}` t1
         LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
         ON t1.column = t2.column
     """
     log(f"Using project_id: {project_id}\n\n{query}")
     dataframe = bd.read_sql(query=query, billing_project_id=project_id, from_file=True)
+    # get only versions that are in staging data table registro_familia
     versions = get_staging_partitions_versions(
         project_id=project_id, dataset_id=dataset_id, table_id=table_id
     )
@@ -470,6 +474,7 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
                 col_name_padronizado = row["nome_padronizado"]
                 bigquery_type = row["bigquery_type"]
                 bigquery_type = bigquery_type if bigquery_type is not None else "STRING"
+                date_format = row["date_format"]
 
                 col_in_last_version = row["coluna_esta_versao_anterior"]
                 if col_name in column_counter:
@@ -486,9 +491,10 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
                 if col_in_last_version == "False":
                     col_expression = f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
                 else:
-                    col_expression = (
-                        f"    CAST({new_col_name} AS {bigquery_type}) AS {col_name_padronizado},"
-                    )
+                    if bigquery_type == "DATE":
+                        col_expression = f"    CAST(PARSE_DATE('{date_format}', {new_col_name}) AS {bigquery_type}) AS {col_name_padronizado},"
+                    else:
+                        col_expression = f"    CAST({new_col_name} AS {bigquery_type}) AS {col_name_padronizado},"
                 columns.append(col_expression)
                 col_description = (
                     row["descricao"] if row["descricao"] is not None else "Sem descrição"
