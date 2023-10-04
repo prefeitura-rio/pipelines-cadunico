@@ -128,7 +128,7 @@ with Flow(
                 project_id=project_id,
                 layout_dataset_id=layout_dataset_id,
                 layout_table_id=layout_table_id,
-                output_path=layout_output_path,
+                layout_output_path=layout_output_path,
                 force_create_models=force_create_models,
             )
             prod_tables_to_materialize_parameters.set_upstream(wait_for_flow_run_)
@@ -156,7 +156,7 @@ with Flow(
             project_id=project_id,
             layout_dataset_id=layout_dataset_id,
             layout_table_id=layout_table_id,
-            output_path=layout_output_path,
+            layout_output_path=layout_output_path,
             force_create_models=force_create_models,
         )
         version_tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
@@ -188,7 +188,7 @@ with Flow(
             project_id=project_id,
             layout_dataset_id=layout_dataset_id,
             layout_table_id=layout_table_id,
-            output_path=layout_output_path,
+            layout_output_path=layout_output_path,
             force_create_models=force_create_models,
         )
         prod_tables_to_materialize_parameters.set_upstream(wait_for_flow_run_)
