@@ -290,11 +290,11 @@ def append_data_to_storage(
 
 @task
 def get_dbt_models_to_materialize(
+    project_id: str,
     dataset_id: str,
     table_id: str,
     only_version_tables: bool,
     first_execution: bool,
-    project_id: str,
     layout_dataset_id: str,
     layout_table_id: str,
     layout_output_path: str | Path,
@@ -324,7 +324,9 @@ def get_dbt_models_to_materialize(
     dataset_id_original = dataset_id
     dataset_id = dataset_id + "_versao"
 
-    versions = get_staging_partitions_versions(dataset_id=dataset_id_original, table_id=table_id)
+    versions = get_staging_partitions_versions(
+        project_id=project_id, dataset_id=dataset_id_original, table_id=table_id
+    )
     log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
 
     root_path = get_root_path()

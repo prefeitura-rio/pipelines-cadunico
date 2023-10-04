@@ -158,11 +158,11 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
     df_final.to_csv(output_filepath, index=False)
 
 
-def get_staging_partitions_versions(dataset_id, table_id):
+def get_staging_partitions_versions(project_id, dataset_id, table_id):
     st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
     blobs = list(
         st.client["storage_staging"]
-        .bucket(st.bucket_name)
+        .bucket(project_id)
         .list_blobs(prefix=f"staging/{st.dataset_id}/{st.table_id}/")
     )
 
@@ -256,13 +256,17 @@ def get_layout_table_from_staging(
         FROM `{project_id}.{layout_dataset_id}_staging.{layout_table_id}` t1
         LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
         ON t1.column = t2.column
-        WHERE t1.versao_layout_particao IN (
-            SELECT DISTINCT versao_layout_particao
-            FROM `rj-smas.{dataset_id}_staging.{table_id}`
-        )
     """
     log(f"Using project_id: {project_id}\n\n{query}")
-    return bd.read_sql(query=query, billing_project_id=project_id, from_file=True)
+    dataframe = bd.read_sql(query=query, billing_project_id=project_id, from_file=True)
+    versions = get_staging_partitions_versions(
+        project_id=project_id, dataset_id=dataset_id, table_id=table_id
+    )
+    log(
+        f"Dataframe will be filtered using versions from {project_id}.{dataset_id}_staging.{table_id}: {versions}"
+    )
+
+    return dataframe[dataframe["versao_layout_particao"].isin(versions)]
 
 
 def load_ruamel():
@@ -603,7 +607,7 @@ def update_layout_from_storage_and_create_versions_dbt_models(
     force_create_models,
 ):
     staging_partitions_list = get_staging_partitions_versions(
-        dataset_id=layout_dataset_id, table_id=layout_table_id
+        project_id=project_id, dataset_id=layout_dataset_id, table_id=layout_table_id
     )
     raw_filespaths_to_ingest = download_files_from_storage_raw(
         dataset_id=layout_dataset_id,
