@@ -250,8 +250,6 @@ def create_table_and_upload_to_storage(dataset_id, table_id, output_path):
 def get_layout_table_from_staging(
     project_id, dataset_id, table_id, layout_dataset_id, layout_table_id
 ):
-    bd.config.from_file = True
-    bd.config.billing_project_id = project_id
     query = f"""
         SELECT
             *
@@ -263,8 +261,8 @@ def get_layout_table_from_staging(
             FROM `rj-smas.{dataset_id}_staging.{table_id}`
         )
     """
-    log(query)
-    return bd.read_sql(query=query)
+    log(f"Using project_id: {project_id}\n\n{query}")
+    return bd.read_sql(query=query, billing_project_id=project_id, from_file=True)
 
 
 def load_ruamel():
