@@ -436,7 +436,8 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
     df["version"] = np.where(
         df["coluna_esta_versao_anterior"] == "False", df["versao_layout_anterior"], df["version"]
     )
-
+    # remove columns that are empty
+    df = df[np.logical_not(df["column"].str.contains("vazio"))]
     df = df.sort_values(["reg", "versao_layout_particao"])
 
     schema = {"version": 2, "models": []}
@@ -458,7 +459,7 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
             SELECT
         """
         end_query = """
-                SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+                SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
                 SAFE_CAST(data_particao AS DATE) AS data_particao
             FROM `rj-smas.__dataset_id_replacer___versao.__table_id_replacer__`
 
@@ -493,11 +494,21 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
                     col_expression = f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
                 else:
                     if bigquery_type == "DATE":
-                        col_expression = f"    CAST(PARSE_DATE('{date_format}', {col_name}) AS {bigquery_type}) AS {col_name_padronizado},"
+                        col_expression = (
+                            "    CASE\n"
+                            + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', {col_name})  AS {bigquery_type})\n"
+                            + f"    END AS {col_name_padronizado},"
+                        )
+
                     else:
                         col_expression = (
-                            f"    CAST({col_name} AS {bigquery_type}) AS {col_name_padronizado},"
+                            "    CASE\n"
+                            + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            + f"        ELSE CAST( {col_name}  AS {bigquery_type})\n"
+                            + f"    END AS {col_name_padronizado},"
                         )
+
                 columns.append(col_expression)
                 col_description = (
                     row["descricao"] if row["descricao"] is not None else "Sem descrição"

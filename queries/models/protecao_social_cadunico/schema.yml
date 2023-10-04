@@ -3,8 +3,6 @@ models :
   - name: controle
     description: Table controle
     columns:
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '0 | version: 0612'
       - name: nome_arquivo
@@ -22,8 +20,6 @@ models :
         description: 'Chave única de identificação da Prefeitura | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '1 | version: 0612'
       - name: data_catrastro
@@ -142,8 +138,6 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '2 | version: 0612'
       - name: id_local_domicilio
@@ -192,8 +186,6 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '3 | version: 0612'
       - name: id_familia_indigena
@@ -203,8 +195,6 @@ models :
           NNNN | version: 0612'
       - name: povo_indigena
         description: 'Nome do povo indígena | version: 0612'
-      - name: vazio_2
-        description: "Espaços em branco\n | version: 0612"
       - name: id_indigena_residente
         description: '1-Sim 2-Não | version: 0612'
       - name: id_reserva_indigena
@@ -306,10 +296,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família  | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '4 | version: 0612'
       - name: data_cadastro
@@ -376,8 +364,6 @@ models :
       - name: pais_nascimento
         description: "Nome do país de nascimento da Pessoa\nQuando o campo 4.14-COD-PAIS-ORIGEM-PESSOA
           for igual a 10 (Brasil) preencher com espaços. | version: 0612"
-      - name: vazio_2
-        description: 'Sem descrição | version: 0612'
       - name: sabe_pais_nascimento
         description: 'Sabe o País de nascimento da pessoa: 1-Opção não marcada no
           formulário, 2-Opção marcada no formulário. | version: 0612'
@@ -418,10 +404,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '5 | version: 0612'
       - name: id_certidao_civil
@@ -434,8 +418,6 @@ models :
         description: 'Livro da certidão | version: 0612'
       - name: folha_certidao
         description: 'Folha da certidão | version: 0612'
-      - name: vazio_2
-        description: 'Espaços em branco | version: 0612'
       - name: data_emissao_certidao
         description: 'Data de emissão da da certidão formato DDMMAAAA | version: 0612'
       - name: sigla_uf_certidao
@@ -448,8 +430,6 @@ models :
         description: 'Código do cartório da certidão | version: 0612'
       - name: cpf
         description: 'CPF da Pessoa, formato NNNNNNNNNNN | version: 0612'
-      - name: vazio_3
-        description: 'Espaços em branco | version: 0612'
       - name: id_complemento_rg
         description: 'Complemento do número da CI da Pessoa | version: 0612'
       - name: data_emissao_rg
@@ -485,10 +465,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '6 | version: 0612'
       - name: id_tem_deficiencia
@@ -542,10 +520,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família  | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '7 | version: 0612'
       - name: id_sabe_ler_escrever
@@ -594,10 +570,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família  | version: 0612'
-      - name: vazio
-        description: 'Espaço em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '8 | version: 0612'
       - name: id_trabalho_semana_passada
@@ -688,8 +662,6 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '9 | version: 0612'
       - name: contato_ddd
@@ -743,8 +715,6 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '11 | version: 0612'
       - name: sesan_vende_leite
@@ -918,10 +888,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família | version: 0612'
-      - name: vazio
-        description: 'Espaço em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '12 | version: 0612'
       - name: dorme_rua
@@ -1068,8 +1036,6 @@ models :
         description: 'Chave única de identificação da Prefeitura | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '13 | version: 0612'
       - name: ptab_desativacao_comunidades_quilombolas
@@ -1234,10 +1200,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Numero do membro da Família | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '14 | version: 0612'
       - name: ptab_desativacao_inep
@@ -1396,10 +1360,8 @@ models :
         description: 'Chave única de identificação da Família | version: 0612'
       - name: id_familia
         description: 'Código Familiar | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família  | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco  | version: 0612'
       - name: numero_registro_arquivo
         description: '11 | version: 0612'
       - name: programa_pro_habitacao
@@ -1419,8 +1381,6 @@ models :
       - name: id_familia_antes_transferencia
         description: 'Código Familiar único de identificação da Família de origem
           antes da transferência | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_transferencia
         description: '16 | version: 0612'
       - name: data_transferencia
@@ -1448,10 +1408,8 @@ models :
       - name: id_familia_origem
         description: 'Código Familiar único de identificação da Família de origem
           antes da transferência | version: 0612'
-      - name: membros_familia
+      - name: id_membro_familia
         description: 'Número do membro da Família  | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '17 | version: 0612'
       - name: data_transferencia_membro
@@ -1487,8 +1445,6 @@ models :
       - name: nao_sabe_nome_pai
         description: 'Não sabe nome do pai: 0 – Opção não marcada no formulário, 1
           – Opção marcada no formulário | version: 0612'
-      - name: vazio_2
-        description: 'Espaços em branco  | version: 0612'
       - name: sigla_uf_nascimento
         description: 'UF de nascimento da Pessoa | version: 0612'
       - name: sabe_sigla_uf_nascimento
@@ -1505,8 +1461,6 @@ models :
           0612'
       - name: pais_nascimento
         description: 'Nome do país de nascimento da Pessoa | version: 0612'
-      - name: vazio_3
-        description: 'Espaços em Branco | version: 0612'
       - name: nao_sabe_pais_nascimento
         description: 'Não sabe o País de nascimento da pessoa: 0 – Opção não marcada
           no formulário, 1 – Opção marcada no formulário | version: 0612'
@@ -1529,8 +1483,6 @@ models :
       - name: id_familia_exclusao
         description: 'Código Familiar único de identificação da Família excluída |
           version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '18 | version: 0612'
       - name: data_exclusao
@@ -1586,8 +1538,6 @@ models :
           membro excluído pertence | version: 0612'
       - name: id_membro_excluido
         description: 'Número do membro da Família excluído | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '19 | version: 0612'
       - name: data_exclusao_membro
@@ -1664,8 +1614,6 @@ models :
       - name: id_interno_representante_legal
         description: 'Número interno que identifica o RL na base de dados | version:
           0612'
-      - name: vazio
-        description: 'Sem descrição | version: 0612'
       - name: numero_registro_arquivo
         description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
           0612"
@@ -1751,8 +1699,6 @@ models :
     columns:
       - name: id_prefeitura
         description: 'Chave de identificação da Prefeitura | version: 0612'
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '98 | version: 0612'
       - name: sigla_uf
@@ -1767,8 +1713,6 @@ models :
   - name: registros
     description: Table registros
     columns:
-      - name: vazio
-        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '99 | version: 0612'
       - name: registros_tipo_00

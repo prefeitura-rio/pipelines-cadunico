@@ -1,26 +1,82 @@
 
 SELECT
-    CAST(chv_natural_prefeitura_fam AS STRING) AS id_prefeitura,
-    CAST(cod_familiar_fam AS STRING) AS id_familia,
-    CAST(num_membro_fmla AS INT64) AS membros_familia,
-    CAST(vazio AS STRING) AS vazio,
-    CAST(num_reg_arquivo AS STRING) AS numero_registro_arquivo,
-    CAST(cod_deficiencia_memb AS STRING) AS id_tem_deficiencia,
-    CAST(ind_def_cegueira_memb AS STRING) AS deficiencia_cegueira,
-    CAST(ind_def_baixa_visao_memb AS STRING) AS deficiencia_baixa_visao,
-    CAST(ind_def_surdez_profunda_memb AS STRING) AS deficiencia_surdez_profunda,
-    CAST(ind_def_surdez_leve_memb AS STRING) AS deficiencia_surdez_leve,
-    CAST(ind_def_fisica_memb AS STRING) AS deficiencia_fisica,
-    CAST(ind_def_mental_memb AS STRING) AS deficiencia_mental,
-    CAST(ind_def_sindrome_down_memb AS STRING) AS deficiencia_sindrome_down,
-    CAST(ind_def_transtorno_mental_memb AS STRING) AS deficiencia_transtorno_mental,
-    CAST(ind_ajuda_nao_memb AS STRING) AS nao_recebe_ajuda,
-    CAST(ind_ajuda_familia_memb AS STRING) AS ajuda_familia,
-    CAST(ind_ajuda_especializado_memb AS STRING) AS ajuda_especializada,
-    CAST(ind_ajuda_vizinho_memb AS STRING) AS ajuda_vizinhos,
-    CAST(ind_ajuda_instituicao_memb AS STRING) AS ajuda_instituicao_social,
-    CAST(ind_ajuda_outra_memb AS STRING) AS ajuda_terceiros,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+    CASE
+        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
+        ELSE CAST( chv_natural_prefeitura_fam  AS STRING)
+    END AS id_prefeitura,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
+        ELSE CAST( cod_familiar_fam  AS STRING)
+    END AS id_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
+        ELSE CAST( num_membro_fmla  AS STRING)
+    END AS id_membro_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
+        ELSE CAST( num_reg_arquivo  AS STRING)
+    END AS numero_registro_arquivo,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( cod_deficiencia_memb  AS STRING)
+    END AS id_tem_deficiencia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_cegueira_memb  AS STRING)
+    END AS deficiencia_cegueira,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_baixa_visao_memb  AS STRING)
+    END AS deficiencia_baixa_visao,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_profunda_memb  AS STRING)
+    END AS deficiencia_surdez_profunda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_leve_memb  AS STRING)
+    END AS deficiencia_surdez_leve,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_fisica_memb  AS STRING)
+    END AS deficiencia_fisica,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_mental_memb  AS STRING)
+    END AS deficiencia_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_sindrome_down_memb  AS STRING)
+    END AS deficiencia_sindrome_down,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_transtorno_mental_memb  AS STRING)
+    END AS deficiencia_transtorno_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_nao_memb  AS STRING)
+    END AS nao_recebe_ajuda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_familia_memb  AS STRING)
+    END AS ajuda_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_especializado_memb  AS STRING)
+    END AS ajuda_especializada,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_vizinho_memb  AS STRING)
+    END AS ajuda_vizinhos,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_instituicao_memb  AS STRING)
+    END AS ajuda_instituicao_social,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_outra_memb  AS STRING)
+    END AS ajuda_terceiros,
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0601`
 
@@ -28,27 +84,83 @@ UNION ALL
 
 
 SELECT
-    CAST(chv_natural_prefeitura_fam AS STRING) AS id_prefeitura,
-    CAST(cod_familiar_fam AS STRING) AS id_familia,
-    CAST(num_membro_fmla AS INT64) AS membros_familia,
-    CAST(vazio AS STRING) AS vazio,
-    CAST(num_reg_arquivo AS STRING) AS numero_registro_arquivo,
-    CAST(cod_deficiencia_memb AS STRING) AS id_tem_deficiencia,
-    CAST(ind_def_cegueira_memb AS STRING) AS deficiencia_cegueira,
-    CAST(ind_def_baixa_visao_memb AS STRING) AS deficiencia_baixa_visao,
-    CAST(ind_def_surdez_profunda_memb AS STRING) AS deficiencia_surdez_profunda,
-    CAST(ind_def_surdez_leve_memb AS STRING) AS deficiencia_surdez_leve,
-    CAST(ind_def_fisica_memb AS STRING) AS deficiencia_fisica,
-    CAST(ind_def_mental_memb AS STRING) AS deficiencia_mental,
-    CAST(ind_def_sindrome_down_memb AS STRING) AS deficiencia_sindrome_down,
-    CAST(ind_def_transtorno_mental_memb AS STRING) AS deficiencia_transtorno_mental,
-    CAST(ind_ajuda_nao_memb AS STRING) AS nao_recebe_ajuda,
-    CAST(ind_ajuda_familia_memb AS STRING) AS ajuda_familia,
-    CAST(ind_ajuda_especializado_memb AS STRING) AS ajuda_especializada,
-    CAST(ind_ajuda_vizinho_memb AS STRING) AS ajuda_vizinhos,
-    CAST(ind_ajuda_instituicao_memb AS STRING) AS ajuda_instituicao_social,
-    CAST(ind_ajuda_outra_memb AS STRING) AS ajuda_terceiros,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+    CASE
+        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
+        ELSE CAST( chv_natural_prefeitura_fam  AS STRING)
+    END AS id_prefeitura,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
+        ELSE CAST( cod_familiar_fam  AS STRING)
+    END AS id_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
+        ELSE CAST( num_membro_fmla  AS STRING)
+    END AS id_membro_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
+        ELSE CAST( num_reg_arquivo  AS STRING)
+    END AS numero_registro_arquivo,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( cod_deficiencia_memb  AS STRING)
+    END AS id_tem_deficiencia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_cegueira_memb  AS STRING)
+    END AS deficiencia_cegueira,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_baixa_visao_memb  AS STRING)
+    END AS deficiencia_baixa_visao,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_profunda_memb  AS STRING)
+    END AS deficiencia_surdez_profunda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_leve_memb  AS STRING)
+    END AS deficiencia_surdez_leve,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_fisica_memb  AS STRING)
+    END AS deficiencia_fisica,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_mental_memb  AS STRING)
+    END AS deficiencia_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_sindrome_down_memb  AS STRING)
+    END AS deficiencia_sindrome_down,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_transtorno_mental_memb  AS STRING)
+    END AS deficiencia_transtorno_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_nao_memb  AS STRING)
+    END AS nao_recebe_ajuda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_familia_memb  AS STRING)
+    END AS ajuda_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_especializado_memb  AS STRING)
+    END AS ajuda_especializada,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_vizinho_memb  AS STRING)
+    END AS ajuda_vizinhos,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_instituicao_memb  AS STRING)
+    END AS ajuda_instituicao_social,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_outra_memb  AS STRING)
+    END AS ajuda_terceiros,
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0603`
 
@@ -56,27 +168,83 @@ UNION ALL
 
 
 SELECT
-    CAST(chv_natural_prefeitura_fam AS STRING) AS id_prefeitura,
-    CAST(cod_familiar_fam AS STRING) AS id_familia,
-    CAST(num_membro_fmla AS INT64) AS membros_familia,
-    CAST(vazio AS STRING) AS vazio,
-    CAST(num_reg_arquivo AS STRING) AS numero_registro_arquivo,
-    CAST(cod_deficiencia_memb AS STRING) AS id_tem_deficiencia,
-    CAST(ind_def_cegueira_memb AS STRING) AS deficiencia_cegueira,
-    CAST(ind_def_baixa_visao_memb AS STRING) AS deficiencia_baixa_visao,
-    CAST(ind_def_surdez_profunda_memb AS STRING) AS deficiencia_surdez_profunda,
-    CAST(ind_def_surdez_leve_memb AS STRING) AS deficiencia_surdez_leve,
-    CAST(ind_def_fisica_memb AS STRING) AS deficiencia_fisica,
-    CAST(ind_def_mental_memb AS STRING) AS deficiencia_mental,
-    CAST(ind_def_sindrome_down_memb AS STRING) AS deficiencia_sindrome_down,
-    CAST(ind_def_transtorno_mental_memb AS STRING) AS deficiencia_transtorno_mental,
-    CAST(ind_ajuda_nao_memb AS STRING) AS nao_recebe_ajuda,
-    CAST(ind_ajuda_familia_memb AS STRING) AS ajuda_familia,
-    CAST(ind_ajuda_especializado_memb AS STRING) AS ajuda_especializada,
-    CAST(ind_ajuda_vizinho_memb AS STRING) AS ajuda_vizinhos,
-    CAST(ind_ajuda_instituicao_memb AS STRING) AS ajuda_instituicao_social,
-    CAST(ind_ajuda_outra_memb AS STRING) AS ajuda_terceiros,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+    CASE
+        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
+        ELSE CAST( chv_natural_prefeitura_fam  AS STRING)
+    END AS id_prefeitura,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
+        ELSE CAST( cod_familiar_fam  AS STRING)
+    END AS id_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
+        ELSE CAST( num_membro_fmla  AS STRING)
+    END AS id_membro_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
+        ELSE CAST( num_reg_arquivo  AS STRING)
+    END AS numero_registro_arquivo,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( cod_deficiencia_memb  AS STRING)
+    END AS id_tem_deficiencia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_cegueira_memb  AS STRING)
+    END AS deficiencia_cegueira,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_baixa_visao_memb  AS STRING)
+    END AS deficiencia_baixa_visao,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_profunda_memb  AS STRING)
+    END AS deficiencia_surdez_profunda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_leve_memb  AS STRING)
+    END AS deficiencia_surdez_leve,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_fisica_memb  AS STRING)
+    END AS deficiencia_fisica,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_mental_memb  AS STRING)
+    END AS deficiencia_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_sindrome_down_memb  AS STRING)
+    END AS deficiencia_sindrome_down,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_transtorno_mental_memb  AS STRING)
+    END AS deficiencia_transtorno_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_nao_memb  AS STRING)
+    END AS nao_recebe_ajuda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_familia_memb  AS STRING)
+    END AS ajuda_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_especializado_memb  AS STRING)
+    END AS ajuda_especializada,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_vizinho_memb  AS STRING)
+    END AS ajuda_vizinhos,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_instituicao_memb  AS STRING)
+    END AS ajuda_instituicao_social,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_outra_memb  AS STRING)
+    END AS ajuda_terceiros,
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0604`
 
@@ -84,27 +252,83 @@ UNION ALL
 
 
 SELECT
-    CAST(chv_natural_prefeitura_fam AS STRING) AS id_prefeitura,
-    CAST(cod_familiar_fam AS STRING) AS id_familia,
-    CAST(num_membro_fmla AS INT64) AS membros_familia,
-    CAST(vazio AS STRING) AS vazio,
-    CAST(num_reg_arquivo AS STRING) AS numero_registro_arquivo,
-    CAST(cod_deficiencia_memb AS STRING) AS id_tem_deficiencia,
-    CAST(ind_def_cegueira_memb AS STRING) AS deficiencia_cegueira,
-    CAST(ind_def_baixa_visao_memb AS STRING) AS deficiencia_baixa_visao,
-    CAST(ind_def_surdez_profunda_memb AS STRING) AS deficiencia_surdez_profunda,
-    CAST(ind_def_surdez_leve_memb AS STRING) AS deficiencia_surdez_leve,
-    CAST(ind_def_fisica_memb AS STRING) AS deficiencia_fisica,
-    CAST(ind_def_mental_memb AS STRING) AS deficiencia_mental,
-    CAST(ind_def_sindrome_down_memb AS STRING) AS deficiencia_sindrome_down,
-    CAST(ind_def_transtorno_mental_memb AS STRING) AS deficiencia_transtorno_mental,
-    CAST(ind_ajuda_nao_memb AS STRING) AS nao_recebe_ajuda,
-    CAST(ind_ajuda_familia_memb AS STRING) AS ajuda_familia,
-    CAST(ind_ajuda_especializado_memb AS STRING) AS ajuda_especializada,
-    CAST(ind_ajuda_vizinho_memb AS STRING) AS ajuda_vizinhos,
-    CAST(ind_ajuda_instituicao_memb AS STRING) AS ajuda_instituicao_social,
-    CAST(ind_ajuda_outra_memb AS STRING) AS ajuda_terceiros,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+    CASE
+        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
+        ELSE CAST( chv_natural_prefeitura_fam  AS STRING)
+    END AS id_prefeitura,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
+        ELSE CAST( cod_familiar_fam  AS STRING)
+    END AS id_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
+        ELSE CAST( num_membro_fmla  AS STRING)
+    END AS id_membro_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
+        ELSE CAST( num_reg_arquivo  AS STRING)
+    END AS numero_registro_arquivo,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( cod_deficiencia_memb  AS STRING)
+    END AS id_tem_deficiencia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_cegueira_memb  AS STRING)
+    END AS deficiencia_cegueira,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_baixa_visao_memb  AS STRING)
+    END AS deficiencia_baixa_visao,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_profunda_memb  AS STRING)
+    END AS deficiencia_surdez_profunda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_leve_memb  AS STRING)
+    END AS deficiencia_surdez_leve,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_fisica_memb  AS STRING)
+    END AS deficiencia_fisica,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_mental_memb  AS STRING)
+    END AS deficiencia_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_sindrome_down_memb  AS STRING)
+    END AS deficiencia_sindrome_down,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_transtorno_mental_memb  AS STRING)
+    END AS deficiencia_transtorno_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_nao_memb  AS STRING)
+    END AS nao_recebe_ajuda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_familia_memb  AS STRING)
+    END AS ajuda_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_especializado_memb  AS STRING)
+    END AS ajuda_especializada,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_vizinho_memb  AS STRING)
+    END AS ajuda_vizinhos,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_instituicao_memb  AS STRING)
+    END AS ajuda_instituicao_social,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_outra_memb  AS STRING)
+    END AS ajuda_terceiros,
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0609`
 
@@ -112,27 +336,83 @@ UNION ALL
 
 
 SELECT
-    CAST(chv_natural_prefeitura_fam AS STRING) AS id_prefeitura,
-    CAST(cod_familiar_fam AS STRING) AS id_familia,
-    CAST(num_membro_fmla AS INT64) AS membros_familia,
-    CAST(vazio AS STRING) AS vazio,
-    CAST(num_reg_arquivo AS STRING) AS numero_registro_arquivo,
-    CAST(cod_deficiencia_memb AS STRING) AS id_tem_deficiencia,
-    CAST(ind_def_cegueira_memb AS STRING) AS deficiencia_cegueira,
-    CAST(ind_def_baixa_visao_memb AS STRING) AS deficiencia_baixa_visao,
-    CAST(ind_def_surdez_profunda_memb AS STRING) AS deficiencia_surdez_profunda,
-    CAST(ind_def_surdez_leve_memb AS STRING) AS deficiencia_surdez_leve,
-    CAST(ind_def_fisica_memb AS STRING) AS deficiencia_fisica,
-    CAST(ind_def_mental_memb AS STRING) AS deficiencia_mental,
-    CAST(ind_def_sindrome_down_memb AS STRING) AS deficiencia_sindrome_down,
-    CAST(ind_def_transtorno_mental_memb AS STRING) AS deficiencia_transtorno_mental,
-    CAST(ind_ajuda_nao_memb AS STRING) AS nao_recebe_ajuda,
-    CAST(ind_ajuda_familia_memb AS STRING) AS ajuda_familia,
-    CAST(ind_ajuda_especializado_memb AS STRING) AS ajuda_especializada,
-    CAST(ind_ajuda_vizinho_memb AS STRING) AS ajuda_vizinhos,
-    CAST(ind_ajuda_instituicao_memb AS STRING) AS ajuda_instituicao_social,
-    CAST(ind_ajuda_outra_memb AS STRING) AS ajuda_terceiros,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+    CASE
+        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
+        ELSE CAST( chv_natural_prefeitura_fam  AS STRING)
+    END AS id_prefeitura,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
+        ELSE CAST( cod_familiar_fam  AS STRING)
+    END AS id_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
+        ELSE CAST( num_membro_fmla  AS STRING)
+    END AS id_membro_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
+        ELSE CAST( num_reg_arquivo  AS STRING)
+    END AS numero_registro_arquivo,
+    CASE
+        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( cod_deficiencia_memb  AS STRING)
+    END AS id_tem_deficiencia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_cegueira_memb  AS STRING)
+    END AS deficiencia_cegueira,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_baixa_visao_memb  AS STRING)
+    END AS deficiencia_baixa_visao,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_profunda_memb  AS STRING)
+    END AS deficiencia_surdez_profunda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_surdez_leve_memb  AS STRING)
+    END AS deficiencia_surdez_leve,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_fisica_memb  AS STRING)
+    END AS deficiencia_fisica,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_mental_memb  AS STRING)
+    END AS deficiencia_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_sindrome_down_memb  AS STRING)
+    END AS deficiencia_sindrome_down,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_def_transtorno_mental_memb  AS STRING)
+    END AS deficiencia_transtorno_mental,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_nao_memb  AS STRING)
+    END AS nao_recebe_ajuda,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_familia_memb  AS STRING)
+    END AS ajuda_familia,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_especializado_memb  AS STRING)
+    END AS ajuda_especializada,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_vizinho_memb  AS STRING)
+    END AS ajuda_vizinhos,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_instituicao_memb  AS STRING)
+    END AS ajuda_instituicao_social,
+    CASE
+        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
+        ELSE CAST( ind_ajuda_outra_memb  AS STRING)
+    END AS ajuda_terceiros,
+    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0612`
 
