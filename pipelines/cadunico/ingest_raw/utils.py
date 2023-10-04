@@ -10,16 +10,12 @@ import basedosdados as bd
 import numpy as np
 import pandas as pd
 import ruamel.yaml as ryaml
-from basedosdados.upload.base import Base
 from google.cloud.storage.blob import Blob
 from unidecode import unidecode
 
 from pipelines.utils.bd import create_table_and_upload_to_gcs
 from pipelines.utils.io import get_root_path, to_partitions
 from pipelines.utils.logging import log
-
-bd.config.from_file = True
-bd.config.billing_project_id = Base()._get_project_id(mode="prod")
 
 
 def get_tables_names_dict(name: str) -> dict:
@@ -254,6 +250,8 @@ def create_table_and_upload_to_storage(dataset_id, table_id, output_path):
 def get_layout_table_from_staging(
     project_id, dataset_id, table_id, layout_dataset_id, layout_table_id
 ):
+    bd.config.from_file = True
+    bd.config.billing_project_id = project_id
     query = f"""
         SELECT
             *
