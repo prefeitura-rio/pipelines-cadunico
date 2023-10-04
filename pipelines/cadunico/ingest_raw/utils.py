@@ -10,6 +10,7 @@ import basedosdados as bd
 import numpy as np
 import pandas as pd
 import ruamel.yaml as ryaml
+from basedosdados.upload.base import Base
 from google.cloud.storage.blob import Blob
 from unidecode import unidecode
 
@@ -18,7 +19,7 @@ from pipelines.utils.io import get_root_path, to_partitions
 from pipelines.utils.logging import log
 
 bd.config.from_file = True
-bd.config.billing_project_id = "rj-escritorio-dev"
+bd.config.billing_project_id = Base()._get_project_id(mode="prod")
 
 
 def get_tables_names_dict(name: str) -> dict:
