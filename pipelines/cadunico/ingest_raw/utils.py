@@ -256,7 +256,7 @@ def get_layout_table_from_staging(
             t2.nome_padronizado,
             t2.bigquery_type,
             t2.date_format,
-        FROM `{project_id}.{layout_dataset_id}.{layout_table_id}` t1
+        FROM `{project_id}.{layout_dataset_id}_staging.{layout_table_id}` t1
         LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
         ON t1.column = t2.column
     """
