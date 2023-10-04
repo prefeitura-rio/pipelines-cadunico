@@ -99,7 +99,7 @@ SELECT
     CAST(cod_unidade_territorial_fam AS STRING) AS id_unidade_territorial,
     CAST(nom_unidade_territorial_fam AS STRING) AS unidade_territorial,
     CAST(ind_formulario_sup3_fam AS STRING) AS formulario_suplementar_3,
-    NULL AS origem_cadastro, --Essa coluna não esta na versao posterior
+    CAST(nu_origem_cadastro_fam AS STRING) AS origem_cadastro,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_controle_0603`

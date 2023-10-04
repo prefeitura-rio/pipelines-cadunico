@@ -87,7 +87,7 @@ SELECT
     CAST(chv_nat_pes_original AS STRING) AS id_original_pessoa,
     CAST(nu_nis_original AS STRING) AS nis_original,
     CAST(cod_pais_origem_pessoa AS STRING) AS id_pais_origem,
-    NULL AS origem_cadastro_pessoa, --Essa coluna não esta na versao posterior
+    CAST(nu_origem_cadastro_pessoa AS STRING) AS origem_cadastro_pessoa,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_primeira_pessoa_0603`

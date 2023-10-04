@@ -24,6 +24,13 @@ SELECT
     CAST(ind_val_renda_pensao_alimen_memb AS STRING) AS nao_recebe_pensao_alimenticia,
     CAST(val_outras_rendas_memb AS INT64) AS outras_fontes,
     CAST(ind_val_outras_rendas_memb AS STRING) AS nao_recebe_outras_fontes,
+    NULL AS id_origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0601`
@@ -56,6 +63,13 @@ SELECT
     CAST(ind_val_renda_pensao_alimen_memb AS STRING) AS nao_recebe_pensao_alimenticia,
     CAST(val_outras_rendas_memb AS INT64) AS outras_fontes,
     CAST(ind_val_outras_rendas_memb AS STRING) AS nao_recebe_outras_fontes,
+    NULL AS id_origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
+    NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0603`
@@ -127,13 +141,13 @@ SELECT
     CAST(ind_val_renda_pensao_alimen_memb AS STRING) AS nao_recebe_pensao_alimenticia,
     CAST(val_outras_rendas_memb AS INT64) AS outras_fontes,
     CAST(ind_val_outras_rendas_memb AS STRING) AS nao_recebe_outras_fontes,
-    NULL AS id_origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
-    NULL AS id_origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
-    NULL AS id_origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
-    NULL AS id_origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
-    NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
-    NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
-    NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
+    CAST(cod_orgm_vlr_rndmo_mes_passado AS STRING) AS id_origem_valor_rendimento_mes_passado,
+    CAST(cod_orgm_vlr_rndmo_bruto_prdo AS STRING) AS id_origem_valor_rendimento_bruto,
+    CAST(cod_origem_valor_ajuda_doacao AS STRING) AS id_origem_valor_ajuda_doacao,
+    CAST(cod_origem_valor_aposentadoria AS STRING) AS id_origem_valor_aposentadoria,
+    CAST(cod_orgm_vlr_seguro_desemprego AS STRING) AS id_origem_valor_seguro_desemprego,
+    CAST(cod_orgm_vlr_pensao_ali AS STRING) AS id_origem_valor_pensao_alimenticia,
+    CAST(cod_orgm_vlr_outra_fonte_renda AS STRING) AS id_origem_valor_outra_fonte,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0609`

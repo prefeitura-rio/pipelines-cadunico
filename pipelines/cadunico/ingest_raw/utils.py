@@ -310,6 +310,7 @@ def create_cadunico_dbt_version_models(
     dataframe: pd.DataFrame, model_dataset_id: str, model_table_id: str
 ):
     df = dataframe.copy()
+    df = df[df["coluna_esta_versao_anterior"] == "True"]
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
     df["reg_version"] = df["reg"] + "____" + df["version"]
@@ -425,10 +426,10 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
     df = df.sort_values(["reg", "versao_layout_particao"])
-    diff = df[df["coluna_esta_versao_anterior"] == "False"]
-    diff["version"] = diff["versao_layout_anterior"]
+    df["version"] = np.where(
+        df["coluna_esta_versao_anterior"] == "False", df["versao_layout_anterior"], df["version"]
+    )
 
-    df = pd.concat([df, diff])
     df = df.sort_values(["reg", "versao_layout_particao"])
 
     schema = {"version": 2, "models": []}
@@ -545,7 +546,7 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
 def parse_columns_version_control(df):
     df = df.sort_values(["reg", "versao_layout_particao"])
 
-    df_final = pd.DataFrame()
+    df_concat = pd.DataFrame()
     for reg in df["reg"].unique().tolist():
         df_table = df[df["reg"] == reg]
         table_versions = df_table["versao_layout_particao"].unique().tolist()
@@ -577,14 +578,26 @@ def parse_columns_version_control(df):
             df_next_version["versao_layout_anterior"] = prev_versions
             df_next_version["coluna_esta_versao_anterior"] = control_column_version
 
-            df_final = pd.concat([df_final, df_next_version])
+            df_concat = pd.concat([df_concat, df_next_version])
+    df_concat = df_concat.sort_values(["reg", "versao_layout_particao"])
+
+    # create new row for versions lass than versao_layout_anterior
+    versions = df["versao_layout_particao"].unique()
+    versions.sort()
+
+    df_new = pd.DataFrame()
+    diff = df_concat[df_concat["coluna_esta_versao_anterior"] == "False"]
+    for index, row in diff.iterrows():
+        df_new = pd.concat([df_new, row.to_frame().T])
+        for version in versions:
+            if version < row["versao_layout_anterior"]:
+                new_row = row.copy()
+                new_row["versao_layout_anterior"] = version
+                df_new = pd.concat([df_new, new_row.to_frame().T])
+
+    df_concat["coluna_esta_versao_anterior"] = "True"
+    df_final = pd.concat([df_concat, df_new])
     df_final = df_final.sort_values(["reg", "versao_layout_particao"])
-
-    remove_cols = ["column_1", "descricao_1"]
-    for col in remove_cols:
-        if col in df_final.columns.tolist():
-            df_final = df_final.drop(columns=[col])
-
     return df_final
 
 

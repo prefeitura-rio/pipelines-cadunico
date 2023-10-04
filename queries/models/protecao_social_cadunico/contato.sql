@@ -15,6 +15,9 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
+    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.contato_0601`
@@ -38,6 +41,9 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
+    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.contato_0603`
@@ -61,6 +67,9 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
+    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.contato_0604`
@@ -110,9 +119,9 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
-    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
-    NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
-    NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
+    CAST(ic_arquivos_carregados AS STRING) AS ic_arquivos_carregados,
+    CAST(data_arquivos_carregados AS STRING) AS data_arquivos_carregados,
+    CAST(cpf_operador_responsavel AS STRING) AS cpf_operador_responsavel,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.contato_0612`
