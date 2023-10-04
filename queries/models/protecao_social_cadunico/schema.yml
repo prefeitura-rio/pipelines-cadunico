@@ -309,7 +309,7 @@ models :
       - name: membros_familia
         description: 'Número do membro da Família  | version: 0612'
       - name: vazio
-        description: 'Sem descrição | version: 0612'
+        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '4 | version: 0612'
       - name: data_cadastro
@@ -376,6 +376,8 @@ models :
       - name: pais_nascimento
         description: "Nome do país de nascimento da Pessoa\nQuando o campo 4.14-COD-PAIS-ORIGEM-PESSOA
           for igual a 10 (Brasil) preencher com espaços. | version: 0612"
+      - name: vazio_2
+        description: 'Sem descrição | version: 0612'
       - name: sabe_pais_nascimento
         description: 'Sabe o País de nascimento da pessoa: 1-Opção não marcada no
           formulário, 2-Opção marcada no formulário. | version: 0612'
@@ -432,6 +434,8 @@ models :
         description: 'Livro da certidão | version: 0612'
       - name: folha_certidao
         description: 'Folha da certidão | version: 0612'
+      - name: vazio_2
+        description: 'Espaços em branco | version: 0612'
       - name: data_emissao_certidao
         description: 'Data de emissão da da certidão formato DDMMAAAA | version: 0612'
       - name: sigla_uf_certidao
@@ -722,7 +726,7 @@ models :
           Caso este campo esteja nulo deverá ficar em branco\nCaso o campo “IC-TIPO-EMAIL”
           esteja marcado com os valores “N-Não Tem” ou “D-Não Declarado” este campo
           deve ser preenchido com “0” (Zero) | version: 0612"
-      - name: ic_arquivos_carregados
+      - name: arquivos_carregados
         description: '1 quando houver arquivos carregados para a família e 2 quando
           não houver | version: 0612'
       - name: data_arquivos_carregados
@@ -1445,7 +1449,7 @@ models :
       - name: membros_familia
         description: 'Número do membro da Família  | version: 0612'
       - name: vazio
-        description: 'Espaços em Branco | version: 0612'
+        description: 'Espaços em branco | version: 0612'
       - name: numero_registro_arquivo
         description: '17 | version: 0612'
       - name: data_transferencia_membro
@@ -1481,6 +1485,8 @@ models :
       - name: nao_sabe_nome_pai
         description: 'Não sabe nome do pai: 0 – Opção não marcada no formulário, 1
           – Opção marcada no formulário | version: 0612'
+      - name: vazio_2
+        description: 'Espaços em Branco | version: 0612'
       - name: sigla_uf_nascimento
         description: 'UF de nascimento da Pessoa | version: 0612'
       - name: sabe_sigla_uf_nascimento

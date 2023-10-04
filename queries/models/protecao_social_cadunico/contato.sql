@@ -15,7 +15,7 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
-    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
@@ -41,7 +41,7 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
-    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
@@ -67,7 +67,7 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
-    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
@@ -93,7 +93,7 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
-    NULL AS ic_arquivos_carregados, --Essa coluna não esta na versao posterior
+    NULL AS arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS data_arquivos_carregados, --Essa coluna não esta na versao posterior
     NULL AS cpf_operador_responsavel, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
@@ -119,8 +119,8 @@ SELECT
     CAST(ic_tipo_email_fam AS STRING) AS email_tipo,
     CAST(email_fam AS STRING) AS email,
     CAST(ic_envio_email_fam AS STRING) AS autoriza_envio_email,
-    CAST(ic_arquivos_carregados AS STRING) AS ic_arquivos_carregados,
-    CAST(data_arquivos_carregados AS STRING) AS data_arquivos_carregados,
+    CAST(ic_arquivos_carregados AS STRING) AS arquivos_carregados,
+    CAST(PARSE_DATE('%d%m%Y', data_arquivos_carregados) AS DATE) AS data_arquivos_carregados,
     CAST(cpf_operador_responsavel AS STRING) AS cpf_operador_responsavel,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
