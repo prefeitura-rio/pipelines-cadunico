@@ -44,17 +44,18 @@ with Flow(
     layout_table_id = Parameter("layout_table_id", default="layout")
     layout_output_path = Parameter("layout_output_path", default="/tmp/cadunico/layout_parsed/")
     force_create_models = Parameter("force_create_models", default=False, required=False)
-    force_materialize_all_models = Parameter(
-        "force_materialize_all_models", default=False, required=False
+    force_materialize_all_dbt_models = Parameter(
+        "force_materialize_all_dbt_models", default=False, required=False
     )
-    force_materialize_all_models_versions = Parameter(
-        "force_materialize_all_models_versions", default=False, required=False
-    )
-    force_materialize_all_models_consolidated = Parameter(
-        "force_materialize_all_models_consolidated", default=False, required=False
+    force_materialize_harmonized_dbt_models = Parameter(
+        "force_materialize_harmonized_dbt_models", default=False, required=False
     )
     # Tasks
     project_id = get_project_id_task()
+    materialization_flow_id = task_get_flow_group_id(
+        flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
+    )
+    materialization_labels = task_get_current_flow_run_labels()
 
     existing_partitions = get_existing_partitions(
         prefix=prefix_staging_area, bucket_name=project_id
@@ -92,41 +93,36 @@ with Flow(
 
         append_data_to_gcs.set_upstream(create_table)
 
-        # VERSION TABLES
-        version_tables_to_materialize_parameters = get_dbt_models_to_materialize(
-            dataset_id=dataset_id,
-            table_id=table_id,
-            only_version_tables=True,
-            first_execution=True,
-            project_id=project_id,
-            layout_dataset_id=layout_dataset_id,
-            layout_table_id=layout_table_id,
-            layout_output_path=layout_output_path,
-            force_create_models=force_create_models,
-        )
-        version_tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
-
         with case(materialize_after_dump, True):
-            materialization_flow_id = task_get_flow_group_id(
-                flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
+            # VERSION TABLES
+            dump_version_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+                dataset_id=dataset_id,
+                table_id=table_id,
+                only_version_tables=True,
+                first_execution=True,
+                project_id=project_id,
+                layout_dataset_id=layout_dataset_id,
+                layout_table_id=layout_table_id,
+                layout_output_path=layout_output_path,
+                force_create_models=force_create_models,
             )
+            dump_version_tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
 
-            materialization_labels = task_get_current_flow_run_labels()
-            materialization_flow_runs = create_flow_run.map(
+            dump_materialization_flow_runs = create_flow_run.map(
                 flow_id=unmapped(materialization_flow_id),
-                parameters=version_tables_to_materialize_parameters,
+                parameters=dump_version_tables_to_materialize_parameters,
                 labels=unmapped(materialization_labels),
             )
 
-            wait_for_flow_run_ = wait_for_flow_run.map(
-                flow_run_id=materialization_flow_runs,
+            dump_wait_for_flow_run_ = wait_for_flow_run.map(
+                flow_run_id=dump_materialization_flow_runs,
                 stream_states=unmapped(True),
                 stream_logs=unmapped(True),
                 raise_final_state=unmapped(True),
             )
 
             # PROD TABLES
-            prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+            dump_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
                 dataset_id=dataset_id,
                 table_id=table_id,
                 only_version_tables=False,
@@ -137,24 +133,53 @@ with Flow(
                 layout_output_path=layout_output_path,
                 force_create_models=force_create_models,
             )
-            prod_tables_to_materialize_parameters.set_upstream(wait_for_flow_run_)
+            dump_prod_tables_to_materialize_parameters.set_upstream(dump_wait_for_flow_run_)
 
-            prod_materialization_flow_runs = create_flow_run.map(
+            dum_prod_materialization_flow_runs = create_flow_run.map(
                 flow_id=unmapped(materialization_flow_id),
-                parameters=prod_tables_to_materialize_parameters,
+                parameters=dump_prod_tables_to_materialize_parameters,
                 labels=unmapped(materialization_labels),
             )
 
-            prod_wait_for_flow_run = wait_for_flow_run.map(
-                flow_run_id=prod_materialization_flow_runs,
+            dump_prod_wait_for_flow_run = wait_for_flow_run.map(
+                flow_run_id=dum_prod_materialization_flow_runs,
                 stream_states=unmapped(True),
                 stream_logs=unmapped(True),
                 raise_final_state=unmapped(True),
             )
+    # materialize only prod dbt models
+    with case(force_materialize_harmonized_dbt_models, True):
+        # PROD TABLES
+        only_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+            dataset_id=dataset_id,
+            table_id=table_id,
+            only_version_tables=False,
+            first_execution=True,
+            project_id=project_id,
+            layout_dataset_id=layout_dataset_id,
+            layout_table_id=layout_table_id,
+            layout_output_path=layout_output_path,
+            force_create_models=force_create_models,
+        )
+        only_prod_tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
 
-    with case(force_materialize_all_models, True):
+        only_prod_materialization_flow_runs = create_flow_run.map(
+            flow_id=unmapped(materialization_flow_id),
+            parameters=only_prod_tables_to_materialize_parameters,
+            labels=unmapped(materialization_labels),
+        )
+
+        only_prod_wait_for_flow_run = wait_for_flow_run.map(
+            flow_run_id=only_prod_materialization_flow_runs,
+            stream_states=unmapped(True),
+            stream_logs=unmapped(True),
+            raise_final_state=unmapped(True),
+        )
+
+    # materialize all dbt models
+    with case(force_materialize_all_dbt_models, True):
         # VERSION TABLES
-        version_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+        all_version_tables_to_materialize_parameters = get_dbt_models_to_materialize(
             dataset_id=dataset_id,
             table_id=table_id,
             only_version_tables=True,
@@ -165,53 +190,41 @@ with Flow(
             layout_output_path=layout_output_path,
             force_create_models=force_create_models,
         )
-        version_tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
+        all_version_tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
 
-        with case(force_materialize_all_models_versions, True):
-            materialization_flow_id = task_get_flow_group_id(
-                flow_name=templates_constants.FLOW_EXECUTE_DBT_MODEL_NAME.value
-            )
+        all_materialization_flow_runs = create_flow_run.map(
+            flow_id=unmapped(materialization_flow_id),
+            parameters=all_version_tables_to_materialize_parameters,
+            labels=unmapped(materialization_labels),
+        )
 
-            materialization_labels = task_get_current_flow_run_labels()
-            materialization_flow_runs = create_flow_run.map(
-                flow_id=unmapped(materialization_flow_id),
-                parameters=version_tables_to_materialize_parameters,
-                labels=unmapped(materialization_labels),
-            )
+        all_wait_for_flow_run_version = wait_for_flow_run.map(
+            flow_run_id=all_materialization_flow_runs,
+            stream_states=unmapped(True),
+            stream_logs=unmapped(True),
+            raise_final_state=unmapped(True),
+        )
 
-            wait_for_flow_run_version = wait_for_flow_run.map(
-                flow_run_id=materialization_flow_runs,
-                stream_states=unmapped(True),
-                stream_logs=unmapped(True),
-                raise_final_state=unmapped(True),
-            )
-        with case(force_materialize_all_models_consolidated, True):
-            # PROD TABLES
-            prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
-                dataset_id=dataset_id,
-                table_id=table_id,
-                only_version_tables=False,
-                first_execution=False,
-                project_id=project_id,
-                layout_dataset_id=layout_dataset_id,
-                layout_table_id=layout_table_id,
-                layout_output_path=layout_output_path,
-                force_create_models=force_create_models,
-            )
-            prod_tables_to_materialize_parameters.set_upstream(wait_for_flow_run_version)
+        # PROD TABLES
+        all_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+            dataset_id=dataset_id,
+            table_id=table_id,
+            only_version_tables=False,
+            first_execution=True,
+            project_id=project_id,
+            layout_dataset_id=layout_dataset_id,
+            layout_table_id=layout_table_id,
+            layout_output_path=layout_output_path,
+            force_create_models=force_create_models,
+        )
+        all_prod_tables_to_materialize_parameters.set_upstream(all_wait_for_flow_run_version)
 
-            prod_materialization_flow_runs = create_flow_run.map(
-                flow_id=unmapped(materialization_flow_id),
-                parameters=prod_tables_to_materialize_parameters,
-                labels=unmapped(materialization_labels),
-            )
+        all_prod_materialization_flow_runs = create_flow_run.map(
+            flow_id=unmapped(materialization_flow_id),
+            parameters=all_prod_tables_to_materialize_parameters,
+            labels=unmapped(materialization_labels),
+        )
 
-            prod_wait_for_flow_run = wait_for_flow_run.map(
-                flow_run_id=prod_materialization_flow_runs,
-                stream_states=unmapped(True),
-                stream_logs=unmapped(True),
-                raise_final_state=unmapped(True),
-            )
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)
 cadunico__ingest_raw__flow.run_config = KubernetesRun(image=constants.DOCKER_IMAGE.value)
