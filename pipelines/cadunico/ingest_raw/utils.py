@@ -151,6 +151,23 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
         lambda x: unidecode(x).replace("-", "_").replace(" ", "_").replace("/", "_").lower().strip()
     )
 
+    df_final["reg_version"] = df_final["reg"] + "____" + df_final["version"]
+    column_names = []
+    for table_version in df_final["reg_version"].unique():
+        dd = df_final[df_final["reg_version"] == table_version]
+        column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
+        for index, row in dd.iterrows():
+            col_name = row["column"]
+            if col_name in column_counter:
+                column_counter[col_name] += 1
+                new_col_name = f"{col_name}_{column_counter[col_name]}"
+                column_names.append(new_col_name)
+            else:
+                column_counter[col_name] = 1
+                column_names.append(col_name)
+
+    df_final["column"] = column_names
+    df_final = df_final.drop(columns=["reg_version"])
     df_final = df_final.reset_index(drop=True)
 
     output_filepath = Path(csv_output)
@@ -332,20 +349,10 @@ def create_cadunico_dbt_version_models(
         table_schema["description"] = f"Table {table_model_name} version {version}"
         table_schema["columns"] = []
         columns = []
-        column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
 
         for index, row in dd.iterrows():
             col_name = row["column"]
-            if col_name in column_counter:
-                column_counter[col_name] += 1
-                new_col_name = f"{col_name}_{column_counter[col_name]}"
-            else:
-                column_counter[col_name] = 1
-                new_col_name = col_name
-
-            col_expression = (
-                f"    SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {new_col_name},"
-            )
+            col_expression = f"    SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {col_name},"
             columns.append(col_expression)
             col_description = row["descricao"] if row["descricao"] is not None else "Sem descrição"
             col_description = (
@@ -359,7 +366,7 @@ def create_cadunico_dbt_version_models(
             # bigquery limits the description to 1024 characters
             col_description = col_description[:1020]
 
-            table_schema["columns"].append({"name": new_col_name, "description": col_description})
+            table_schema["columns"].append({"name": col_name, "description": col_description})
 
         schema["models"].append(table_schema)
 
@@ -469,7 +476,6 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
                 f"{table_name_original}_test" if "test" in model_dataset_id else table_name_original
             )
             columns = []
-            column_counter = {}  # Dicionário para rastrear a contagem de colunas repetidas
             for index, row in table_version.iterrows():
                 col_name = row["column"]
                 col_name_padronizado = row["nome_padronizado"]
@@ -478,24 +484,20 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
                 date_format = row["date_format"]
 
                 col_in_last_version = row["coluna_esta_versao_anterior"]
-                if col_name in column_counter:
-                    column_counter[col_name] += 1
-                    new_col_name = f"{col_name}_{column_counter[col_name]}"
-                else:
-                    column_counter[col_name] = 1
-                    new_col_name = col_name
 
                 col_name_padronizado = (
-                    col_name_padronizado if col_name_padronizado is not None else new_col_name
+                    col_name_padronizado if col_name_padronizado is not None else col_name
                 )
 
                 if col_in_last_version == "False":
                     col_expression = f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
                 else:
                     if bigquery_type == "DATE":
-                        col_expression = f"    CAST(PARSE_DATE('{date_format}', {new_col_name}) AS {bigquery_type}) AS {col_name_padronizado},"
+                        col_expression = f"    CAST(PARSE_DATE('{date_format}', {col_name}) AS {bigquery_type}) AS {col_name_padronizado},"
                     else:
-                        col_expression = f"    CAST({new_col_name} AS {bigquery_type}) AS {col_name_padronizado},"
+                        col_expression = (
+                            f"    CAST({col_name} AS {bigquery_type}) AS {col_name_padronizado},"
+                        )
                 columns.append(col_expression)
                 col_description = (
                     row["descricao"] if row["descricao"] is not None else "Sem descrição"
