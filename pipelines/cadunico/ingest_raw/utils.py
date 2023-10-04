@@ -574,11 +574,17 @@ def parse_columns_version_control(df):
             df_final = pd.concat([df_final, df_next_version])
     df_final = df_final.sort_values(["reg", "versao_layout_particao"])
 
+    remove_cols = ["column_1", "descricao_1"]
+    for col in remove_cols:
+        if col in df_final.columns.tolist():
+            df_final = df_final.drop(columns=[col])
+
     return df_final
 
 
 def create_layout_column_cross_version_control_bq_table(dataframe, dataset_id, table_id):
     new_dataframe = parse_columns_version_control(df=dataframe)
+
     output_path = Path("/tmp/cadunico/final_layout")
     shutil.rmtree(output_path, ignore_errors=True)
     to_partitions(
