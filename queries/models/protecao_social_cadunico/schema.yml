@@ -448,6 +448,8 @@ models :
         description: 'Código do cartório da certidão | version: 0612'
       - name: cpf
         description: 'CPF da Pessoa, formato NNNNNNNNNNN | version: 0612'
+      - name: vazio_3
+        description: 'Espaços em branco | version: 0612'
       - name: id_complemento_rg
         description: 'Complemento do número da CI da Pessoa | version: 0612'
       - name: data_emissao_rg
@@ -1486,7 +1488,7 @@ models :
         description: 'Não sabe nome do pai: 0 – Opção não marcada no formulário, 1
           – Opção marcada no formulário | version: 0612'
       - name: vazio_2
-        description: 'Espaços em Branco | version: 0612'
+        description: 'Espaços em branco  | version: 0612'
       - name: sigla_uf_nascimento
         description: 'UF de nascimento da Pessoa | version: 0612'
       - name: sabe_sigla_uf_nascimento
@@ -1503,6 +1505,8 @@ models :
           0612'
       - name: pais_nascimento
         description: 'Nome do país de nascimento da Pessoa | version: 0612'
+      - name: vazio_3
+        description: 'Espaços em Branco | version: 0612'
       - name: nao_sabe_pais_nascimento
         description: 'Não sabe o País de nascimento da pessoa: 0 – Opção não marcada
           no formulário, 1 – Opção marcada no formulário | version: 0612'
