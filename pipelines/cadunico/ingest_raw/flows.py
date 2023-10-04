@@ -95,7 +95,7 @@ with Flow(
             project_id=project_id,
             layout_dataset_id=layout_dataset_id,
             layout_table_id=layout_table_id,
-            output_path=layout_output_path,
+            layout_output_path=layout_output_path,
             force_create_models=force_create_models,
         )
         version_tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
