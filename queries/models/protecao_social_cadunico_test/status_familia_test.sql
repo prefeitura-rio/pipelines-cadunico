@@ -54,7 +54,7 @@ SELECT
     CAST(ind_paud_sem_rf_fam AS string) AS paud_sem_responsavel_cadastrado,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.13_test_0601_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.status_familia_test_0604_test`
 
 UNION ALL
 
@@ -114,65 +114,5 @@ SELECT
     CAST(ind_paud_sem_rf_fam AS string) AS paud_sem_responsavel_cadastrado,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.13_test_0604_test`
-
-UNION ALL
-
-
-SELECT
-    CAST(chv_natural_prefeitura_fam AS string) AS id_prefeitura,
-    CAST(cod_familiar_fam AS string) AS id_familia,
-    CAST(vazio AS string) AS vazio,
-    CAST(num_reg_arquivo AS string) AS numero_registro_arquivo,
-    CAST(ind_ptab_desat_quilomb_fam AS string) AS ptab_desativacao_comunidades_quilombolas,
-    CAST(ind_ptab_desat_terras_indig_fam AS string) AS ptab_desativacao_terras_indigenas,
-    CAST(ind_ptab_desat_cras_creas_fam AS string) AS ptab_desativacao_cras_creas,
-    CAST(ind_ptab_desat_eas_fam AS string) AS ptab_desativacao_eas,
-    CAST(ind_pmig_cpo_obr_prin_fam AS string) AS pmig_campos_obrigatorios_nao_preenchidos,
-    CAST(ind_pmig_cpo_obr_sup1_fam AS string) AS pmig_campos_obrigatorios_nao_preenchidos_sumeplentar_1,
-    CAST(ind_pmig_sem_rf_fam AS string) AS pmig_sem_responsavel_familiar_cadastrado,
-    CAST(ind_ptrn_sem_rf_fam AS string) AS ptrn_sem_responsavel_familiar_cadastrado,
-    CAST(ind_paud_cpo_obr_prin_fam AS string) AS paud_campo_obrigatorio_nao_preenchido_formulario_principal,
-    CAST(ind_paud_cpo_obr_sup1_fam AS string) AS paud_campo_obrigatorio_nao_preenchido_formulario_suplementar_1,
-    CAST(ind_patl_fam_desatual_fam AS string) AS patl_dados_desatualizados,
-    CAST(ind_otrn_outro_mun_fam AS string) AS transferida_outro_municipio,
-    CAST(ind_otrn_nova_fam AS string) AS transferida_este_municipio_nova_familia,
-    CAST(ind_otrn_exist_fam AS string) AS transferida_este_municipio_familia_existente,
-    CAST(ind_otrn_outra_fam AS string) AS transferida_outra_familia_mesmo_municipio,
-    CAST(ind_oend_uterrit_fam AS string) AS sem_unidade_territorial,
-    CAST(ind_pmds_pend_01 AS string) AS pmds_pendencia_01,
-    CAST(ind_pmds_pend_02 AS string) AS pmds_pendencia_02,
-    CAST(ind_pmds_pend_03 AS string) AS pmds_pendencia_03,
-    CAST(ind_pmds_pend_04 AS string) AS pmds_pendencia_04,
-    CAST(ind_pmds_pend_05 AS string) AS pmds_pendencia_05,
-    CAST(ind_pmds_pend_06 AS string) AS pmds_pendencia_06,
-    CAST(ind_pmds_pend_07 AS string) AS pmds_pendencia_07,
-    CAST(ind_pmds_pend_08 AS string) AS pmds_pendencia_08,
-    CAST(ind_pmds_pend_09 AS string) AS pmds_pendencia_09,
-    CAST(ind_pmds_pend_10 AS string) AS pmds_pendencia_10,
-    CAST(ind_pmds_pend_11 AS string) AS pmds_pendencia_11,
-    CAST(ind_pmds_pend_12 AS string) AS pmds_pendencia_12,
-    CAST(ind_pmds_pend_13 AS string) AS pmds_pendencia_13,
-    CAST(ind_pmds_pend_14 AS string) AS pmds_pendencia_14,
-    CAST(ind_pmds_pend_15 AS string) AS pmds_pendencia_15,
-    CAST(ind_pmds_pend_16 AS string) AS pmds_pendencia_16,
-    CAST(ind_pmds_pend_17 AS string) AS pmds_pendencia_17,
-    CAST(ind_pmds_pend_18 AS string) AS pmds_pendencia_18,
-    CAST(ind_pmds_pend_19 AS string) AS pmds_pendencia_19,
-    CAST(ind_pmds_pend_20 AS string) AS pmds_pendencia_20,
-    CAST(ind_pmds_pend_21 AS string) AS pmds_pendencia_21,
-    CAST(ind_pmds_pend_22 AS string) AS pmds_pendencia_22,
-    CAST(ind_pmds_pend_23 AS string) AS pmds_pendencia_23,
-    CAST(ind_pmds_pend_24 AS string) AS pmds_pendencia_24,
-    CAST(ind_pmds_pend_25 AS string) AS pmds_pendencia_25,
-    CAST(ind_pmds_pend_26 AS string) AS pmds_pendencia_26,
-    CAST(ind_pmds_pend_27 AS string) AS pmds_pendencia_27,
-    CAST(ind_pmds_pend_28 AS string) AS pmds_pendencia_28,
-    CAST(ind_pmds_pend_29 AS string) AS pmds_pendencia_29,
-    CAST(ind_pmds_pend_30 AS string) AS pmds_pendencia_30,
-    CAST(ind_oaud_excl_pess_cpf_nulo AS string) AS exclusao_pessoa_cpf_nulo,
-    CAST(ind_paud_sem_rf_fam AS string) AS paud_sem_responsavel_cadastrado,
-    SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
-    SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_test_versao.13_test_0609_test`
+FROM `rj-smas.protecao_social_cadunico_test_versao.status_familia_test_0609_test`
 

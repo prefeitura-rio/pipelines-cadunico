@@ -28,16 +28,16 @@ def get_tables_names_dict(name: str) -> dict:
         "02": "domicilio",
         "03": "familia",
         "04": "identificacao_primeira_pessoa",
-        "05": "documento",
+        "05": "documento_pessoa",
         "06": "pessoa_deficiencia",
         "07": "escolaridade",
         "08": "trabalho_remuneracao",
         "09": "contato",
-        "11": "11",
-        "12": "12",
-        "13": "13",
-        "14": "14",
-        "15": "15",
+        "11": "seguranca_alimentar",
+        "12": "condicao_rua",
+        "13": "status_familia",
+        "14": "documento_membro",
+        "15": "habitacao",
         "16": "transferencia_familia",
         "17": "identificacao_membro",
         "18": "exclusao_servidor",
@@ -46,7 +46,6 @@ def get_tables_names_dict(name: str) -> dict:
         "98": "prefeitura",
         "99": "registros",
     }
-
     return table_dict[name]
 
 
@@ -247,15 +246,33 @@ def create_table_and_upload_to_storage(dataset_id, table_id, output_path):
 
 
 def get_layout_table_from_staging(project_id, dataset_id, table_id):
-    bd.config.billing_project_id = project_id
-    bd.config.from_file = True
-
     query = f"""
         SELECT
             *
         FROM `{project_id}.{dataset_id}_staging.{table_id}`
     """
     log(query)
+    return bd.read_sql(query=query)
+
+
+def get_layout_padronized_column_names_from_bq(project_id, dataset_id, table_id):
+    """
+    This query returns the layout table with padronized names and also only the versions
+    that are in the staging table registro_familia
+    """
+    query = f"""
+        SELECT
+            t1.*,
+            t2.nome_padronizado,
+            t2.bigquery_type
+        FROM `{project_id}.{dataset_id}_staging.layout_columns_version_control` t1
+        LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
+        ON t1.column = t2.column
+        WHERE t1.versao_layout_particao IN (
+            SELECT DISTINCT versao_layout_particao
+            FROM `rj-smas.{dataset_id}_staging.{table_id}`
+        )
+    """
     return bd.read_sql(query=query)
 
 
@@ -292,9 +309,10 @@ def dump_dict_to_dbt_yaml(schema, schema_yaml_path):
     )
 
 
-def create_cadunico_queries_from_table(
-    df: pd.DataFrame, model_dataset_id: str, model_table_id: str
+def create_cadunico_dbt_version_models(
+    dataframe: pd.DataFrame, model_dataset_id: str, model_table_id: str
 ):
+    df = dataframe.copy()
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
     df["reg_version"] = df["reg"] + "____" + df["version"]
@@ -405,18 +423,8 @@ def create_cadunico_queries_from_table(
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
 
 
-def create_cadunico_final_queries_from_table(model_dataset_id: str):
-    query = f"""
-        SELECT
-            t1.*,
-            t2.nome_padronizado,
-            t2.bigquery_type
-        FROM `rj-smas.{model_dataset_id}_staging.layout_columns_version_control` t1
-        LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
-        ON t1.column = t2.column
-    """
-    df = bd.read_sql(query=query)
-
+def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_dataset_id: str):
+    df = dataframe.copy()
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
     df = df.sort_values(["reg", "versao_layout_particao"])
@@ -580,7 +588,7 @@ def parse_columns_version_control(df):
     return df_final
 
 
-def create_layout_final_bq_table(dataframe, dataset_id, table_id):
+def create_layout_column_cross_version_control_bq_table(dataframe, dataset_id, table_id):
     new_dataframe = parse_columns_version_control(df=dataframe)
     output_path = Path("/tmp/cadunico/final_layout")
     shutil.rmtree(output_path, ignore_errors=True)
@@ -620,7 +628,7 @@ def update_layout_from_storage_and_create_versions_dbt_models(
     )
 
     if raw_filespaths_to_ingest:
-        log(f"Files to ingest: {raw_filespaths_to_ingest}")
+        log(f"FILES TO INGEST: {raw_filespaths_to_ingest}")
         output_path = parse_xlsx_files_and_save_partition(
             output_path=output_path,
             raw_filespaths_to_ingest=raw_filespaths_to_ingest,
@@ -629,19 +637,32 @@ def update_layout_from_storage_and_create_versions_dbt_models(
             dataset_id=layout_dataset_id, table_id=layout_table_id, output_path=output_path
         )
     else:
-        log("No LAYOUT files to ingest or Models do Create")
+        log("NO LAYOUT FILES TO INGEST")
 
     if raw_filespaths_to_ingest or force_create_models:
+        log("GET LAYOUT TABLE FROM STAGING")
         df = get_layout_table_from_staging(
             project_id=project_id,
             dataset_id=layout_dataset_id,
             table_id=layout_table_id,
         )
-        log("Parse and create table columns version control")
-        df_final = create_layout_final_bq_table(
+
+        log("CREATE LAYOUT COLUMNS VERSION CONTROL IN BQ")
+        create_layout_column_cross_version_control_bq_table(
             dataframe=df, dataset_id=layout_dataset_id, table_id=layout_table_id
         )
-        create_cadunico_queries_from_table(
-            df=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
+
+        log("GET LAYOUT PADRONIZED COLUMN NAMES TABLE FROM BQ")
+        df_final = get_layout_padronized_column_names_from_bq(
+            project_id=project_id, dataset_id=model_dataset_id, table_id=model_table_id
         )
-        create_cadunico_final_queries_from_table(model_dataset_id=model_dataset_id)
+
+        log("CREATE DBT VERSION MODELS")
+        create_cadunico_dbt_version_models(
+            dataframe=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
+        )
+
+        log("CREATE DBT CONSOLIDATED MODELS")
+        create_cadunico_dbt_consolidated_models(
+            dataframe=df_final, model_dataset_id=model_dataset_id
+        )

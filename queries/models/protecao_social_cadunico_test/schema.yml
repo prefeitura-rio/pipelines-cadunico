@@ -409,8 +409,8 @@ models :
           01 – Online\n02 – APP Número de NIS localizado ou atribuído à pessoa no
           momento de sua inclusão no Cadastro Único\nO número de NIS original do membro
           nunca será alterado. | version: 0609"
-  - name: documento_test
-    description: Table documento_test
+  - name: documento_pessoa_test
+    description: Table documento_pessoa_test
     columns:
       - name: id_prefeitura
         description: 'Chave única de identificação da Família | version: 0609'
@@ -722,8 +722,8 @@ models :
           Caso este campo esteja nulo deverá ficar em branco\nCaso o campo “IC-TIPO-EMAIL”
           esteja marcado com os valores “N-Não Tem” ou “D-Não Declarado” este campo
           deve ser preenchido com “0” (Zero) | version: 0609"
-  - name: 11_test
-    description: Table 11_test
+  - name: seguranca_alimentar_test
+    description: Table seguranca_alimentar_test
     columns:
       - name: id_prefeitura
         description: 'Chave única de identificação da Família | version: 0609'
@@ -897,8 +897,8 @@ models :
           Fundiário 303 Família Acampada 304 Família Atingida por Empreendimentos
           de Infraestrutura 305 Família de Preso do Sistema Carcerário 306 Família
           de Catadores de Material Reciclável 000 Nenhuma | version: 0609'
-  - name: 12_test
-    description: Table 12_test
+  - name: condicao_rua_test
+    description: Table condicao_rua_test
     columns:
       - name: id_prefeitura
         description: 'Chave única de identificação da Família | version: 0609'
@@ -1047,8 +1047,8 @@ models :
       - name: ganha_dinheiro_nao_respondeu
         description: 'Não respondeu como ganha dinheiro: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário | version: 0609'
-  - name: 13_test
-    description: Table 13_test
+  - name: status_familia_test
+    description: Table status_familia_test
     columns:
       - name: id_prefeitura
         description: 'Chave única de identificação da Prefeitura | version: 0609'
@@ -1213,8 +1213,8 @@ models :
         description: "Existência de pendência • \"Família sem Responsável Familiar
           cadastrado\" para a famílias atualizadas na V7\n0- Não Existe 1- Existe
           NULO | version: 0609"
-  - name: 14_test
-    description: Table 14_test
+  - name: documento_membro_test
+    description: Table documento_membro_test
     columns:
       - name: id_prefeitura
         description: 'Chave única de identificação da Família | version: 0609'
@@ -1369,14 +1369,14 @@ models :
       - name: oaud_rg_multiplicidade
         description: 'Existência de ocorrência “Multiplicidade de RG” 0- Não Existe
           1- Existe NULO | version: 0609'
-      - name: paud_cpf_suspenso_base_receita_federal
-        description: 'Existência de pendência “CPF cancelado na base da Receita Federal”
-          0 – Não Existe 1 – Existe NULO | version: 0609'
       - name: paud_cpf_cancelado_base_receita_federal
         description: 'Existência de pendência “CPF suspenso na base da Receita Federal”
           0 – Não Existe 1 – Existe NULO | version: 0609'
-  - name: 15_test
-    description: Table 15_test
+      - name: paud_cpf_suspenso_base_receita_federal
+        description: 'Existência de pendência “CPF cancelado na base da Receita Federal”
+          0 – Não Existe 1 – Existe NULO | version: 0609'
+  - name: habitacao_test
+    description: Table habitacao_test
     columns:
       - name: id_prefeitura
         description: 'Chave única de identificação da Família | version: 0609'
