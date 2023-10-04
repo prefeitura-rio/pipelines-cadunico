@@ -34,7 +34,7 @@ SELECT
     END AS id_condicao_cadastro,
     CASE
         WHEN REGEXP_CONTAINS(vlr_renda_media_fam, r'^\s*$') THEN NULL
-        ELSE CAST( vlr_renda_media_fam  AS INT64)
+        ELSE SAFE_CAST( vlr_renda_media_fam  AS INT64)
     END AS valor_renda_media,
     CASE
         WHEN REGEXP_CONTAINS(ind_trabalho_infantil_fam, r'^\s*$') THEN NULL
@@ -110,7 +110,7 @@ SELECT
     END AS logradouro,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_fam, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_fam  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_fam  AS INT64)
     END AS numero_logradouro,
     CASE
         WHEN REGEXP_CONTAINS(des_complemento_fam, r'^\s*$') THEN NULL
@@ -219,7 +219,7 @@ SELECT
     END AS id_condicao_cadastro,
     CASE
         WHEN REGEXP_CONTAINS(vlr_renda_media_fam, r'^\s*$') THEN NULL
-        ELSE CAST( vlr_renda_media_fam  AS INT64)
+        ELSE SAFE_CAST( vlr_renda_media_fam  AS INT64)
     END AS valor_renda_media,
     CASE
         WHEN REGEXP_CONTAINS(ind_trabalho_infantil_fam, r'^\s*$') THEN NULL
@@ -295,7 +295,7 @@ SELECT
     END AS logradouro,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_fam, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_fam  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_fam  AS INT64)
     END AS numero_logradouro,
     CASE
         WHEN REGEXP_CONTAINS(des_complemento_fam, r'^\s*$') THEN NULL
@@ -407,7 +407,7 @@ SELECT
     END AS id_condicao_cadastro,
     CASE
         WHEN REGEXP_CONTAINS(vlr_renda_media_fam, r'^\s*$') THEN NULL
-        ELSE CAST( vlr_renda_media_fam  AS INT64)
+        ELSE SAFE_CAST( vlr_renda_media_fam  AS INT64)
     END AS valor_renda_media,
     CASE
         WHEN REGEXP_CONTAINS(ind_trabalho_infantil_fam, r'^\s*$') THEN NULL
@@ -483,7 +483,7 @@ SELECT
     END AS logradouro,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_fam, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_fam  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_fam  AS INT64)
     END AS numero_logradouro,
     CASE
         WHEN REGEXP_CONTAINS(des_complemento_fam, r'^\s*$') THEN NULL
@@ -595,7 +595,7 @@ SELECT
     END AS id_condicao_cadastro,
     CASE
         WHEN REGEXP_CONTAINS(vlr_renda_media_fam, r'^\s*$') THEN NULL
-        ELSE CAST( vlr_renda_media_fam  AS INT64)
+        ELSE SAFE_CAST( vlr_renda_media_fam  AS INT64)
     END AS valor_renda_media,
     CASE
         WHEN REGEXP_CONTAINS(ind_trabalho_infantil_fam, r'^\s*$') THEN NULL
@@ -671,7 +671,7 @@ SELECT
     END AS logradouro,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_fam, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_fam  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_fam  AS INT64)
     END AS numero_logradouro,
     CASE
         WHEN REGEXP_CONTAINS(des_complemento_fam, r'^\s*$') THEN NULL
@@ -783,7 +783,7 @@ SELECT
     END AS id_condicao_cadastro,
     CASE
         WHEN REGEXP_CONTAINS(vlr_renda_media_fam, r'^\s*$') THEN NULL
-        ELSE CAST( vlr_renda_media_fam  AS INT64)
+        ELSE SAFE_CAST( vlr_renda_media_fam  AS INT64)
     END AS valor_renda_media,
     CASE
         WHEN REGEXP_CONTAINS(ind_trabalho_infantil_fam, r'^\s*$') THEN NULL
@@ -859,7 +859,7 @@ SELECT
     END AS logradouro,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_fam, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_fam  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_fam  AS INT64)
     END AS numero_logradouro,
     CASE
         WHEN REGEXP_CONTAINS(des_complemento_fam, r'^\s*$') THEN NULL

@@ -34,7 +34,7 @@ SELECT
     END AS id_funcao_principal_trabalho,
     CASE
         WHEN REGEXP_CONTAINS(val_remuner_emprego_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_remuner_emprego_memb  AS INT64)
+        ELSE SAFE_CAST( val_remuner_emprego_memb  AS INT64)
     END AS remuneracao,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_remuner_emprego_memb, r'^\s*$') THEN NULL
@@ -46,15 +46,15 @@ SELECT
     END AS id_trabalho_remunerado_ultimos_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(qtd_meses_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_meses_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_meses_12_meses_memb  AS INT64)
     END AS meses_trabalhados_nos_ultimos_12,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_bruta_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_bruta_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_bruta_12_meses_memb  AS INT64)
     END AS remuneracao_bruta,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_doacao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_doacao_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_doacao_memb  AS INT64)
     END AS doacoes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_doacao_memb, r'^\s*$') THEN NULL
@@ -62,7 +62,7 @@ SELECT
     END AS nao_recebe_doacao,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_aposent_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_aposent_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_aposent_memb  AS INT64)
     END AS aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_aposent_memb, r'^\s*$') THEN NULL
@@ -70,7 +70,7 @@ SELECT
     END AS nao_recebe_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_seguro_desemp_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_seguro_desemp_memb  AS INT64)
     END AS seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
@@ -78,7 +78,7 @@ SELECT
     END AS nao_recebe_seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_pensao_alimen_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_pensao_alimen_memb  AS INT64)
     END AS pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
@@ -86,7 +86,7 @@ SELECT
     END AS nao_recebe_pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(val_outras_rendas_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_outras_rendas_memb  AS INT64)
+        ELSE SAFE_CAST( val_outras_rendas_memb  AS INT64)
     END AS outras_fontes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_outras_rendas_memb, r'^\s*$') THEN NULL
@@ -141,7 +141,7 @@ SELECT
     END AS id_funcao_principal_trabalho,
     CASE
         WHEN REGEXP_CONTAINS(val_remuner_emprego_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_remuner_emprego_memb  AS INT64)
+        ELSE SAFE_CAST( val_remuner_emprego_memb  AS INT64)
     END AS remuneracao,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_remuner_emprego_memb, r'^\s*$') THEN NULL
@@ -153,15 +153,15 @@ SELECT
     END AS id_trabalho_remunerado_ultimos_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(qtd_meses_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_meses_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_meses_12_meses_memb  AS INT64)
     END AS meses_trabalhados_nos_ultimos_12,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_bruta_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_bruta_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_bruta_12_meses_memb  AS INT64)
     END AS remuneracao_bruta,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_doacao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_doacao_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_doacao_memb  AS INT64)
     END AS doacoes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_doacao_memb, r'^\s*$') THEN NULL
@@ -169,7 +169,7 @@ SELECT
     END AS nao_recebe_doacao,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_aposent_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_aposent_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_aposent_memb  AS INT64)
     END AS aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_aposent_memb, r'^\s*$') THEN NULL
@@ -177,7 +177,7 @@ SELECT
     END AS nao_recebe_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_seguro_desemp_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_seguro_desemp_memb  AS INT64)
     END AS seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
@@ -185,7 +185,7 @@ SELECT
     END AS nao_recebe_seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_pensao_alimen_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_pensao_alimen_memb  AS INT64)
     END AS pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
@@ -193,7 +193,7 @@ SELECT
     END AS nao_recebe_pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(val_outras_rendas_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_outras_rendas_memb  AS INT64)
+        ELSE SAFE_CAST( val_outras_rendas_memb  AS INT64)
     END AS outras_fontes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_outras_rendas_memb, r'^\s*$') THEN NULL
@@ -248,7 +248,7 @@ SELECT
     END AS id_funcao_principal_trabalho,
     CASE
         WHEN REGEXP_CONTAINS(val_remuner_emprego_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_remuner_emprego_memb  AS INT64)
+        ELSE SAFE_CAST( val_remuner_emprego_memb  AS INT64)
     END AS remuneracao,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_remuner_emprego_memb, r'^\s*$') THEN NULL
@@ -260,15 +260,15 @@ SELECT
     END AS id_trabalho_remunerado_ultimos_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(qtd_meses_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_meses_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_meses_12_meses_memb  AS INT64)
     END AS meses_trabalhados_nos_ultimos_12,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_bruta_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_bruta_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_bruta_12_meses_memb  AS INT64)
     END AS remuneracao_bruta,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_doacao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_doacao_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_doacao_memb  AS INT64)
     END AS doacoes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_doacao_memb, r'^\s*$') THEN NULL
@@ -276,7 +276,7 @@ SELECT
     END AS nao_recebe_doacao,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_aposent_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_aposent_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_aposent_memb  AS INT64)
     END AS aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_aposent_memb, r'^\s*$') THEN NULL
@@ -284,7 +284,7 @@ SELECT
     END AS nao_recebe_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_seguro_desemp_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_seguro_desemp_memb  AS INT64)
     END AS seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
@@ -292,7 +292,7 @@ SELECT
     END AS nao_recebe_seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_pensao_alimen_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_pensao_alimen_memb  AS INT64)
     END AS pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
@@ -300,7 +300,7 @@ SELECT
     END AS nao_recebe_pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(val_outras_rendas_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_outras_rendas_memb  AS INT64)
+        ELSE SAFE_CAST( val_outras_rendas_memb  AS INT64)
     END AS outras_fontes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_outras_rendas_memb, r'^\s*$') THEN NULL
@@ -355,7 +355,7 @@ SELECT
     END AS id_funcao_principal_trabalho,
     CASE
         WHEN REGEXP_CONTAINS(val_remuner_emprego_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_remuner_emprego_memb  AS INT64)
+        ELSE SAFE_CAST( val_remuner_emprego_memb  AS INT64)
     END AS remuneracao,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_remuner_emprego_memb, r'^\s*$') THEN NULL
@@ -367,15 +367,15 @@ SELECT
     END AS id_trabalho_remunerado_ultimos_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(qtd_meses_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_meses_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_meses_12_meses_memb  AS INT64)
     END AS meses_trabalhados_nos_ultimos_12,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_bruta_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_bruta_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_bruta_12_meses_memb  AS INT64)
     END AS remuneracao_bruta,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_doacao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_doacao_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_doacao_memb  AS INT64)
     END AS doacoes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_doacao_memb, r'^\s*$') THEN NULL
@@ -383,7 +383,7 @@ SELECT
     END AS nao_recebe_doacao,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_aposent_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_aposent_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_aposent_memb  AS INT64)
     END AS aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_aposent_memb, r'^\s*$') THEN NULL
@@ -391,7 +391,7 @@ SELECT
     END AS nao_recebe_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_seguro_desemp_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_seguro_desemp_memb  AS INT64)
     END AS seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
@@ -399,7 +399,7 @@ SELECT
     END AS nao_recebe_seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_pensao_alimen_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_pensao_alimen_memb  AS INT64)
     END AS pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
@@ -407,7 +407,7 @@ SELECT
     END AS nao_recebe_pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(val_outras_rendas_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_outras_rendas_memb  AS INT64)
+        ELSE SAFE_CAST( val_outras_rendas_memb  AS INT64)
     END AS outras_fontes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_outras_rendas_memb, r'^\s*$') THEN NULL
@@ -483,7 +483,7 @@ SELECT
     END AS id_funcao_principal_trabalho,
     CASE
         WHEN REGEXP_CONTAINS(val_remuner_emprego_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_remuner_emprego_memb  AS INT64)
+        ELSE SAFE_CAST( val_remuner_emprego_memb  AS INT64)
     END AS remuneracao,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_remuner_emprego_memb, r'^\s*$') THEN NULL
@@ -495,15 +495,15 @@ SELECT
     END AS id_trabalho_remunerado_ultimos_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(qtd_meses_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_meses_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_meses_12_meses_memb  AS INT64)
     END AS meses_trabalhados_nos_ultimos_12,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_bruta_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_bruta_12_meses_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_bruta_12_meses_memb  AS INT64)
     END AS remuneracao_bruta,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_doacao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_doacao_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_doacao_memb  AS INT64)
     END AS doacoes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_doacao_memb, r'^\s*$') THEN NULL
@@ -511,7 +511,7 @@ SELECT
     END AS nao_recebe_doacao,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_aposent_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_aposent_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_aposent_memb  AS INT64)
     END AS aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_aposent_memb, r'^\s*$') THEN NULL
@@ -519,7 +519,7 @@ SELECT
     END AS nao_recebe_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_seguro_desemp_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_seguro_desemp_memb  AS INT64)
     END AS seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
@@ -527,7 +527,7 @@ SELECT
     END AS nao_recebe_seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_renda_pensao_alimen_memb  AS INT64)
+        ELSE SAFE_CAST( val_renda_pensao_alimen_memb  AS INT64)
     END AS pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
@@ -535,7 +535,7 @@ SELECT
     END AS nao_recebe_pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(val_outras_rendas_memb, r'^\s*$') THEN NULL
-        ELSE CAST( val_outras_rendas_memb  AS INT64)
+        ELSE SAFE_CAST( val_outras_rendas_memb  AS INT64)
     END AS outras_fontes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_outras_rendas_memb, r'^\s*$') THEN NULL

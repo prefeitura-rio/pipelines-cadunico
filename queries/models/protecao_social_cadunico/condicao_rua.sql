@@ -22,7 +22,7 @@ SELECT
     END AS dorme_rua,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_rua_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_rua_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_rua_memb  AS INT64)
     END AS dorme_rua_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_albergue_memb, r'^\s*$') THEN NULL
@@ -30,7 +30,7 @@ SELECT
     END AS dorme_albergue,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_albergue_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_albergue_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_albergue_memb  AS INT64)
     END AS dorme_albergue_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_dom_part_memb, r'^\s*$') THEN NULL
@@ -38,7 +38,7 @@ SELECT
     END AS dorme_domicilio_particular,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_dom_part_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
     END AS dorme_domicilio_particular_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_outro_memb, r'^\s*$') THEN NULL
@@ -46,7 +46,7 @@ SELECT
     END AS dorme_outro,
     CASE
         WHEN REGEXP_CONTAINS(qtd_freq_outro_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_freq_outro_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_freq_outro_memb  AS INT64)
     END AS dorme_outro_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(cod_tempo_rua_memb, r'^\s*$') THEN NULL
@@ -230,7 +230,7 @@ SELECT
     END AS dorme_rua,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_rua_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_rua_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_rua_memb  AS INT64)
     END AS dorme_rua_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_albergue_memb, r'^\s*$') THEN NULL
@@ -238,7 +238,7 @@ SELECT
     END AS dorme_albergue,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_albergue_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_albergue_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_albergue_memb  AS INT64)
     END AS dorme_albergue_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_dom_part_memb, r'^\s*$') THEN NULL
@@ -246,7 +246,7 @@ SELECT
     END AS dorme_domicilio_particular,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_dom_part_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
     END AS dorme_domicilio_particular_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_outro_memb, r'^\s*$') THEN NULL
@@ -254,7 +254,7 @@ SELECT
     END AS dorme_outro,
     CASE
         WHEN REGEXP_CONTAINS(qtd_freq_outro_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_freq_outro_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_freq_outro_memb  AS INT64)
     END AS dorme_outro_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(cod_tempo_rua_memb, r'^\s*$') THEN NULL
@@ -438,7 +438,7 @@ SELECT
     END AS dorme_rua,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_rua_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_rua_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_rua_memb  AS INT64)
     END AS dorme_rua_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_albergue_memb, r'^\s*$') THEN NULL
@@ -446,7 +446,7 @@ SELECT
     END AS dorme_albergue,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_albergue_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_albergue_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_albergue_memb  AS INT64)
     END AS dorme_albergue_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_dom_part_memb, r'^\s*$') THEN NULL
@@ -454,7 +454,7 @@ SELECT
     END AS dorme_domicilio_particular,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_dom_part_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
     END AS dorme_domicilio_particular_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_outro_memb, r'^\s*$') THEN NULL
@@ -462,7 +462,7 @@ SELECT
     END AS dorme_outro,
     CASE
         WHEN REGEXP_CONTAINS(qtd_freq_outro_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_freq_outro_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_freq_outro_memb  AS INT64)
     END AS dorme_outro_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(cod_tempo_rua_memb, r'^\s*$') THEN NULL
@@ -646,7 +646,7 @@ SELECT
     END AS dorme_rua,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_rua_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_rua_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_rua_memb  AS INT64)
     END AS dorme_rua_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_albergue_memb, r'^\s*$') THEN NULL
@@ -654,7 +654,7 @@ SELECT
     END AS dorme_albergue,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_albergue_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_albergue_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_albergue_memb  AS INT64)
     END AS dorme_albergue_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_dom_part_memb, r'^\s*$') THEN NULL
@@ -662,7 +662,7 @@ SELECT
     END AS dorme_domicilio_particular,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_dom_part_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
     END AS dorme_domicilio_particular_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_outro_memb, r'^\s*$') THEN NULL
@@ -670,7 +670,7 @@ SELECT
     END AS dorme_outro,
     CASE
         WHEN REGEXP_CONTAINS(qtd_freq_outro_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_freq_outro_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_freq_outro_memb  AS INT64)
     END AS dorme_outro_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(cod_tempo_rua_memb, r'^\s*$') THEN NULL
@@ -854,7 +854,7 @@ SELECT
     END AS dorme_rua,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_rua_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_rua_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_rua_memb  AS INT64)
     END AS dorme_rua_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_albergue_memb, r'^\s*$') THEN NULL
@@ -862,7 +862,7 @@ SELECT
     END AS dorme_albergue,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_albergue_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_albergue_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_albergue_memb  AS INT64)
     END AS dorme_albergue_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_dormir_dom_part_memb, r'^\s*$') THEN NULL
@@ -870,7 +870,7 @@ SELECT
     END AS dorme_domicilio_particular,
     CASE
         WHEN REGEXP_CONTAINS(qtd_dormir_freq_dom_part_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_dormir_freq_dom_part_memb  AS INT64)
     END AS dorme_domicilio_particular_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(ind_outro_memb, r'^\s*$') THEN NULL
@@ -878,7 +878,7 @@ SELECT
     END AS dorme_outro,
     CASE
         WHEN REGEXP_CONTAINS(qtd_freq_outro_memb, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_freq_outro_memb  AS INT64)
+        ELSE SAFE_CAST( qtd_freq_outro_memb  AS INT64)
     END AS dorme_outro_vezes_semana,
     CASE
         WHEN REGEXP_CONTAINS(cod_tempo_rua_memb, r'^\s*$') THEN NULL

@@ -7,7 +7,7 @@ models :
         description: '0 | version: 0612'
       - name: nome_arquivo
         description: 'ESPELHO CADUNICO 7 MUNICIPAL | version: 0612'
-      - name: versao_layout
+      - name: versao_layout_arquivo
         description: "FORMATO '06.12' | version: 0612"
       - name: data_posicao_cadastro
         description: 'Posição cadastral extraída no formato DDMMAAAA | version: 0612'

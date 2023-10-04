@@ -126,7 +126,7 @@ SELECT
     END AS logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_rl, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_rl  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_rl  AS INT64)
     END AS numero_logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(desc_complemento_lograd_rl, r'^\s*$') THEN NULL
@@ -286,7 +286,7 @@ SELECT
     END AS logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_rl, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_rl  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_rl  AS INT64)
     END AS numero_logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(desc_complemento_lograd_rl, r'^\s*$') THEN NULL
@@ -446,7 +446,7 @@ SELECT
     END AS logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_rl, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_rl  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_rl  AS INT64)
     END AS numero_logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(desc_complemento_lograd_rl, r'^\s*$') THEN NULL
@@ -606,7 +606,7 @@ SELECT
     END AS logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_rl, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_rl  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_rl  AS INT64)
     END AS numero_logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(desc_complemento_lograd_rl, r'^\s*$') THEN NULL
@@ -766,7 +766,7 @@ SELECT
     END AS logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(num_logradouro_rl, r'^\s*$') THEN NULL
-        ELSE CAST( num_logradouro_rl  AS INT64)
+        ELSE SAFE_CAST( num_logradouro_rl  AS INT64)
     END AS numero_logradouro_representante_legal,
     CASE
         WHEN REGEXP_CONTAINS(desc_complemento_lograd_rl, r'^\s*$') THEN NULL

@@ -22,11 +22,11 @@ SELECT
     END AS id_especie_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_domic_fam  AS INT64)
     END AS quantidade_comodos_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_dormitorio_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_dormitorio_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_dormitorio_fam  AS INT64)
     END AS quantidade_comodos_dormitorio,
     CASE
         WHEN REGEXP_CONTAINS(cod_material_piso_fam, r'^\s*$') THEN NULL
@@ -94,11 +94,11 @@ SELECT
     END AS id_especie_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_domic_fam  AS INT64)
     END AS quantidade_comodos_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_dormitorio_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_dormitorio_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_dormitorio_fam  AS INT64)
     END AS quantidade_comodos_dormitorio,
     CASE
         WHEN REGEXP_CONTAINS(cod_material_piso_fam, r'^\s*$') THEN NULL
@@ -166,11 +166,11 @@ SELECT
     END AS id_especie_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_domic_fam  AS INT64)
     END AS quantidade_comodos_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_dormitorio_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_dormitorio_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_dormitorio_fam  AS INT64)
     END AS quantidade_comodos_dormitorio,
     CASE
         WHEN REGEXP_CONTAINS(cod_material_piso_fam, r'^\s*$') THEN NULL
@@ -238,11 +238,11 @@ SELECT
     END AS id_especie_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_domic_fam  AS INT64)
     END AS quantidade_comodos_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_dormitorio_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_dormitorio_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_dormitorio_fam  AS INT64)
     END AS quantidade_comodos_dormitorio,
     CASE
         WHEN REGEXP_CONTAINS(cod_material_piso_fam, r'^\s*$') THEN NULL
@@ -310,11 +310,11 @@ SELECT
     END AS id_especie_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_domic_fam  AS INT64)
     END AS quantidade_comodos_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_comodos_dormitorio_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_comodos_dormitorio_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_comodos_dormitorio_fam  AS INT64)
     END AS quantidade_comodos_dormitorio,
     CASE
         WHEN REGEXP_CONTAINS(cod_material_piso_fam, r'^\s*$') THEN NULL

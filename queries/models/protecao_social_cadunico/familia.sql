@@ -58,15 +58,15 @@ SELECT
     END AS nao_sabe_comunidade_quilombola,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoas_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoas_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoas_domic_fam  AS INT64)
     END AS pessoas_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_familias_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_familias_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_familias_domic_fam  AS INT64)
     END AS familias_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
     END AS pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
@@ -74,7 +74,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
     END AS pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
@@ -82,7 +82,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
     END AS pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
@@ -90,7 +90,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_energia_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_energia_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_energia_fam  AS INT64)
     END AS despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_energia_fam, r'^\s*$') THEN NULL
@@ -98,7 +98,7 @@ SELECT
     END AS nao_tem_despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_agua_esgoto_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_agua_esgoto_fam  AS INT64)
     END AS despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
@@ -106,7 +106,7 @@ SELECT
     END AS nao_tem_despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_gas_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_gas_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_gas_fam  AS INT64)
     END AS despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_gas_fam, r'^\s*$') THEN NULL
@@ -114,7 +114,7 @@ SELECT
     END AS nao_tem_despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_alimentacao_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_alimentacao_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_alimentacao_fam  AS INT64)
     END AS despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_alimentacao_fam, r'^\s*$') THEN NULL
@@ -122,7 +122,7 @@ SELECT
     END AS nao_tem_despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_transpor_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_transpor_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_transpor_fam  AS INT64)
     END AS despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_transpor_fam, r'^\s*$') THEN NULL
@@ -130,7 +130,7 @@ SELECT
     END AS nao_tem_despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_aluguel_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_aluguel_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_aluguel_fam  AS INT64)
     END AS despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_aluguel_fam, r'^\s*$') THEN NULL
@@ -138,7 +138,7 @@ SELECT
     END AS nao_tem_despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_medicamentos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_medicamentos_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_medicamentos_fam  AS INT64)
     END AS despesa_medicamentos,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_medicamentos_fam, r'^\s*$') THEN NULL
@@ -226,15 +226,15 @@ SELECT
     END AS nao_sabe_comunidade_quilombola,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoas_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoas_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoas_domic_fam  AS INT64)
     END AS pessoas_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_familias_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_familias_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_familias_domic_fam  AS INT64)
     END AS familias_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
     END AS pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
@@ -242,7 +242,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
     END AS pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
@@ -250,7 +250,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
     END AS pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
@@ -258,7 +258,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_energia_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_energia_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_energia_fam  AS INT64)
     END AS despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_energia_fam, r'^\s*$') THEN NULL
@@ -266,7 +266,7 @@ SELECT
     END AS nao_tem_despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_agua_esgoto_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_agua_esgoto_fam  AS INT64)
     END AS despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
@@ -274,7 +274,7 @@ SELECT
     END AS nao_tem_despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_gas_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_gas_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_gas_fam  AS INT64)
     END AS despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_gas_fam, r'^\s*$') THEN NULL
@@ -282,7 +282,7 @@ SELECT
     END AS nao_tem_despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_alimentacao_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_alimentacao_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_alimentacao_fam  AS INT64)
     END AS despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_alimentacao_fam, r'^\s*$') THEN NULL
@@ -290,7 +290,7 @@ SELECT
     END AS nao_tem_despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_transpor_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_transpor_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_transpor_fam  AS INT64)
     END AS despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_transpor_fam, r'^\s*$') THEN NULL
@@ -298,7 +298,7 @@ SELECT
     END AS nao_tem_despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_aluguel_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_aluguel_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_aluguel_fam  AS INT64)
     END AS despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_aluguel_fam, r'^\s*$') THEN NULL
@@ -306,7 +306,7 @@ SELECT
     END AS nao_tem_despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_medicamentos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_medicamentos_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_medicamentos_fam  AS INT64)
     END AS despesa_medicamentos,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_medicamentos_fam, r'^\s*$') THEN NULL
@@ -394,15 +394,15 @@ SELECT
     END AS nao_sabe_comunidade_quilombola,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoas_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoas_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoas_domic_fam  AS INT64)
     END AS pessoas_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_familias_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_familias_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_familias_domic_fam  AS INT64)
     END AS familias_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
     END AS pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
@@ -410,7 +410,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
     END AS pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
@@ -418,7 +418,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
     END AS pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
@@ -426,7 +426,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_energia_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_energia_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_energia_fam  AS INT64)
     END AS despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_energia_fam, r'^\s*$') THEN NULL
@@ -434,7 +434,7 @@ SELECT
     END AS nao_tem_despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_agua_esgoto_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_agua_esgoto_fam  AS INT64)
     END AS despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
@@ -442,7 +442,7 @@ SELECT
     END AS nao_tem_despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_gas_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_gas_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_gas_fam  AS INT64)
     END AS despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_gas_fam, r'^\s*$') THEN NULL
@@ -450,7 +450,7 @@ SELECT
     END AS nao_tem_despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_alimentacao_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_alimentacao_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_alimentacao_fam  AS INT64)
     END AS despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_alimentacao_fam, r'^\s*$') THEN NULL
@@ -458,7 +458,7 @@ SELECT
     END AS nao_tem_despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_transpor_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_transpor_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_transpor_fam  AS INT64)
     END AS despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_transpor_fam, r'^\s*$') THEN NULL
@@ -466,7 +466,7 @@ SELECT
     END AS nao_tem_despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_aluguel_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_aluguel_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_aluguel_fam  AS INT64)
     END AS despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_aluguel_fam, r'^\s*$') THEN NULL
@@ -474,7 +474,7 @@ SELECT
     END AS nao_tem_despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_medicamentos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_medicamentos_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_medicamentos_fam  AS INT64)
     END AS despesa_medicamentos,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_medicamentos_fam, r'^\s*$') THEN NULL
@@ -562,15 +562,15 @@ SELECT
     END AS nao_sabe_comunidade_quilombola,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoas_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoas_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoas_domic_fam  AS INT64)
     END AS pessoas_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_familias_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_familias_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_familias_domic_fam  AS INT64)
     END AS familias_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
     END AS pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
@@ -578,7 +578,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
     END AS pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
@@ -586,7 +586,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
     END AS pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
@@ -594,7 +594,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_energia_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_energia_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_energia_fam  AS INT64)
     END AS despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_energia_fam, r'^\s*$') THEN NULL
@@ -602,7 +602,7 @@ SELECT
     END AS nao_tem_despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_agua_esgoto_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_agua_esgoto_fam  AS INT64)
     END AS despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
@@ -610,7 +610,7 @@ SELECT
     END AS nao_tem_despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_gas_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_gas_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_gas_fam  AS INT64)
     END AS despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_gas_fam, r'^\s*$') THEN NULL
@@ -618,7 +618,7 @@ SELECT
     END AS nao_tem_despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_alimentacao_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_alimentacao_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_alimentacao_fam  AS INT64)
     END AS despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_alimentacao_fam, r'^\s*$') THEN NULL
@@ -626,7 +626,7 @@ SELECT
     END AS nao_tem_despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_transpor_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_transpor_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_transpor_fam  AS INT64)
     END AS despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_transpor_fam, r'^\s*$') THEN NULL
@@ -634,7 +634,7 @@ SELECT
     END AS nao_tem_despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_aluguel_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_aluguel_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_aluguel_fam  AS INT64)
     END AS despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_aluguel_fam, r'^\s*$') THEN NULL
@@ -642,7 +642,7 @@ SELECT
     END AS nao_tem_despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_medicamentos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_medicamentos_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_medicamentos_fam  AS INT64)
     END AS despesa_medicamentos,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_medicamentos_fam, r'^\s*$') THEN NULL
@@ -730,15 +730,15 @@ SELECT
     END AS nao_sabe_comunidade_quilombola,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoas_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoas_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoas_domic_fam  AS INT64)
     END AS pessoas_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_familias_domic_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_familias_domic_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_familias_domic_fam  AS INT64)
     END AS familias_domicilio,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_0_17_anos_fam  AS INT64)
     END AS pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_0_17_anos_fam, r'^\s*$') THEN NULL
@@ -746,7 +746,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_0_17_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_18_59_anos_fam  AS INT64)
     END AS pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_18_59_anos_fam, r'^\s*$') THEN NULL
@@ -754,7 +754,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_18_59_anos,
     CASE
         WHEN REGEXP_CONTAINS(qtd_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
+        ELSE SAFE_CAST( qtd_pessoa_inter_60_anos_fam  AS INT64)
     END AS pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(ind_pessoa_inter_60_anos_fam, r'^\s*$') THEN NULL
@@ -762,7 +762,7 @@ SELECT
     END AS nao_tem_pessoas_internadas_mais_60_anos,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_energia_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_energia_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_energia_fam  AS INT64)
     END AS despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_energia_fam, r'^\s*$') THEN NULL
@@ -770,7 +770,7 @@ SELECT
     END AS nao_tem_despesa_energia,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_agua_esgoto_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_agua_esgoto_fam  AS INT64)
     END AS despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_agua_esgoto_fam, r'^\s*$') THEN NULL
@@ -778,7 +778,7 @@ SELECT
     END AS nao_tem_despesa_agua_esgoto,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_gas_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_gas_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_gas_fam  AS INT64)
     END AS despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_gas_fam, r'^\s*$') THEN NULL
@@ -786,7 +786,7 @@ SELECT
     END AS nao_tem_despesa_gas,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_alimentacao_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_alimentacao_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_alimentacao_fam  AS INT64)
     END AS despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_alimentacao_fam, r'^\s*$') THEN NULL
@@ -794,7 +794,7 @@ SELECT
     END AS nao_tem_despesa_alimentacao,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_transpor_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_transpor_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_transpor_fam  AS INT64)
     END AS despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_transpor_fam, r'^\s*$') THEN NULL
@@ -802,7 +802,7 @@ SELECT
     END AS nao_tem_despesa_transporte,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_aluguel_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_aluguel_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_aluguel_fam  AS INT64)
     END AS despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_aluguel_fam, r'^\s*$') THEN NULL
@@ -810,7 +810,7 @@ SELECT
     END AS nao_tem_despesa_aluguel,
     CASE
         WHEN REGEXP_CONTAINS(val_desp_medicamentos_fam, r'^\s*$') THEN NULL
-        ELSE CAST( val_desp_medicamentos_fam  AS INT64)
+        ELSE SAFE_CAST( val_desp_medicamentos_fam  AS INT64)
     END AS despesa_medicamentos,
     CASE
         WHEN REGEXP_CONTAINS(ind_desp_medicamentos_fam, r'^\s*$') THEN NULL

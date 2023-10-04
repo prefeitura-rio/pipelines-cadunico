@@ -500,7 +500,13 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
                             + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', {col_name})  AS {bigquery_type})\n"
                             + f"    END AS {col_name_padronizado},"
                         )
-
+                    elif bigquery_type == "INT64":
+                        col_expression = (
+                            "    CASE\n"
+                            + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            + f"        ELSE SAFE_CAST( {col_name}  AS {bigquery_type})\n"
+                            + f"    END AS {col_name_padronizado},"
+                        )
                     else:
                         col_expression = (
                             "    CASE\n"

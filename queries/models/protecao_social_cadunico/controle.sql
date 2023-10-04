@@ -11,7 +11,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(cod_versao_layout_hdr, r'^\s*$') THEN NULL
         ELSE CAST( cod_versao_layout_hdr  AS STRING)
-    END AS versao_layout,
+    END AS versao_layout_arquivo,
     CASE
         WHEN REGEXP_CONTAINS(dta_posicao_cadastro_hdr, r'^\s*$') THEN NULL
         ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', dta_posicao_cadastro_hdr)  AS DATE)
@@ -39,7 +39,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(cod_versao_layout_hdr, r'^\s*$') THEN NULL
         ELSE CAST( cod_versao_layout_hdr  AS STRING)
-    END AS versao_layout,
+    END AS versao_layout_arquivo,
     CASE
         WHEN REGEXP_CONTAINS(dta_posicao_cadastro_hdr, r'^\s*$') THEN NULL
         ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', dta_posicao_cadastro_hdr)  AS DATE)
@@ -67,7 +67,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(cod_versao_layout_hdr, r'^\s*$') THEN NULL
         ELSE CAST( cod_versao_layout_hdr  AS STRING)
-    END AS versao_layout,
+    END AS versao_layout_arquivo,
     CASE
         WHEN REGEXP_CONTAINS(dta_posicao_cadastro_hdr, r'^\s*$') THEN NULL
         ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', dta_posicao_cadastro_hdr)  AS DATE)
@@ -95,7 +95,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(cod_versao_layout_hdr, r'^\s*$') THEN NULL
         ELSE CAST( cod_versao_layout_hdr  AS STRING)
-    END AS versao_layout,
+    END AS versao_layout_arquivo,
     CASE
         WHEN REGEXP_CONTAINS(dta_posicao_cadastro_hdr, r'^\s*$') THEN NULL
         ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', dta_posicao_cadastro_hdr)  AS DATE)
@@ -123,7 +123,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(cod_versao_layout_hdr, r'^\s*$') THEN NULL
         ELSE CAST( cod_versao_layout_hdr  AS STRING)
-    END AS versao_layout,
+    END AS versao_layout_arquivo,
     CASE
         WHEN REGEXP_CONTAINS(dta_posicao_cadastro_hdr, r'^\s*$') THEN NULL
         ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', dta_posicao_cadastro_hdr)  AS DATE)
