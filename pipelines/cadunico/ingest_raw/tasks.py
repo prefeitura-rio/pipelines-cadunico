@@ -289,8 +289,16 @@ def append_data_to_storage(
 
 
 @task
-def get_version_tables_to_materialize(
-    dataset_id: str, table_id: str, version_tables: bool
+def get_dbt_models_to_materialize(
+    dataset_id: str,
+    table_id: str,
+    only_version_tables: bool,
+    first_execution: bool,
+    project_id: str,
+    layout_dataset_id: str,
+    layout_table_id: str,
+    layout_output_path: str | Path,
+    force_create_models: bool,
 ) -> List[dict]:
     """
     Get tables parameters to materialize from queries/models/{dataset_id}/.
@@ -299,6 +307,20 @@ def get_version_tables_to_materialize(
         dataset_id (str): The dataset ID.
         ingested_files_output (str | Path): The path to the ingested files.
     """
+    if first_execution:
+        log("STARTING LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
+        update_layout_from_storage_and_create_versions_dbt_models(
+            project_id=project_id,
+            layout_dataset_id=layout_dataset_id,
+            layout_table_id=layout_table_id,
+            output_path=layout_output_path,
+            model_dataset_id=dataset_id,
+            model_table_id=table_id,
+            force_create_models=force_create_models,
+        )
+        log("FINISHED LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
+
+    log("STARTING GETTING DBT MODELS TO MATERIALIZE")
     dataset_id_original = dataset_id
     dataset_id = dataset_id + "_versao"
 
@@ -333,7 +355,7 @@ def get_version_tables_to_materialize(
         else:
             parameters_list.append(parameters)
 
-    if not version_tables:
+    if not only_version_tables:
         parameters_list = []
         # add hamonized tables to materialize
         queries_dir = root_path / f"queries/models/{dataset_id_original}"
@@ -359,28 +381,3 @@ def get_version_tables_to_materialize(
     parameters_list_log = json.dumps(parameters_list, indent=4)
     log(f"{len(parameters_list)} TABLES TO MATERIALIZE:\n{parameters_list_log}")
     return parameters_list
-
-
-@task
-def update_layout_from_storage_and_create_versions_dbt_models_task(
-    project_id: str,
-    layout_dataset_id: str,
-    layout_table_id: str,
-    output_path: str | Path,
-    model_dataset_id: str,
-    model_table_id: str,
-    force_create_models: bool,
-):
-    """
-    Update layout from storage and create versions dbt models.
-
-    """
-    update_layout_from_storage_and_create_versions_dbt_models(
-        project_id=project_id,
-        layout_dataset_id=layout_dataset_id,
-        layout_table_id=layout_table_id,
-        output_path=output_path,
-        model_dataset_id=model_dataset_id,
-        model_table_id=model_table_id,
-        force_create_models=force_create_models,
-    )
