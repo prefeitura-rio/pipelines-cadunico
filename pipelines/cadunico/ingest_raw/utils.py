@@ -149,6 +149,11 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
     df_final = df_final[df_final["version"].isin(filter_versions)]
     log(f"Filtered versions: {filter_versions}")
 
+    df_final["column"] = df_final["arquivo_base_versao_7"].fillna("sem_nome")
+    df_final["column"] = df_final["column"].apply(
+        lambda x: unidecode(x).replace("-", "_").replace(" ", "_").replace("/", "_").lower().strip()
+    )
+
     df_final = df_final.reset_index(drop=True)
 
     output_filepath = Path(csv_output)
@@ -245,27 +250,13 @@ def create_table_and_upload_to_storage(dataset_id, table_id, output_path):
     return output_path
 
 
-def get_layout_table_from_staging(project_id, dataset_id, table_id):
+def get_layout_table_from_staging(
+    project_id, dataset_id, table_id, layout_dataset_id, layout_table_id
+):
     query = f"""
         SELECT
             *
-        FROM `{project_id}.{dataset_id}_staging.{table_id}`
-    """
-    log(query)
-    return bd.read_sql(query=query)
-
-
-def get_layout_padronized_column_names_from_bq(project_id, dataset_id, table_id):
-    """
-    This query returns the layout table with padronized names and also only the versions
-    that are in the staging table registro_familia
-    """
-    query = f"""
-        SELECT
-            t1.*,
-            t2.nome_padronizado,
-            t2.bigquery_type
-        FROM `{project_id}.{dataset_id}_staging.layout_columns_version_control` t1
+        FROM `{project_id}.{layout_dataset_id}_staging.{layout_table_id}` t1
         LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
         ON t1.column = t2.column
         WHERE t1.versao_layout_particao IN (
@@ -273,6 +264,7 @@ def get_layout_padronized_column_names_from_bq(project_id, dataset_id, table_id)
             FROM `rj-smas.{dataset_id}_staging.{table_id}`
         )
     """
+    log(query)
     return bd.read_sql(query=query)
 
 
@@ -545,10 +537,6 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
 
 def parse_columns_version_control(df):
     df = df.sort_values(["reg", "versao_layout_particao"])
-    df["column"] = df["arquivo_base_versao_7"].fillna("sem_nome")
-    df["column"] = df["column"].apply(
-        lambda x: unidecode(x).replace("-", "_").replace(" ", "_").replace("/", "_").lower().strip()
-    )
 
     df_final = pd.DataFrame()
     for reg in df["reg"].unique().tolist():
@@ -641,20 +629,17 @@ def update_layout_from_storage_and_create_versions_dbt_models(
 
     if raw_filespaths_to_ingest or force_create_models:
         log("GET LAYOUT TABLE FROM STAGING")
-        df = get_layout_table_from_staging(
+        dataframe = get_layout_table_from_staging(
             project_id=project_id,
-            dataset_id=layout_dataset_id,
-            table_id=layout_table_id,
+            dataset_id=model_dataset_id,
+            table_id=model_table_id,
+            layout_dataset_id=layout_dataset_id,
+            layout_table_id=layout_table_id,
         )
 
         log("CREATE LAYOUT COLUMNS VERSION CONTROL IN BQ")
-        create_layout_column_cross_version_control_bq_table(
-            dataframe=df, dataset_id=layout_dataset_id, table_id=layout_table_id
-        )
-
-        log("GET LAYOUT PADRONIZED COLUMN NAMES TABLE FROM BQ")
-        df_final = get_layout_padronized_column_names_from_bq(
-            project_id=project_id, dataset_id=model_dataset_id, table_id=model_table_id
+        df_final = create_layout_column_cross_version_control_bq_table(
+            dataframe=dataframe, dataset_id=layout_dataset_id, table_id=layout_table_id
         )
 
         log("CREATE DBT VERSION MODELS")
