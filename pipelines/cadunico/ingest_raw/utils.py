@@ -178,7 +178,6 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
 
 
 def get_staging_partitions_versions(project_id, dataset_id, table_id):
-    print(dataset_id, table_id)
     st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
     blobs = list(
         st.client["storage_staging"]
@@ -466,6 +465,19 @@ def create_cadunico_dbt_consolidated_models(
 
         sql_filepath.parent.mkdir(parents=True, exist_ok=True)
         log_created_models.append(str(sql_filepath))
+        config_partition = """
+                {{
+                    config(
+                        partition_by={
+                            "field": "data_particao",
+                            "data_type": "date",
+                            "granularity": "month",
+                        }
+                    )
+                }}
+
+        """
+        final_query = textwrap.dedent(config_partition) + final_query
 
         with open(sql_filepath, "w") as text_file:
             text_file.write(final_query)
