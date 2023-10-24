@@ -40,6 +40,7 @@ def get_tables_names_dict(name: str) -> dict:
         "18": "exclusao_servidor",
         "19": "exclusao_membro",
         "20": "representante_legal",
+        "21": "21",
         "98": "prefeitura",
         "99": "registros",
     }
@@ -497,21 +498,21 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
                         col_expression = (
                             "    CASE\n"
                             + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', {col_name})  AS {bigquery_type})\n"
+                            + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', TRIM({col_name}))  AS {bigquery_type})\n"
                             + f"    END AS {col_name_padronizado},"
                         )
                     elif bigquery_type == "INT64":
                         col_expression = (
                             "    CASE\n"
                             + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"        ELSE SAFE_CAST( {col_name}  AS {bigquery_type})\n"
+                            + f"        ELSE SAFE_CAST( TRIM({col_name}) AS {bigquery_type})\n"
                             + f"    END AS {col_name_padronizado},"
                         )
                     else:
                         col_expression = (
                             "    CASE\n"
                             + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"        ELSE CAST( {col_name}  AS {bigquery_type})\n"
+                            + f"        ELSE CAST( TRIM({col_name})  AS {bigquery_type})\n"
                             + f"    END AS {col_name_padronizado},"
                         )
 
