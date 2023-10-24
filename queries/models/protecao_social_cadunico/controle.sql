@@ -1,4 +1,16 @@
 
+{{
+    config(
+        materialized="table",
+        partition_by={
+            "field": "data_particao",
+            "data_type": "date",
+            "granularity": "month",
+        }
+    )
+}}
+
+
 SELECT
 
     --column: cod_versao_layout_hdr

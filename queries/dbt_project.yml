@@ -27,7 +27,3 @@ models:
     protecao_social_cadunico:
         +materialized: table
         +schema: protecao_social_cadunico
-        +partition_by:
-          field: data_particao
-          data_type: date
-          granularity: month
