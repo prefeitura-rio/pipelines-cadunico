@@ -465,19 +465,20 @@ def create_cadunico_dbt_consolidated_models(
 
         sql_filepath.parent.mkdir(parents=True, exist_ok=True)
         log_created_models.append(str(sql_filepath))
-        config_partition = """
-                {{
-                    config(
-                        partition_by={
-                            "field": "data_particao",
-                            "data_type": "date",
-                            "granularity": "month",
-                        }
-                    )
-                }}
+        # config_partition = """
+        #         {{
+        #             config(
+        #                 materialized="incremental",
+        #                 partition_by={
+        #                     "field": "data_particao",
+        #                     "data_type": "date",
+        #                     "granularity": "month",
+        #                 }
+        #             )
+        #         }}
 
-        """
-        final_query = textwrap.dedent(config_partition) + final_query
+        # """
+        # final_query = textwrap.dedent(config_partition) + final_query
 
         with open(sql_filepath, "w") as text_file:
             text_file.write(final_query)

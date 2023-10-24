@@ -1,15 +1,4 @@
 
-{{
-    config(
-        partition_by={
-            "field": "data_particao",
-            "data_type": "date",
-            "granularity": "month",
-        }
-    )
-}}
-
-
 SELECT
 
     --column: num_reg_arquivo
