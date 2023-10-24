@@ -361,11 +361,10 @@ def create_cadunico_dbt_consolidated_models(
         end_query = """
                 SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
                 SAFE_CAST(data_particao AS DATE) AS data_particao
-            -- FROM `rj-smas.__dataset_id_replacer___versao.__table_id_replacer__`
             FROM `rj-smas.__dataset_id_replacer___staging.__model_table_id_replacer__`
-            WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-                AND versao_layout_particao = '__version_replacer__'
+            WHERE versao_layout_particao = '__version_replacer__'
                 AND SUBSTRING(text,38,2) = '__table_number_replacer__'
+
             UNION ALL
 
         """
@@ -374,6 +373,7 @@ def create_cadunico_dbt_consolidated_models(
 
         for version in versions:
             table_version = tables[tables["version"] == version]
+            table_version = table_version.sort_values("column")
             columns = table_version["column"].tolist()
             table_name_original = f"{model_name}_{version}"
             table_name = (
@@ -381,8 +381,7 @@ def create_cadunico_dbt_consolidated_models(
             )
             columns = []
             for index, row in table_version.iterrows():
-                # col_name = row["column"]
-
+                column = row["column"]
                 col_name = f"SUBSTRING(text,{row['posicao']},{row['tamanho']})"
                 col_name_padronizado = row["nome_padronizado"]
                 bigquery_type = row["bigquery_type"]
@@ -396,25 +395,31 @@ def create_cadunico_dbt_consolidated_models(
                 )
 
                 if col_in_last_version == "False":
-                    col_expression = f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
+                    col_expression = (
+                        f"\n    --column: {column}\n"
+                        + f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
+                    )
                 else:
                     if bigquery_type == "DATE":
                         col_expression = (
-                            "    CASE\n"
+                            f"\n    --column: {column}\n"
+                            + "    CASE\n"
                             + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
                             + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', TRIM({col_name}))  AS {bigquery_type})\n"
                             + f"    END AS {col_name_padronizado},"
                         )
                     elif bigquery_type == "INT64":
                         col_expression = (
-                            "    CASE\n"
+                            f"\n    --column: {column}\n"
+                            + "    CASE\n"
                             + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
                             + f"        ELSE SAFE_CAST( TRIM({col_name}) AS {bigquery_type})\n"
                             + f"    END AS {col_name_padronizado},"
                         )
                     else:
                         col_expression = (
-                            "    CASE\n"
+                            f"\n    --column: {column}\n"
+                            + "    CASE\n"
                             + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
                             + f"        ELSE CAST( TRIM({col_name})  AS {bigquery_type})\n"
                             + f"    END AS {col_name_padronizado},"
@@ -470,9 +475,7 @@ def create_cadunico_dbt_consolidated_models(
     log(f"created {len(log_created_models)} prod models : {json_log}")
 
 
-def parse_columns_version_control(df):
-    df = df.sort_values(["reg", "versao_layout_particao"])
-
+def columns_version_control_diff(df):
     df_concat = pd.DataFrame()
     for reg in df["reg"].unique().tolist():
         df_table = df[df["reg"] == reg]
@@ -506,14 +509,21 @@ def parse_columns_version_control(df):
             df_next_version["coluna_esta_versao_anterior"] = control_column_version
 
             df_concat = pd.concat([df_concat, df_next_version])
-    df_concat = df_concat.sort_values(["reg", "versao_layout_particao"])
+    return df_concat.sort_values(["reg", "versao_layout_particao"])
+
+
+def parse_columns_version_control(df):
+    log("ASCENDING SEARCH\n")
+    df_ascending = columns_version_control_diff(
+        df=df.sort_values(["reg", "versao_layout_particao"])
+    )
 
     # create new row for versions lass than versao_layout_anterior
-    versions = df["versao_layout_particao"].unique()
+    versions = df_ascending["versao_layout_particao"].unique()
     versions.sort()
 
     df_new = pd.DataFrame()
-    diff = df_concat[df_concat["coluna_esta_versao_anterior"] == "False"]
+    diff = df_ascending[df_ascending["coluna_esta_versao_anterior"] == "False"]
     for index, row in diff.iterrows():
         df_new = pd.concat([df_new, row.to_frame().T])
         for version in versions:
@@ -522,9 +532,18 @@ def parse_columns_version_control(df):
                 new_row["versao_layout_anterior"] = version
                 df_new = pd.concat([df_new, new_row.to_frame().T])
 
-    df_concat["coluna_esta_versao_anterior"] = "True"
-    df_final = pd.concat([df_concat, df_new])
+    df_ascending["coluna_esta_versao_anterior"] = "True"
+    df_final = pd.concat([df_ascending, df_new])
     df_final = df_final.sort_values(["reg", "versao_layout_particao"])
+
+    log("\nDESCENDING SEARCH\n")
+    df_descending = columns_version_control_diff(
+        df=df.sort_values(["reg", "versao_layout_particao"], ascending=False)
+    )
+    df_descending_filterd = df_descending[df_descending["coluna_esta_versao_anterior"] == "False"]
+
+    df_final = pd.concat([df_final, df_descending_filterd])
+
     return df_final
 
 

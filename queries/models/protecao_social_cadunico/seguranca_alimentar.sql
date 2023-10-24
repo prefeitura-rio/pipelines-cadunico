@@ -1,1264 +1,1858 @@
 
 SELECT
+
+    --column: chv_natural_prefeitura_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS sesan_vende_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
-    END AS sesan_recebe_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
-    END AS sesan_vende_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
-    END AS sesan_recebe_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
-    END AS sesan_recebe_cesta_basica,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
-    END AS sesan_refeicao_restaurante_popular,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
-    END AS sesan_refeicao_cozinha_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS sesan_participou_curso_alimentacao_nutricao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
-    END AS sesan_capitacao_agua_chuva_producao_alimentos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
-    END AS sesan_cisterna,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
-    END AS sesan_horta_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
-    END AS sesan_projeto_carteira_indigena,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
-    END AS sesan_vende_feira_popular_mds,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
-    END AS sesan_nenhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
-    END AS id_trabalho_escravo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
-    END AS energia_tarifa_social,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS enegia_doacao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS nao_pagou_instalacao_energia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS energia_nenhum,
+
+    --column: cod_cta_energ_ordem_pessoa_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,59,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,59,2))  AS STRING)
     END AS id_conta_energia_numero_ordem,
+
+    --column: cod_cta_energ_unid_consum_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,61,20), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,61,20))  AS STRING)
     END AS id_conta_energia_unidade_consumidora,
+
+    --column: cod_errad_trab_escravo_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
-    END AS snas_bpc_deficiente,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
+    END AS id_trabalho_escravo,
+
+    --column: cod_familiar_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
-    END AS snas_bpc_idoso,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
+    END AS id_familia,
+
+    --column: ind_min_energ_elet_doacao_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
-    END AS snas_programa_atencao_integram_familia,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
+    END AS enegia_doacao,
+
+    --column: ind_min_energ_luz_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS snas_crianca_0_6_anos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
+    END AS nao_pagou_instalacao_energia,
+
+    --column: ind_min_energ_nenhum_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS snas_gtupos_idosos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
+    END AS energia_nenhum,
+
+    --column: ind_min_energ_tarifa_soc_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS snas_abrigo_mulher_vitima_violencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS snas_abrigo_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS snas_abrigo_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS snas_abrigo_adultos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS snas_abrigo_populacao_adulta,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
-    END AS snas_projovem_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
-    END AS snas_projovem_urbano,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
-    END AS snas_projovem_campo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
-    END AS snas_projovem_trabalhador,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
-    END AS snas_habilitacao_reabilitacao_deficiencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
-    END AS snas_enfrenta_violencia_crianca,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
-    END AS snas_adolescente_liberdade_assistida,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
-    END AS snas_adolescente_liberdade_servico_comunitario,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
-    END AS snas_orientacao_especial_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
-    END AS snas_centro_dia_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
-    END AS snas_atendimento_domiciliar_idoso_deficiente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
-    END AS snas_inclusao_produtiva,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
-    END AS snas_programa_erradicacao_trabalho_infantil,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
-    END AS snas_nunhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
-    END AS nao_beneficiaria_programa_ministerio_cidades,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
+    END AS energia_tarifa_social,
+
+    --column: ind_parc_mds_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,106,3), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,106,3))  AS STRING)
     END AS ind_parc_mds_fam,
+
+    --column: ind_prog_prohab_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
+    END AS nao_beneficiaria_programa_ministerio_cidades,
+
+    --column: ind_sesan_capit_agua_chuva_prod_alim_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
+    END AS sesan_capitacao_agua_chuva_producao_alimentos,
+
+    --column: ind_sesan_cisterna_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
+    END AS sesan_cisterna,
+
+    --column: ind_sesan_feira_pop_mds_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
+    END AS sesan_vende_feira_popular_mds,
+
+    --column: ind_sesan_horta_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
+    END AS sesan_horta_comunitaria,
+
+    --column: ind_sesan_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
+    END AS sesan_nenhum,
+
+    --column: ind_sesan_partic_alim_nutricao_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
+    END AS sesan_participou_curso_alimentacao_nutricao,
+
+    --column: ind_sesan_proj_cart_indigena_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
+    END AS sesan_projeto_carteira_indigena,
+
+    --column: ind_sesan_receb_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
+    END AS sesan_recebe_alimento_paa,
+
+    --column: ind_sesan_receb_cesta_basica_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
+    END AS sesan_recebe_cesta_basica,
+
+    --column: ind_sesan_receb_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
+    END AS sesan_recebe_leite,
+
+    --column: ind_sesan_refei_cozinha_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
+    END AS sesan_refeicao_cozinha_comunitaria,
+
+    --column: ind_sesan_refei_restau_popular_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
+    END AS sesan_refeicao_restaurante_popular,
+
+    --column: ind_sesan_vende_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
+    END AS sesan_vende_alimento_paa,
+
+    --column: ind_sesan_vende_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
+    END AS sesan_vende_leite,
+
+    --column: ind_snas_abrigo_adultos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
+    END AS snas_abrigo_adultos,
+
+    --column: ind_snas_abrigo_crianca_adoles_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
+    END AS snas_abrigo_crianca_adolescente,
+
+    --column: ind_snas_abrigo_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
+    END AS snas_abrigo_idoso,
+
+    --column: ind_snas_abrigo_mulher_vitima_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
+    END AS snas_abrigo_mulher_vitima_violencia,
+
+    --column: ind_snas_abrigo_popul_adulta_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
+    END AS snas_abrigo_populacao_adulta,
+
+    --column: ind_snas_acomp_social_liberdade_comunidade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
+    END AS snas_adolescente_liberdade_servico_comunitario,
+
+    --column: ind_snas_acomp_social_liberdade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
+    END AS snas_adolescente_liberdade_assistida,
+
+    --column: ind_snas_atend_domic_idosos_defic_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
+    END AS snas_atendimento_domiciliar_idoso_deficiente,
+
+    --column: ind_snas_bpc_deficiente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
+    END AS snas_bpc_deficiente,
+
+    --column: ind_snas_bpc_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
+    END AS snas_bpc_idoso,
+
+    --column: ind_snas_centro_dia_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
+    END AS snas_centro_dia_idoso,
+
+    --column: ind_snas_crianca_0_6_anos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
+    END AS snas_crianca_0_6_anos,
+
+    --column: ind_snas_enfrenta_violencia_crianca_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
+    END AS snas_enfrenta_violencia_crianca,
+
+    --column: ind_snas_grupos_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
+    END AS snas_gtupos_idosos,
+
+    --column: ind_snas_habilit_reabilit_deficiencia_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
+    END AS snas_habilitacao_reabilitacao_deficiencia,
+
+    --column: ind_snas_inclusao_produtiva_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
+    END AS snas_inclusao_produtiva,
+
+    --column: ind_snas_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
+    END AS snas_nunhum,
+
+    --column: ind_snas_orientacao_especial_criancas_adol_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
+    END AS snas_orientacao_especial_crianca_adolescente,
+
+    --column: ind_snas_paif_fam__
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
+    END AS snas_programa_atencao_integram_familia,
+
+    --column: ind_snas_peti_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
+    END AS snas_programa_erradicacao_trabalho_infantil,
+
+    --column: ind_snas_projovem_adolescente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
+    END AS snas_projovem_adolescente,
+
+    --column: ind_snas_projovem_campo_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
+    END AS snas_projovem_campo,
+
+    --column: ind_snas_projovem_trabalhador_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
+    END AS snas_projovem_trabalhador,
+
+    --column: ind_snas_projovem_urbano_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
+    END AS snas_projovem_urbano,
+
+    --column: num_reg_arquivo
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
+    END AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
--- FROM `rj-smas.protecao_social_cadunico_versao.seguranca_alimentar_0601`
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
-WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-    AND versao_layout_particao = '0601'
+WHERE versao_layout_particao = '0601'
     AND SUBSTRING(text,38,2) = '11'
+
 UNION ALL
 
 
 SELECT
+
+    --column: chv_natural_prefeitura_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS sesan_vende_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
-    END AS sesan_recebe_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
-    END AS sesan_vende_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
-    END AS sesan_recebe_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
-    END AS sesan_recebe_cesta_basica,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
-    END AS sesan_refeicao_restaurante_popular,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
-    END AS sesan_refeicao_cozinha_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS sesan_participou_curso_alimentacao_nutricao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
-    END AS sesan_capitacao_agua_chuva_producao_alimentos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
-    END AS sesan_cisterna,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
-    END AS sesan_horta_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
-    END AS sesan_projeto_carteira_indigena,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
-    END AS sesan_vende_feira_popular_mds,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
-    END AS sesan_nenhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
-    END AS id_trabalho_escravo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
-    END AS energia_tarifa_social,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS enegia_doacao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS nao_pagou_instalacao_energia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS energia_nenhum,
+
+    --column: cod_cta_energ_ordem_pessoa_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,59,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,59,2))  AS STRING)
     END AS id_conta_energia_numero_ordem,
+
+    --column: cod_cta_energ_unid_consum_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,61,20), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,61,20))  AS STRING)
     END AS id_conta_energia_unidade_consumidora,
+
+    --column: cod_errad_trab_escravo_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
-    END AS snas_bpc_deficiente,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
+    END AS id_trabalho_escravo,
+
+    --column: cod_familiar_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
-    END AS snas_bpc_idoso,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
+    END AS id_familia,
+
+    --column: ind_min_energ_elet_doacao_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
-    END AS snas_programa_atencao_integram_familia,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
+    END AS enegia_doacao,
+
+    --column: ind_min_energ_luz_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS snas_crianca_0_6_anos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
+    END AS nao_pagou_instalacao_energia,
+
+    --column: ind_min_energ_nenhum_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS snas_gtupos_idosos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
+    END AS energia_nenhum,
+
+    --column: ind_min_energ_tarifa_soc_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS snas_abrigo_mulher_vitima_violencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS snas_abrigo_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS snas_abrigo_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS snas_abrigo_adultos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS snas_abrigo_populacao_adulta,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
-    END AS snas_projovem_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
-    END AS snas_projovem_urbano,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
-    END AS snas_projovem_campo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
-    END AS snas_projovem_trabalhador,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
-    END AS snas_habilitacao_reabilitacao_deficiencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
-    END AS snas_enfrenta_violencia_crianca,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
-    END AS snas_adolescente_liberdade_assistida,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
-    END AS snas_adolescente_liberdade_servico_comunitario,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
-    END AS snas_orientacao_especial_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
-    END AS snas_centro_dia_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
-    END AS snas_atendimento_domiciliar_idoso_deficiente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
-    END AS snas_inclusao_produtiva,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
-    END AS snas_programa_erradicacao_trabalho_infantil,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
-    END AS snas_nunhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
-    END AS nao_beneficiaria_programa_ministerio_cidades,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
+    END AS energia_tarifa_social,
+
+    --column: ind_parc_mds_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,106,3), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,106,3))  AS STRING)
     END AS ind_parc_mds_fam,
+
+    --column: ind_prog_prohab_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
+    END AS nao_beneficiaria_programa_ministerio_cidades,
+
+    --column: ind_sesan_capit_agua_chuva_prod_alim_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
+    END AS sesan_capitacao_agua_chuva_producao_alimentos,
+
+    --column: ind_sesan_cisterna_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
+    END AS sesan_cisterna,
+
+    --column: ind_sesan_feira_pop_mds_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
+    END AS sesan_vende_feira_popular_mds,
+
+    --column: ind_sesan_horta_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
+    END AS sesan_horta_comunitaria,
+
+    --column: ind_sesan_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
+    END AS sesan_nenhum,
+
+    --column: ind_sesan_partic_alim_nutricao_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
+    END AS sesan_participou_curso_alimentacao_nutricao,
+
+    --column: ind_sesan_proj_cart_indigena_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
+    END AS sesan_projeto_carteira_indigena,
+
+    --column: ind_sesan_receb_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
+    END AS sesan_recebe_alimento_paa,
+
+    --column: ind_sesan_receb_cesta_basica_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
+    END AS sesan_recebe_cesta_basica,
+
+    --column: ind_sesan_receb_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
+    END AS sesan_recebe_leite,
+
+    --column: ind_sesan_refei_cozinha_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
+    END AS sesan_refeicao_cozinha_comunitaria,
+
+    --column: ind_sesan_refei_restau_popular_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
+    END AS sesan_refeicao_restaurante_popular,
+
+    --column: ind_sesan_vende_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
+    END AS sesan_vende_alimento_paa,
+
+    --column: ind_sesan_vende_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
+    END AS sesan_vende_leite,
+
+    --column: ind_snas_abrigo_adultos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
+    END AS snas_abrigo_adultos,
+
+    --column: ind_snas_abrigo_crianca_adoles_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
+    END AS snas_abrigo_crianca_adolescente,
+
+    --column: ind_snas_abrigo_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
+    END AS snas_abrigo_idoso,
+
+    --column: ind_snas_abrigo_mulher_vitima_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
+    END AS snas_abrigo_mulher_vitima_violencia,
+
+    --column: ind_snas_abrigo_popul_adulta_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
+    END AS snas_abrigo_populacao_adulta,
+
+    --column: ind_snas_acomp_social_liberdade_comunidade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
+    END AS snas_adolescente_liberdade_servico_comunitario,
+
+    --column: ind_snas_acomp_social_liberdade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
+    END AS snas_adolescente_liberdade_assistida,
+
+    --column: ind_snas_atend_domic_idosos_defic_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
+    END AS snas_atendimento_domiciliar_idoso_deficiente,
+
+    --column: ind_snas_bpc_deficiente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
+    END AS snas_bpc_deficiente,
+
+    --column: ind_snas_bpc_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
+    END AS snas_bpc_idoso,
+
+    --column: ind_snas_centro_dia_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
+    END AS snas_centro_dia_idoso,
+
+    --column: ind_snas_crianca_0_6_anos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
+    END AS snas_crianca_0_6_anos,
+
+    --column: ind_snas_enfrenta_violencia_crianca_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
+    END AS snas_enfrenta_violencia_crianca,
+
+    --column: ind_snas_grupos_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
+    END AS snas_gtupos_idosos,
+
+    --column: ind_snas_habilit_reabilit_deficiencia_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
+    END AS snas_habilitacao_reabilitacao_deficiencia,
+
+    --column: ind_snas_inclusao_produtiva_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
+    END AS snas_inclusao_produtiva,
+
+    --column: ind_snas_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
+    END AS snas_nunhum,
+
+    --column: ind_snas_orientacao_especial_criancas_adol_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
+    END AS snas_orientacao_especial_crianca_adolescente,
+
+    --column: ind_snas_paif_fam__
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
+    END AS snas_programa_atencao_integram_familia,
+
+    --column: ind_snas_peti_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
+    END AS snas_programa_erradicacao_trabalho_infantil,
+
+    --column: ind_snas_projovem_adolescente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
+    END AS snas_projovem_adolescente,
+
+    --column: ind_snas_projovem_campo_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
+    END AS snas_projovem_campo,
+
+    --column: ind_snas_projovem_trabalhador_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
+    END AS snas_projovem_trabalhador,
+
+    --column: ind_snas_projovem_urbano_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
+    END AS snas_projovem_urbano,
+
+    --column: num_reg_arquivo
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
+    END AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
--- FROM `rj-smas.protecao_social_cadunico_versao.seguranca_alimentar_0603`
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
-WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-    AND versao_layout_particao = '0603'
+WHERE versao_layout_particao = '0603'
     AND SUBSTRING(text,38,2) = '11'
+
 UNION ALL
 
 
 SELECT
+
+    --column: chv_natural_prefeitura_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS sesan_vende_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
-    END AS sesan_recebe_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
-    END AS sesan_vende_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
-    END AS sesan_recebe_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
-    END AS sesan_recebe_cesta_basica,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
-    END AS sesan_refeicao_restaurante_popular,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
-    END AS sesan_refeicao_cozinha_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS sesan_participou_curso_alimentacao_nutricao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
-    END AS sesan_capitacao_agua_chuva_producao_alimentos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
-    END AS sesan_cisterna,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
-    END AS sesan_horta_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
-    END AS sesan_projeto_carteira_indigena,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
-    END AS sesan_vende_feira_popular_mds,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
-    END AS sesan_nenhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
-    END AS id_trabalho_escravo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
-    END AS energia_tarifa_social,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS enegia_doacao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS nao_pagou_instalacao_energia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS energia_nenhum,
+
+    --column: cod_cta_energ_ordem_pessoa_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,59,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,59,2))  AS STRING)
     END AS id_conta_energia_numero_ordem,
+
+    --column: cod_cta_energ_unid_consum_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,61,20), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,61,20))  AS STRING)
     END AS id_conta_energia_unidade_consumidora,
+
+    --column: cod_errad_trab_escravo_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
-    END AS snas_bpc_deficiente,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
+    END AS id_trabalho_escravo,
+
+    --column: cod_familiar_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
-    END AS snas_bpc_idoso,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
+    END AS id_familia,
+
+    --column: ind_min_energ_elet_doacao_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
-    END AS snas_programa_atencao_integram_familia,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
+    END AS enegia_doacao,
+
+    --column: ind_min_energ_luz_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS snas_crianca_0_6_anos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
+    END AS nao_pagou_instalacao_energia,
+
+    --column: ind_min_energ_nenhum_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS snas_gtupos_idosos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
+    END AS energia_nenhum,
+
+    --column: ind_min_energ_tarifa_soc_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS snas_abrigo_mulher_vitima_violencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS snas_abrigo_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS snas_abrigo_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS snas_abrigo_adultos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS snas_abrigo_populacao_adulta,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
-    END AS snas_projovem_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
-    END AS snas_projovem_urbano,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
-    END AS snas_projovem_campo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
-    END AS snas_projovem_trabalhador,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
-    END AS snas_habilitacao_reabilitacao_deficiencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
-    END AS snas_enfrenta_violencia_crianca,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
-    END AS snas_adolescente_liberdade_assistida,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
-    END AS snas_adolescente_liberdade_servico_comunitario,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
-    END AS snas_orientacao_especial_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
-    END AS snas_centro_dia_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
-    END AS snas_atendimento_domiciliar_idoso_deficiente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
-    END AS snas_inclusao_produtiva,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
-    END AS snas_programa_erradicacao_trabalho_infantil,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
-    END AS snas_nunhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
-    END AS nao_beneficiaria_programa_ministerio_cidades,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
+    END AS energia_tarifa_social,
+
+    --column: ind_parc_mds_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,106,3), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,106,3))  AS STRING)
     END AS ind_parc_mds_fam,
+
+    --column: ind_prog_prohab_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
+    END AS nao_beneficiaria_programa_ministerio_cidades,
+
+    --column: ind_sesan_capit_agua_chuva_prod_alim_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
+    END AS sesan_capitacao_agua_chuva_producao_alimentos,
+
+    --column: ind_sesan_cisterna_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
+    END AS sesan_cisterna,
+
+    --column: ind_sesan_feira_pop_mds_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
+    END AS sesan_vende_feira_popular_mds,
+
+    --column: ind_sesan_horta_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
+    END AS sesan_horta_comunitaria,
+
+    --column: ind_sesan_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
+    END AS sesan_nenhum,
+
+    --column: ind_sesan_partic_alim_nutricao_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
+    END AS sesan_participou_curso_alimentacao_nutricao,
+
+    --column: ind_sesan_proj_cart_indigena_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
+    END AS sesan_projeto_carteira_indigena,
+
+    --column: ind_sesan_receb_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
+    END AS sesan_recebe_alimento_paa,
+
+    --column: ind_sesan_receb_cesta_basica_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
+    END AS sesan_recebe_cesta_basica,
+
+    --column: ind_sesan_receb_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
+    END AS sesan_recebe_leite,
+
+    --column: ind_sesan_refei_cozinha_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
+    END AS sesan_refeicao_cozinha_comunitaria,
+
+    --column: ind_sesan_refei_restau_popular_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
+    END AS sesan_refeicao_restaurante_popular,
+
+    --column: ind_sesan_vende_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
+    END AS sesan_vende_alimento_paa,
+
+    --column: ind_sesan_vende_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
+    END AS sesan_vende_leite,
+
+    --column: ind_snas_abrigo_adultos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
+    END AS snas_abrigo_adultos,
+
+    --column: ind_snas_abrigo_crianca_adoles_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
+    END AS snas_abrigo_crianca_adolescente,
+
+    --column: ind_snas_abrigo_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
+    END AS snas_abrigo_idoso,
+
+    --column: ind_snas_abrigo_mulher_vitima_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
+    END AS snas_abrigo_mulher_vitima_violencia,
+
+    --column: ind_snas_abrigo_popul_adulta_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
+    END AS snas_abrigo_populacao_adulta,
+
+    --column: ind_snas_acomp_social_liberdade_comunidade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
+    END AS snas_adolescente_liberdade_servico_comunitario,
+
+    --column: ind_snas_acomp_social_liberdade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
+    END AS snas_adolescente_liberdade_assistida,
+
+    --column: ind_snas_atend_domic_idosos_defic_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
+    END AS snas_atendimento_domiciliar_idoso_deficiente,
+
+    --column: ind_snas_bpc_deficiente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
+    END AS snas_bpc_deficiente,
+
+    --column: ind_snas_bpc_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
+    END AS snas_bpc_idoso,
+
+    --column: ind_snas_centro_dia_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
+    END AS snas_centro_dia_idoso,
+
+    --column: ind_snas_crianca_0_6_anos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
+    END AS snas_crianca_0_6_anos,
+
+    --column: ind_snas_enfrenta_violencia_crianca_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
+    END AS snas_enfrenta_violencia_crianca,
+
+    --column: ind_snas_grupos_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
+    END AS snas_gtupos_idosos,
+
+    --column: ind_snas_habilit_reabilit_deficiencia_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
+    END AS snas_habilitacao_reabilitacao_deficiencia,
+
+    --column: ind_snas_inclusao_produtiva_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
+    END AS snas_inclusao_produtiva,
+
+    --column: ind_snas_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
+    END AS snas_nunhum,
+
+    --column: ind_snas_orientacao_especial_criancas_adol_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
+    END AS snas_orientacao_especial_crianca_adolescente,
+
+    --column: ind_snas_paif_fam__
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
+    END AS snas_programa_atencao_integram_familia,
+
+    --column: ind_snas_peti_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
+    END AS snas_programa_erradicacao_trabalho_infantil,
+
+    --column: ind_snas_projovem_adolescente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
+    END AS snas_projovem_adolescente,
+
+    --column: ind_snas_projovem_campo_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
+    END AS snas_projovem_campo,
+
+    --column: ind_snas_projovem_trabalhador_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
+    END AS snas_projovem_trabalhador,
+
+    --column: ind_snas_projovem_urbano_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
+    END AS snas_projovem_urbano,
+
+    --column: num_reg_arquivo
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
+    END AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
--- FROM `rj-smas.protecao_social_cadunico_versao.seguranca_alimentar_0604`
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
-WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-    AND versao_layout_particao = '0604'
+WHERE versao_layout_particao = '0604'
     AND SUBSTRING(text,38,2) = '11'
+
 UNION ALL
 
 
 SELECT
+
+    --column: chv_natural_prefeitura_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS sesan_vende_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
-    END AS sesan_recebe_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
-    END AS sesan_vende_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
-    END AS sesan_recebe_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
-    END AS sesan_recebe_cesta_basica,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
-    END AS sesan_refeicao_restaurante_popular,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
-    END AS sesan_refeicao_cozinha_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS sesan_participou_curso_alimentacao_nutricao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
-    END AS sesan_capitacao_agua_chuva_producao_alimentos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
-    END AS sesan_cisterna,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
-    END AS sesan_horta_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
-    END AS sesan_projeto_carteira_indigena,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
-    END AS sesan_vende_feira_popular_mds,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
-    END AS sesan_nenhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
-    END AS id_trabalho_escravo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
-    END AS energia_tarifa_social,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS enegia_doacao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS nao_pagou_instalacao_energia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS energia_nenhum,
+
+    --column: cod_cta_energ_ordem_pessoa_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,59,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,59,2))  AS STRING)
     END AS id_conta_energia_numero_ordem,
+
+    --column: cod_cta_energ_unid_consum_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,61,20), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,61,20))  AS STRING)
     END AS id_conta_energia_unidade_consumidora,
+
+    --column: cod_errad_trab_escravo_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
-    END AS snas_bpc_deficiente,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
+    END AS id_trabalho_escravo,
+
+    --column: cod_familiar_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
-    END AS snas_bpc_idoso,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
+    END AS id_familia,
+
+    --column: ind_min_energ_elet_doacao_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
-    END AS snas_programa_atencao_integram_familia,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
+    END AS enegia_doacao,
+
+    --column: ind_min_energ_luz_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS snas_crianca_0_6_anos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
+    END AS nao_pagou_instalacao_energia,
+
+    --column: ind_min_energ_nenhum_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS snas_gtupos_idosos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
+    END AS energia_nenhum,
+
+    --column: ind_min_energ_tarifa_soc_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS snas_abrigo_mulher_vitima_violencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS snas_abrigo_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS snas_abrigo_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS snas_abrigo_adultos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS snas_abrigo_populacao_adulta,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
-    END AS snas_projovem_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
-    END AS snas_projovem_urbano,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
-    END AS snas_projovem_campo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
-    END AS snas_projovem_trabalhador,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
-    END AS snas_habilitacao_reabilitacao_deficiencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
-    END AS snas_enfrenta_violencia_crianca,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
-    END AS snas_adolescente_liberdade_assistida,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
-    END AS snas_adolescente_liberdade_servico_comunitario,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
-    END AS snas_orientacao_especial_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
-    END AS snas_centro_dia_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
-    END AS snas_atendimento_domiciliar_idoso_deficiente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
-    END AS snas_inclusao_produtiva,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
-    END AS snas_programa_erradicacao_trabalho_infantil,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
-    END AS snas_nunhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
-    END AS nao_beneficiaria_programa_ministerio_cidades,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
+    END AS energia_tarifa_social,
+
+    --column: ind_parc_mds_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,106,3), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,106,3))  AS STRING)
     END AS ind_parc_mds_fam,
+
+    --column: ind_prog_prohab_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
+    END AS nao_beneficiaria_programa_ministerio_cidades,
+
+    --column: ind_sesan_capit_agua_chuva_prod_alim_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
+    END AS sesan_capitacao_agua_chuva_producao_alimentos,
+
+    --column: ind_sesan_cisterna_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
+    END AS sesan_cisterna,
+
+    --column: ind_sesan_feira_pop_mds_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
+    END AS sesan_vende_feira_popular_mds,
+
+    --column: ind_sesan_horta_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
+    END AS sesan_horta_comunitaria,
+
+    --column: ind_sesan_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
+    END AS sesan_nenhum,
+
+    --column: ind_sesan_partic_alim_nutricao_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
+    END AS sesan_participou_curso_alimentacao_nutricao,
+
+    --column: ind_sesan_proj_cart_indigena_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
+    END AS sesan_projeto_carteira_indigena,
+
+    --column: ind_sesan_receb_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
+    END AS sesan_recebe_alimento_paa,
+
+    --column: ind_sesan_receb_cesta_basica_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
+    END AS sesan_recebe_cesta_basica,
+
+    --column: ind_sesan_receb_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
+    END AS sesan_recebe_leite,
+
+    --column: ind_sesan_refei_cozinha_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
+    END AS sesan_refeicao_cozinha_comunitaria,
+
+    --column: ind_sesan_refei_restau_popular_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
+    END AS sesan_refeicao_restaurante_popular,
+
+    --column: ind_sesan_vende_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
+    END AS sesan_vende_alimento_paa,
+
+    --column: ind_sesan_vende_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
+    END AS sesan_vende_leite,
+
+    --column: ind_snas_abrigo_adultos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
+    END AS snas_abrigo_adultos,
+
+    --column: ind_snas_abrigo_crianca_adoles_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
+    END AS snas_abrigo_crianca_adolescente,
+
+    --column: ind_snas_abrigo_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
+    END AS snas_abrigo_idoso,
+
+    --column: ind_snas_abrigo_mulher_vitima_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
+    END AS snas_abrigo_mulher_vitima_violencia,
+
+    --column: ind_snas_abrigo_popul_adulta_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
+    END AS snas_abrigo_populacao_adulta,
+
+    --column: ind_snas_acomp_social_liberdade_comunidade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
+    END AS snas_adolescente_liberdade_servico_comunitario,
+
+    --column: ind_snas_acomp_social_liberdade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
+    END AS snas_adolescente_liberdade_assistida,
+
+    --column: ind_snas_atend_domic_idosos_defic_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
+    END AS snas_atendimento_domiciliar_idoso_deficiente,
+
+    --column: ind_snas_bpc_deficiente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
+    END AS snas_bpc_deficiente,
+
+    --column: ind_snas_bpc_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
+    END AS snas_bpc_idoso,
+
+    --column: ind_snas_centro_dia_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
+    END AS snas_centro_dia_idoso,
+
+    --column: ind_snas_crianca_0_6_anos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
+    END AS snas_crianca_0_6_anos,
+
+    --column: ind_snas_enfrenta_violencia_crianca_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
+    END AS snas_enfrenta_violencia_crianca,
+
+    --column: ind_snas_grupos_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
+    END AS snas_gtupos_idosos,
+
+    --column: ind_snas_habilit_reabilit_deficiencia_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
+    END AS snas_habilitacao_reabilitacao_deficiencia,
+
+    --column: ind_snas_inclusao_produtiva_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
+    END AS snas_inclusao_produtiva,
+
+    --column: ind_snas_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
+    END AS snas_nunhum,
+
+    --column: ind_snas_orientacao_especial_criancas_adol_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
+    END AS snas_orientacao_especial_crianca_adolescente,
+
+    --column: ind_snas_paif_fam__
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
+    END AS snas_programa_atencao_integram_familia,
+
+    --column: ind_snas_peti_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
+    END AS snas_programa_erradicacao_trabalho_infantil,
+
+    --column: ind_snas_projovem_adolescente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
+    END AS snas_projovem_adolescente,
+
+    --column: ind_snas_projovem_campo_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
+    END AS snas_projovem_campo,
+
+    --column: ind_snas_projovem_trabalhador_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
+    END AS snas_projovem_trabalhador,
+
+    --column: ind_snas_projovem_urbano_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
+    END AS snas_projovem_urbano,
+
+    --column: num_reg_arquivo
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
+    END AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
--- FROM `rj-smas.protecao_social_cadunico_versao.seguranca_alimentar_0609`
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
-WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-    AND versao_layout_particao = '0609'
+WHERE versao_layout_particao = '0609'
     AND SUBSTRING(text,38,2) = '11'
+
 UNION ALL
 
 
 SELECT
+
+    --column: chv_natural_prefeitura_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS sesan_vende_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
-    END AS sesan_recebe_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
-    END AS sesan_vende_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
-    END AS sesan_recebe_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
-    END AS sesan_recebe_cesta_basica,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
-    END AS sesan_refeicao_restaurante_popular,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
-    END AS sesan_refeicao_cozinha_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS sesan_participou_curso_alimentacao_nutricao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
-    END AS sesan_capitacao_agua_chuva_producao_alimentos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
-    END AS sesan_cisterna,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
-    END AS sesan_horta_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
-    END AS sesan_projeto_carteira_indigena,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
-    END AS sesan_vende_feira_popular_mds,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
-    END AS sesan_nenhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
-    END AS id_trabalho_escravo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
-    END AS energia_tarifa_social,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS enegia_doacao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS nao_pagou_instalacao_energia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS energia_nenhum,
+
+    --column: cod_cta_energ_ordem_pessoa_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,59,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,59,2))  AS STRING)
     END AS id_conta_energia_numero_ordem,
+
+    --column: cod_cta_energ_unid_consum_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,61,20), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,61,20))  AS STRING)
     END AS id_conta_energia_unidade_consumidora,
+
+    --column: cod_errad_trab_escravo_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
-    END AS snas_bpc_deficiente,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
+    END AS id_trabalho_escravo,
+
+    --column: cod_familiar_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
-    END AS snas_bpc_idoso,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
+    END AS id_familia,
+
+    --column: ind_min_energ_elet_doacao_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
-    END AS snas_programa_atencao_integram_familia,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
+    END AS enegia_doacao,
+
+    --column: ind_min_energ_luz_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS snas_crianca_0_6_anos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
+    END AS nao_pagou_instalacao_energia,
+
+    --column: ind_min_energ_nenhum_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS snas_gtupos_idosos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
+    END AS energia_nenhum,
+
+    --column: ind_min_energ_tarifa_soc_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS snas_abrigo_mulher_vitima_violencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS snas_abrigo_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS snas_abrigo_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS snas_abrigo_adultos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS snas_abrigo_populacao_adulta,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
-    END AS snas_projovem_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
-    END AS snas_projovem_urbano,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
-    END AS snas_projovem_campo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
-    END AS snas_projovem_trabalhador,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
-    END AS snas_habilitacao_reabilitacao_deficiencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
-    END AS snas_enfrenta_violencia_crianca,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
-    END AS snas_adolescente_liberdade_assistida,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
-    END AS snas_adolescente_liberdade_servico_comunitario,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
-    END AS snas_orientacao_especial_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
-    END AS snas_centro_dia_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
-    END AS snas_atendimento_domiciliar_idoso_deficiente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
-    END AS snas_inclusao_produtiva,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
-    END AS snas_programa_erradicacao_trabalho_infantil,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
-    END AS snas_nunhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
-    END AS nao_beneficiaria_programa_ministerio_cidades,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
+    END AS energia_tarifa_social,
+
+    --column: ind_parc_mds_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,106,3), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,106,3))  AS STRING)
     END AS ind_parc_mds_fam,
+
+    --column: ind_prog_prohab_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
+    END AS nao_beneficiaria_programa_ministerio_cidades,
+
+    --column: ind_sesan_capit_agua_chuva_prod_alim_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
+    END AS sesan_capitacao_agua_chuva_producao_alimentos,
+
+    --column: ind_sesan_cisterna_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
+    END AS sesan_cisterna,
+
+    --column: ind_sesan_feira_pop_mds_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
+    END AS sesan_vende_feira_popular_mds,
+
+    --column: ind_sesan_horta_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
+    END AS sesan_horta_comunitaria,
+
+    --column: ind_sesan_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
+    END AS sesan_nenhum,
+
+    --column: ind_sesan_partic_alim_nutricao_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
+    END AS sesan_participou_curso_alimentacao_nutricao,
+
+    --column: ind_sesan_proj_cart_indigena_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
+    END AS sesan_projeto_carteira_indigena,
+
+    --column: ind_sesan_receb_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
+    END AS sesan_recebe_alimento_paa,
+
+    --column: ind_sesan_receb_cesta_basica_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
+    END AS sesan_recebe_cesta_basica,
+
+    --column: ind_sesan_receb_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
+    END AS sesan_recebe_leite,
+
+    --column: ind_sesan_refei_cozinha_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
+    END AS sesan_refeicao_cozinha_comunitaria,
+
+    --column: ind_sesan_refei_restau_popular_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
+    END AS sesan_refeicao_restaurante_popular,
+
+    --column: ind_sesan_vende_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
+    END AS sesan_vende_alimento_paa,
+
+    --column: ind_sesan_vende_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
+    END AS sesan_vende_leite,
+
+    --column: ind_snas_abrigo_adultos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
+    END AS snas_abrigo_adultos,
+
+    --column: ind_snas_abrigo_crianca_adoles_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
+    END AS snas_abrigo_crianca_adolescente,
+
+    --column: ind_snas_abrigo_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
+    END AS snas_abrigo_idoso,
+
+    --column: ind_snas_abrigo_mulher_vitima_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
+    END AS snas_abrigo_mulher_vitima_violencia,
+
+    --column: ind_snas_abrigo_popul_adulta_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
+    END AS snas_abrigo_populacao_adulta,
+
+    --column: ind_snas_acomp_social_liberdade_comunidade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
+    END AS snas_adolescente_liberdade_servico_comunitario,
+
+    --column: ind_snas_acomp_social_liberdade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
+    END AS snas_adolescente_liberdade_assistida,
+
+    --column: ind_snas_atend_domic_idosos_defic_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
+    END AS snas_atendimento_domiciliar_idoso_deficiente,
+
+    --column: ind_snas_bpc_deficiente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
+    END AS snas_bpc_deficiente,
+
+    --column: ind_snas_bpc_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
+    END AS snas_bpc_idoso,
+
+    --column: ind_snas_centro_dia_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
+    END AS snas_centro_dia_idoso,
+
+    --column: ind_snas_crianca_0_6_anos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
+    END AS snas_crianca_0_6_anos,
+
+    --column: ind_snas_enfrenta_violencia_crianca_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
+    END AS snas_enfrenta_violencia_crianca,
+
+    --column: ind_snas_grupos_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
+    END AS snas_gtupos_idosos,
+
+    --column: ind_snas_habilit_reabilit_deficiencia_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
+    END AS snas_habilitacao_reabilitacao_deficiencia,
+
+    --column: ind_snas_inclusao_produtiva_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
+    END AS snas_inclusao_produtiva,
+
+    --column: ind_snas_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
+    END AS snas_nunhum,
+
+    --column: ind_snas_orientacao_especial_criancas_adol_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
+    END AS snas_orientacao_especial_crianca_adolescente,
+
+    --column: ind_snas_paif_fam__
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
+    END AS snas_programa_atencao_integram_familia,
+
+    --column: ind_snas_peti_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
+    END AS snas_programa_erradicacao_trabalho_infantil,
+
+    --column: ind_snas_projovem_adolescente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
+    END AS snas_projovem_adolescente,
+
+    --column: ind_snas_projovem_campo_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
+    END AS snas_projovem_campo,
+
+    --column: ind_snas_projovem_trabalhador_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
+    END AS snas_projovem_trabalhador,
+
+    --column: ind_snas_projovem_urbano_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
+    END AS snas_projovem_urbano,
+
+    --column: num_reg_arquivo
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
+    END AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
--- FROM `rj-smas.protecao_social_cadunico_versao.seguranca_alimentar_0612`
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
-WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-    AND versao_layout_particao = '0612'
+WHERE versao_layout_particao = '0612'
     AND SUBSTRING(text,38,2) = '11'
+
 UNION ALL
 
 
 SELECT
+
+    --column: chv_natural_prefeitura_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS sesan_vende_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
-    END AS sesan_recebe_leite,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
-    END AS sesan_vende_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
-    END AS sesan_recebe_alimento_paa,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
-    END AS sesan_recebe_cesta_basica,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
-    END AS sesan_refeicao_restaurante_popular,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
-    END AS sesan_refeicao_cozinha_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS sesan_participou_curso_alimentacao_nutricao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
-    END AS sesan_capitacao_agua_chuva_producao_alimentos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
-    END AS sesan_cisterna,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
-    END AS sesan_horta_comunitaria,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
-    END AS sesan_projeto_carteira_indigena,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
-    END AS sesan_vende_feira_popular_mds,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
-    END AS sesan_nenhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
-    END AS id_trabalho_escravo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
-    END AS energia_tarifa_social,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS enegia_doacao,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS nao_pagou_instalacao_energia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS energia_nenhum,
+
+    --column: cod_cta_energ_ordem_pessoa_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,59,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,59,2))  AS STRING)
     END AS id_conta_energia_numero_ordem,
+
+    --column: cod_cta_energ_unid_consum_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,61,20), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,61,20))  AS STRING)
     END AS id_conta_energia_unidade_consumidora,
+
+    --column: cod_errad_trab_escravo_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
-    END AS snas_bpc_deficiente,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
+    END AS id_trabalho_escravo,
+
+    --column: cod_familiar_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
-    END AS snas_bpc_idoso,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
+    END AS id_familia,
+
+    --column: ind_min_energ_elet_doacao_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
-    END AS snas_programa_atencao_integram_familia,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
+    END AS enegia_doacao,
+
+    --column: ind_min_energ_luz_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS snas_crianca_0_6_anos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
+    END AS nao_pagou_instalacao_energia,
+
+    --column: ind_min_energ_nenhum_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS snas_gtupos_idosos,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
+    END AS energia_nenhum,
+
+    --column: ind_min_energ_tarifa_soc_fam
     CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS snas_abrigo_mulher_vitima_violencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS snas_abrigo_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS snas_abrigo_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS snas_abrigo_adultos,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS snas_abrigo_populacao_adulta,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
-    END AS snas_projovem_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
-    END AS snas_projovem_urbano,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
-    END AS snas_projovem_campo,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
-    END AS snas_projovem_trabalhador,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
-    END AS snas_habilitacao_reabilitacao_deficiencia,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
-    END AS snas_enfrenta_violencia_crianca,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
-    END AS snas_adolescente_liberdade_assistida,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
-    END AS snas_adolescente_liberdade_servico_comunitario,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
-    END AS snas_orientacao_especial_crianca_adolescente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
-    END AS snas_centro_dia_idoso,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
-    END AS snas_atendimento_domiciliar_idoso_deficiente,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
-    END AS snas_inclusao_produtiva,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
-    END AS snas_programa_erradicacao_trabalho_infantil,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
-    END AS snas_nunhum,
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
-    END AS nao_beneficiaria_programa_ministerio_cidades,
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,55,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,55,1))  AS STRING)
+    END AS energia_tarifa_social,
+
+    --column: ind_parc_mds_fam
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,106,3), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,106,3))  AS STRING)
     END AS ind_parc_mds_fam,
+
+    --column: ind_prog_prohab_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,105,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,105,1))  AS STRING)
+    END AS nao_beneficiaria_programa_ministerio_cidades,
+
+    --column: ind_sesan_capit_agua_chuva_prod_alim_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
+    END AS sesan_capitacao_agua_chuva_producao_alimentos,
+
+    --column: ind_sesan_cisterna_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
+    END AS sesan_cisterna,
+
+    --column: ind_sesan_feira_pop_mds_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
+    END AS sesan_vende_feira_popular_mds,
+
+    --column: ind_sesan_horta_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
+    END AS sesan_horta_comunitaria,
+
+    --column: ind_sesan_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
+    END AS sesan_nenhum,
+
+    --column: ind_sesan_partic_alim_nutricao_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
+    END AS sesan_participou_curso_alimentacao_nutricao,
+
+    --column: ind_sesan_proj_cart_indigena_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
+    END AS sesan_projeto_carteira_indigena,
+
+    --column: ind_sesan_receb_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
+    END AS sesan_recebe_alimento_paa,
+
+    --column: ind_sesan_receb_cesta_basica_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
+    END AS sesan_recebe_cesta_basica,
+
+    --column: ind_sesan_receb_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
+    END AS sesan_recebe_leite,
+
+    --column: ind_sesan_refei_cozinha_comum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
+    END AS sesan_refeicao_cozinha_comunitaria,
+
+    --column: ind_sesan_refei_restau_popular_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
+    END AS sesan_refeicao_restaurante_popular,
+
+    --column: ind_sesan_vende_alim_paa_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
+    END AS sesan_vende_alimento_paa,
+
+    --column: ind_sesan_vende_leite_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
+    END AS sesan_vende_leite,
+
+    --column: ind_snas_abrigo_adultos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
+    END AS snas_abrigo_adultos,
+
+    --column: ind_snas_abrigo_crianca_adoles_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
+    END AS snas_abrigo_crianca_adolescente,
+
+    --column: ind_snas_abrigo_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
+    END AS snas_abrigo_idoso,
+
+    --column: ind_snas_abrigo_mulher_vitima_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
+    END AS snas_abrigo_mulher_vitima_violencia,
+
+    --column: ind_snas_abrigo_popul_adulta_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
+    END AS snas_abrigo_populacao_adulta,
+
+    --column: ind_snas_acomp_social_liberdade_comunidade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,98,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,98,1))  AS STRING)
+    END AS snas_adolescente_liberdade_servico_comunitario,
+
+    --column: ind_snas_acomp_social_liberdade_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,97,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,97,1))  AS STRING)
+    END AS snas_adolescente_liberdade_assistida,
+
+    --column: ind_snas_atend_domic_idosos_defic_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,101,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,101,1))  AS STRING)
+    END AS snas_atendimento_domiciliar_idoso_deficiente,
+
+    --column: ind_snas_bpc_deficiente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,81,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,81,1))  AS STRING)
+    END AS snas_bpc_deficiente,
+
+    --column: ind_snas_bpc_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,82,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,82,1))  AS STRING)
+    END AS snas_bpc_idoso,
+
+    --column: ind_snas_centro_dia_idoso_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,100,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,100,1))  AS STRING)
+    END AS snas_centro_dia_idoso,
+
+    --column: ind_snas_crianca_0_6_anos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
+    END AS snas_crianca_0_6_anos,
+
+    --column: ind_snas_enfrenta_violencia_crianca_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,96,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,96,1))  AS STRING)
+    END AS snas_enfrenta_violencia_crianca,
+
+    --column: ind_snas_grupos_idosos_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
+    END AS snas_gtupos_idosos,
+
+    --column: ind_snas_habilit_reabilit_deficiencia_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,95,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,95,1))  AS STRING)
+    END AS snas_habilitacao_reabilitacao_deficiencia,
+
+    --column: ind_snas_inclusao_produtiva_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,102,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,102,1))  AS STRING)
+    END AS snas_inclusao_produtiva,
+
+    --column: ind_snas_nenhum_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,104,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,104,1))  AS STRING)
+    END AS snas_nunhum,
+
+    --column: ind_snas_orientacao_especial_criancas_adol_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,99,1))  AS STRING)
+    END AS snas_orientacao_especial_crianca_adolescente,
+
+    --column: ind_snas_paif_fam__
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,83,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,83,1))  AS STRING)
+    END AS snas_programa_atencao_integram_familia,
+
+    --column: ind_snas_peti_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,103,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,103,1))  AS STRING)
+    END AS snas_programa_erradicacao_trabalho_infantil,
+
+    --column: ind_snas_projovem_adolescente_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,91,1))  AS STRING)
+    END AS snas_projovem_adolescente,
+
+    --column: ind_snas_projovem_campo_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,93,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,93,1))  AS STRING)
+    END AS snas_projovem_campo,
+
+    --column: ind_snas_projovem_trabalhador_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,94,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,94,1))  AS STRING)
+    END AS snas_projovem_trabalhador,
+
+    --column: ind_snas_projovem_urbano_fam
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,92,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,92,1))  AS STRING)
+    END AS snas_projovem_urbano,
+
+    --column: num_reg_arquivo
+    CASE
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
+    END AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
--- FROM `rj-smas.protecao_social_cadunico_versao.seguranca_alimentar_0615`
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
-WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-    AND versao_layout_particao = '0615'
+WHERE versao_layout_particao = '0615'
     AND SUBSTRING(text,38,2) = '11'
+
