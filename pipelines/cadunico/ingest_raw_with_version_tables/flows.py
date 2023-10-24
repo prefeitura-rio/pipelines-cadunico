@@ -8,7 +8,7 @@ from prefect.utilities.edges import unmapped
 from pipelines.cadunico.ingest_raw.tasks import (
     append_data_to_storage,
     create_table_if_not_exists,
-    get_dbt_models_to_materialize_task,
+    get_dbt_models_to_materialize,
     get_existing_partitions,
     get_files_to_ingest,
     get_project_id_task,
@@ -44,6 +44,9 @@ with Flow(
     layout_table_id = Parameter("layout_table_id", default="layout")
     layout_output_path = Parameter("layout_output_path", default="/tmp/cadunico/layout_parsed/")
     force_create_models = Parameter("force_create_models", default=False, required=False)
+    force_materialize_all_dbt_models = Parameter(
+        "force_materialize_all_dbt_models", default=False, required=False
+    )
     force_materialize_harmonized_dbt_models = Parameter(
         "force_materialize_harmonized_dbt_models", default=False, required=False
     )
@@ -91,17 +94,46 @@ with Flow(
         append_data_to_gcs.set_upstream(create_table)
 
         with case(materialize_after_dump, True):
-            # PROD TABLES
-            dump_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize_task(
+            # VERSION TABLES
+            dump_version_tables_to_materialize_parameters = get_dbt_models_to_materialize(
                 dataset_id=dataset_id,
                 table_id=table_id,
+                only_version_tables=True,
+                first_execution=True,
                 project_id=project_id,
                 layout_dataset_id=layout_dataset_id,
                 layout_table_id=layout_table_id,
                 layout_output_path=layout_output_path,
                 force_create_models=force_create_models,
             )
-            dump_prod_tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
+            dump_version_tables_to_materialize_parameters.set_upstream(append_data_to_gcs)
+
+            dump_materialization_flow_runs = create_flow_run.map(
+                flow_id=unmapped(materialization_flow_id),
+                parameters=dump_version_tables_to_materialize_parameters,
+                labels=unmapped(materialization_labels),
+            )
+
+            dump_wait_for_flow_run_ = wait_for_flow_run.map(
+                flow_run_id=dump_materialization_flow_runs,
+                stream_states=unmapped(True),
+                stream_logs=unmapped(True),
+                raise_final_state=unmapped(True),
+            )
+
+            # PROD TABLES
+            dump_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+                dataset_id=dataset_id,
+                table_id=table_id,
+                only_version_tables=False,
+                first_execution=False,
+                project_id=project_id,
+                layout_dataset_id=layout_dataset_id,
+                layout_table_id=layout_table_id,
+                layout_output_path=layout_output_path,
+                force_create_models=force_create_models,
+            )
+            dump_prod_tables_to_materialize_parameters.set_upstream(dump_wait_for_flow_run_)
 
             dum_prod_materialization_flow_runs = create_flow_run.map(
                 flow_id=unmapped(materialization_flow_id),
@@ -118,9 +150,11 @@ with Flow(
     # materialize only prod dbt models
     with case(force_materialize_harmonized_dbt_models, True):
         # PROD TABLES
-        only_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize_task(
+        only_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
             dataset_id=dataset_id,
             table_id=table_id,
+            only_version_tables=False,
+            first_execution=True,
             project_id=project_id,
             layout_dataset_id=layout_dataset_id,
             layout_table_id=layout_table_id,
@@ -142,6 +176,54 @@ with Flow(
             raise_final_state=unmapped(True),
         )
 
+    # materialize all dbt models
+    with case(force_materialize_all_dbt_models, True):
+        # VERSION TABLES
+        all_version_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+            dataset_id=dataset_id,
+            table_id=table_id,
+            only_version_tables=True,
+            first_execution=True,
+            project_id=project_id,
+            layout_dataset_id=layout_dataset_id,
+            layout_table_id=layout_table_id,
+            layout_output_path=layout_output_path,
+            force_create_models=force_create_models,
+        )
+        all_version_tables_to_materialize_parameters.set_upstream(need_to_ingest_bool)
+
+        all_materialization_flow_runs = create_flow_run.map(
+            flow_id=unmapped(materialization_flow_id),
+            parameters=all_version_tables_to_materialize_parameters,
+            labels=unmapped(materialization_labels),
+        )
+
+        all_wait_for_flow_run_version = wait_for_flow_run.map(
+            flow_run_id=all_materialization_flow_runs,
+            stream_states=unmapped(True),
+            stream_logs=unmapped(True),
+            raise_final_state=unmapped(True),
+        )
+
+        # PROD TABLES
+        all_prod_tables_to_materialize_parameters = get_dbt_models_to_materialize(
+            dataset_id=dataset_id,
+            table_id=table_id,
+            only_version_tables=False,
+            first_execution=True,
+            project_id=project_id,
+            layout_dataset_id=layout_dataset_id,
+            layout_table_id=layout_table_id,
+            layout_output_path=layout_output_path,
+            force_create_models=force_create_models,
+        )
+        all_prod_tables_to_materialize_parameters.set_upstream(all_wait_for_flow_run_version)
+
+        all_prod_materialization_flow_runs = create_flow_run.map(
+            flow_id=unmapped(materialization_flow_id),
+            parameters=all_prod_tables_to_materialize_parameters,
+            labels=unmapped(materialization_labels),
+        )
 
 # Storage and run configs
 cadunico__ingest_raw__flow.storage = GCS(constants.GCS_FLOWS_BUCKET.value)

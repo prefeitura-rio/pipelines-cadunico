@@ -5,7 +5,6 @@ import shutil
 import textwrap
 from datetime import datetime
 from pathlib import Path
-from typing import List
 
 import basedosdados as bd
 import numpy as np
@@ -178,7 +177,6 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
 
 
 def get_staging_partitions_versions(project_id, dataset_id, table_id):
-    print(dataset_id, table_id)
     st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
     blobs = list(
         st.client["storage_staging"]
@@ -287,7 +285,7 @@ def get_layout_table_from_staging(
         project_id=project_id, dataset_id=dataset_id, table_id=table_id
     )
     log(
-        f"Dataframe will be filtered using versions from {project_id}.{dataset_id}_staging.{table_id}: {versions}"
+        f"Dataframe will be filtered using versions from {project_id}.{dataset_id}_staging.{table_id}: {versions}"  # noqa
     )
 
     return dataframe[dataframe["versao_layout_particao"].isin(versions)]
@@ -326,9 +324,112 @@ def dump_dict_to_dbt_yaml(schema, schema_yaml_path):
     )
 
 
-def create_cadunico_dbt_consolidated_models(
+def create_cadunico_dbt_version_models(
     dataframe: pd.DataFrame, model_dataset_id: str, model_table_id: str
 ):
+    df = dataframe.copy()
+    df = df[df["coluna_esta_versao_anterior"] == "True"]
+    df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
+    df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
+    df["reg_version"] = df["reg"] + "____" + df["version"]
+
+    schema = {"version": 2, "models": []}
+    log_created_models = []
+    for table_version in df["reg_version"].unique():
+        table_schema = {}
+
+        dd = df[df["reg_version"] == table_version]
+        table_number = table_version.split("____")[0]
+        table_model_name = get_tables_names_dict(table_number)
+        version = table_version.split("____")[1]
+        table_name_original = f"{table_model_name}_{version}"
+        table_name = (
+            f"{table_name_original}_test" if "test" in model_dataset_id else table_name_original
+        )
+        table_schema["name"] = table_name
+        table_schema["description"] = f"Table {table_model_name} version {version}"
+        table_schema["columns"] = []
+        columns = []
+
+        for index, row in dd.iterrows():
+            col_name = row["column"]
+            col_expression = f"    SUBSTRING(text,{row['posicao']},{row['tamanho']}) AS {col_name},"
+            columns.append(col_expression)
+            col_description = row["descricao"] if row["descricao"] is not None else "Sem descrição"
+            col_description = (
+                re.sub(r"\s+", " ", col_description)
+                .replace(";", "\n")
+                .replace("\\", "")
+                .replace(". ", "\n")
+                .replace("\n ", "\n")
+                .replace(" - ", "-")
+            )
+            # bigquery limits the description to 1024 characters
+            col_description = col_description[:1020]
+
+            table_schema["columns"].append({"name": col_name, "description": col_description})
+
+        schema["models"].append(table_schema)
+
+        ini_query = """
+                {{
+                    config(
+                        materialized= "incremental",
+                        partition_by={
+                            "field": "data_particao",
+                            "data_type": "date",
+                            "granularity": "month",
+                        }
+                    )
+
+                }}
+
+                SELECT
+                    """
+
+        end_query = """
+                SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout_particao,
+                SAFE_CAST(data_particao AS DATE) AS data_particao
+            FROM `rj-smas.__dataset_id_replacer___staging.__table_id_replacer__`
+            WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+                AND versao_layout_particao = '__version_replacer__'
+                AND SUBSTRING(text,38,2) = '__table_number_replacer__'
+
+            {% if is_incremental() %}
+
+            {% set max_partition = run_query("SELECT gr FROM (SELECT IF(max(data_particao) > CURRENT_DATE('America/Sao_Paulo'), CURRENT_DATE('America/Sao_Paulo'), max(data_particao)) as gr FROM " ~ this ~ ")").columns[0].values()[0] %}
+
+            AND
+                SAFE_CAST(data_particao AS DATE) > ("{{ max_partition }}")
+
+            {% endif %}
+        """  # noqa
+        ini_query = textwrap.dedent(ini_query)
+        end_query = textwrap.dedent(end_query)
+        table_query = ini_query + "\n".join(columns) + end_query
+        table_query = table_query.replace("__table_number_replacer__", table_number)
+        table_query = table_query.replace("__version_replacer__", version)
+        table_query = table_query.replace("__dataset_id_replacer__", model_dataset_id)
+        table_query = table_query.replace("__table_id_replacer__", model_table_id)
+
+        root_path = get_root_path()
+
+        model_path_versao = root_path / f"queries/models/{model_dataset_id}_versao"
+        sql_filepath = model_path_versao / f"{table_name}.sql"
+
+        sql_filepath.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(sql_filepath, "w") as text_file:
+            text_file.write(table_query)
+
+        log_created_models.append(str(sql_filepath))
+    json_log = json.dumps(log_created_models, indent=4)
+    log(f"created {len(log_created_models)} version models : {json_log}")
+
+    dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
+
+
+def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_dataset_id: str):
     df = dataframe.copy()
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
@@ -361,11 +462,8 @@ def create_cadunico_dbt_consolidated_models(
         end_query = """
                 SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
                 SAFE_CAST(data_particao AS DATE) AS data_particao
-            -- FROM `rj-smas.__dataset_id_replacer___versao.__table_id_replacer__`
-            FROM `rj-smas.__dataset_id_replacer___staging.__model_table_id_replacer__`
-            WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
-                AND versao_layout_particao = '__version_replacer__'
-                AND SUBSTRING(text,38,2) = '__table_number_replacer__'
+            FROM `rj-smas.__dataset_id_replacer___versao.__table_id_replacer__`
+
             UNION ALL
 
         """
@@ -381,9 +479,7 @@ def create_cadunico_dbt_consolidated_models(
             )
             columns = []
             for index, row in table_version.iterrows():
-                # col_name = row["column"]
-
-                col_name = f"SUBSTRING(text,{row['posicao']},{row['tamanho']})"
+                col_name = row["column"]
                 col_name_padronizado = row["nome_padronizado"]
                 bigquery_type = row["bigquery_type"]
                 bigquery_type = bigquery_type if bigquery_type is not None else "STRING"
@@ -396,13 +492,13 @@ def create_cadunico_dbt_consolidated_models(
                 )
 
                 if col_in_last_version == "False":
-                    col_expression = f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
+                    col_expression = f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"  # noqa
                 else:
                     if bigquery_type == "DATE":
                         col_expression = (
                             "    CASE\n"
                             + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', TRIM({col_name}))  AS {bigquery_type})\n"
+                            + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', TRIM({col_name}))  AS {bigquery_type})\n"  # noqa
                             + f"    END AS {col_name_padronizado},"
                         )
                     elif bigquery_type == "INT64":
@@ -444,9 +540,6 @@ def create_cadunico_dbt_consolidated_models(
             table_query = ini_query + "\n".join(columns) + end_query
             table_query = table_query.replace("__dataset_id_replacer__", model_dataset_id)
             table_query = table_query.replace("__table_id_replacer__", table_name)
-            table_query = table_query.replace("__table_number_replacer__", table_number)
-            table_query = table_query.replace("__version_replacer__", version)
-            table_query = table_query.replace("__model_table_id_replacer__", model_table_id)
             final_query += table_query
         final_query = final_query.rsplit("UNION ALL", 1)[0]
         for item in table_schema["columns"]:
@@ -550,13 +643,13 @@ def create_layout_column_cross_version_control_bq_table(dataframe, dataset_id, t
 
 
 def update_layout_from_storage_and_create_versions_dbt_models(
-    project_id: str,
-    layout_dataset_id: str,
-    layout_table_id: str,
-    output_path: str | Path,
-    model_dataset_id: str,
-    model_table_id: str,
-    force_create_models: bool,
+    project_id,
+    layout_dataset_id,
+    layout_table_id,
+    output_path,
+    model_dataset_id,
+    model_table_id,
+    force_create_models,
 ):
     staging_partitions_list = get_staging_partitions_versions(
         project_id=project_id, dataset_id=layout_dataset_id, table_id=layout_table_id
@@ -595,87 +688,12 @@ def update_layout_from_storage_and_create_versions_dbt_models(
             dataframe=dataframe, dataset_id=layout_dataset_id, table_id=layout_table_id
         )
 
-        log("CREATE DBT CONSOLIDATED MODELS")
-        create_cadunico_dbt_consolidated_models(
+        log("CREATE DBT VERSION MODELS")
+        create_cadunico_dbt_version_models(
             dataframe=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
 
-
-def get_dbt_models_to_materialize(
-    project_id: str,
-    dataset_id: str,
-    table_id: str,
-    layout_dataset_id: str,
-    layout_table_id: str,
-    layout_output_path: str | Path,
-    force_create_models: bool,
-) -> List[dict]:
-    """
-    Get tables parameters to materialize from queries/models/{dataset_id}/.
-
-    Args:
-        dataset_id (str): The dataset ID.
-        ingested_files_output (str | Path): The path to the ingested files.
-    """
-    # if first_execution:
-    log("STARTING LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
-    update_layout_from_storage_and_create_versions_dbt_models(
-        project_id=project_id,
-        layout_dataset_id=layout_dataset_id,
-        layout_table_id=layout_table_id,
-        output_path=layout_output_path,
-        model_dataset_id=dataset_id,
-        model_table_id=table_id,
-        force_create_models=force_create_models,
-    )
-    log("FINISHED LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
-
-    log("STARTING GETTING DBT MODELS TO MATERIALIZE")
-    dataset_id_original = dataset_id
-    dataset_id = dataset_id + "_versao"
-
-    versions = get_staging_partitions_versions(
-        project_id=project_id, dataset_id=dataset_id_original, table_id=table_id
-    )
-    versions.sort()
-    log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
-
-    root_path = get_root_path()
-    queries_dir = root_path / f"queries/models/{dataset_id}"
-    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
-    files_path.sort()
-    tables = [
-        q.replace(".sql", "").split("/")[-1].split("__")[-1]
-        for q in files_path
-        if q.endswith(".sql")
-    ]
-    table_dbt_alias = [
-        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
-    ]
-
-    # if not only_version_tables:
-    parameters_list = []
-    # add hamonized tables to materialize
-    queries_dir = root_path / f"queries/models/{dataset_id_original}"
-    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
-    files_path.sort()
-    tables = [
-        q.replace(".sql", "").split("/")[-1].split("__")[-1]
-        for q in files_path
-        if q.endswith(".sql")
-    ]
-    table_dbt_alias = [
-        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
-    ]
-
-    for _table_id_, dbt_alias in zip(tables, table_dbt_alias):
-        parameters = {
-            "dataset_id": dataset_id_original,
-            "table_id": f"{_table_id_}",
-            "dbt_alias": dbt_alias,
-        }
-        parameters_list.append(parameters)
-
-    parameters_list_log = json.dumps(parameters_list, indent=4)
-    log(f"{len(parameters_list)} TABLES TO MATERIALIZE:\n{parameters_list_log}")
-    return parameters_list
+        log("CREATE DBT CONSOLIDATED MODELS")
+        create_cadunico_dbt_consolidated_models(
+            dataframe=df_final, model_dataset_id=model_dataset_id
+        )
