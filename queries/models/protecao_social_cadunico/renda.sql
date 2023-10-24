@@ -34,8 +34,8 @@ SELECT
     END AS id_funcao_principal_trabalho,
     CASE
         WHEN REGEXP_CONTAINS(fx_rnd_val_remuner_emprego_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(fx_rnd_val_remuner_emprego_memb)  AS STRING)
-    END AS fx_rnd_val_remuner_emprego_memb,
+        ELSE SAFE_CAST( TRIM(fx_rnd_val_remuner_emprego_memb) AS INT64)
+    END AS renda_emprego_ultimo_mes,
     CASE
         WHEN REGEXP_CONTAINS(ind_val_remuner_emprego_memb, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(ind_val_remuner_emprego_memb)  AS STRING)
@@ -50,28 +50,28 @@ SELECT
     END AS meses_trabalhados_nos_ultimos_12,
     CASE
         WHEN REGEXP_CONTAINS(fx_rnd_val_renda_bruta_12_meses_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(fx_rnd_val_renda_bruta_12_meses_memb)  AS STRING)
-    END AS fx_rnd_val_renda_bruta_12_meses_memb,
+        ELSE SAFE_CAST( TRIM(fx_rnd_val_renda_bruta_12_meses_memb) AS INT64)
+    END AS renda_bruta_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(fx_rnd_val_renda_doacao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(fx_rnd_val_renda_doacao_memb)  AS STRING)
-    END AS fx_rnd_val_renda_doacao_memb,
+        ELSE SAFE_CAST( TRIM(fx_rnd_val_renda_doacao_memb) AS INT64)
+    END AS renda_doacao,
     CASE
         WHEN REGEXP_CONTAINS(fx_rnd_val_renda_aposent_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(fx_rnd_val_renda_aposent_memb)  AS STRING)
-    END AS fx_rnd_val_renda_aposent_memb,
+        ELSE SAFE_CAST( TRIM(fx_rnd_val_renda_aposent_memb) AS INT64)
+    END AS renda_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(fx_rnd_val_renda_seguro_desemp_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(fx_rnd_val_renda_seguro_desemp_memb)  AS STRING)
-    END AS fx_rnd_val_renda_seguro_desemp_memb,
+        ELSE SAFE_CAST( TRIM(fx_rnd_val_renda_seguro_desemp_memb) AS INT64)
+    END AS renda_seguro_desemprego,
     CASE
         WHEN REGEXP_CONTAINS(fx_rnd_val_renda_pensao_alimen_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(fx_rnd_val_renda_pensao_alimen_memb)  AS STRING)
-    END AS fx_rnd_val_renda_pensao_alimen_memb,
+        ELSE SAFE_CAST( TRIM(fx_rnd_val_renda_pensao_alimen_memb) AS INT64)
+    END AS renda_pensao_alimenticia,
     CASE
         WHEN REGEXP_CONTAINS(fx_rnd_val_outras_rendas_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(fx_rnd_val_outras_rendas_memb)  AS STRING)
-    END AS fx_rnd_val_outras_rendas_memb,
+        ELSE SAFE_CAST( TRIM(fx_rnd_val_outras_rendas_memb) AS INT64)
+    END AS renda_outras_rendas,
     CASE
         WHEN REGEXP_CONTAINS(cod_orgm_vlr_rndmo_mes_passado, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(cod_orgm_vlr_rndmo_mes_passado)  AS STRING)
@@ -102,21 +102,21 @@ SELECT
     END AS id_origem_valor_outra_fonte,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_rndmo_mes_passado, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_rndmo_mes_passado)  AS STRING)
-    END AS dt_intgo_vlr_rndmo_mes_passado,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_rndmo_mes_passado))  AS DATE)
+    END AS data_integracao_emprego_ultimo_mes,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_rndmo_bruto, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_rndmo_bruto)  AS STRING)
-    END AS dt_intgo_vlr_rndmo_bruto,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_rndmo_bruto))  AS DATE)
+    END AS data_integracao_renda_bruta_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_aposentadoria, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_aposentadoria)  AS STRING)
-    END AS dt_intgo_vlr_aposentadoria,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_aposentadoria))  AS DATE)
+    END AS data_integracao_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_outra_fonte_rnda, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_outra_fonte_rnda)  AS STRING)
-    END AS dt_intgo_vlr_outra_fonte_rnda,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_outra_fonte_rnda))  AS DATE)
+    END AS data_integracao_outras_fonte,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_versao.21_0615`
+FROM `rj-smas.protecao_social_cadunico_versao.renda_0615`
 

@@ -131,7 +131,7 @@ models :
       - name: origem_cadastro
         description: "Valor contendo o domínio da origem\nAtualmente temos as origens:
           01 – Online\n02 – APP | version: 0615"
-      - name: dta_integracao_fam
+      - name: data_integracao_familia
         description: 'Data de integração referente a data de processamento de arquivo
           de renda origem CNIS no formato DDMMAAAA | version: 0615'
   - name: domicilio
@@ -658,19 +658,19 @@ models :
       - name: id_origem_valor_outra_fonte
         description: "Flag indicadora da origem do valor do campo VAL-OUTRAS-RENDAS-MEMB\n
           Origem da renda:1 – Auto declarada\n2 – CNIS\n | version: 0615"
-      - name: dt_intgo_vlr_rndmo_mes_passado
+      - name: data_integracao_emprego_ultimo_mes
         description: 'Data de integração referente ao campo VAL-REMUNER-EMPREGO-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'
-      - name: dt_intgo_vlr_rndmo_bruto
+      - name: data_integracao_renda_bruta_12_meses
         description: 'Data de integração referente ao campo VAL-RENDA-BRUTA-12-MESES-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'
-      - name: dt_intgo_vlr_aposentadoria
+      - name: data_integracao_aposentadoria
         description: 'Data de integração referente ao campo VAL-RENDA-APOSENT-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'
-      - name: dt_intgo_vlr_outra_fonte_rnda
+      - name: data_integracao_outras_fonte
         description: 'Data de integração referente ao campo VAL-OUTRAS-RENDAS-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'
@@ -1713,8 +1713,8 @@ models :
         description: 'Nome do município | version: 0615'
       - name: sigla_uf_representante_legal
         description: 'UF do Estado do logradouro | version: 0615'
-  - name: '21'
-    description: Table 21
+  - name: renda
+    description: Table renda
     columns:
       - name: id_prefeitura
         description: 'Chave única de identificação da Família | version: 0615'
@@ -1739,7 +1739,7 @@ models :
           TRABALHO ASSINADA 6-TRABALHADOR DOMESTICO COM CARTEIRA DE TRABALHO ASSINADA
           7-TRABALHADOR NAO-REMUNERADO 8-MILITAR OU SERVIDOR PUBLICO 9-EMPREGADOR
           10-ESTAGIARIO 11-APRENDIZ | version: 0615"
-      - name: fx_rnd_val_remuner_emprego_memb
+      - name: renda_emprego_ultimo_mes
         description: "Valor de remuneração\nCampo numérico de 6 posições formato NNNNNN
           (sem casas decimais) | version: 0615"
       - name: nao_recebe_remuneracao
@@ -1751,22 +1751,22 @@ models :
       - name: meses_trabalhados_nos_ultimos_12
         description: 'Quantidade de meses trabalhados nos últimos 12, campo numérico
           de 2 posições, formato NN | version: 0615'
-      - name: fx_rnd_val_renda_bruta_12_meses_memb
+      - name: renda_bruta_12_meses
         description: "Valor de remuneração bruta\nCampo numérico de 6 posições formato
           NNNNNN (sem casas decimais) | version: 0615"
-      - name: fx_rnd_val_renda_doacao_memb
+      - name: renda_doacao
         description: "Valor recebido de doação\nCampo numérico de 6 posições formato
           NNNNNN (sem casas decimais) | version: 0615"
-      - name: fx_rnd_val_renda_aposent_memb
+      - name: renda_aposentadoria
         description: "Valor recebido de aposentadoria\nCampo numérico de 6 posições
           formato NNNNNN (sem casas decimais) | version: 0615"
-      - name: fx_rnd_val_renda_seguro_desemp_memb
+      - name: renda_seguro_desemprego
         description: "Valor recebido de seguro desemprego\nCampo numérico de 6 posições
           formato NNNNNN (sem casas decimais) | version: 0615"
-      - name: fx_rnd_val_renda_pensao_alimen_memb
+      - name: renda_pensao_alimenticia
         description: "Valor recebido de pensão alimentícia\nCampo numérico de 6 posições
           formato NNNNNN (sem casas decimais) | version: 0615"
-      - name: fx_rnd_val_outras_rendas_memb
+      - name: renda_outras_rendas
         description: "Valor recebido de outras fontes\nCampo numérico de 6 posições
           formato NNNNNN (sem casas decimais) | version: 0615"
       - name: id_origem_valor_rendimento_mes_passado
@@ -1790,19 +1790,19 @@ models :
       - name: id_origem_valor_outra_fonte
         description: "Flag indicadora da origem do valor do campo VAL-OUTRAS-RENDAS-MEMB\n
           Origem da renda:1 – Auto declarada\n2 – CNIS\n | version: 0615"
-      - name: dt_intgo_vlr_rndmo_mes_passado
+      - name: data_integracao_emprego_ultimo_mes
         description: 'Data de integração referente ao campo VAL-REMUNER-EMPREGO-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'
-      - name: dt_intgo_vlr_rndmo_bruto
+      - name: data_integracao_renda_bruta_12_meses
         description: 'Data de integração referente ao campo VAL-RENDA-BRUTA-12-MESES-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'
-      - name: dt_intgo_vlr_aposentadoria
+      - name: data_integracao_aposentadoria
         description: 'Data de integração referente ao campo VAL-RENDA-APOSENT-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'
-      - name: dt_intgo_vlr_outra_fonte_rnda
+      - name: data_integracao_outras_fonte
         description: 'Data de integração referente ao campo VAL-OUTRAS-RENDAS-MEMB
           conforme data de processamento de arquivo de renda origem CNIS no formato
           DDMMAAAA | version: 0615'

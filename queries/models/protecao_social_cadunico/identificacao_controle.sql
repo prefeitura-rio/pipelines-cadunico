@@ -177,7 +177,7 @@ SELECT
         ELSE CAST( TRIM(ind_formulario_sup3_fam)  AS STRING)
     END AS formulario_suplementar_3,
     NULL AS origem_cadastro, --Essa coluna não esta na versao posterior
-    NULL AS dta_integracao_fam, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_controle_0601`
@@ -366,7 +366,7 @@ SELECT
         WHEN REGEXP_CONTAINS(nu_origem_cadastro_fam, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(nu_origem_cadastro_fam)  AS STRING)
     END AS origem_cadastro,
-    NULL AS dta_integracao_fam, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_controle_0603`
@@ -555,7 +555,7 @@ SELECT
         WHEN REGEXP_CONTAINS(nu_origem_cadastro_fam, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(nu_origem_cadastro_fam)  AS STRING)
     END AS origem_cadastro,
-    NULL AS dta_integracao_fam, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_controle_0604`
@@ -744,7 +744,7 @@ SELECT
         WHEN REGEXP_CONTAINS(nu_origem_cadastro_fam, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(nu_origem_cadastro_fam)  AS STRING)
     END AS origem_cadastro,
-    NULL AS dta_integracao_fam, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_controle_0609`
@@ -933,7 +933,7 @@ SELECT
         WHEN REGEXP_CONTAINS(nu_origem_cadastro_fam, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(nu_origem_cadastro_fam)  AS STRING)
     END AS origem_cadastro,
-    NULL AS dta_integracao_fam, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_controle_0612`
@@ -1124,8 +1124,8 @@ SELECT
     END AS origem_cadastro,
     CASE
         WHEN REGEXP_CONTAINS(dta_integracao_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dta_integracao_fam)  AS STRING)
-    END AS dta_integracao_fam,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dta_integracao_fam))  AS DATE)
+    END AS data_integracao_familia,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.identificacao_controle_0615`

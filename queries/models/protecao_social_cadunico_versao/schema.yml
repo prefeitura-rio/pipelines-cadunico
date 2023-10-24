@@ -6779,8 +6779,8 @@ models :
         description: Nome do município
       - name: sigla_uf_rl
         description: UF do Estado do logradouro
-  - name: '21_0615'
-    description: Table 21 version 0615
+  - name: renda_0615
+    description: Table renda version 0615
     columns:
       - name: chv_natural_prefeitura_fam
         description: Chave única de identificação da Família

@@ -99,10 +99,10 @@ SELECT
     NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
     NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
     NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_mes_passado, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_bruto, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_aposentadoria, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_outra_fonte_rnda, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_emprego_ultimo_mes, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_renda_bruta_12_meses, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_aposentadoria, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_outras_fonte, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0601`
@@ -210,10 +210,10 @@ SELECT
     NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
     NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
     NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_mes_passado, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_bruto, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_aposentadoria, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_outra_fonte_rnda, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_emprego_ultimo_mes, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_renda_bruta_12_meses, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_aposentadoria, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_outras_fonte, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0603`
@@ -321,10 +321,10 @@ SELECT
     NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
     NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
     NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_mes_passado, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_bruto, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_aposentadoria, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_outra_fonte_rnda, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_emprego_ultimo_mes, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_renda_bruta_12_meses, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_aposentadoria, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_outras_fonte, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0604`
@@ -453,10 +453,10 @@ SELECT
         WHEN REGEXP_CONTAINS(cod_orgm_vlr_outra_fonte_renda, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(cod_orgm_vlr_outra_fonte_renda)  AS STRING)
     END AS id_origem_valor_outra_fonte,
-    NULL AS dt_intgo_vlr_rndmo_mes_passado, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_bruto, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_aposentadoria, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_outra_fonte_rnda, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_emprego_ultimo_mes, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_renda_bruta_12_meses, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_aposentadoria, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_outras_fonte, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0609`
@@ -585,10 +585,10 @@ SELECT
         WHEN REGEXP_CONTAINS(cod_orgm_vlr_outra_fonte_renda, r'^\s*$') THEN NULL
         ELSE CAST( TRIM(cod_orgm_vlr_outra_fonte_renda)  AS STRING)
     END AS id_origem_valor_outra_fonte,
-    NULL AS dt_intgo_vlr_rndmo_mes_passado, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_rndmo_bruto, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_aposentadoria, --Essa coluna não esta na versao posterior
-    NULL AS dt_intgo_vlr_outra_fonte_rnda, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_emprego_ultimo_mes, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_renda_bruta_12_meses, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_aposentadoria, --Essa coluna não esta na versao posterior
+    NULL AS data_integracao_outras_fonte, --Essa coluna não esta na versao posterior
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0612`
@@ -719,20 +719,20 @@ SELECT
     END AS id_origem_valor_outra_fonte,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_rndmo_mes_passado, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_rndmo_mes_passado)  AS STRING)
-    END AS dt_intgo_vlr_rndmo_mes_passado,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_rndmo_mes_passado))  AS DATE)
+    END AS data_integracao_emprego_ultimo_mes,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_rndmo_bruto, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_rndmo_bruto)  AS STRING)
-    END AS dt_intgo_vlr_rndmo_bruto,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_rndmo_bruto))  AS DATE)
+    END AS data_integracao_renda_bruta_12_meses,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_aposentadoria, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_aposentadoria)  AS STRING)
-    END AS dt_intgo_vlr_aposentadoria,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_aposentadoria))  AS DATE)
+    END AS data_integracao_aposentadoria,
     CASE
         WHEN REGEXP_CONTAINS(dt_intgo_vlr_outra_fonte_rnda, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(dt_intgo_vlr_outra_fonte_rnda)  AS STRING)
-    END AS dt_intgo_vlr_outra_fonte_rnda,
+        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(dt_intgo_vlr_outra_fonte_rnda))  AS DATE)
+    END AS data_integracao_outras_fonte,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_versao.trabalho_remuneracao_0615`

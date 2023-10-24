@@ -40,7 +40,7 @@ def get_tables_names_dict(name: str) -> dict:
         "18": "exclusao_servidor",
         "19": "exclusao_membro",
         "20": "representante_legal",
-        "21": "21",
+        "21": "renda",
         "98": "prefeitura",
         "99": "registros",
     }
