@@ -294,8 +294,8 @@ def get_dbt_models_to_materialize_task(
     layout_table_id: str,
     layout_output_path: str | Path,
     force_create_models: bool,
-):
-    get_dbt_models_to_materialize(
+) -> List:
+    parameters_models_to_materialize = get_dbt_models_to_materialize(
         project_id=project_id,
         dataset_id=dataset_id,
         table_id=table_id,
@@ -304,3 +304,5 @@ def get_dbt_models_to_materialize_task(
         layout_output_path=layout_output_path,
         force_create_models=force_create_models,
     )
+
+    return parameters_models_to_materialize
