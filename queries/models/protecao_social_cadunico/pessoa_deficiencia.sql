@@ -1,502 +1,520 @@
 
 SELECT
     CASE
-        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(chv_natural_prefeitura_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
     CASE
-        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_familiar_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
     END AS id_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_membro_fmla)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,25,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,25,11))  AS STRING)
     END AS id_membro_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_reg_arquivo)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
     END AS numero_registro_arquivo,
     CASE
-        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_deficiencia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
     END AS id_tem_deficiencia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_cegueira_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
     END AS deficiencia_cegueira,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_baixa_visao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
     END AS deficiencia_baixa_visao,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_profunda_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
     END AS deficiencia_surdez_profunda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_leve_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
     END AS deficiencia_surdez_leve,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_fisica_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
     END AS deficiencia_fisica,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
     END AS deficiencia_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_sindrome_down_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
     END AS deficiencia_sindrome_down,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_transtorno_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
     END AS deficiencia_transtorno_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_nao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
     END AS nao_recebe_ajuda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_familia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
     END AS ajuda_familia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_especializado_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
     END AS ajuda_especializada,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_vizinho_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
     END AS ajuda_vizinhos,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_instituicao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
     END AS ajuda_instituicao_social,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_outra_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
     END AS ajuda_terceiros,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0601`
-
+-- FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0601`
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
+WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+    AND versao_layout_particao = '0601'
+    AND SUBSTRING(text,38,2) = '06'
 UNION ALL
 
 
 SELECT
     CASE
-        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(chv_natural_prefeitura_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
     CASE
-        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_familiar_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
     END AS id_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_membro_fmla)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,25,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,25,11))  AS STRING)
     END AS id_membro_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_reg_arquivo)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
     END AS numero_registro_arquivo,
     CASE
-        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_deficiencia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
     END AS id_tem_deficiencia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_cegueira_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
     END AS deficiencia_cegueira,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_baixa_visao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
     END AS deficiencia_baixa_visao,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_profunda_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
     END AS deficiencia_surdez_profunda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_leve_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
     END AS deficiencia_surdez_leve,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_fisica_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
     END AS deficiencia_fisica,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
     END AS deficiencia_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_sindrome_down_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
     END AS deficiencia_sindrome_down,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_transtorno_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
     END AS deficiencia_transtorno_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_nao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
     END AS nao_recebe_ajuda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_familia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
     END AS ajuda_familia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_especializado_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
     END AS ajuda_especializada,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_vizinho_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
     END AS ajuda_vizinhos,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_instituicao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
     END AS ajuda_instituicao_social,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_outra_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
     END AS ajuda_terceiros,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0603`
-
+-- FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0603`
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
+WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+    AND versao_layout_particao = '0603'
+    AND SUBSTRING(text,38,2) = '06'
 UNION ALL
 
 
 SELECT
     CASE
-        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(chv_natural_prefeitura_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
     CASE
-        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_familiar_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
     END AS id_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_membro_fmla)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,25,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,25,11))  AS STRING)
     END AS id_membro_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_reg_arquivo)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
     END AS numero_registro_arquivo,
     CASE
-        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_deficiencia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
     END AS id_tem_deficiencia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_cegueira_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
     END AS deficiencia_cegueira,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_baixa_visao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
     END AS deficiencia_baixa_visao,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_profunda_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
     END AS deficiencia_surdez_profunda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_leve_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
     END AS deficiencia_surdez_leve,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_fisica_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
     END AS deficiencia_fisica,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
     END AS deficiencia_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_sindrome_down_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
     END AS deficiencia_sindrome_down,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_transtorno_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
     END AS deficiencia_transtorno_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_nao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
     END AS nao_recebe_ajuda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_familia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
     END AS ajuda_familia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_especializado_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
     END AS ajuda_especializada,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_vizinho_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
     END AS ajuda_vizinhos,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_instituicao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
     END AS ajuda_instituicao_social,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_outra_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
     END AS ajuda_terceiros,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0604`
-
+-- FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0604`
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
+WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+    AND versao_layout_particao = '0604'
+    AND SUBSTRING(text,38,2) = '06'
 UNION ALL
 
 
 SELECT
     CASE
-        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(chv_natural_prefeitura_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
     CASE
-        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_familiar_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
     END AS id_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_membro_fmla)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,25,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,25,11))  AS STRING)
     END AS id_membro_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_reg_arquivo)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
     END AS numero_registro_arquivo,
     CASE
-        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_deficiencia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
     END AS id_tem_deficiencia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_cegueira_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
     END AS deficiencia_cegueira,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_baixa_visao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
     END AS deficiencia_baixa_visao,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_profunda_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
     END AS deficiencia_surdez_profunda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_leve_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
     END AS deficiencia_surdez_leve,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_fisica_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
     END AS deficiencia_fisica,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
     END AS deficiencia_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_sindrome_down_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
     END AS deficiencia_sindrome_down,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_transtorno_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
     END AS deficiencia_transtorno_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_nao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
     END AS nao_recebe_ajuda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_familia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
     END AS ajuda_familia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_especializado_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
     END AS ajuda_especializada,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_vizinho_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
     END AS ajuda_vizinhos,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_instituicao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
     END AS ajuda_instituicao_social,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_outra_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
     END AS ajuda_terceiros,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0609`
-
+-- FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0609`
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
+WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+    AND versao_layout_particao = '0609'
+    AND SUBSTRING(text,38,2) = '06'
 UNION ALL
 
 
 SELECT
     CASE
-        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(chv_natural_prefeitura_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
     CASE
-        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_familiar_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
     END AS id_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_membro_fmla)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,25,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,25,11))  AS STRING)
     END AS id_membro_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_reg_arquivo)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
     END AS numero_registro_arquivo,
     CASE
-        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_deficiencia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
     END AS id_tem_deficiencia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_cegueira_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
     END AS deficiencia_cegueira,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_baixa_visao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
     END AS deficiencia_baixa_visao,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_profunda_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
     END AS deficiencia_surdez_profunda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_leve_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
     END AS deficiencia_surdez_leve,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_fisica_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
     END AS deficiencia_fisica,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
     END AS deficiencia_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_sindrome_down_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
     END AS deficiencia_sindrome_down,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_transtorno_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
     END AS deficiencia_transtorno_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_nao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
     END AS nao_recebe_ajuda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_familia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
     END AS ajuda_familia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_especializado_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
     END AS ajuda_especializada,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_vizinho_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
     END AS ajuda_vizinhos,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_instituicao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
     END AS ajuda_instituicao_social,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_outra_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
     END AS ajuda_terceiros,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0612`
-
+-- FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0612`
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
+WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+    AND versao_layout_particao = '0612'
+    AND SUBSTRING(text,38,2) = '06'
 UNION ALL
 
 
 SELECT
     CASE
-        WHEN REGEXP_CONTAINS(chv_natural_prefeitura_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(chv_natural_prefeitura_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
     END AS id_prefeitura,
     CASE
-        WHEN REGEXP_CONTAINS(cod_familiar_fam, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_familiar_fam)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
     END AS id_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_membro_fmla, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_membro_fmla)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,25,11), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,25,11))  AS STRING)
     END AS id_membro_familia,
     CASE
-        WHEN REGEXP_CONTAINS(num_reg_arquivo, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(num_reg_arquivo)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
     END AS numero_registro_arquivo,
     CASE
-        WHEN REGEXP_CONTAINS(cod_deficiencia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(cod_deficiencia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
     END AS id_tem_deficiencia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_cegueira_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_cegueira_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,41,1))  AS STRING)
     END AS deficiencia_cegueira,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_baixa_visao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_baixa_visao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,42,1))  AS STRING)
     END AS deficiencia_baixa_visao,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_profunda_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_profunda_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,43,1))  AS STRING)
     END AS deficiencia_surdez_profunda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_surdez_leve_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_surdez_leve_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,44,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,44,1))  AS STRING)
     END AS deficiencia_surdez_leve,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_fisica_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_fisica_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,45,1))  AS STRING)
     END AS deficiencia_fisica,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,46,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,46,1))  AS STRING)
     END AS deficiencia_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_sindrome_down_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_sindrome_down_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
     END AS deficiencia_sindrome_down,
     CASE
-        WHEN REGEXP_CONTAINS(ind_def_transtorno_mental_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_def_transtorno_mental_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,48,1))  AS STRING)
     END AS deficiencia_transtorno_mental,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_nao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_nao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,49,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,49,1))  AS STRING)
     END AS nao_recebe_ajuda,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_familia_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_familia_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,50,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,50,1))  AS STRING)
     END AS ajuda_familia,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_especializado_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_especializado_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,51,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,51,1))  AS STRING)
     END AS ajuda_especializada,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_vizinho_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_vizinho_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,52,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,52,1))  AS STRING)
     END AS ajuda_vizinhos,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_instituicao_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_instituicao_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,53,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,53,1))  AS STRING)
     END AS ajuda_instituicao_social,
     CASE
-        WHEN REGEXP_CONTAINS(ind_ajuda_outra_memb, r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(ind_ajuda_outra_memb)  AS STRING)
+        WHEN REGEXP_CONTAINS(SUBSTRING(text,54,1), r'^\s*$') THEN NULL
+        ELSE CAST( TRIM(SUBSTRING(text,54,1))  AS STRING)
     END AS ajuda_terceiros,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
-FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0615`
-
+-- FROM `rj-smas.protecao_social_cadunico_versao.pessoa_deficiencia_0615`
+FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
+WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+    AND versao_layout_particao = '0615'
+    AND SUBSTRING(text,38,2) = '06'

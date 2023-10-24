@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 from os import system
 from pathlib import Path
 from typing import List
@@ -12,10 +11,9 @@ from google.cloud.storage.blob import Blob
 from prefect import task
 
 from pipelines.cadunico.ingest_raw.utils import (
-    get_staging_partitions_versions,
+    get_dbt_models_to_materialize,
     parse_partition,
     parse_txt_first_line,
-    update_layout_from_storage_and_create_versions_dbt_models,
 )
 from pipelines.utils.bd import create_table_and_upload_to_gcs, get_project_id
 from pipelines.utils.gcs import (
@@ -23,7 +21,6 @@ from pipelines.utils.gcs import (
     list_blobs_with_prefix,
     parse_blobs_to_partition_list,
 )
-from pipelines.utils.io import get_root_path
 from pipelines.utils.logging import log
 
 
@@ -289,7 +286,7 @@ def append_data_to_storage(
 
 
 @task
-def get_dbt_models_to_materialize(
+def get_dbt_models_to_materialize_task(
     project_id: str,
     dataset_id: str,
     table_id: str,
@@ -299,87 +296,15 @@ def get_dbt_models_to_materialize(
     layout_table_id: str,
     layout_output_path: str | Path,
     force_create_models: bool,
-) -> List[dict]:
-    """
-    Get tables parameters to materialize from queries/models/{dataset_id}/.
-
-    Args:
-        dataset_id (str): The dataset ID.
-        ingested_files_output (str | Path): The path to the ingested files.
-    """
-    if first_execution:
-        log("STARTING LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
-        update_layout_from_storage_and_create_versions_dbt_models(
-            project_id=project_id,
-            layout_dataset_id=layout_dataset_id,
-            layout_table_id=layout_table_id,
-            output_path=layout_output_path,
-            model_dataset_id=dataset_id,
-            model_table_id=table_id,
-            force_create_models=force_create_models,
-        )
-        log("FINISHED LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
-
-    log("STARTING GETTING DBT MODELS TO MATERIALIZE")
-    dataset_id_original = dataset_id
-    dataset_id = dataset_id + "_versao"
-
-    versions = get_staging_partitions_versions(
-        project_id=project_id, dataset_id=dataset_id_original, table_id=table_id
+):
+    get_dbt_models_to_materialize(
+        project_id=project_id,
+        dataset_id=dataset_id,
+        table_id=table_id,
+        only_version_tables=only_version_tables,
+        first_execution=first_execution,
+        layout_dataset_id=layout_dataset_id,
+        layout_table_id=layout_table_id,
+        layout_output_path=layout_output_path,
+        force_create_models=force_create_models,
     )
-    log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
-
-    root_path = get_root_path()
-    queries_dir = root_path / f"queries/models/{dataset_id}"
-    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
-    files_path.sort()
-    tables = [
-        q.replace(".sql", "").split("/")[-1].split("__")[-1]
-        for q in files_path
-        if q.endswith(".sql")
-    ]
-    table_dbt_alias = [
-        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
-    ]
-
-    parameters_list = []
-    # add version tables to materialize
-    for _table_id, dbt_alias in zip(tables, table_dbt_alias):
-        parameters = {
-            "dataset_id": dataset_id,
-            "table_id": f"{_table_id}",
-            "dbt_alias": dbt_alias,
-        }
-        if versions:
-            for version in versions:
-                if version in _table_id:
-                    parameters_list.append(parameters)
-        else:
-            parameters_list.append(parameters)
-
-    if not only_version_tables:
-        parameters_list = []
-        # add hamonized tables to materialize
-        queries_dir = root_path / f"queries/models/{dataset_id_original}"
-        files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
-        files_path.sort()
-        tables = [
-            q.replace(".sql", "").split("/")[-1].split("__")[-1]
-            for q in files_path
-            if q.endswith(".sql")
-        ]
-        table_dbt_alias = [
-            True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
-        ]
-
-        for _table_id_, dbt_alias in zip(tables, table_dbt_alias):
-            parameters = {
-                "dataset_id": dataset_id_original,
-                "table_id": f"{_table_id_}",
-                "dbt_alias": dbt_alias,
-            }
-            parameters_list.append(parameters)
-
-    parameters_list_log = json.dumps(parameters_list, indent=4)
-    log(f"{len(parameters_list)} TABLES TO MATERIALIZE:\n{parameters_list_log}")
-    return parameters_list

@@ -5,6 +5,7 @@ import shutil
 import textwrap
 from datetime import datetime
 from pathlib import Path
+from typing import List
 
 import basedosdados as bd
 import numpy as np
@@ -177,6 +178,7 @@ def parse_tables_from_xlsx(xlsx_input, csv_output, target_pattern, filter_versio
 
 
 def get_staging_partitions_versions(project_id, dataset_id, table_id):
+    print(dataset_id, table_id)
     st = bd.Storage(dataset_id=dataset_id, table_id=table_id)
     blobs = list(
         st.client["storage_staging"]
@@ -429,7 +431,9 @@ def create_cadunico_dbt_version_models(
     dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
 
 
-def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_dataset_id: str):
+def create_cadunico_dbt_consolidated_models(
+    dataframe: pd.DataFrame, model_dataset_id: str, model_table_id: str
+):
     df = dataframe.copy()
     df["reg"] = df["reg"].apply(lambda x: x if len(x) > 1 else f"0{x}")
     df["version"] = df["version"].str.replace(".", "").apply(lambda x: x if len(x) > 3 else f"0{x}")
@@ -462,8 +466,11 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
         end_query = """
                 SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
                 SAFE_CAST(data_particao AS DATE) AS data_particao
-            FROM `rj-smas.__dataset_id_replacer___versao.__table_id_replacer__`
-
+            -- FROM `rj-smas.__dataset_id_replacer___versao.__table_id_replacer__`
+            FROM `rj-smas.__dataset_id_replacer___staging.__model_table_id_replacer__`
+            WHERE SAFE_CAST(data_particao AS DATE) < CURRENT_DATE('America/Sao_Paulo')
+                AND versao_layout_particao = '__version_replacer__'
+                AND SUBSTRING(text,38,2) = '__table_number_replacer__'
             UNION ALL
 
         """
@@ -479,7 +486,9 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
             )
             columns = []
             for index, row in table_version.iterrows():
-                col_name = row["column"]
+                # col_name = row["column"]
+
+                col_name = f"SUBSTRING(text,{row['posicao']},{row['tamanho']})"
                 col_name_padronizado = row["nome_padronizado"]
                 bigquery_type = row["bigquery_type"]
                 bigquery_type = bigquery_type if bigquery_type is not None else "STRING"
@@ -540,6 +549,9 @@ def create_cadunico_dbt_consolidated_models(dataframe: pd.DataFrame, model_datas
             table_query = ini_query + "\n".join(columns) + end_query
             table_query = table_query.replace("__dataset_id_replacer__", model_dataset_id)
             table_query = table_query.replace("__table_id_replacer__", table_name)
+            table_query = table_query.replace("__table_number_replacer__", table_number)
+            table_query = table_query.replace("__version_replacer__", version)
+            table_query = table_query.replace("__model_table_id_replacer__", model_table_id)
             final_query += table_query
         final_query = final_query.rsplit("UNION ALL", 1)[0]
         for item in table_schema["columns"]:
@@ -643,13 +655,13 @@ def create_layout_column_cross_version_control_bq_table(dataframe, dataset_id, t
 
 
 def update_layout_from_storage_and_create_versions_dbt_models(
-    project_id,
-    layout_dataset_id,
-    layout_table_id,
-    output_path,
-    model_dataset_id,
-    model_table_id,
-    force_create_models,
+    project_id: str,
+    layout_dataset_id: str,
+    layout_table_id: str,
+    output_path: str | Path,
+    model_dataset_id: str,
+    model_table_id: str,
+    force_create_models: bool,
 ):
     staging_partitions_list = get_staging_partitions_versions(
         project_id=project_id, dataset_id=layout_dataset_id, table_id=layout_table_id
@@ -688,12 +700,109 @@ def update_layout_from_storage_and_create_versions_dbt_models(
             dataframe=dataframe, dataset_id=layout_dataset_id, table_id=layout_table_id
         )
 
-        log("CREATE DBT VERSION MODELS")
-        create_cadunico_dbt_version_models(
-            dataframe=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
-        )
+        # log("CREATE DBT VERSION MODELS")
+        # create_cadunico_dbt_version_models(
+        #     dataframe=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
+        # )
 
         log("CREATE DBT CONSOLIDATED MODELS")
         create_cadunico_dbt_consolidated_models(
-            dataframe=df_final, model_dataset_id=model_dataset_id
+            dataframe=df_final, model_dataset_id=model_dataset_id, model_table_id=model_table_id
         )
+
+
+def get_dbt_models_to_materialize(
+    project_id: str,
+    dataset_id: str,
+    table_id: str,
+    # only_version_tables: bool,
+    # first_execution: bool,
+    layout_dataset_id: str,
+    layout_table_id: str,
+    layout_output_path: str | Path,
+    force_create_models: bool,
+) -> List[dict]:
+    """
+    Get tables parameters to materialize from queries/models/{dataset_id}/.
+
+    Args:
+        dataset_id (str): The dataset ID.
+        ingested_files_output (str | Path): The path to the ingested files.
+    """
+    # if first_execution:
+    log("STARTING LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
+    update_layout_from_storage_and_create_versions_dbt_models(
+        project_id=project_id,
+        layout_dataset_id=layout_dataset_id,
+        layout_table_id=layout_table_id,
+        output_path=layout_output_path,
+        model_dataset_id=dataset_id,
+        model_table_id=table_id,
+        force_create_models=force_create_models,
+    )
+    log("FINISHED LAYOUT TABLE MANAGEMENT AND DBT MODELS CREATION")
+
+    log("STARTING GETTING DBT MODELS TO MATERIALIZE")
+    dataset_id_original = dataset_id
+    dataset_id = dataset_id + "_versao"
+
+    versions = get_staging_partitions_versions(
+        project_id=project_id, dataset_id=dataset_id_original, table_id=table_id
+    )
+    versions.sort()
+    log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
+
+    root_path = get_root_path()
+    queries_dir = root_path / f"queries/models/{dataset_id}"
+    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+    files_path.sort()
+    tables = [
+        q.replace(".sql", "").split("/")[-1].split("__")[-1]
+        for q in files_path
+        if q.endswith(".sql")
+    ]
+    table_dbt_alias = [
+        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
+    ]
+
+    # parameters_list = []
+    # # add version tables to materialize
+    # for _table_id, dbt_alias in zip(tables, table_dbt_alias):
+    #     parameters = {
+    #         "dataset_id": dataset_id,
+    #         "table_id": f"{_table_id}",
+    #         "dbt_alias": dbt_alias,
+    #     }
+    #     if versions:
+    #         for version in versions:
+    #             if version in _table_id:
+    #                 parameters_list.append(parameters)
+    #     else:
+    #         parameters_list.append(parameters)
+
+    # if not only_version_tables:
+    parameters_list = []
+    # add hamonized tables to materialize
+    queries_dir = root_path / f"queries/models/{dataset_id_original}"
+    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+    files_path.sort()
+    tables = [
+        q.replace(".sql", "").split("/")[-1].split("__")[-1]
+        for q in files_path
+        if q.endswith(".sql")
+    ]
+    table_dbt_alias = [
+        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
+    ]
+
+    for _table_id_, dbt_alias in zip(tables, table_dbt_alias):
+        parameters = {
+            "dataset_id": dataset_id_original,
+            "table_id": f"{_table_id_}",
+            "dbt_alias": dbt_alias,
+        }
+        parameters_list.append(parameters)
+
+    parameters_list_log = json.dumps(parameters_list, indent=4)
+    log(f"{len(parameters_list)} TABLES TO MATERIALIZE:\n{parameters_list_log}")
+    return parameters_list
