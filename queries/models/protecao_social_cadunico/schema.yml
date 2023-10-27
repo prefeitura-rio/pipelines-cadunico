@@ -1448,7 +1448,7 @@ models :
         description: "Cor ou raça: campo numérico de 1 posição variando de 1 a 5,
           1-Branca\n2 – Preta\n3 – Amarela\n4 – Parda\n5 – Indígena\ndependendo da
           opção marcada no formulário | version: 0615"
-      - name: sexo
+      - name: id_sexo
         description: 'Sexo: 1 – Masculino, 2 – Feminino | version: 0615'
       - name: data_nascimento
         description: 'Data de nascimento da pessoa no formato DDMMAAAA | version:

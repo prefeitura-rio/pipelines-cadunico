@@ -71,7 +71,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,164,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,164,1))  AS STRING)
-    END AS sexo,
+    END AS id_sexo,
 
     --column: dta_nasc_membt
     CASE
@@ -243,7 +243,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,164,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,164,1))  AS STRING)
-    END AS sexo,
+    END AS id_sexo,
 
     --column: dta_nasc_membt
     CASE
@@ -415,7 +415,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,164,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,164,1))  AS STRING)
-    END AS sexo,
+    END AS id_sexo,
 
     --column: dta_nasc_membt
     CASE
@@ -587,7 +587,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,164,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,164,1))  AS STRING)
-    END AS sexo,
+    END AS id_sexo,
 
     --column: dta_nasc_membt
     CASE
@@ -759,7 +759,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,164,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,164,1))  AS STRING)
-    END AS sexo,
+    END AS id_sexo,
 
     --column: dta_nasc_membt
     CASE
@@ -931,7 +931,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,164,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,164,1))  AS STRING)
-    END AS sexo,
+    END AS id_sexo,
 
     --column: dta_nasc_membt
     CASE
