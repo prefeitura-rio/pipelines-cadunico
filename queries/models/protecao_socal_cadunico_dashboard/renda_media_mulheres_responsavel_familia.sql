@@ -10,7 +10,7 @@ WITH renda_familias AS (
     FROM `rj-smas.protecao_social_cadunico.identificacao_primeira_pessoa` p
     JOIN `rj-smas.protecao_social_cadunico.identificacao_controle` c
       ON p.id_familia = c.id_familia
-    WHERE p.id_parentesco_representante_legal = '01'
+    WHERE p.id_parentesco_responsavel_familia = '01'
 )
 SELECT
     data_particao,
