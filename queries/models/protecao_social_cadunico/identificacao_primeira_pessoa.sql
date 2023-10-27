@@ -83,7 +83,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,184,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,184,2))  AS STRING)
-    END AS id_parentesco_representante_legal,
+    END AS id_parentesco_responsavel_familia,
 
     --column: cod_raca_cor_pessoa
     CASE
@@ -318,7 +318,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,184,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,184,2))  AS STRING)
-    END AS id_parentesco_representante_legal,
+    END AS id_parentesco_responsavel_familia,
 
     --column: cod_raca_cor_pessoa
     CASE
@@ -556,7 +556,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,184,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,184,2))  AS STRING)
-    END AS id_parentesco_representante_legal,
+    END AS id_parentesco_responsavel_familia,
 
     --column: cod_raca_cor_pessoa
     CASE
@@ -794,7 +794,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,184,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,184,2))  AS STRING)
-    END AS id_parentesco_representante_legal,
+    END AS id_parentesco_responsavel_familia,
 
     --column: cod_raca_cor_pessoa
     CASE
@@ -1032,7 +1032,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,184,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,184,2))  AS STRING)
-    END AS id_parentesco_representante_legal,
+    END AS id_parentesco_responsavel_familia,
 
     --column: cod_raca_cor_pessoa
     CASE
@@ -1270,7 +1270,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,184,2), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,184,2))  AS STRING)
-    END AS id_parentesco_representante_legal,
+    END AS id_parentesco_responsavel_familia,
 
     --column: cod_raca_cor_pessoa
     CASE

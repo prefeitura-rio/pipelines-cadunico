@@ -325,7 +325,7 @@ models :
       - name: id_pais_origem
         description: "Código do País de nascimento da Pessoa\nCampo numérico de 4
           posições formato NNNN | version: 0615"
-      - name: id_parentesco_representante_legal
+      - name: id_parentesco_responsavel_familia
         description: 'Relaçao de parentesco com o RF: campo numérico de 2 posições
           variando de 1 a 11, dependendo da opção marcada no formulário | version:
           0615'
