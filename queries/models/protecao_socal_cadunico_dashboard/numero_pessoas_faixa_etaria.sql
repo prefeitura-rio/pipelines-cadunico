@@ -76,6 +76,7 @@ membro AS (
     SELECT
     data_particao,
     id_membro_familia,
+    id_familia,
     CASE
         WHEN id_sexo = '1' THEN 'Masculino'
         WHEN id_sexo = '2' THEN 'Feminino'
@@ -104,6 +105,10 @@ membro AS (
 membro_escolaridade AS (
   SELECT
     m.data_particao,
+    CASE
+      WHEN f.id_cras_creas IS NULL THEN "Não Informado"
+      ELSE f.id_cras_creas
+    END AS id_cras_creas,
     m.id_membro_familia,
     m.genero,
     m.raca,
@@ -114,16 +119,20 @@ membro_escolaridade AS (
   LEFT JOIN escolaridade e
     ON (m.id_membro_familia = e.id_membro_familia)
       AND (m.data_particao = e.data_particao)
+  LEFT JOIN `rj-smas.protecao_social_cadunico.familia` f
+  ON (m.id_familia = f.id_familia)
+      AND (m.data_particao = f.data_particao)
 )
 
 
 SELECT
   data_particao,
+  id_cras_creas,
   faixa_etaria,
   genero,
   raca,
   escolaridade,
   COUNT(*) AS numero_pessoas
 FROM membro_escolaridade
-GROUP BY 1, 2, 3, 4, 5
-ORDER BY 1, 2, 3, 4, 5
+GROUP BY 1, 2, 3, 4, 5, 6
+ORDER BY 1, 2, 3, 4, 5, 6
