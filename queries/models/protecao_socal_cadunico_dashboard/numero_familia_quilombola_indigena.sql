@@ -1,0 +1,7 @@
+SELECT
+    data_particao,
+    SUM(CASE WHEN familia_indigena = '1' THEN 1 ELSE 0 END) AS numero_familias_indigenas,
+    SUM(CASE WHEN familia_quilombola = '1' THEN 1 ELSE 0 END) AS numero_familias_quilombolas
+FROM `rj-smas.protecao_social_cadunico.familia`
+GROUP BY 1
+ORDER BY 1

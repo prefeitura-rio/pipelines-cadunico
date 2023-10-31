@@ -35,7 +35,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS id_familia_indigena,
+    END AS familia_indigena,
 
     --column: cod_familiar_fam
     CASE
@@ -285,7 +285,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS id_familia_indigena,
+    END AS familia_indigena,
 
     --column: cod_familiar_fam
     CASE
@@ -535,7 +535,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS id_familia_indigena,
+    END AS familia_indigena,
 
     --column: cod_familiar_fam
     CASE
@@ -785,7 +785,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS id_familia_indigena,
+    END AS familia_indigena,
 
     --column: cod_familiar_fam
     CASE
@@ -1035,7 +1035,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS id_familia_indigena,
+    END AS familia_indigena,
 
     --column: cod_familiar_fam
     CASE
@@ -1285,7 +1285,7 @@ SELECT
     CASE
         WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
         ELSE CAST( TRIM(SUBSTRING(text,40,1))  AS STRING)
-    END AS id_familia_indigena,
+    END AS familia_indigena,
 
     --column: cod_familiar_fam
     CASE
