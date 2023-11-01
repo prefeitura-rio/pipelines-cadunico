@@ -188,7 +188,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,52,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,52,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,52,2))
         END AS INT64
     ) AS meses_trabalhados_nos_ultimos_12,
 
@@ -433,7 +433,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,52,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,52,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,52,2))
         END AS INT64
     ) AS meses_trabalhados_nos_ultimos_12,
 
@@ -678,7 +678,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,53,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,53,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,53,2))
         END AS INT64
     ) AS meses_trabalhados_nos_ultimos_12,
 
@@ -1021,7 +1021,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,53,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,53,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,53,2))
         END AS INT64
     ) AS meses_trabalhados_nos_ultimos_12,
 
@@ -1364,7 +1364,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,53,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,53,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,53,2))
         END AS INT64
     ) AS meses_trabalhados_nos_ultimos_12,
 
@@ -1727,7 +1727,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,53,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,53,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,53,2))
         END AS INT64
     ) AS meses_trabalhados_nos_ultimos_12,
 

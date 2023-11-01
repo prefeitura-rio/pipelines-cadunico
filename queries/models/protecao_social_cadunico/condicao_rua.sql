@@ -385,7 +385,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,43,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,43,1))
         END AS INT64
     ) AS dorme_albergue_vezes_semana,
 
@@ -393,7 +393,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,45,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,45,1))
         END AS INT64
     ) AS dorme_domicilio_particular_vezes_semana,
 
@@ -401,7 +401,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,41,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,41,1))
         END AS INT64
     ) AS dorme_rua_vezes_semana,
 
@@ -409,7 +409,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,47,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,47,1))
         END AS INT64
     ) AS dorme_outro_vezes_semana,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -795,7 +795,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,43,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,43,1))
         END AS INT64
     ) AS dorme_albergue_vezes_semana,
 
@@ -803,7 +803,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,45,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,45,1))
         END AS INT64
     ) AS dorme_domicilio_particular_vezes_semana,
 
@@ -811,7 +811,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,41,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,41,1))
         END AS INT64
     ) AS dorme_rua_vezes_semana,
 
@@ -819,7 +819,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,47,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,47,1))
         END AS INT64
     ) AS dorme_outro_vezes_semana,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -1205,7 +1205,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,43,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,43,1))
         END AS INT64
     ) AS dorme_albergue_vezes_semana,
 
@@ -1213,7 +1213,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,45,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,45,1))
         END AS INT64
     ) AS dorme_domicilio_particular_vezes_semana,
 
@@ -1221,7 +1221,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,41,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,41,1))
         END AS INT64
     ) AS dorme_rua_vezes_semana,
 
@@ -1229,7 +1229,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,47,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,47,1))
         END AS INT64
     ) AS dorme_outro_vezes_semana,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -1615,7 +1615,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,43,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,43,1))
         END AS INT64
     ) AS dorme_albergue_vezes_semana,
 
@@ -1623,7 +1623,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,45,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,45,1))
         END AS INT64
     ) AS dorme_domicilio_particular_vezes_semana,
 
@@ -1631,7 +1631,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,41,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,41,1))
         END AS INT64
     ) AS dorme_rua_vezes_semana,
 
@@ -1639,7 +1639,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,47,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,47,1))
         END AS INT64
     ) AS dorme_outro_vezes_semana,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -2025,7 +2025,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,43,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,43,1))
         END AS INT64
     ) AS dorme_albergue_vezes_semana,
 
@@ -2033,7 +2033,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,45,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,45,1))
         END AS INT64
     ) AS dorme_domicilio_particular_vezes_semana,
 
@@ -2041,7 +2041,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,41,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,41,1))
         END AS INT64
     ) AS dorme_rua_vezes_semana,
 
@@ -2049,7 +2049,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,47,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,47,1))
         END AS INT64
     ) AS dorme_outro_vezes_semana,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -2435,7 +2435,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,43,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,43,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,43,1))
         END AS INT64
     ) AS dorme_albergue_vezes_semana,
 
@@ -2443,7 +2443,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,45,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,45,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,45,1))
         END AS INT64
     ) AS dorme_domicilio_particular_vezes_semana,
 
@@ -2451,7 +2451,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,41,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,41,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,41,1))
         END AS INT64
     ) AS dorme_rua_vezes_semana,
 
@@ -2459,7 +2459,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,47,1)) AS INT64
+            ELSE TRIM(SUBSTRING(text,47,1))
         END AS INT64
     ) AS dorme_outro_vezes_semana,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,

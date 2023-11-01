@@ -259,7 +259,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,321,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,321,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,321,2))
         END AS INT64
     ) AS familias_domicilio,
 
@@ -267,7 +267,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,323,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,323,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,323,2))
         END AS INT64
     ) AS pessoas_internadas_0_17_anos,
 
@@ -275,7 +275,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,326,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,326,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,326,2))
         END AS INT64
     ) AS pessoas_internadas_18_59_anos,
 
@@ -283,7 +283,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,329,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,329,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,329,2))
         END AS INT64
     ) AS pessoas_internadas_mais_60_anos,
 
@@ -291,7 +291,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,319,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,319,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,319,2))
         END AS INT64
     ) AS pessoas_domicilio,
 
@@ -607,7 +607,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,321,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,321,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,321,2))
         END AS INT64
     ) AS familias_domicilio,
 
@@ -615,7 +615,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,323,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,323,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,323,2))
         END AS INT64
     ) AS pessoas_internadas_0_17_anos,
 
@@ -623,7 +623,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,326,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,326,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,326,2))
         END AS INT64
     ) AS pessoas_internadas_18_59_anos,
 
@@ -631,7 +631,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,329,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,329,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,329,2))
         END AS INT64
     ) AS pessoas_internadas_mais_60_anos,
 
@@ -639,7 +639,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,319,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,319,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,319,2))
         END AS INT64
     ) AS pessoas_domicilio,
 
@@ -955,7 +955,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,321,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,321,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,321,2))
         END AS INT64
     ) AS familias_domicilio,
 
@@ -963,7 +963,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,323,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,323,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,323,2))
         END AS INT64
     ) AS pessoas_internadas_0_17_anos,
 
@@ -971,7 +971,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,326,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,326,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,326,2))
         END AS INT64
     ) AS pessoas_internadas_18_59_anos,
 
@@ -979,7 +979,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,329,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,329,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,329,2))
         END AS INT64
     ) AS pessoas_internadas_mais_60_anos,
 
@@ -987,7 +987,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,319,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,319,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,319,2))
         END AS INT64
     ) AS pessoas_domicilio,
 
@@ -1303,7 +1303,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,321,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,321,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,321,2))
         END AS INT64
     ) AS familias_domicilio,
 
@@ -1311,7 +1311,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,323,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,323,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,323,2))
         END AS INT64
     ) AS pessoas_internadas_0_17_anos,
 
@@ -1319,7 +1319,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,326,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,326,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,326,2))
         END AS INT64
     ) AS pessoas_internadas_18_59_anos,
 
@@ -1327,7 +1327,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,329,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,329,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,329,2))
         END AS INT64
     ) AS pessoas_internadas_mais_60_anos,
 
@@ -1335,7 +1335,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,319,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,319,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,319,2))
         END AS INT64
     ) AS pessoas_domicilio,
 
@@ -1651,7 +1651,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,321,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,321,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,321,2))
         END AS INT64
     ) AS familias_domicilio,
 
@@ -1659,7 +1659,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,323,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,323,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,323,2))
         END AS INT64
     ) AS pessoas_internadas_0_17_anos,
 
@@ -1667,7 +1667,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,326,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,326,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,326,2))
         END AS INT64
     ) AS pessoas_internadas_18_59_anos,
 
@@ -1675,7 +1675,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,329,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,329,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,329,2))
         END AS INT64
     ) AS pessoas_internadas_mais_60_anos,
 
@@ -1683,7 +1683,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,319,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,319,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,319,2))
         END AS INT64
     ) AS pessoas_domicilio,
 
@@ -1999,7 +1999,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,321,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,321,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,321,2))
         END AS INT64
     ) AS familias_domicilio,
 
@@ -2007,7 +2007,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,323,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,323,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,323,2))
         END AS INT64
     ) AS pessoas_internadas_0_17_anos,
 
@@ -2015,7 +2015,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,326,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,326,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,326,2))
         END AS INT64
     ) AS pessoas_internadas_18_59_anos,
 
@@ -2023,7 +2023,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,329,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,329,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,329,2))
         END AS INT64
     ) AS pessoas_internadas_mais_60_anos,
 
@@ -2031,7 +2031,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,319,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,319,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,319,2))
         END AS INT64
     ) AS pessoas_domicilio,
 

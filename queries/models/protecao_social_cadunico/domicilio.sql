@@ -255,7 +255,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,42,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,42,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,42,2))
         END AS INT64
     ) AS quantidade_comodos_domicilio,
 
@@ -263,7 +263,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,44,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,44,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,44,2))
         END AS INT64
     ) AS quantidade_comodos_dormitorio,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -519,7 +519,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,42,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,42,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,42,2))
         END AS INT64
     ) AS quantidade_comodos_domicilio,
 
@@ -527,7 +527,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,44,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,44,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,44,2))
         END AS INT64
     ) AS quantidade_comodos_dormitorio,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -783,7 +783,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,42,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,42,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,42,2))
         END AS INT64
     ) AS quantidade_comodos_domicilio,
 
@@ -791,7 +791,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,44,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,44,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,44,2))
         END AS INT64
     ) AS quantidade_comodos_dormitorio,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -1047,7 +1047,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,42,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,42,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,42,2))
         END AS INT64
     ) AS quantidade_comodos_domicilio,
 
@@ -1055,7 +1055,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,44,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,44,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,44,2))
         END AS INT64
     ) AS quantidade_comodos_dormitorio,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -1311,7 +1311,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,42,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,42,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,42,2))
         END AS INT64
     ) AS quantidade_comodos_domicilio,
 
@@ -1319,7 +1319,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,44,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,44,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,44,2))
         END AS INT64
     ) AS quantidade_comodos_dormitorio,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -1575,7 +1575,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,42,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,42,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,42,2))
         END AS INT64
     ) AS quantidade_comodos_domicilio,
 
@@ -1583,7 +1583,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,44,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,44,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,44,2))
         END AS INT64
     ) AS quantidade_comodos_dormitorio,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,

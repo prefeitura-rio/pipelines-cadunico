@@ -268,7 +268,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,908,15), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,908,15)) AS INT64
+            ELSE TRIM(SUBSTRING(text,908,15))
         END AS INT64
     ) AS numero_logradouro_representante_legal,
 
@@ -619,7 +619,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,908,15), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,908,15)) AS INT64
+            ELSE TRIM(SUBSTRING(text,908,15))
         END AS INT64
     ) AS numero_logradouro_representante_legal,
 
@@ -970,7 +970,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,908,15), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,908,15)) AS INT64
+            ELSE TRIM(SUBSTRING(text,908,15))
         END AS INT64
     ) AS numero_logradouro_representante_legal,
 
@@ -1321,7 +1321,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,908,15), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,908,15)) AS INT64
+            ELSE TRIM(SUBSTRING(text,908,15))
         END AS INT64
     ) AS numero_logradouro_representante_legal,
 
@@ -1672,7 +1672,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,908,15), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,908,15)) AS INT64
+            ELSE TRIM(SUBSTRING(text,908,15))
         END AS INT64
     ) AS numero_logradouro_representante_legal,
 
@@ -2023,7 +2023,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,908,15), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,908,15)) AS INT64
+            ELSE TRIM(SUBSTRING(text,908,15))
         END AS INT64
     ) AS numero_logradouro_representante_legal,
 

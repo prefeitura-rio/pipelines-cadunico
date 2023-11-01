@@ -25,7 +25,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,40,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,40,9))
         END AS INT64
     ) AS registros_tipo_00,
 
@@ -33,7 +33,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,49,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,49,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,49,9))
         END AS INT64
     ) AS registros_tipo_01,
 
@@ -41,7 +41,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,58,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,58,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,58,9))
         END AS INT64
     ) AS registros_tipo_02,
 
@@ -49,7 +49,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,67,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,67,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,67,9))
         END AS INT64
     ) AS registros_tipo_03,
 
@@ -57,7 +57,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,76,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,76,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,76,9))
         END AS INT64
     ) AS registros_tipo_04,
 
@@ -65,7 +65,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,85,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,85,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,85,9))
         END AS INT64
     ) AS registros_tipo_05,
 
@@ -73,7 +73,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,94,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,94,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,94,9))
         END AS INT64
     ) AS registros_tipo_06,
 
@@ -81,7 +81,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,103,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,103,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,103,9))
         END AS INT64
     ) AS registros_tipo_07,
 
@@ -89,7 +89,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,112,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,112,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,112,9))
         END AS INT64
     ) AS registros_tipo_08,
 
@@ -97,7 +97,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,121,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,121,9))
         END AS INT64
     ) AS registros_tipo_09,
 
@@ -105,7 +105,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,130,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,130,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,130,9))
         END AS INT64
     ) AS registros_tipo_10,
 
@@ -113,7 +113,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,139,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,139,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,139,9))
         END AS INT64
     ) AS registros_tipo_11,
 
@@ -121,7 +121,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,148,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,148,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,148,9))
         END AS INT64
     ) AS registros_tipo_12,
 
@@ -129,7 +129,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,157,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,157,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,157,9))
         END AS INT64
     ) AS registros_tipo_13,
 
@@ -137,7 +137,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,166,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,166,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,166,9))
         END AS INT64
     ) AS registros_tipo_14,
 
@@ -145,7 +145,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,175,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,175,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,175,9))
         END AS INT64
     ) AS registros_tipo_15,
 
@@ -153,7 +153,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,184,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,184,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,184,9))
         END AS INT64
     ) AS registros_tipo_16,
 
@@ -161,7 +161,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,193,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,193,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,193,9))
         END AS INT64
     ) AS registros_tipo_17,
 
@@ -169,7 +169,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,202,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,202,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,202,9))
         END AS INT64
     ) AS registros_tipo_18,
 
@@ -177,7 +177,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,211,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,211,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,211,9))
         END AS INT64
     ) AS registros_tipo_19,
 
@@ -185,7 +185,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_20,
 
@@ -196,7 +196,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,229,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,229,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,229,9))
         END AS INT64
     ) AS registros_tipo_98,
 
@@ -204,7 +204,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,238,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,238,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,238,9))
         END AS INT64
     ) AS registros_tipo_99,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -230,7 +230,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,40,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,40,9))
         END AS INT64
     ) AS registros_tipo_00,
 
@@ -238,7 +238,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,49,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,49,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,49,9))
         END AS INT64
     ) AS registros_tipo_01,
 
@@ -246,7 +246,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,58,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,58,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,58,9))
         END AS INT64
     ) AS registros_tipo_02,
 
@@ -254,7 +254,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,67,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,67,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,67,9))
         END AS INT64
     ) AS registros_tipo_03,
 
@@ -262,7 +262,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,76,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,76,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,76,9))
         END AS INT64
     ) AS registros_tipo_04,
 
@@ -270,7 +270,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,85,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,85,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,85,9))
         END AS INT64
     ) AS registros_tipo_05,
 
@@ -278,7 +278,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,94,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,94,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,94,9))
         END AS INT64
     ) AS registros_tipo_06,
 
@@ -286,7 +286,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,103,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,103,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,103,9))
         END AS INT64
     ) AS registros_tipo_07,
 
@@ -294,7 +294,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,112,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,112,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,112,9))
         END AS INT64
     ) AS registros_tipo_08,
 
@@ -302,7 +302,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,121,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,121,9))
         END AS INT64
     ) AS registros_tipo_09,
 
@@ -310,7 +310,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,130,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,130,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,130,9))
         END AS INT64
     ) AS registros_tipo_10,
 
@@ -318,7 +318,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,139,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,139,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,139,9))
         END AS INT64
     ) AS registros_tipo_11,
 
@@ -326,7 +326,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,148,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,148,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,148,9))
         END AS INT64
     ) AS registros_tipo_12,
 
@@ -334,7 +334,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,157,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,157,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,157,9))
         END AS INT64
     ) AS registros_tipo_13,
 
@@ -342,7 +342,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,166,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,166,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,166,9))
         END AS INT64
     ) AS registros_tipo_14,
 
@@ -350,7 +350,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,175,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,175,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,175,9))
         END AS INT64
     ) AS registros_tipo_15,
 
@@ -358,7 +358,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,184,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,184,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,184,9))
         END AS INT64
     ) AS registros_tipo_16,
 
@@ -366,7 +366,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,193,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,193,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,193,9))
         END AS INT64
     ) AS registros_tipo_17,
 
@@ -374,7 +374,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,202,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,202,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,202,9))
         END AS INT64
     ) AS registros_tipo_18,
 
@@ -382,7 +382,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,211,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,211,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,211,9))
         END AS INT64
     ) AS registros_tipo_19,
 
@@ -390,7 +390,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_20,
 
@@ -401,7 +401,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,229,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,229,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,229,9))
         END AS INT64
     ) AS registros_tipo_98,
 
@@ -409,7 +409,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,238,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,238,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,238,9))
         END AS INT64
     ) AS registros_tipo_99,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -435,7 +435,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,40,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,40,9))
         END AS INT64
     ) AS registros_tipo_00,
 
@@ -443,7 +443,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,49,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,49,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,49,9))
         END AS INT64
     ) AS registros_tipo_01,
 
@@ -451,7 +451,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,58,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,58,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,58,9))
         END AS INT64
     ) AS registros_tipo_02,
 
@@ -459,7 +459,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,67,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,67,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,67,9))
         END AS INT64
     ) AS registros_tipo_03,
 
@@ -467,7 +467,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,76,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,76,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,76,9))
         END AS INT64
     ) AS registros_tipo_04,
 
@@ -475,7 +475,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,85,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,85,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,85,9))
         END AS INT64
     ) AS registros_tipo_05,
 
@@ -483,7 +483,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,94,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,94,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,94,9))
         END AS INT64
     ) AS registros_tipo_06,
 
@@ -491,7 +491,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,103,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,103,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,103,9))
         END AS INT64
     ) AS registros_tipo_07,
 
@@ -499,7 +499,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,112,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,112,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,112,9))
         END AS INT64
     ) AS registros_tipo_08,
 
@@ -507,7 +507,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,121,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,121,9))
         END AS INT64
     ) AS registros_tipo_09,
 
@@ -515,7 +515,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,130,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,130,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,130,9))
         END AS INT64
     ) AS registros_tipo_10,
 
@@ -523,7 +523,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,139,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,139,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,139,9))
         END AS INT64
     ) AS registros_tipo_11,
 
@@ -531,7 +531,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,148,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,148,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,148,9))
         END AS INT64
     ) AS registros_tipo_12,
 
@@ -539,7 +539,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,157,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,157,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,157,9))
         END AS INT64
     ) AS registros_tipo_13,
 
@@ -547,7 +547,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,166,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,166,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,166,9))
         END AS INT64
     ) AS registros_tipo_14,
 
@@ -555,7 +555,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,175,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,175,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,175,9))
         END AS INT64
     ) AS registros_tipo_15,
 
@@ -563,7 +563,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,184,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,184,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,184,9))
         END AS INT64
     ) AS registros_tipo_16,
 
@@ -571,7 +571,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,193,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,193,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,193,9))
         END AS INT64
     ) AS registros_tipo_17,
 
@@ -579,7 +579,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,202,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,202,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,202,9))
         END AS INT64
     ) AS registros_tipo_18,
 
@@ -587,7 +587,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,211,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,211,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,211,9))
         END AS INT64
     ) AS registros_tipo_19,
 
@@ -595,7 +595,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_20,
 
@@ -606,7 +606,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,229,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,229,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,229,9))
         END AS INT64
     ) AS registros_tipo_98,
 
@@ -614,7 +614,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,238,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,238,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,238,9))
         END AS INT64
     ) AS registros_tipo_99,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -640,7 +640,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,40,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,40,9))
         END AS INT64
     ) AS registros_tipo_00,
 
@@ -648,7 +648,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,49,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,49,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,49,9))
         END AS INT64
     ) AS registros_tipo_01,
 
@@ -656,7 +656,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,58,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,58,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,58,9))
         END AS INT64
     ) AS registros_tipo_02,
 
@@ -664,7 +664,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,67,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,67,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,67,9))
         END AS INT64
     ) AS registros_tipo_03,
 
@@ -672,7 +672,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,76,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,76,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,76,9))
         END AS INT64
     ) AS registros_tipo_04,
 
@@ -680,7 +680,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,85,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,85,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,85,9))
         END AS INT64
     ) AS registros_tipo_05,
 
@@ -688,7 +688,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,94,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,94,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,94,9))
         END AS INT64
     ) AS registros_tipo_06,
 
@@ -696,7 +696,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,103,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,103,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,103,9))
         END AS INT64
     ) AS registros_tipo_07,
 
@@ -704,7 +704,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,112,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,112,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,112,9))
         END AS INT64
     ) AS registros_tipo_08,
 
@@ -712,7 +712,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,121,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,121,9))
         END AS INT64
     ) AS registros_tipo_09,
 
@@ -720,7 +720,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,130,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,130,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,130,9))
         END AS INT64
     ) AS registros_tipo_10,
 
@@ -728,7 +728,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,139,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,139,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,139,9))
         END AS INT64
     ) AS registros_tipo_11,
 
@@ -736,7 +736,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,148,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,148,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,148,9))
         END AS INT64
     ) AS registros_tipo_12,
 
@@ -744,7 +744,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,157,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,157,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,157,9))
         END AS INT64
     ) AS registros_tipo_13,
 
@@ -752,7 +752,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,166,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,166,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,166,9))
         END AS INT64
     ) AS registros_tipo_14,
 
@@ -760,7 +760,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,175,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,175,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,175,9))
         END AS INT64
     ) AS registros_tipo_15,
 
@@ -768,7 +768,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,184,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,184,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,184,9))
         END AS INT64
     ) AS registros_tipo_16,
 
@@ -776,7 +776,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,193,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,193,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,193,9))
         END AS INT64
     ) AS registros_tipo_17,
 
@@ -784,7 +784,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,202,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,202,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,202,9))
         END AS INT64
     ) AS registros_tipo_18,
 
@@ -792,7 +792,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,211,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,211,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,211,9))
         END AS INT64
     ) AS registros_tipo_19,
 
@@ -800,7 +800,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_20,
 
@@ -808,7 +808,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_21,
 
@@ -816,7 +816,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,229,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,229,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,229,9))
         END AS INT64
     ) AS registros_tipo_98,
 
@@ -824,7 +824,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,238,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,238,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,238,9))
         END AS INT64
     ) AS registros_tipo_99,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -850,7 +850,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,40,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,40,9))
         END AS INT64
     ) AS registros_tipo_00,
 
@@ -858,7 +858,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,49,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,49,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,49,9))
         END AS INT64
     ) AS registros_tipo_01,
 
@@ -866,7 +866,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,58,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,58,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,58,9))
         END AS INT64
     ) AS registros_tipo_02,
 
@@ -874,7 +874,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,67,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,67,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,67,9))
         END AS INT64
     ) AS registros_tipo_03,
 
@@ -882,7 +882,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,76,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,76,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,76,9))
         END AS INT64
     ) AS registros_tipo_04,
 
@@ -890,7 +890,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,85,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,85,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,85,9))
         END AS INT64
     ) AS registros_tipo_05,
 
@@ -898,7 +898,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,94,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,94,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,94,9))
         END AS INT64
     ) AS registros_tipo_06,
 
@@ -906,7 +906,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,103,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,103,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,103,9))
         END AS INT64
     ) AS registros_tipo_07,
 
@@ -914,7 +914,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,112,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,112,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,112,9))
         END AS INT64
     ) AS registros_tipo_08,
 
@@ -922,7 +922,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,121,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,121,9))
         END AS INT64
     ) AS registros_tipo_09,
 
@@ -930,7 +930,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,130,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,130,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,130,9))
         END AS INT64
     ) AS registros_tipo_10,
 
@@ -938,7 +938,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,139,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,139,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,139,9))
         END AS INT64
     ) AS registros_tipo_11,
 
@@ -946,7 +946,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,148,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,148,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,148,9))
         END AS INT64
     ) AS registros_tipo_12,
 
@@ -954,7 +954,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,157,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,157,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,157,9))
         END AS INT64
     ) AS registros_tipo_13,
 
@@ -962,7 +962,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,166,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,166,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,166,9))
         END AS INT64
     ) AS registros_tipo_14,
 
@@ -970,7 +970,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,175,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,175,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,175,9))
         END AS INT64
     ) AS registros_tipo_15,
 
@@ -978,7 +978,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,184,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,184,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,184,9))
         END AS INT64
     ) AS registros_tipo_16,
 
@@ -986,7 +986,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,193,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,193,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,193,9))
         END AS INT64
     ) AS registros_tipo_17,
 
@@ -994,7 +994,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,202,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,202,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,202,9))
         END AS INT64
     ) AS registros_tipo_18,
 
@@ -1002,7 +1002,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,211,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,211,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,211,9))
         END AS INT64
     ) AS registros_tipo_19,
 
@@ -1010,7 +1010,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_20,
 
@@ -1018,7 +1018,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_21,
 
@@ -1026,7 +1026,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,229,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,229,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,229,9))
         END AS INT64
     ) AS registros_tipo_98,
 
@@ -1034,7 +1034,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,238,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,238,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,238,9))
         END AS INT64
     ) AS registros_tipo_99,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
@@ -1060,7 +1060,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,40,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,40,9))
         END AS INT64
     ) AS registros_tipo_00,
 
@@ -1068,7 +1068,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,49,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,49,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,49,9))
         END AS INT64
     ) AS registros_tipo_01,
 
@@ -1076,7 +1076,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,58,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,58,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,58,9))
         END AS INT64
     ) AS registros_tipo_02,
 
@@ -1084,7 +1084,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,67,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,67,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,67,9))
         END AS INT64
     ) AS registros_tipo_03,
 
@@ -1092,7 +1092,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,76,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,76,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,76,9))
         END AS INT64
     ) AS registros_tipo_04,
 
@@ -1100,7 +1100,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,85,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,85,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,85,9))
         END AS INT64
     ) AS registros_tipo_05,
 
@@ -1108,7 +1108,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,94,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,94,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,94,9))
         END AS INT64
     ) AS registros_tipo_06,
 
@@ -1116,7 +1116,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,103,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,103,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,103,9))
         END AS INT64
     ) AS registros_tipo_07,
 
@@ -1124,7 +1124,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,112,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,112,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,112,9))
         END AS INT64
     ) AS registros_tipo_08,
 
@@ -1132,7 +1132,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,121,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,121,9))
         END AS INT64
     ) AS registros_tipo_09,
 
@@ -1140,7 +1140,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,130,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,130,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,130,9))
         END AS INT64
     ) AS registros_tipo_10,
 
@@ -1148,7 +1148,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,139,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,139,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,139,9))
         END AS INT64
     ) AS registros_tipo_11,
 
@@ -1156,7 +1156,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,148,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,148,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,148,9))
         END AS INT64
     ) AS registros_tipo_12,
 
@@ -1164,7 +1164,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,157,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,157,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,157,9))
         END AS INT64
     ) AS registros_tipo_13,
 
@@ -1172,7 +1172,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,166,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,166,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,166,9))
         END AS INT64
     ) AS registros_tipo_14,
 
@@ -1180,7 +1180,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,175,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,175,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,175,9))
         END AS INT64
     ) AS registros_tipo_15,
 
@@ -1188,7 +1188,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,184,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,184,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,184,9))
         END AS INT64
     ) AS registros_tipo_16,
 
@@ -1196,7 +1196,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,193,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,193,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,193,9))
         END AS INT64
     ) AS registros_tipo_17,
 
@@ -1204,7 +1204,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,202,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,202,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,202,9))
         END AS INT64
     ) AS registros_tipo_18,
 
@@ -1212,7 +1212,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,211,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,211,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,211,9))
         END AS INT64
     ) AS registros_tipo_19,
 
@@ -1220,7 +1220,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,220,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,220,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,220,9))
         END AS INT64
     ) AS registros_tipo_20,
 
@@ -1231,7 +1231,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,229,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,229,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,229,9))
         END AS INT64
     ) AS registros_tipo_98,
 
@@ -1239,7 +1239,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,238,9), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,238,9)) AS INT64
+            ELSE TRIM(SUBSTRING(text,238,9))
         END AS INT64
     ) AS registros_tipo_99,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,

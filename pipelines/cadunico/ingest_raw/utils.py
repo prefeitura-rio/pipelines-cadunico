@@ -430,7 +430,7 @@ def create_cadunico_dbt_consolidated_models(
                             + "    SAFE_CAST(\n"
                             + "        CASE\n"
                             + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"            ELSE TRIM({col_name}) AS {bigquery_type}\n"
+                            + f"            ELSE TRIM({col_name})\n"
                             + f"        END AS {bigquery_type}\n"
                             + f"    ) AS {col_name_padronizado},"
                         )

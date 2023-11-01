@@ -322,7 +322,7 @@ SELECT
     SAFE_CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,49,2), r'^\s*$') THEN NULL
-            ELSE TRIM(SUBSTRING(text,49,2)) AS INT64
+            ELSE TRIM(SUBSTRING(text,49,2))
         END AS INT64
     ) AS meses_trabalhados_nos_ultimos_12,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
