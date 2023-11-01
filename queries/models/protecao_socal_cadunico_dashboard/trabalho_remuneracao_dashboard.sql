@@ -20,20 +20,7 @@ WITH trabalho_remuneracao_tb AS (
         WHEN valor_renda_media BETWEEN 2900 AND 7100 THEN 'Classe C'
         ELSE 'Classes D/E'
     END AS faixa_renda,
-    CASE
-        WHEN id_funcao_principal_trabalho = '01' THEN 'Trabalhador por conta própria (bico, autônomo)'
-        WHEN id_funcao_principal_trabalho = '02' THEN 'Trabalhador temporário em área rural'
-        WHEN id_funcao_principal_trabalho = '03' THEN 'Empregado sem carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '04' THEN 'Empregado com carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '05' THEN 'Trabalhador doméstico sem carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '06' THEN 'Trabalhador doméstico com carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '07' THEN 'Trabalhador não-remunerado'
-        WHEN id_funcao_principal_trabalho = '08' THEN 'Militar ou servidor público'
-        WHEN id_funcao_principal_trabalho = '09' THEN 'Empregador'
-        WHEN id_funcao_principal_trabalho = '10' THEN 'Estagiário'
-        WHEN id_funcao_principal_trabalho = '11' THEN 'Aprendiz'
-        ELSE 'Não Informado'
-    END AS funcao_principal_descricao,
+    funcao_principal_trabalho,
     COUNTIF(tr.id_trabalho_semana_passada='1') AS trabalho_semana_passada,
     COUNTIF(tr.id_afastado_semana_passada='1') AS afastado_semana_passada,
     ROUND(AVG(meses_trabalhados_nos_ultimos_12),2) AS media_meses_trabalhados_nos_ultimos_12,
@@ -54,8 +41,8 @@ LEFT JOIN `rj-smas.protecao_social_cadunico.identificacao_controle` ic
 LEFT JOIN `rj-smas.protecao_social_cadunico.familia` f
   ON f.id_familia = tr.id_familia
     AND f.data_particao = tr.data_particao
-GROUP BY data_particao, id_cras_creas, faixa_renda, faixa_etaria, funcao_principal_descricao
-ORDER BY id_cras_creas, data_particao, faixa_renda, faixa_etaria, funcao_principal_descricao
+GROUP BY data_particao, id_cras_creas, faixa_renda, faixa_etaria, funcao_principal_trabalho
+ORDER BY id_cras_creas, data_particao, faixa_renda, faixa_etaria, funcao_principal_trabalho
 ),
 
 total_data_cras_cres AS (
@@ -65,7 +52,8 @@ total_data_cras_cres AS (
         WHEN id_cras_creas IS NULL THEN "Não Informado"
         ELSE id_cras_creas
       END AS id_cras_creas,
-      COUNT(*) AS total_familias
+      COUNT(*) AS total_familias_cras,
+      SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao) AS total_familias,
   FROM `rj-smas.protecao_social_cadunico.familia`
   GROUP BY 1, 2
 )
@@ -73,10 +61,11 @@ total_data_cras_cres AS (
 SELECT
   tr.data_particao,
   tr.id_cras_creas,
+  tdcc.total_familias_cras,
   tdcc.total_familias,
   tr.faixa_etaria,
   tr.faixa_renda,
-  tr.funcao_principal_descricao,
+  tr.funcao_principal_trabalho,
   tr.trabalho_semana_passada,
   100 * SAFE.DIV(tr.trabalho_semana_passada, tdcc.total_familias) AS porcentagem_trabalho_semana_passada,
   tr.afastado_semana_passada,
@@ -99,4 +88,4 @@ FROM trabalho_remuneracao_tb tr
 LEFT JOIN total_data_cras_cres tdcc
   ON tr.data_particao = tdcc.data_particao
     AND tr.id_cras_creas = tdcc.id_cras_creas
-ORDER BY tr.id_cras_creas, tr.data_particao, faixa_renda, faixa_etaria, funcao_principal_descricao
+ORDER BY tr.id_cras_creas, tr.data_particao, faixa_renda, faixa_etaria, funcao_principal_trabalho

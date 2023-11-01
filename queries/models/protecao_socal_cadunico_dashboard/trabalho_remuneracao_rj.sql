@@ -16,24 +16,11 @@ WITH trabalho_remuneracao_tb AS (
         WHEN valor_renda_media BETWEEN 2900 AND 7100 THEN 'Classe C'
         ELSE 'Classes D/E'
     END AS faixa_renda,
-    CASE
-        WHEN id_funcao_principal_trabalho = '01' THEN 'Trabalhador por conta própria (bico, autônomo)'
-        WHEN id_funcao_principal_trabalho = '02' THEN 'Trabalhador temporário em área rural'
-        WHEN id_funcao_principal_trabalho = '03' THEN 'Empregado sem carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '04' THEN 'Empregado com carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '05' THEN 'Trabalhador doméstico sem carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '06' THEN 'Trabalhador doméstico com carteira de trabalho assinada'
-        WHEN id_funcao_principal_trabalho = '07' THEN 'Trabalhador não-remunerado'
-        WHEN id_funcao_principal_trabalho = '08' THEN 'Militar ou servidor público'
-        WHEN id_funcao_principal_trabalho = '09' THEN 'Empregador'
-        WHEN id_funcao_principal_trabalho = '10' THEN 'Estagiário'
-        WHEN id_funcao_principal_trabalho = '11' THEN 'Aprendiz'
-        ELSE 'Não Informado'
-    END AS funcao_principal_descricao,
+    funcao_principal_trabalho,
     COUNTIF(tr.id_trabalho_semana_passada='1') AS trabalho_semana_passada,
     COUNTIF(tr.id_afastado_semana_passada='1') AS afastado_semana_passada,
     ROUND(AVG(meses_trabalhados_nos_ultimos_12),2) AS media_meses_trabalhados_nos_ultimos_12,
-    ROUND(AVG(remuneracao/100),2) AS media_remuneracao,
+    ROUND(AVG(remuneracao),2) AS media_remuneracao,
     COUNTIF(tr.nao_recebe_doacao != '0' AND tr.nao_recebe_doacao IS NOT NULL) AS recebe_doacao,
     COUNTIF(tr.nao_recebe_aposentadoria != '0' AND tr.nao_recebe_aposentadoria IS NOT NULL) AS recebe_aposentadoria,
     COUNTIF(tr.nao_recebe_seguro_desemprego != '0' AND tr.nao_recebe_seguro_desemprego IS NOT NULL) AS recebe_seguro_desemprego,
@@ -50,14 +37,15 @@ LEFT JOIN `rj-smas.protecao_social_cadunico.identificacao_controle` ic
 LEFT JOIN `rj-smas.protecao_social_cadunico.familia` f
   ON f.id_familia = tr.id_familia
     AND f.data_particao = tr.data_particao
-GROUP BY data_particao, faixa_renda, faixa_etaria, funcao_principal_descricao
-ORDER BY data_particao, faixa_renda, faixa_etaria, funcao_principal_descricao
+GROUP BY data_particao, faixa_renda, faixa_etaria, funcao_principal_trabalho
+ORDER BY data_particao, faixa_renda, faixa_etaria, funcao_principal_trabalho
 ),
 
 total_data_cras_cres AS (
   SELECT
       data_particao,
-      COUNT(*) AS total_familias
+      COUNT(*) AS total_familias_cras,
+      SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao) AS total_familias,
   FROM `rj-smas.protecao_social_cadunico.familia`
   GROUP BY 1
 )
@@ -67,26 +55,26 @@ SELECT
   tdcc.total_familias,
   tr.faixa_etaria,
   tr.faixa_renda,
-  tr.funcao_principal_descricao,
+  tr.funcao_principal_trabalho,
   tr.trabalho_semana_passada,
-  100 * SAFE.DIV(tr.trabalho_semana_passada, tdcc.total_familias) AS porcentagem_trabalho_semana_passada,
+  ROUND(100 * SAFE_DIVIDE(tr.trabalho_semana_passada, tdcc.total_familias), 4) AS porcentagem_trabalho_semana_passada,
   tr.afastado_semana_passada,
-  100 * SAFE.DIV(tr.afastado_semana_passada, tdcc.total_familias) AS porcentagem_afastado_semana_passada,
+  ROUND(100 * SAFE_DIVIDE(tr.afastado_semana_passada, tdcc.total_familias), 4) AS porcentagem_afastado_semana_passada,
   tr.media_meses_trabalhados_nos_ultimos_12,
   tr.media_remuneracao,
   tr.recebe_doacao,
-  100 * SAFE.DIV(tr.recebe_doacao, tdcc.total_familias) AS porcentagem_recebe_doacao,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_doacao, tdcc.total_familias), 4) AS porcentagem_recebe_doacao,
   tr.recebe_aposentadoria,
-  100 * SAFE.DIV(tr.recebe_aposentadoria, tdcc.total_familias) AS porcentagem_recebe_aposentadoria,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_aposentadoria, tdcc.total_familias), 4) AS porcentagem_recebe_aposentadoria,
   tr.recebe_seguro_desemprego,
-  100 * SAFE.DIV(tr.recebe_seguro_desemprego, tdcc.total_familias) AS porcentagem_recebe_seguro_desemprego,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_seguro_desemprego, tdcc.total_familias), 4) AS porcentagem_recebe_seguro_desemprego,
   tr.recebe_pensao_alimenticia,
-  100 * SAFE.DIV(tr.recebe_pensao_alimenticia, tdcc.total_familias) AS porcentagem_recebe_pensao_alimenticia,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_pensao_alimenticia, tdcc.total_familias), 4) AS porcentagem_recebe_pensao_alimenticia,
   tr.recebe_outras_fontes,
-  100 * SAFE.DIV(tr.recebe_outras_fontes, tdcc.total_familias) AS porcentagem_recebe_outras_fontes,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_outras_fontes, tdcc.total_familias), 4) AS porcentagem_recebe_outras_fontes,
   tr.trabalho_infantil,
-  100 * SAFE.DIV(tr.trabalho_infantil, tdcc.total_familias) AS porcentagem_trabalho_infantil
+  ROUND(100 * SAFE_DIVIDE(tr.trabalho_infantil, tdcc.total_familias), 4) AS porcentagem_trabalho_infantil
 FROM trabalho_remuneracao_tb tr
 LEFT JOIN total_data_cras_cres tdcc
   ON tr.data_particao = tdcc.data_particao
-ORDER BY  tr.data_particao, faixa_renda, faixa_etaria, funcao_principal_descricao
+ORDER BY tr.data_particao, faixa_renda, faixa_etaria, funcao_principal_trabalho
