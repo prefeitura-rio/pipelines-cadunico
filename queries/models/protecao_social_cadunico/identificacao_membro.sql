@@ -140,7 +140,7 @@ SELECT
 
     --column: dta_nasc_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,165,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,165,8))
@@ -148,7 +148,7 @@ SELECT
 
     --column: dta_transferencia_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -411,7 +411,7 @@ SELECT
 
     --column: dta_nasc_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,165,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,165,8))
@@ -419,7 +419,7 @@ SELECT
 
     --column: dta_transferencia_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -682,7 +682,7 @@ SELECT
 
     --column: dta_nasc_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,165,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,165,8))
@@ -690,7 +690,7 @@ SELECT
 
     --column: dta_transferencia_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -953,7 +953,7 @@ SELECT
 
     --column: dta_nasc_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,165,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,165,8))
@@ -961,7 +961,7 @@ SELECT
 
     --column: dta_transferencia_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -1224,7 +1224,7 @@ SELECT
 
     --column: dta_nasc_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,165,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,165,8))
@@ -1232,7 +1232,7 @@ SELECT
 
     --column: dta_transferencia_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -1495,7 +1495,7 @@ SELECT
 
     --column: dta_nasc_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,165,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,165,8))
@@ -1503,7 +1503,7 @@ SELECT
 
     --column: dta_transferencia_membt
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))

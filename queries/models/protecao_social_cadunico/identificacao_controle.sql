@@ -160,7 +160,7 @@ SELECT
 
     --column: dat_alteracao_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
@@ -168,7 +168,7 @@ SELECT
 
     --column: dat_atualizacao_familia
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1112,8))
@@ -176,7 +176,7 @@ SELECT
 
     --column: dat_cadastramento_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -200,7 +200,7 @@ SELECT
 
     --column: dt_cdstr_atual_fmla
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1103,8))
@@ -208,7 +208,7 @@ SELECT
 
     --column: dta_entrevista_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,91,8))
@@ -590,7 +590,7 @@ SELECT
 
     --column: dat_alteracao_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
@@ -598,7 +598,7 @@ SELECT
 
     --column: dat_atualizacao_familia
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1112,8))
@@ -606,7 +606,7 @@ SELECT
 
     --column: dat_cadastramento_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -630,7 +630,7 @@ SELECT
 
     --column: dt_cdstr_atual_fmla
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1103,8))
@@ -638,7 +638,7 @@ SELECT
 
     --column: dta_entrevista_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,91,8))
@@ -1025,7 +1025,7 @@ SELECT
 
     --column: dat_alteracao_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
@@ -1033,7 +1033,7 @@ SELECT
 
     --column: dat_atualizacao_familia
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1112,8))
@@ -1041,7 +1041,7 @@ SELECT
 
     --column: dat_cadastramento_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -1065,7 +1065,7 @@ SELECT
 
     --column: dt_cdstr_atual_fmla
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1103,8))
@@ -1073,7 +1073,7 @@ SELECT
 
     --column: dta_entrevista_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,91,8))
@@ -1460,7 +1460,7 @@ SELECT
 
     --column: dat_alteracao_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
@@ -1468,7 +1468,7 @@ SELECT
 
     --column: dat_atualizacao_familia
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1112,8))
@@ -1476,7 +1476,7 @@ SELECT
 
     --column: dat_cadastramento_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -1500,7 +1500,7 @@ SELECT
 
     --column: dt_cdstr_atual_fmla
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1103,8))
@@ -1508,7 +1508,7 @@ SELECT
 
     --column: dta_entrevista_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,91,8))
@@ -1895,7 +1895,7 @@ SELECT
 
     --column: dat_alteracao_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
@@ -1903,7 +1903,7 @@ SELECT
 
     --column: dat_atualizacao_familia
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1112,8))
@@ -1911,7 +1911,7 @@ SELECT
 
     --column: dat_cadastramento_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -1935,7 +1935,7 @@ SELECT
 
     --column: dt_cdstr_atual_fmla
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1103,8))
@@ -1943,7 +1943,7 @@ SELECT
 
     --column: dta_entrevista_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,91,8))
@@ -2330,7 +2330,7 @@ SELECT
 
     --column: dat_alteracao_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
@@ -2338,7 +2338,7 @@ SELECT
 
     --column: dat_atualizacao_familia
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1112,8))
@@ -2346,7 +2346,7 @@ SELECT
 
     --column: dat_cadastramento_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -2370,7 +2370,7 @@ SELECT
 
     --column: dt_cdstr_atual_fmla
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1103,8))
@@ -2378,7 +2378,7 @@ SELECT
 
     --column: dta_entrevista_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,91,8))
@@ -2386,7 +2386,7 @@ SELECT
 
     --column: dta_integracao_fam
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,1233,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,1233,8))

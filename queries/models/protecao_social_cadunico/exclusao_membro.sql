@@ -79,7 +79,7 @@ SELECT
 
     --column: dat_emi_pgmcu_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
@@ -87,7 +87,7 @@ SELECT
 
     --column: data_exc_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -103,7 +103,7 @@ SELECT
 
     --column: dta_emissao_certid_mbo_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,283,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,283,8))
@@ -290,7 +290,7 @@ SELECT
 
     --column: dat_emi_pgmcu_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
@@ -298,7 +298,7 @@ SELECT
 
     --column: data_exc_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -314,7 +314,7 @@ SELECT
 
     --column: dta_emissao_certid_mbo_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,283,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,283,8))
@@ -501,7 +501,7 @@ SELECT
 
     --column: dat_emi_pgmcu_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
@@ -509,7 +509,7 @@ SELECT
 
     --column: data_exc_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -525,7 +525,7 @@ SELECT
 
     --column: dta_emissao_certid_mbo_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,283,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,283,8))
@@ -712,7 +712,7 @@ SELECT
 
     --column: dat_emi_pgmcu_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
@@ -720,7 +720,7 @@ SELECT
 
     --column: data_exc_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -736,7 +736,7 @@ SELECT
 
     --column: dta_emissao_certid_mbo_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,283,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,283,8))
@@ -923,7 +923,7 @@ SELECT
 
     --column: dat_emi_pgmcu_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
@@ -931,7 +931,7 @@ SELECT
 
     --column: data_exc_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -947,7 +947,7 @@ SELECT
 
     --column: dta_emissao_certid_mbo_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,283,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,283,8))
@@ -1134,7 +1134,7 @@ SELECT
 
     --column: dat_emi_pgmcu_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
@@ -1142,7 +1142,7 @@ SELECT
 
     --column: data_exc_mbo
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
@@ -1158,7 +1158,7 @@ SELECT
 
     --column: dta_emissao_certid_mbo_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,283,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,283,8))

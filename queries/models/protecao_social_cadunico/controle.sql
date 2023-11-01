@@ -23,7 +23,7 @@ SELECT
 
     --column: dta_extracao_dados_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,83,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,83,8))
@@ -31,7 +31,7 @@ SELECT
 
     --column: dta_posicao_cadastro_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,75,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,75,8))
@@ -73,7 +73,7 @@ SELECT
 
     --column: dta_extracao_dados_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,83,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,83,8))
@@ -81,7 +81,7 @@ SELECT
 
     --column: dta_posicao_cadastro_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,75,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,75,8))
@@ -123,7 +123,7 @@ SELECT
 
     --column: dta_extracao_dados_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,83,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,83,8))
@@ -131,7 +131,7 @@ SELECT
 
     --column: dta_posicao_cadastro_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,75,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,75,8))
@@ -173,7 +173,7 @@ SELECT
 
     --column: dta_extracao_dados_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,83,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,83,8))
@@ -181,7 +181,7 @@ SELECT
 
     --column: dta_posicao_cadastro_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,75,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,75,8))
@@ -223,7 +223,7 @@ SELECT
 
     --column: dta_extracao_dados_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,83,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,83,8))
@@ -231,7 +231,7 @@ SELECT
 
     --column: dta_posicao_cadastro_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,75,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,75,8))
@@ -273,7 +273,7 @@ SELECT
 
     --column: dta_extracao_dados_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,83,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,83,8))
@@ -281,7 +281,7 @@ SELECT
 
     --column: dta_posicao_cadastro_hdr
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,75,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,75,8))

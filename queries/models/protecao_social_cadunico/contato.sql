@@ -723,7 +723,7 @@ SELECT
 
     --column: data_arquivos_carregados
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,121,8))
@@ -909,7 +909,7 @@ SELECT
 
     --column: data_arquivos_carregados
     SAFE.PARSE_DATE(
-        '%d%m%Y,'
+        '%d%m%Y',
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,121,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,121,8))
