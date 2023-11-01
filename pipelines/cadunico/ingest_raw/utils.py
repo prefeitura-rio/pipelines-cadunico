@@ -418,7 +418,7 @@ def create_cadunico_dbt_consolidated_models(
                             f"\n    --column: {column}\n"
                             + "    SAFE.PARSE_DATE(\n"
                             + f"        '{date_format},'\n"
-                            + "         CASE\n"
+                            + "        CASE\n"
                             + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
                             + f"            ELSE TRIM({col_name})\n"
                             + "        END"
@@ -440,7 +440,7 @@ def create_cadunico_dbt_consolidated_models(
                             + "    SAFE_CAST(\n"
                             + "        CASE\n"
                             + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"            ELSE SAFE_CAST( TRIM({col_name}) AS INT64) / {ajuste_decimal} \n"
+                            + f"            ELSE SAFE_CAST( TRIM({col_name}) AS INT64) / {ajuste_decimal}\n"
                             + f"        END AS {bigquery_type}\n"
                             + f"    ) AS {col_name_padronizado},"
                         )

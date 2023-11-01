@@ -99,7 +99,7 @@ SELECT
     --column: dta_emissao_cart_trab_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,260,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,260,8))
         END    ) AS data_emissao_carteira_trabalho,
@@ -107,7 +107,7 @@ SELECT
     --column: dta_emissao_certid_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,131,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,131,8))
         END    ) AS data_emissao_certidao,
@@ -115,7 +115,7 @@ SELECT
     --column: dta_emissao_ident_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,230,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,230,8))
         END    ) AS data_emissao_rg,
@@ -336,7 +336,7 @@ SELECT
     --column: dta_emissao_cart_trab_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,260,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,260,8))
         END    ) AS data_emissao_carteira_trabalho,
@@ -344,7 +344,7 @@ SELECT
     --column: dta_emissao_certid_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,131,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,131,8))
         END    ) AS data_emissao_certidao,
@@ -352,7 +352,7 @@ SELECT
     --column: dta_emissao_ident_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,230,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,230,8))
         END    ) AS data_emissao_rg,
@@ -573,7 +573,7 @@ SELECT
     --column: dta_emissao_cart_trab_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,260,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,260,8))
         END    ) AS data_emissao_carteira_trabalho,
@@ -581,7 +581,7 @@ SELECT
     --column: dta_emissao_certid_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,131,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,131,8))
         END    ) AS data_emissao_certidao,
@@ -589,7 +589,7 @@ SELECT
     --column: dta_emissao_ident_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,230,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,230,8))
         END    ) AS data_emissao_rg,
@@ -810,7 +810,7 @@ SELECT
     --column: dta_emissao_cart_trab_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,260,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,260,8))
         END    ) AS data_emissao_carteira_trabalho,
@@ -818,7 +818,7 @@ SELECT
     --column: dta_emissao_certid_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,131,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,131,8))
         END    ) AS data_emissao_certidao,
@@ -826,7 +826,7 @@ SELECT
     --column: dta_emissao_ident_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,230,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,230,8))
         END    ) AS data_emissao_rg,
@@ -1047,7 +1047,7 @@ SELECT
     --column: dta_emissao_cart_trab_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,260,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,260,8))
         END    ) AS data_emissao_carteira_trabalho,
@@ -1055,7 +1055,7 @@ SELECT
     --column: dta_emissao_certid_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,131,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,131,8))
         END    ) AS data_emissao_certidao,
@@ -1063,7 +1063,7 @@ SELECT
     --column: dta_emissao_ident_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,230,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,230,8))
         END    ) AS data_emissao_rg,
@@ -1284,7 +1284,7 @@ SELECT
     --column: dta_emissao_cart_trab_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,260,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,260,8))
         END    ) AS data_emissao_carteira_trabalho,
@@ -1292,7 +1292,7 @@ SELECT
     --column: dta_emissao_certid_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,131,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,131,8))
         END    ) AS data_emissao_certidao,
@@ -1300,7 +1300,7 @@ SELECT
     --column: dta_emissao_ident_pessoa
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,230,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,230,8))
         END    ) AS data_emissao_rg,

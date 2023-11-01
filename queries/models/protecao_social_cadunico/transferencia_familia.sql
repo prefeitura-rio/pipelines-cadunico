@@ -83,7 +83,7 @@ SELECT
     --column: dat_transferencia_famt
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_transferencia,
@@ -176,7 +176,7 @@ SELECT
     --column: dat_transferencia_famt
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_transferencia,
@@ -269,7 +269,7 @@ SELECT
     --column: dat_transferencia_famt
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_transferencia,
@@ -362,7 +362,7 @@ SELECT
     --column: dat_transferencia_famt
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_transferencia,
@@ -455,7 +455,7 @@ SELECT
     --column: dat_transferencia_famt
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_transferencia,
@@ -548,7 +548,7 @@ SELECT
     --column: dat_transferencia_famt
     SAFE.PARSE_DATE(
         '%d%m%Y,'
-         CASE
+        CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_transferencia,
