@@ -507,6 +507,12 @@ def create_cadunico_dbt_consolidated_models(
 
                 col_schema = {"name": col_name_padronizado, "description": col_description}
                 table_schema["columns"].append(col_schema)
+                if dicionario_atributos is not None:
+                    col_schema_dict_atr = {
+                        "name": col_name_padronizado_dict_atr,
+                        "description": col_description,
+                    }
+                    table_schema["columns"].append(col_schema_dict_atr)
 
             column_dict = {}
 
