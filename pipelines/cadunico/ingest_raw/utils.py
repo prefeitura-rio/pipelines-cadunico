@@ -520,8 +520,8 @@ def create_cadunico_dbt_consolidated_models(
 
         root_path = get_root_path()
 
-        model_path_versao = root_path / f"queries/models/{model_dataset_id}"
-        sql_filepath = model_path_versao / f"{model_name}.sql"
+        model_path = root_path / f"queries/models/{model_dataset_id}"
+        sql_filepath = model_path / f"{model_name}.sql"
 
         sql_filepath.parent.mkdir(parents=True, exist_ok=True)
         log_created_models.append(str(sql_filepath))
@@ -543,7 +543,7 @@ def create_cadunico_dbt_consolidated_models(
         with open(sql_filepath, "w") as text_file:
             text_file.write(final_query)
 
-    dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path_versao / "schema.yml")
+    dump_dict_to_dbt_yaml(schema=schema, schema_yaml_path=model_path / "schema.yml")
     json_log = json.dumps(log_created_models, indent=4)
     log(f"created {len(log_created_models)} prod models : {json_log}")
 
@@ -725,24 +725,6 @@ def get_dbt_models_to_materialize(
     log("STARTING GETTING DBT MODELS TO MATERIALIZE")
     dataset_id_original = dataset_id
     root_path = get_root_path()
-
-    # dataset_id = dataset_id + "_versao"
-    # versions = get_staging_partitions_versions(
-    #     project_id=project_id, dataset_id=dataset_id_original, table_id=table_id
-    # )
-    # versions.sort()
-    # log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
-    # queries_dir = root_path / f"queries/models/{dataset_id}"
-    # files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
-    # files_path.sort()
-    # tables = [
-    #     q.replace(".sql", "").split("/")[-1].split("__")[-1]
-    #     for q in files_path
-    #     if q.endswith(".sql")
-    # ]
-    # table_dbt_alias = [
-    #     True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
-    # ]
 
     # if not only_version_tables:
     parameters_list = []
