@@ -14,40 +14,61 @@
 SELECT
 
     --column: chv_natural_prefeitura
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_munic_ibge_2_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,2))  AS STRING)
-    END AS sigla_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,2))
+        END AS STRING
+    ) AS sigla_uf,
 
     --column: cod_munic_ibge_5_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,5))  AS STRING)
-    END AS if_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,42,5))
+        END AS STRING
+    ) AS if_municipio,
 
     --column: ind_migracao_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS migracao,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS id_migracao,
+    --column: ind_migracao_pre
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS migracao,
 
     --column: nom_prefeitura_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,70))  AS STRING)
-    END AS prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,70))
+        END AS STRING
+    ) AS prefeitura,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -60,40 +81,61 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_munic_ibge_2_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,2))  AS STRING)
-    END AS sigla_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,2))
+        END AS STRING
+    ) AS sigla_uf,
 
     --column: cod_munic_ibge_5_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,5))  AS STRING)
-    END AS if_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,42,5))
+        END AS STRING
+    ) AS if_municipio,
 
     --column: ind_migracao_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS migracao,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS id_migracao,
+    --column: ind_migracao_pre
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS migracao,
 
     --column: nom_prefeitura_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,70))  AS STRING)
-    END AS prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,70))
+        END AS STRING
+    ) AS prefeitura,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -106,40 +148,61 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_munic_ibge_2_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,2))  AS STRING)
-    END AS sigla_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,2))
+        END AS STRING
+    ) AS sigla_uf,
 
     --column: cod_munic_ibge_5_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,5))  AS STRING)
-    END AS if_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,42,5))
+        END AS STRING
+    ) AS if_municipio,
 
     --column: ind_migracao_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS migracao,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS id_migracao,
+    --column: ind_migracao_pre
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS migracao,
 
     --column: nom_prefeitura_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,70))  AS STRING)
-    END AS prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,70))
+        END AS STRING
+    ) AS prefeitura,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -152,40 +215,61 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_munic_ibge_2_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,2))  AS STRING)
-    END AS sigla_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,2))
+        END AS STRING
+    ) AS sigla_uf,
 
     --column: cod_munic_ibge_5_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,5))  AS STRING)
-    END AS if_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,42,5))
+        END AS STRING
+    ) AS if_municipio,
 
     --column: ind_migracao_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS migracao,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS id_migracao,
+    --column: ind_migracao_pre
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS migracao,
 
     --column: nom_prefeitura_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,70))  AS STRING)
-    END AS prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,70))
+        END AS STRING
+    ) AS prefeitura,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -198,40 +282,61 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_munic_ibge_2_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,2))  AS STRING)
-    END AS sigla_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,2))
+        END AS STRING
+    ) AS sigla_uf,
 
     --column: cod_munic_ibge_5_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,5))  AS STRING)
-    END AS if_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,42,5))
+        END AS STRING
+    ) AS if_municipio,
 
     --column: ind_migracao_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS migracao,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS id_migracao,
+    --column: ind_migracao_pre
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS migracao,
 
     --column: nom_prefeitura_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,70))  AS STRING)
-    END AS prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,70))
+        END AS STRING
+    ) AS prefeitura,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -244,40 +349,61 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_munic_ibge_2_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,40,2))  AS STRING)
-    END AS sigla_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,2))
+        END AS STRING
+    ) AS sigla_uf,
 
     --column: cod_munic_ibge_5_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,42,5))  AS STRING)
-    END AS if_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,42,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,42,5))
+        END AS STRING
+    ) AS if_municipio,
 
     --column: ind_migracao_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,47,1))  AS STRING)
-    END AS migracao,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS id_migracao,
+    --column: ind_migracao_pre
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,47,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,47,1))
+        END AS STRING
+    ) AS migracao,
 
     --column: nom_prefeitura_pre
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,48,70))  AS STRING)
-    END AS prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,70))
+        END AS STRING
+    ) AS prefeitura,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`

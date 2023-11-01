@@ -269,13 +269,11 @@ def create_table_and_upload_to_storage(dataset_id, table_id, output_path):
 def get_layout_table_from_staging(
     project_id, dataset_id, table_id, layout_dataset_id, layout_table_id
 ):
-    query = f"""
+    query = """
         SELECT
-            t1.*,
-            t2.nome_padronizado,
-            t2.bigquery_type,
-            t2.date_format,
-        FROM `{project_id}.{layout_dataset_id}_staging.{layout_table_id}` t1
+            t1.* EXCEPT(column, descricao),
+            t2.*
+        FROM `rj-smas.protecao_social_cadunico_staging.layout` t1
         LEFT JOIN `rj-smas.protecao_social_cadunico_staging.layout_dicionario_colunas` t2
         ON t1.column = t2.column
     """
@@ -325,6 +323,17 @@ def dump_dict_to_dbt_yaml(schema, schema_yaml_path):
     )
 
 
+def convert_string_to_json(s):
+    if s is not None:
+        try:
+            return json.loads(str(s))
+        except Exception as e:
+            log(s)
+            raise BaseException(e)
+    else:
+        return s
+
+
 def create_cadunico_dbt_consolidated_models(
     dataframe: pd.DataFrame, model_dataset_id: str, model_table_id: str
 ):
@@ -335,6 +344,10 @@ def create_cadunico_dbt_consolidated_models(
     df["version"] = np.where(
         df["coluna_esta_versao_anterior"] == "False", df["versao_layout_anterior"], df["version"]
     )
+    df["dicionario_atributos"] = df["dicionario_atributos"].apply(
+        lambda s: convert_string_to_json(s)
+    )
+
     # remove columns that are empty
     df = df[np.logical_not(df["column"].str.contains("vazio"))]
     df = df.sort_values(["reg", "versao_layout_particao"])
@@ -386,7 +399,8 @@ def create_cadunico_dbt_consolidated_models(
                 bigquery_type = row["bigquery_type"]
                 bigquery_type = bigquery_type if bigquery_type is not None else "STRING"
                 date_format = row["date_format"]
-
+                ajuste_decimal = row["ajuste_decimal"]
+                dicionario_atributos = row["dicionario_atributos"]
                 col_in_last_version = row["coluna_esta_versao_anterior"]
 
                 col_name_padronizado = (
@@ -402,27 +416,73 @@ def create_cadunico_dbt_consolidated_models(
                     if bigquery_type == "DATE":
                         col_expression = (
                             f"\n    --column: {column}\n"
-                            + "    CASE\n"
-                            + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"        ELSE CAST( SAFE.PARSE_DATE('{date_format}', TRIM({col_name}))  AS {bigquery_type})\n"
-                            + f"    END AS {col_name_padronizado},"
+                            + "    SAFE.PARSE_DATE(\n"
+                            + f"        '{date_format}'\n,"
+                            + "         CASE\n"
+                            + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            + f"            ELSE TRIM({col_name})\n"
+                            + "        END"
+                            + f"    ) AS {col_name_padronizado},"
                         )
                     elif bigquery_type == "INT64":
                         col_expression = (
                             f"\n    --column: {column}\n"
-                            + "    CASE\n"
-                            + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"        ELSE SAFE_CAST( TRIM({col_name}) AS {bigquery_type})\n"
-                            + f"    END AS {col_name_padronizado},"
+                            + "    SAFE_CAST(\n"
+                            + "        CASE\n"
+                            + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            + f"            ELSE TRIM({col_name}) AS {bigquery_type}\n"
+                            + f"        END AS {bigquery_type}\n"
+                            + f"    ) AS {col_name_padronizado},"
+                        )
+                    elif bigquery_type == "FLOAT64":
+                        col_expression = (
+                            f"\n    --column: {column}\n"
+                            + "    SAFE_CAST(\n"
+                            + "        CASE\n"
+                            + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            + f"            ELSE SAFE_CAST( TRIM({col_name}) AS INT64) / {ajuste_decimal} \n"
+                            + f"        END AS {bigquery_type}\n"
+                            + f"    ) AS {col_name_padronizado},"
                         )
                     else:
                         col_expression = (
                             f"\n    --column: {column}\n"
-                            + "    CASE\n"
-                            + f"        WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
-                            + f"        ELSE CAST( TRIM({col_name})  AS {bigquery_type})\n"
-                            + f"    END AS {col_name_padronizado},"
+                            + "    CAST(\n"
+                            + "        CASE\n"
+                            + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            + f"            ELSE TRIM({col_name})\n"
+                            + f"        END AS {bigquery_type}\n"
+                            + f"    ) AS {col_name_padronizado},"
                         )
+
+                        if dicionario_atributos is not None:
+                            col_expression = (
+                                col_expression
+                                + f"\n    --column: {column}\n"
+                                + "    CAST(\n"
+                                + "        CASE\n"
+                                + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
+                            )
+                            for key in dicionario_atributos.keys():
+                                col_expression = (
+                                    col_expression
+                                    + f"            WHEN REGEXP_CONTAINS({col_name}, r'^{key}$') THEN '{dicionario_atributos[key]}'\n"
+                                )
+
+                            if "id_" in col_name_padronizado:
+                                col_name_padronizado_dict_atr = col_name_padronizado.replace(
+                                    "id_", "", 1
+                                )
+                            else:
+                                raise Exception(
+                                    f"col_name_padronizado: {col_name_padronizado} should have id_ in the name"
+                                )
+                            col_expression = (
+                                col_expression
+                                + f"            ELSE TRIM({col_name})\n"
+                                + f"        END AS {bigquery_type}\n"
+                                + f"    ) AS {col_name_padronizado_dict_atr},"
+                            )
 
                 columns.append(col_expression)
                 col_description = (

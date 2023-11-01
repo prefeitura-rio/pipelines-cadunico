@@ -14,274 +14,424 @@
 SELECT
 
     --column: chv_natural_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_condicao_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS id_condicao_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS id_condicao_cadastro,
+    --column: cod_condicao_cadastro_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^1$') THEN 'Atualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^2$') THEN 'Desatualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^3$') THEN 'Por Confirmação'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^4$') THEN 'Não Se Aplica'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^5$') THEN 'Por Confirmação Do Usuário'
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS condicao_cadastro,
 
     --column: cod_est_cadastral_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS id_estado_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS id_estado_cadastro,
+    --column: cod_est_cadastral_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^1$') THEN 'Em Cadastramento'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^2$') THEN 'Sem Registro Civil'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^3$') THEN 'Cadastrado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^4$') THEN 'Excluido'
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS estado_cadastro,
 
     --column: cod_familiar_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,14,11))
+        END AS STRING
+    ) AS id_familia,
 
     --column: cod_forma_coleta_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS id_forma_coleta,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS id_forma_coleta,
+    --column: cod_forma_coleta_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^0$') THEN 'Informação Migrada Como Inexistente'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^1$') THEN 'Sem Visita Domiciliar'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^2$') THEN 'Com Visita Domiciliar'
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS forma_coleta,
 
     --column: cod_ibge_distrito_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,76,2))  AS STRING)
-    END AS id_distrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,76,2))
+        END AS STRING
+    ) AS id_distrito,
 
     --column: cod_ibge_setor_censo_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,80,4))  AS STRING)
-    END AS id_setor_censitario,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,80,4))
+        END AS STRING
+    ) AS id_setor_censitario,
 
     --column: cod_ibge_subdistr_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,78,2))  AS STRING)
-    END AS id_subdistrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,78,2))
+        END AS STRING
+    ) AS id_subdistrito,
 
     --column: cod_modalidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS id_modalidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,84,1))
+        END AS STRING
+    ) AS id_modalidade,
 
     --column: cod_munic_ibge_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,69,2))  AS STRING)
-    END AS id_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,69,2))
+        END AS STRING
+    ) AS id_uf,
 
     --column: cod_munic_ibge_5_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,71,5))  AS STRING)
-    END AS id_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,71,5))
+        END AS STRING
+    ) AS id_municipio,
 
     --column: cod_origem_familia_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1092,11))  AS STRING)
-    END AS id_familia_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1092,11))
+        END AS STRING
+    ) AS id_familia_origem,
 
     --column: cod_origem_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1079,13))  AS STRING)
-    END AS id_prefeitura_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1079,13))
+        END AS STRING
+    ) AS id_prefeitura_origem,
 
     --column: cod_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1120,10))  AS STRING)
-    END AS id_unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1120,10))
+        END AS STRING
+    ) AS id_unidade_territorial,
 
     --column: dat_alteracao_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,48,8)))  AS DATE)
-    END AS data_alteracao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,8))
+        END    ) AS data_alteracao,
 
     --column: dat_atualizacao_familia
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1112,8)))  AS DATE)
-    END AS data_atualizacao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1112,8))
+        END    ) AS data_atualizacao,
 
     --column: dat_cadastramento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,40,8)))  AS DATE)
-    END AS data_catrastro,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,8))
+        END    ) AS data_catrastro,
 
     --column: des_complemento_adic_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,365,75))  AS STRING)
-    END AS complemento_adicional,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,365,75))
+        END AS STRING
+    ) AS complemento_adicional,
 
     --column: des_complemento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,343,22))  AS STRING)
-    END AS complemento,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,343,22))
+        END AS STRING
+    ) AS complemento,
 
     --column: dt_cdstr_atual_fmla
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1103,8)))  AS DATE)
-    END AS data_limite_catastro_atual,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1103,8))
+        END    ) AS data_limite_catastro_atual,
 
     --column: dta_entrevista_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,91,8)))  AS DATE)
-    END AS data_entrevista,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,91,8))
+        END    ) AS data_entrevista,
 
     --column: dta_integracao_fam
     NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
 
     --column: filler
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,448,38))  AS STRING)
-    END AS filler,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,448,38))
+        END AS STRING
+    ) AS filler,
 
     --column: flag_fam_alterada_v7
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1111,1))  AS STRING)
-    END AS alterada_v7,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS id_alterada_v7,
+    --column: flag_fam_alterada_v7
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^0$') THEN 'Família Não Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^1$') THEN 'Família Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^2$') THEN 'Família Oriunda Da V7'
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS alterada_v7,
 
     --column: ind_cadastro_valido_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS cadastro_valido,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS id_cadastro_valido,
+    --column: ind_cadastro_valido_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^2$') THEN 'Não'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^3$') THEN 'Não Se Aplica'
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS cadastro_valido,
 
     --column: ind_formulario_0_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS formulario_0,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,86,1))
+        END AS STRING
+    ) AS formulario_0,
 
     --column: ind_formulario_1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS formulario_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,87,1))
+        END AS STRING
+    ) AS formulario_1,
 
     --column: ind_formulario_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS formulario_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,88,1))
+        END AS STRING
+    ) AS formulario_2,
 
     --column: ind_formulario_sup1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS formulario_suplementar_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,89,1))
+        END AS STRING
+    ) AS formulario_suplementar_1,
 
     --column: ind_formulario_sup2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS formulario_suplementar_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,90,1))
+        END AS STRING
+    ) AS formulario_suplementar_2,
 
     --column: ind_formulario_sup3_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1230,1))  AS STRING)
-    END AS formulario_suplementar_3,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1230,1))
+        END AS STRING
+    ) AS formulario_suplementar_3,
 
     --column: ind_trabalho_infantil_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,68,1))  AS STRING)
-    END AS trabalho_infantil,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS id_trabalho_infantil,
+    --column: ind_trabalho_infantil_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS trabalho_infantil,
 
     --column: nom_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,742,70))  AS STRING)
-    END AS entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,742,70))
+        END AS STRING
+    ) AS entrevistador,
 
     --column: nom_localidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,76))  AS STRING)
-    END AS localidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,99,76))
+        END AS STRING
+    ) AS localidade,
 
     --column: nom_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,251,76))  AS STRING)
-    END AS logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,251,76))
+        END AS STRING
+    ) AS logradouro,
 
     --column: nom_tip_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,175,38))  AS STRING)
-    END AS tipo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,175,38))
+        END AS STRING
+    ) AS tipo_logradouro,
 
     --column: nom_titulo_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,213,38))  AS STRING)
-    END AS titulo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,213,38))
+        END AS STRING
+    ) AS titulo_logradouro,
 
     --column: nom_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1130,100))  AS STRING)
-    END AS unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1130,100))
+        END AS STRING
+    ) AS unidade_territorial,
 
     --column: nu_origem_cadastro_fam
     NULL AS origem_cadastro, --Essa coluna não esta na versao posterior
 
     --column: num_cep_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,440,8))  AS STRING)
-    END AS cep,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,440,8))
+        END AS STRING
+    ) AS cep,
 
     --column: num_cpf_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,812,11))  AS STRING)
-    END AS cpf_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,812,11))
+        END AS STRING
+    ) AS cpf_entrevistador,
 
     --column: num_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,327,16)) AS INT64)
-    END AS numero_logradouro,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,327,16)) AS INT64
+        END AS INT64
+    ) AS numero_logradouro,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
 
     --column: txt_obs_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,823,256))  AS STRING)
-    END AS observacoes_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,823,256))
+        END AS STRING
+    ) AS observacoes_entrevistador,
 
     --column: txt_referencia_local_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,486,256))  AS STRING)
-    END AS refencia_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,486,256))
+        END AS STRING
+    ) AS refencia_logradouro,
 
     --column: vlr_renda_media_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64)
-    END AS valor_renda_media,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
+            ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64) / 100
+        END AS FLOAT64
+    ) AS valor_renda_media,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -294,277 +444,429 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_condicao_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS id_condicao_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS id_condicao_cadastro,
+    --column: cod_condicao_cadastro_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^1$') THEN 'Atualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^2$') THEN 'Desatualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^3$') THEN 'Por Confirmação'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^4$') THEN 'Não Se Aplica'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^5$') THEN 'Por Confirmação Do Usuário'
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS condicao_cadastro,
 
     --column: cod_est_cadastral_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS id_estado_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS id_estado_cadastro,
+    --column: cod_est_cadastral_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^1$') THEN 'Em Cadastramento'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^2$') THEN 'Sem Registro Civil'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^3$') THEN 'Cadastrado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^4$') THEN 'Excluido'
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS estado_cadastro,
 
     --column: cod_familiar_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,14,11))
+        END AS STRING
+    ) AS id_familia,
 
     --column: cod_forma_coleta_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS id_forma_coleta,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS id_forma_coleta,
+    --column: cod_forma_coleta_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^0$') THEN 'Informação Migrada Como Inexistente'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^1$') THEN 'Sem Visita Domiciliar'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^2$') THEN 'Com Visita Domiciliar'
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS forma_coleta,
 
     --column: cod_ibge_distrito_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,76,2))  AS STRING)
-    END AS id_distrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,76,2))
+        END AS STRING
+    ) AS id_distrito,
 
     --column: cod_ibge_setor_censo_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,80,4))  AS STRING)
-    END AS id_setor_censitario,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,80,4))
+        END AS STRING
+    ) AS id_setor_censitario,
 
     --column: cod_ibge_subdistr_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,78,2))  AS STRING)
-    END AS id_subdistrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,78,2))
+        END AS STRING
+    ) AS id_subdistrito,
 
     --column: cod_modalidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS id_modalidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,84,1))
+        END AS STRING
+    ) AS id_modalidade,
 
     --column: cod_munic_ibge_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,69,2))  AS STRING)
-    END AS id_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,69,2))
+        END AS STRING
+    ) AS id_uf,
 
     --column: cod_munic_ibge_5_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,71,5))  AS STRING)
-    END AS id_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,71,5))
+        END AS STRING
+    ) AS id_municipio,
 
     --column: cod_origem_familia_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1092,11))  AS STRING)
-    END AS id_familia_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1092,11))
+        END AS STRING
+    ) AS id_familia_origem,
 
     --column: cod_origem_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1079,13))  AS STRING)
-    END AS id_prefeitura_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1079,13))
+        END AS STRING
+    ) AS id_prefeitura_origem,
 
     --column: cod_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1120,10))  AS STRING)
-    END AS id_unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1120,10))
+        END AS STRING
+    ) AS id_unidade_territorial,
 
     --column: dat_alteracao_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,48,8)))  AS DATE)
-    END AS data_alteracao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,8))
+        END    ) AS data_alteracao,
 
     --column: dat_atualizacao_familia
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1112,8)))  AS DATE)
-    END AS data_atualizacao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1112,8))
+        END    ) AS data_atualizacao,
 
     --column: dat_cadastramento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,40,8)))  AS DATE)
-    END AS data_catrastro,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,8))
+        END    ) AS data_catrastro,
 
     --column: des_complemento_adic_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,365,75))  AS STRING)
-    END AS complemento_adicional,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,365,75))
+        END AS STRING
+    ) AS complemento_adicional,
 
     --column: des_complemento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,343,22))  AS STRING)
-    END AS complemento,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,343,22))
+        END AS STRING
+    ) AS complemento,
 
     --column: dt_cdstr_atual_fmla
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1103,8)))  AS DATE)
-    END AS data_limite_catastro_atual,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1103,8))
+        END    ) AS data_limite_catastro_atual,
 
     --column: dta_entrevista_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,91,8)))  AS DATE)
-    END AS data_entrevista,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,91,8))
+        END    ) AS data_entrevista,
 
     --column: dta_integracao_fam
     NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
 
     --column: filler
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,448,38))  AS STRING)
-    END AS filler,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,448,38))
+        END AS STRING
+    ) AS filler,
 
     --column: flag_fam_alterada_v7
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1111,1))  AS STRING)
-    END AS alterada_v7,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS id_alterada_v7,
+    --column: flag_fam_alterada_v7
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^0$') THEN 'Família Não Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^1$') THEN 'Família Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^2$') THEN 'Família Oriunda Da V7'
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS alterada_v7,
 
     --column: ind_cadastro_valido_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS cadastro_valido,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS id_cadastro_valido,
+    --column: ind_cadastro_valido_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^2$') THEN 'Não'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^3$') THEN 'Não Se Aplica'
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS cadastro_valido,
 
     --column: ind_formulario_0_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS formulario_0,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,86,1))
+        END AS STRING
+    ) AS formulario_0,
 
     --column: ind_formulario_1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS formulario_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,87,1))
+        END AS STRING
+    ) AS formulario_1,
 
     --column: ind_formulario_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS formulario_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,88,1))
+        END AS STRING
+    ) AS formulario_2,
 
     --column: ind_formulario_sup1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS formulario_suplementar_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,89,1))
+        END AS STRING
+    ) AS formulario_suplementar_1,
 
     --column: ind_formulario_sup2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS formulario_suplementar_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,90,1))
+        END AS STRING
+    ) AS formulario_suplementar_2,
 
     --column: ind_formulario_sup3_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1230,1))  AS STRING)
-    END AS formulario_suplementar_3,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1230,1))
+        END AS STRING
+    ) AS formulario_suplementar_3,
 
     --column: ind_trabalho_infantil_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,68,1))  AS STRING)
-    END AS trabalho_infantil,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS id_trabalho_infantil,
+    --column: ind_trabalho_infantil_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS trabalho_infantil,
 
     --column: nom_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,742,70))  AS STRING)
-    END AS entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,742,70))
+        END AS STRING
+    ) AS entrevistador,
 
     --column: nom_localidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,76))  AS STRING)
-    END AS localidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,99,76))
+        END AS STRING
+    ) AS localidade,
 
     --column: nom_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,251,76))  AS STRING)
-    END AS logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,251,76))
+        END AS STRING
+    ) AS logradouro,
 
     --column: nom_tip_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,175,38))  AS STRING)
-    END AS tipo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,175,38))
+        END AS STRING
+    ) AS tipo_logradouro,
 
     --column: nom_titulo_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,213,38))  AS STRING)
-    END AS titulo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,213,38))
+        END AS STRING
+    ) AS titulo_logradouro,
 
     --column: nom_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1130,100))  AS STRING)
-    END AS unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1130,100))
+        END AS STRING
+    ) AS unidade_territorial,
 
     --column: nu_origem_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1231,2))  AS STRING)
-    END AS origem_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1231,2))
+        END AS STRING
+    ) AS origem_cadastro,
 
     --column: num_cep_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,440,8))  AS STRING)
-    END AS cep,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,440,8))
+        END AS STRING
+    ) AS cep,
 
     --column: num_cpf_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,812,11))  AS STRING)
-    END AS cpf_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,812,11))
+        END AS STRING
+    ) AS cpf_entrevistador,
 
     --column: num_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,327,16)) AS INT64)
-    END AS numero_logradouro,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,327,16)) AS INT64
+        END AS INT64
+    ) AS numero_logradouro,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
 
     --column: txt_obs_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,823,256))  AS STRING)
-    END AS observacoes_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,823,256))
+        END AS STRING
+    ) AS observacoes_entrevistador,
 
     --column: txt_referencia_local_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,486,256))  AS STRING)
-    END AS refencia_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,486,256))
+        END AS STRING
+    ) AS refencia_logradouro,
 
     --column: vlr_renda_media_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64)
-    END AS valor_renda_media,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
+            ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64) / 100
+        END AS FLOAT64
+    ) AS valor_renda_media,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -577,277 +879,429 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_condicao_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS id_condicao_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS id_condicao_cadastro,
+    --column: cod_condicao_cadastro_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^1$') THEN 'Atualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^2$') THEN 'Desatualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^3$') THEN 'Por Confirmação'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^4$') THEN 'Não Se Aplica'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^5$') THEN 'Por Confirmação Do Usuário'
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS condicao_cadastro,
 
     --column: cod_est_cadastral_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS id_estado_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS id_estado_cadastro,
+    --column: cod_est_cadastral_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^1$') THEN 'Em Cadastramento'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^2$') THEN 'Sem Registro Civil'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^3$') THEN 'Cadastrado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^4$') THEN 'Excluido'
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS estado_cadastro,
 
     --column: cod_familiar_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,14,11))
+        END AS STRING
+    ) AS id_familia,
 
     --column: cod_forma_coleta_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS id_forma_coleta,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS id_forma_coleta,
+    --column: cod_forma_coleta_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^0$') THEN 'Informação Migrada Como Inexistente'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^1$') THEN 'Sem Visita Domiciliar'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^2$') THEN 'Com Visita Domiciliar'
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS forma_coleta,
 
     --column: cod_ibge_distrito_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,76,2))  AS STRING)
-    END AS id_distrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,76,2))
+        END AS STRING
+    ) AS id_distrito,
 
     --column: cod_ibge_setor_censo_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,80,4))  AS STRING)
-    END AS id_setor_censitario,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,80,4))
+        END AS STRING
+    ) AS id_setor_censitario,
 
     --column: cod_ibge_subdistr_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,78,2))  AS STRING)
-    END AS id_subdistrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,78,2))
+        END AS STRING
+    ) AS id_subdistrito,
 
     --column: cod_modalidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS id_modalidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,84,1))
+        END AS STRING
+    ) AS id_modalidade,
 
     --column: cod_munic_ibge_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,69,2))  AS STRING)
-    END AS id_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,69,2))
+        END AS STRING
+    ) AS id_uf,
 
     --column: cod_munic_ibge_5_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,71,5))  AS STRING)
-    END AS id_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,71,5))
+        END AS STRING
+    ) AS id_municipio,
 
     --column: cod_origem_familia_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1092,11))  AS STRING)
-    END AS id_familia_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1092,11))
+        END AS STRING
+    ) AS id_familia_origem,
 
     --column: cod_origem_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1079,13))  AS STRING)
-    END AS id_prefeitura_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1079,13))
+        END AS STRING
+    ) AS id_prefeitura_origem,
 
     --column: cod_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1120,10))  AS STRING)
-    END AS id_unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1120,10))
+        END AS STRING
+    ) AS id_unidade_territorial,
 
     --column: dat_alteracao_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,48,8)))  AS DATE)
-    END AS data_alteracao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,8))
+        END    ) AS data_alteracao,
 
     --column: dat_atualizacao_familia
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1112,8)))  AS DATE)
-    END AS data_atualizacao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1112,8))
+        END    ) AS data_atualizacao,
 
     --column: dat_cadastramento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,40,8)))  AS DATE)
-    END AS data_catrastro,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,8))
+        END    ) AS data_catrastro,
 
     --column: des_complemento_adic_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,365,75))  AS STRING)
-    END AS complemento_adicional,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,365,75))
+        END AS STRING
+    ) AS complemento_adicional,
 
     --column: des_complemento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,343,22))  AS STRING)
-    END AS complemento,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,343,22))
+        END AS STRING
+    ) AS complemento,
 
     --column: dt_cdstr_atual_fmla
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1103,8)))  AS DATE)
-    END AS data_limite_catastro_atual,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1103,8))
+        END    ) AS data_limite_catastro_atual,
 
     --column: dta_entrevista_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,91,8)))  AS DATE)
-    END AS data_entrevista,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,91,8))
+        END    ) AS data_entrevista,
 
     --column: dta_integracao_fam
     NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
 
     --column: filler
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,448,38))  AS STRING)
-    END AS filler,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,448,38))
+        END AS STRING
+    ) AS filler,
 
     --column: flag_fam_alterada_v7
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1111,1))  AS STRING)
-    END AS alterada_v7,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS id_alterada_v7,
+    --column: flag_fam_alterada_v7
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^0$') THEN 'Família Não Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^1$') THEN 'Família Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^2$') THEN 'Família Oriunda Da V7'
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS alterada_v7,
 
     --column: ind_cadastro_valido_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS cadastro_valido,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS id_cadastro_valido,
+    --column: ind_cadastro_valido_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^2$') THEN 'Não'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^3$') THEN 'Não Se Aplica'
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS cadastro_valido,
 
     --column: ind_formulario_0_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS formulario_0,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,86,1))
+        END AS STRING
+    ) AS formulario_0,
 
     --column: ind_formulario_1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS formulario_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,87,1))
+        END AS STRING
+    ) AS formulario_1,
 
     --column: ind_formulario_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS formulario_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,88,1))
+        END AS STRING
+    ) AS formulario_2,
 
     --column: ind_formulario_sup1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS formulario_suplementar_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,89,1))
+        END AS STRING
+    ) AS formulario_suplementar_1,
 
     --column: ind_formulario_sup2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS formulario_suplementar_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,90,1))
+        END AS STRING
+    ) AS formulario_suplementar_2,
 
     --column: ind_formulario_sup3_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1230,1))  AS STRING)
-    END AS formulario_suplementar_3,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1230,1))
+        END AS STRING
+    ) AS formulario_suplementar_3,
 
     --column: ind_trabalho_infantil_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,68,1))  AS STRING)
-    END AS trabalho_infantil,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS id_trabalho_infantil,
+    --column: ind_trabalho_infantil_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS trabalho_infantil,
 
     --column: nom_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,742,70))  AS STRING)
-    END AS entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,742,70))
+        END AS STRING
+    ) AS entrevistador,
 
     --column: nom_localidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,76))  AS STRING)
-    END AS localidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,99,76))
+        END AS STRING
+    ) AS localidade,
 
     --column: nom_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,251,76))  AS STRING)
-    END AS logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,251,76))
+        END AS STRING
+    ) AS logradouro,
 
     --column: nom_tip_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,175,38))  AS STRING)
-    END AS tipo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,175,38))
+        END AS STRING
+    ) AS tipo_logradouro,
 
     --column: nom_titulo_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,213,38))  AS STRING)
-    END AS titulo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,213,38))
+        END AS STRING
+    ) AS titulo_logradouro,
 
     --column: nom_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1130,100))  AS STRING)
-    END AS unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1130,100))
+        END AS STRING
+    ) AS unidade_territorial,
 
     --column: nu_origem_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1231,2))  AS STRING)
-    END AS origem_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1231,2))
+        END AS STRING
+    ) AS origem_cadastro,
 
     --column: num_cep_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,440,8))  AS STRING)
-    END AS cep,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,440,8))
+        END AS STRING
+    ) AS cep,
 
     --column: num_cpf_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,812,11))  AS STRING)
-    END AS cpf_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,812,11))
+        END AS STRING
+    ) AS cpf_entrevistador,
 
     --column: num_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,327,16)) AS INT64)
-    END AS numero_logradouro,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,327,16)) AS INT64
+        END AS INT64
+    ) AS numero_logradouro,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
 
     --column: txt_obs_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,823,256))  AS STRING)
-    END AS observacoes_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,823,256))
+        END AS STRING
+    ) AS observacoes_entrevistador,
 
     --column: txt_referencia_local_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,486,256))  AS STRING)
-    END AS refencia_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,486,256))
+        END AS STRING
+    ) AS refencia_logradouro,
 
     --column: vlr_renda_media_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64)
-    END AS valor_renda_media,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
+            ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64) / 100
+        END AS FLOAT64
+    ) AS valor_renda_media,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -860,277 +1314,429 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_condicao_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS id_condicao_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS id_condicao_cadastro,
+    --column: cod_condicao_cadastro_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^1$') THEN 'Atualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^2$') THEN 'Desatualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^3$') THEN 'Por Confirmação'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^4$') THEN 'Não Se Aplica'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^5$') THEN 'Por Confirmação Do Usuário'
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS condicao_cadastro,
 
     --column: cod_est_cadastral_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS id_estado_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS id_estado_cadastro,
+    --column: cod_est_cadastral_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^1$') THEN 'Em Cadastramento'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^2$') THEN 'Sem Registro Civil'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^3$') THEN 'Cadastrado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^4$') THEN 'Excluido'
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS estado_cadastro,
 
     --column: cod_familiar_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,14,11))
+        END AS STRING
+    ) AS id_familia,
 
     --column: cod_forma_coleta_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS id_forma_coleta,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS id_forma_coleta,
+    --column: cod_forma_coleta_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^0$') THEN 'Informação Migrada Como Inexistente'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^1$') THEN 'Sem Visita Domiciliar'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^2$') THEN 'Com Visita Domiciliar'
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS forma_coleta,
 
     --column: cod_ibge_distrito_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,76,2))  AS STRING)
-    END AS id_distrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,76,2))
+        END AS STRING
+    ) AS id_distrito,
 
     --column: cod_ibge_setor_censo_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,80,4))  AS STRING)
-    END AS id_setor_censitario,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,80,4))
+        END AS STRING
+    ) AS id_setor_censitario,
 
     --column: cod_ibge_subdistr_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,78,2))  AS STRING)
-    END AS id_subdistrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,78,2))
+        END AS STRING
+    ) AS id_subdistrito,
 
     --column: cod_modalidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS id_modalidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,84,1))
+        END AS STRING
+    ) AS id_modalidade,
 
     --column: cod_munic_ibge_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,69,2))  AS STRING)
-    END AS id_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,69,2))
+        END AS STRING
+    ) AS id_uf,
 
     --column: cod_munic_ibge_5_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,71,5))  AS STRING)
-    END AS id_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,71,5))
+        END AS STRING
+    ) AS id_municipio,
 
     --column: cod_origem_familia_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1092,11))  AS STRING)
-    END AS id_familia_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1092,11))
+        END AS STRING
+    ) AS id_familia_origem,
 
     --column: cod_origem_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1079,13))  AS STRING)
-    END AS id_prefeitura_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1079,13))
+        END AS STRING
+    ) AS id_prefeitura_origem,
 
     --column: cod_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1120,10))  AS STRING)
-    END AS id_unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1120,10))
+        END AS STRING
+    ) AS id_unidade_territorial,
 
     --column: dat_alteracao_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,48,8)))  AS DATE)
-    END AS data_alteracao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,8))
+        END    ) AS data_alteracao,
 
     --column: dat_atualizacao_familia
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1112,8)))  AS DATE)
-    END AS data_atualizacao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1112,8))
+        END    ) AS data_atualizacao,
 
     --column: dat_cadastramento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,40,8)))  AS DATE)
-    END AS data_catrastro,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,8))
+        END    ) AS data_catrastro,
 
     --column: des_complemento_adic_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,365,75))  AS STRING)
-    END AS complemento_adicional,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,365,75))
+        END AS STRING
+    ) AS complemento_adicional,
 
     --column: des_complemento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,343,22))  AS STRING)
-    END AS complemento,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,343,22))
+        END AS STRING
+    ) AS complemento,
 
     --column: dt_cdstr_atual_fmla
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1103,8)))  AS DATE)
-    END AS data_limite_catastro_atual,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1103,8))
+        END    ) AS data_limite_catastro_atual,
 
     --column: dta_entrevista_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,91,8)))  AS DATE)
-    END AS data_entrevista,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,91,8))
+        END    ) AS data_entrevista,
 
     --column: dta_integracao_fam
     NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
 
     --column: filler
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,448,38))  AS STRING)
-    END AS filler,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,448,38))
+        END AS STRING
+    ) AS filler,
 
     --column: flag_fam_alterada_v7
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1111,1))  AS STRING)
-    END AS alterada_v7,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS id_alterada_v7,
+    --column: flag_fam_alterada_v7
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^0$') THEN 'Família Não Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^1$') THEN 'Família Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^2$') THEN 'Família Oriunda Da V7'
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS alterada_v7,
 
     --column: ind_cadastro_valido_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS cadastro_valido,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS id_cadastro_valido,
+    --column: ind_cadastro_valido_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^2$') THEN 'Não'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^3$') THEN 'Não Se Aplica'
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS cadastro_valido,
 
     --column: ind_formulario_0_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS formulario_0,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,86,1))
+        END AS STRING
+    ) AS formulario_0,
 
     --column: ind_formulario_1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS formulario_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,87,1))
+        END AS STRING
+    ) AS formulario_1,
 
     --column: ind_formulario_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS formulario_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,88,1))
+        END AS STRING
+    ) AS formulario_2,
 
     --column: ind_formulario_sup1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS formulario_suplementar_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,89,1))
+        END AS STRING
+    ) AS formulario_suplementar_1,
 
     --column: ind_formulario_sup2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS formulario_suplementar_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,90,1))
+        END AS STRING
+    ) AS formulario_suplementar_2,
 
     --column: ind_formulario_sup3_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1230,1))  AS STRING)
-    END AS formulario_suplementar_3,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1230,1))
+        END AS STRING
+    ) AS formulario_suplementar_3,
 
     --column: ind_trabalho_infantil_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,68,1))  AS STRING)
-    END AS trabalho_infantil,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS id_trabalho_infantil,
+    --column: ind_trabalho_infantil_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS trabalho_infantil,
 
     --column: nom_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,742,70))  AS STRING)
-    END AS entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,742,70))
+        END AS STRING
+    ) AS entrevistador,
 
     --column: nom_localidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,76))  AS STRING)
-    END AS localidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,99,76))
+        END AS STRING
+    ) AS localidade,
 
     --column: nom_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,251,76))  AS STRING)
-    END AS logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,251,76))
+        END AS STRING
+    ) AS logradouro,
 
     --column: nom_tip_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,175,38))  AS STRING)
-    END AS tipo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,175,38))
+        END AS STRING
+    ) AS tipo_logradouro,
 
     --column: nom_titulo_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,213,38))  AS STRING)
-    END AS titulo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,213,38))
+        END AS STRING
+    ) AS titulo_logradouro,
 
     --column: nom_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1130,100))  AS STRING)
-    END AS unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1130,100))
+        END AS STRING
+    ) AS unidade_territorial,
 
     --column: nu_origem_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1231,2))  AS STRING)
-    END AS origem_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1231,2))
+        END AS STRING
+    ) AS origem_cadastro,
 
     --column: num_cep_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,440,8))  AS STRING)
-    END AS cep,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,440,8))
+        END AS STRING
+    ) AS cep,
 
     --column: num_cpf_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,812,11))  AS STRING)
-    END AS cpf_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,812,11))
+        END AS STRING
+    ) AS cpf_entrevistador,
 
     --column: num_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,327,16)) AS INT64)
-    END AS numero_logradouro,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,327,16)) AS INT64
+        END AS INT64
+    ) AS numero_logradouro,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
 
     --column: txt_obs_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,823,256))  AS STRING)
-    END AS observacoes_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,823,256))
+        END AS STRING
+    ) AS observacoes_entrevistador,
 
     --column: txt_referencia_local_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,486,256))  AS STRING)
-    END AS refencia_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,486,256))
+        END AS STRING
+    ) AS refencia_logradouro,
 
     --column: vlr_renda_media_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64)
-    END AS valor_renda_media,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
+            ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64) / 100
+        END AS FLOAT64
+    ) AS valor_renda_media,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -1143,277 +1749,429 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_condicao_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS id_condicao_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS id_condicao_cadastro,
+    --column: cod_condicao_cadastro_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^1$') THEN 'Atualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^2$') THEN 'Desatualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^3$') THEN 'Por Confirmação'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^4$') THEN 'Não Se Aplica'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^5$') THEN 'Por Confirmação Do Usuário'
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS condicao_cadastro,
 
     --column: cod_est_cadastral_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS id_estado_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS id_estado_cadastro,
+    --column: cod_est_cadastral_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^1$') THEN 'Em Cadastramento'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^2$') THEN 'Sem Registro Civil'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^3$') THEN 'Cadastrado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^4$') THEN 'Excluido'
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS estado_cadastro,
 
     --column: cod_familiar_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,14,11))
+        END AS STRING
+    ) AS id_familia,
 
     --column: cod_forma_coleta_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS id_forma_coleta,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS id_forma_coleta,
+    --column: cod_forma_coleta_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^0$') THEN 'Informação Migrada Como Inexistente'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^1$') THEN 'Sem Visita Domiciliar'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^2$') THEN 'Com Visita Domiciliar'
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS forma_coleta,
 
     --column: cod_ibge_distrito_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,76,2))  AS STRING)
-    END AS id_distrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,76,2))
+        END AS STRING
+    ) AS id_distrito,
 
     --column: cod_ibge_setor_censo_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,80,4))  AS STRING)
-    END AS id_setor_censitario,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,80,4))
+        END AS STRING
+    ) AS id_setor_censitario,
 
     --column: cod_ibge_subdistr_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,78,2))  AS STRING)
-    END AS id_subdistrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,78,2))
+        END AS STRING
+    ) AS id_subdistrito,
 
     --column: cod_modalidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS id_modalidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,84,1))
+        END AS STRING
+    ) AS id_modalidade,
 
     --column: cod_munic_ibge_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,69,2))  AS STRING)
-    END AS id_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,69,2))
+        END AS STRING
+    ) AS id_uf,
 
     --column: cod_munic_ibge_5_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,71,5))  AS STRING)
-    END AS id_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,71,5))
+        END AS STRING
+    ) AS id_municipio,
 
     --column: cod_origem_familia_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1092,11))  AS STRING)
-    END AS id_familia_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1092,11))
+        END AS STRING
+    ) AS id_familia_origem,
 
     --column: cod_origem_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1079,13))  AS STRING)
-    END AS id_prefeitura_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1079,13))
+        END AS STRING
+    ) AS id_prefeitura_origem,
 
     --column: cod_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1120,10))  AS STRING)
-    END AS id_unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1120,10))
+        END AS STRING
+    ) AS id_unidade_territorial,
 
     --column: dat_alteracao_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,48,8)))  AS DATE)
-    END AS data_alteracao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,8))
+        END    ) AS data_alteracao,
 
     --column: dat_atualizacao_familia
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1112,8)))  AS DATE)
-    END AS data_atualizacao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1112,8))
+        END    ) AS data_atualizacao,
 
     --column: dat_cadastramento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,40,8)))  AS DATE)
-    END AS data_catrastro,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,8))
+        END    ) AS data_catrastro,
 
     --column: des_complemento_adic_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,365,75))  AS STRING)
-    END AS complemento_adicional,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,365,75))
+        END AS STRING
+    ) AS complemento_adicional,
 
     --column: des_complemento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,343,22))  AS STRING)
-    END AS complemento,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,343,22))
+        END AS STRING
+    ) AS complemento,
 
     --column: dt_cdstr_atual_fmla
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1103,8)))  AS DATE)
-    END AS data_limite_catastro_atual,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1103,8))
+        END    ) AS data_limite_catastro_atual,
 
     --column: dta_entrevista_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,91,8)))  AS DATE)
-    END AS data_entrevista,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,91,8))
+        END    ) AS data_entrevista,
 
     --column: dta_integracao_fam
     NULL AS data_integracao_familia, --Essa coluna não esta na versao posterior
 
     --column: filler
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,448,38))  AS STRING)
-    END AS filler,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,448,38))
+        END AS STRING
+    ) AS filler,
 
     --column: flag_fam_alterada_v7
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1111,1))  AS STRING)
-    END AS alterada_v7,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS id_alterada_v7,
+    --column: flag_fam_alterada_v7
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^0$') THEN 'Família Não Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^1$') THEN 'Família Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^2$') THEN 'Família Oriunda Da V7'
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS alterada_v7,
 
     --column: ind_cadastro_valido_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS cadastro_valido,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS id_cadastro_valido,
+    --column: ind_cadastro_valido_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^2$') THEN 'Não'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^3$') THEN 'Não Se Aplica'
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS cadastro_valido,
 
     --column: ind_formulario_0_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS formulario_0,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,86,1))
+        END AS STRING
+    ) AS formulario_0,
 
     --column: ind_formulario_1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS formulario_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,87,1))
+        END AS STRING
+    ) AS formulario_1,
 
     --column: ind_formulario_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS formulario_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,88,1))
+        END AS STRING
+    ) AS formulario_2,
 
     --column: ind_formulario_sup1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS formulario_suplementar_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,89,1))
+        END AS STRING
+    ) AS formulario_suplementar_1,
 
     --column: ind_formulario_sup2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS formulario_suplementar_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,90,1))
+        END AS STRING
+    ) AS formulario_suplementar_2,
 
     --column: ind_formulario_sup3_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1230,1))  AS STRING)
-    END AS formulario_suplementar_3,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1230,1))
+        END AS STRING
+    ) AS formulario_suplementar_3,
 
     --column: ind_trabalho_infantil_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,68,1))  AS STRING)
-    END AS trabalho_infantil,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS id_trabalho_infantil,
+    --column: ind_trabalho_infantil_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS trabalho_infantil,
 
     --column: nom_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,742,70))  AS STRING)
-    END AS entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,742,70))
+        END AS STRING
+    ) AS entrevistador,
 
     --column: nom_localidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,76))  AS STRING)
-    END AS localidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,99,76))
+        END AS STRING
+    ) AS localidade,
 
     --column: nom_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,251,76))  AS STRING)
-    END AS logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,251,76))
+        END AS STRING
+    ) AS logradouro,
 
     --column: nom_tip_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,175,38))  AS STRING)
-    END AS tipo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,175,38))
+        END AS STRING
+    ) AS tipo_logradouro,
 
     --column: nom_titulo_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,213,38))  AS STRING)
-    END AS titulo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,213,38))
+        END AS STRING
+    ) AS titulo_logradouro,
 
     --column: nom_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1130,100))  AS STRING)
-    END AS unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1130,100))
+        END AS STRING
+    ) AS unidade_territorial,
 
     --column: nu_origem_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1231,2))  AS STRING)
-    END AS origem_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1231,2))
+        END AS STRING
+    ) AS origem_cadastro,
 
     --column: num_cep_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,440,8))  AS STRING)
-    END AS cep,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,440,8))
+        END AS STRING
+    ) AS cep,
 
     --column: num_cpf_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,812,11))  AS STRING)
-    END AS cpf_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,812,11))
+        END AS STRING
+    ) AS cpf_entrevistador,
 
     --column: num_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,327,16)) AS INT64)
-    END AS numero_logradouro,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,327,16)) AS INT64
+        END AS INT64
+    ) AS numero_logradouro,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
 
     --column: txt_obs_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,823,256))  AS STRING)
-    END AS observacoes_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,823,256))
+        END AS STRING
+    ) AS observacoes_entrevistador,
 
     --column: txt_referencia_local_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,486,256))  AS STRING)
-    END AS refencia_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,486,256))
+        END AS STRING
+    ) AS refencia_logradouro,
 
     --column: vlr_renda_media_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64)
-    END AS valor_renda_media,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
+            ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64) / 100
+        END AS FLOAT64
+    ) AS valor_renda_media,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`
@@ -1426,280 +2184,434 @@ UNION ALL
 SELECT
 
     --column: chv_natural_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1,13))  AS STRING)
-    END AS id_prefeitura,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1,13))
+        END AS STRING
+    ) AS id_prefeitura,
 
     --column: cod_condicao_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,58,1))  AS STRING)
-    END AS id_condicao_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS id_condicao_cadastro,
+    --column: cod_condicao_cadastro_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^1$') THEN 'Atualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^2$') THEN 'Desatualizado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^3$') THEN 'Por Confirmação'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^4$') THEN 'Não Se Aplica'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,58,1), r'^5$') THEN 'Por Confirmação Do Usuário'
+            ELSE TRIM(SUBSTRING(text,58,1))
+        END AS STRING
+    ) AS condicao_cadastro,
 
     --column: cod_est_cadastral_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,56,1))  AS STRING)
-    END AS id_estado_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS id_estado_cadastro,
+    --column: cod_est_cadastral_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^1$') THEN 'Em Cadastramento'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^2$') THEN 'Sem Registro Civil'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^3$') THEN 'Cadastrado'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,56,1), r'^4$') THEN 'Excluido'
+            ELSE TRIM(SUBSTRING(text,56,1))
+        END AS STRING
+    ) AS estado_cadastro,
 
     --column: cod_familiar_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,14,11))  AS STRING)
-    END AS id_familia,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,14,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,14,11))
+        END AS STRING
+    ) AS id_familia,
 
     --column: cod_forma_coleta_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,85,1))  AS STRING)
-    END AS id_forma_coleta,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS id_forma_coleta,
+    --column: cod_forma_coleta_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^0$') THEN 'Informação Migrada Como Inexistente'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^1$') THEN 'Sem Visita Domiciliar'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,85,1), r'^2$') THEN 'Com Visita Domiciliar'
+            ELSE TRIM(SUBSTRING(text,85,1))
+        END AS STRING
+    ) AS forma_coleta,
 
     --column: cod_ibge_distrito_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,76,2))  AS STRING)
-    END AS id_distrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,76,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,76,2))
+        END AS STRING
+    ) AS id_distrito,
 
     --column: cod_ibge_setor_censo_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,80,4))  AS STRING)
-    END AS id_setor_censitario,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,80,4), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,80,4))
+        END AS STRING
+    ) AS id_setor_censitario,
 
     --column: cod_ibge_subdistr_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,78,2))  AS STRING)
-    END AS id_subdistrito,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,78,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,78,2))
+        END AS STRING
+    ) AS id_subdistrito,
 
     --column: cod_modalidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,84,1))  AS STRING)
-    END AS id_modalidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,84,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,84,1))
+        END AS STRING
+    ) AS id_modalidade,
 
     --column: cod_munic_ibge_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,69,2))  AS STRING)
-    END AS id_uf,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,69,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,69,2))
+        END AS STRING
+    ) AS id_uf,
 
     --column: cod_munic_ibge_5_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,71,5))  AS STRING)
-    END AS id_municipio,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,71,5), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,71,5))
+        END AS STRING
+    ) AS id_municipio,
 
     --column: cod_origem_familia_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1092,11))  AS STRING)
-    END AS id_familia_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1092,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1092,11))
+        END AS STRING
+    ) AS id_familia_origem,
 
     --column: cod_origem_prefeitura_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1079,13))  AS STRING)
-    END AS id_prefeitura_origem,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1079,13), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1079,13))
+        END AS STRING
+    ) AS id_prefeitura_origem,
 
     --column: cod_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1120,10))  AS STRING)
-    END AS id_unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1120,10), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1120,10))
+        END AS STRING
+    ) AS id_unidade_territorial,
 
     --column: dat_alteracao_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,48,8)))  AS DATE)
-    END AS data_alteracao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,48,8))
+        END    ) AS data_alteracao,
 
     --column: dat_atualizacao_familia
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1112,8)))  AS DATE)
-    END AS data_atualizacao,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1112,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1112,8))
+        END    ) AS data_atualizacao,
 
     --column: dat_cadastramento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,40,8)))  AS DATE)
-    END AS data_catrastro,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,8))
+        END    ) AS data_catrastro,
 
     --column: des_complemento_adic_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,365,75))  AS STRING)
-    END AS complemento_adicional,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,365,75), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,365,75))
+        END AS STRING
+    ) AS complemento_adicional,
 
     --column: des_complemento_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,343,22))  AS STRING)
-    END AS complemento,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,343,22), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,343,22))
+        END AS STRING
+    ) AS complemento,
 
     --column: dt_cdstr_atual_fmla
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1103,8)))  AS DATE)
-    END AS data_limite_catastro_atual,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1103,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1103,8))
+        END    ) AS data_limite_catastro_atual,
 
     --column: dta_entrevista_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,91,8)))  AS DATE)
-    END AS data_entrevista,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,91,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,91,8))
+        END    ) AS data_entrevista,
 
     --column: dta_integracao_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1233,8), r'^\s*$') THEN NULL
-        ELSE CAST( SAFE.PARSE_DATE('%d%m%Y', TRIM(SUBSTRING(text,1233,8)))  AS DATE)
-    END AS data_integracao_familia,
+    SAFE.PARSE_DATE(
+        '%d%m%Y'
+,         CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1233,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1233,8))
+        END    ) AS data_integracao_familia,
 
     --column: filler
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,448,38))  AS STRING)
-    END AS filler,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,448,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,448,38))
+        END AS STRING
+    ) AS filler,
 
     --column: flag_fam_alterada_v7
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1111,1))  AS STRING)
-    END AS alterada_v7,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS id_alterada_v7,
+    --column: flag_fam_alterada_v7
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^0$') THEN 'Família Não Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^1$') THEN 'Família Atualizada Na V7'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1111,1), r'^2$') THEN 'Família Oriunda Da V7'
+            ELSE TRIM(SUBSTRING(text,1111,1))
+        END AS STRING
+    ) AS alterada_v7,
 
     --column: ind_cadastro_valido_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,57,1))  AS STRING)
-    END AS cadastro_valido,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS id_cadastro_valido,
+    --column: ind_cadastro_valido_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^2$') THEN 'Não'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,57,1), r'^3$') THEN 'Não Se Aplica'
+            ELSE TRIM(SUBSTRING(text,57,1))
+        END AS STRING
+    ) AS cadastro_valido,
 
     --column: ind_formulario_0_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,86,1))  AS STRING)
-    END AS formulario_0,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,86,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,86,1))
+        END AS STRING
+    ) AS formulario_0,
 
     --column: ind_formulario_1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,87,1))  AS STRING)
-    END AS formulario_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,87,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,87,1))
+        END AS STRING
+    ) AS formulario_1,
 
     --column: ind_formulario_2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,88,1))  AS STRING)
-    END AS formulario_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,88,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,88,1))
+        END AS STRING
+    ) AS formulario_2,
 
     --column: ind_formulario_sup1_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,89,1))  AS STRING)
-    END AS formulario_suplementar_1,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,89,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,89,1))
+        END AS STRING
+    ) AS formulario_suplementar_1,
 
     --column: ind_formulario_sup2_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,90,1))  AS STRING)
-    END AS formulario_suplementar_2,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,90,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,90,1))
+        END AS STRING
+    ) AS formulario_suplementar_2,
 
     --column: ind_formulario_sup3_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1230,1))  AS STRING)
-    END AS formulario_suplementar_3,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1230,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1230,1))
+        END AS STRING
+    ) AS formulario_suplementar_3,
 
     --column: ind_trabalho_infantil_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,68,1))  AS STRING)
-    END AS trabalho_infantil,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS id_trabalho_infantil,
+    --column: ind_trabalho_infantil_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,68,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,68,1))
+        END AS STRING
+    ) AS trabalho_infantil,
 
     --column: nom_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,742,70))  AS STRING)
-    END AS entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,742,70), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,742,70))
+        END AS STRING
+    ) AS entrevistador,
 
     --column: nom_localidade_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,99,76))  AS STRING)
-    END AS localidade,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,99,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,99,76))
+        END AS STRING
+    ) AS localidade,
 
     --column: nom_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,251,76))  AS STRING)
-    END AS logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,251,76), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,251,76))
+        END AS STRING
+    ) AS logradouro,
 
     --column: nom_tip_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,175,38))  AS STRING)
-    END AS tipo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,175,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,175,38))
+        END AS STRING
+    ) AS tipo_logradouro,
 
     --column: nom_titulo_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,213,38))  AS STRING)
-    END AS titulo_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,213,38), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,213,38))
+        END AS STRING
+    ) AS titulo_logradouro,
 
     --column: nom_unidade_territorial_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1130,100))  AS STRING)
-    END AS unidade_territorial,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1130,100), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1130,100))
+        END AS STRING
+    ) AS unidade_territorial,
 
     --column: nu_origem_cadastro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,1231,2))  AS STRING)
-    END AS origem_cadastro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,1231,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,1231,2))
+        END AS STRING
+    ) AS origem_cadastro,
 
     --column: num_cep_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,440,8))  AS STRING)
-    END AS cep,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,440,8), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,440,8))
+        END AS STRING
+    ) AS cep,
 
     --column: num_cpf_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,812,11))  AS STRING)
-    END AS cpf_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,812,11), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,812,11))
+        END AS STRING
+    ) AS cpf_entrevistador,
 
     --column: num_logradouro_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,327,16)) AS INT64)
-    END AS numero_logradouro,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,327,16), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,327,16)) AS INT64
+        END AS INT64
+    ) AS numero_logradouro,
 
     --column: num_reg_arquivo
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,38,2))  AS STRING)
-    END AS numero_registro_arquivo,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,38,2), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,38,2))
+        END AS STRING
+    ) AS numero_registro_arquivo,
 
     --column: txt_obs_entrevistador_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,823,256))  AS STRING)
-    END AS observacoes_entrevistador,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,823,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,823,256))
+        END AS STRING
+    ) AS observacoes_entrevistador,
 
     --column: txt_referencia_local_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
-        ELSE CAST( TRIM(SUBSTRING(text,486,256))  AS STRING)
-    END AS refencia_logradouro,
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,486,256), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,486,256))
+        END AS STRING
+    ) AS refencia_logradouro,
 
     --column: vlr_renda_media_fam
-    CASE
-        WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
-        ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64)
-    END AS valor_renda_media,
+    SAFE_CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,59,9), r'^\s*$') THEN NULL
+            ELSE SAFE_CAST( TRIM(SUBSTRING(text,59,9)) AS INT64) / 100
+        END AS FLOAT64
+    ) AS valor_renda_media,
     SAFE_CAST(versao_layout_particao AS STRING) AS versao_layout,
     SAFE_CAST(data_particao AS DATE) AS data_particao
 FROM `rj-smas.protecao_social_cadunico_staging.registro_familia`

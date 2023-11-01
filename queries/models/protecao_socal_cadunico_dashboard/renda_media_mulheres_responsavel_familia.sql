@@ -6,7 +6,7 @@ WITH renda_familias AS (
           ELSE f.id_cras_creas
         END AS id_cras_creas,
         p.id_familia,
-        c.valor_renda_media,
+        c.valor_renda_media / 100,
         CASE
             WHEN p.id_sexo = '2'  THEN 'Chefiada por Mulheres'
             ELSE 'Outras Famílias'

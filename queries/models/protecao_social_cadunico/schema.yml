@@ -4,7 +4,7 @@ models :
     description: Table controle
     columns:
       - name: versao_layout_arquivo
-        description: "FORMATO '99.99' | version: 0615"
+        description: "FORMATO '06.09' | version: 0615"
       - name: data_extracao_dados
         description: 'Data da extração no formato DDMMAAAA | version: 0615'
       - name: data_posicao_cadastro
@@ -12,7 +12,8 @@ models :
       - name: nome_arquivo
         description: 'ESPELHO CADUNICO 7 MUNICIPAL | version: 0615'
       - name: numero_registro_arquivo
-        description: '0 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
   - name: identificacao_controle
     description: Table identificacao_controle
     columns:
@@ -75,10 +76,10 @@ models :
           de renda origem CNIS no formato DDMMAAAA | version: 0615'
       - name: filler
         description: 'Espaços em branco. | version: 0615'
-      - name: alterada_v7
+      - name: id_alterada_v7
         description: '0-Família não atualizada na V7 1-Família atualizada na V7 2-Família
           oriunda da V7 | version: 0615'
-      - name: cadastro_valido
+      - name: id_cadastro_valido
         description: 'Cadastro válido: 1- Sim 2- Não 3- Não se Aplica | version: 0615'
       - name: formulario_0
         description: "O conteúdo deste campo é 1 se a Opção '0-Principal' for marcada
@@ -101,7 +102,7 @@ models :
         description: "O conteúdo deste campo é 1 se na Opção '1.09 – Formulários Preenchidos’
           for marcada a opção 5 – Formulário Suplementar 3, caso contrário o conteúdo
           é 0 | version: 0615"
-      - name: trabalho_infantil
+      - name: id_trabalho_infantil
         description: 'Trabalho infantil na família: 1-Sim, 2-Não | version: 0615'
       - name: entrevistador
         description: 'Nome do entrevistador | version: 0615'
@@ -126,7 +127,8 @@ models :
       - name: numero_logradouro
         description: 'Número do endereço | version: 0615'
       - name: numero_registro_arquivo
-        description: '1 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: observacoes_entrevistador
         description: 'Observações apontadas pelo entrevistador | version: 0615'
       - name: refencia_logradouro
@@ -138,7 +140,7 @@ models :
     description: Table domicilio
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_forma_abatecimento_agua_domicilio
         description: 'Forma de abastecimento de água: campo numérico de 1 posição
           variando de 1 a 4, dependendo da opção marcada no formulário | version:
@@ -175,7 +177,8 @@ models :
           1 posição variando de 1 a 7 dependendo da opção marcada no formulário |
           version: 0615'
       - name: numero_registro_arquivo
-        description: '2 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: quantidade_comodos_domicilio
         description: 'Qtd de comodos do domicilio, campo numérico de 2 posições |
           version: 0615'
@@ -186,7 +189,7 @@ models :
     description: Table familia
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_cras_creas
         description: 'Código do CRAS/CREAS | version: 0615'
       - name: id_comunidade_quilombola
@@ -205,7 +208,7 @@ models :
         description: 'Código da reserva indígena, campo numérico de 4 posições no
           formato NNNN | version: 0615'
       - name: nao_sabe_comunidade_quilombola
-        description: "'Não sabe(comunidade quilombola da família)': 0-Opção não marcada
+        description: "Não sabe(comunidade quilombola da família)': 0-Opção não marcada
           no formulário, 1-Opção marcada no formulário | version: 0615"
       - name: nao_tem_despesa_agua_esgoto
         description: 'Não tem despesa com água: 0-Opção não marcada no formulário,
@@ -228,7 +231,7 @@ models :
       - name: nao_tem_despesa_transporte
         description: 'Não tem despesa com transporte: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário | version: 0615'
-      - name: familia_quilombola
+      - name: id_familia_quilombola
         description: 'Família quilombola: 1-Sim, 2-Não | version: 0615'
       - name: nao_tem_pessoas_internadas_0_17_anos
         description: 'Não tem pessoas internadas faixa 0-17 anos: 0-Opção não marcada
@@ -240,7 +243,7 @@ models :
         description: 'Não tem pessoas internadas faixa >= 60 anos: 0-Opção não marcada
           no formulário, 1-Opção marcada no formulário | version: 0615'
       - name: nao_sabe_reserva_indigena
-        description: "'Não sabe(reserva indígena da família)': 0-Opção não marcada
+        description: "Não sabe(reserva indígena da família)': 0-Opção não marcada
           no formulário, 1-Opção marcada no formulário | version: 0615"
       - name: cras_creas
         description: 'Nome do CRAS/CREAS | version: 0615'
@@ -255,7 +258,8 @@ models :
       - name: id_estabelecimento_saude
         description: 'Código do estabelecimento EAS/MS | version: 0615'
       - name: numero_registro_arquivo
-        description: '3 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: familias_domicilio
         description: 'Quantidade de famílias no domicílio, campo numérico de 2 posições,
           formato NN | version: 0615'
@@ -296,11 +300,11 @@ models :
     description: Table identificacao_primeira_pessoa
     columns:
       - name: id_pessoa
-        description: 'Chave natural atual da Pessoa  | version: 0615'
+        description: 'Chave natural atual da Pessoa | version: 0615'
       - name: id_original_pessoa
-        description: 'Chave natural original da Pessoa  | version: 0615'
+        description: 'Chave natural original da Pessoa | version: 0615'
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_certidao_registrada_cartorio
         description: 'Pessoa registrada em cartório: campo numérico de 1 posição variando
           de 1 a 4, dependendo da opção marcada no formulário | version: 0615'
@@ -317,14 +321,16 @@ models :
         description: 'Local de nascimento: 1-Neste município, 2-Em outro município,
           3-Em outro país | version: 0615'
       - name: id_familia_origem
-        description: 'CÓDIGO DA FAMÍLIA DE ORIGEM ANTES DA TRANFERÊNCIA  | version:
+        description: 'CÓDIGO DA FAMÍLIA DE ORIGEM ANTES DA TRANFERÊNCIA | version:
           0615'
       - name: id_prefeitura_origem
-        description: 'CÓDIGO DA PREFEITURA DE ORIGEM ANTES DA TRANFERÊNCIA  | version:
+        description: 'CÓDIGO DA PREFEITURA DE ORIGEM ANTES DA TRANFERÊNCIA | version:
           0615'
       - name: id_pais_origem
         description: "Código do País de nascimento da Pessoa\nCampo numérico de 4
-          posições formato NNNN | version: 0615"
+          posições formato NNNN Número do NIS original\nNúmero de NIS localizado ou
+          atribuído à pessoa no momento de sua inclusão no Cadastro Único\nO número
+          de NIS original do membro nunca será alterado. | version: 0615"
       - name: id_parentesco_responsavel_familia
         description: 'Relaçao de parentesco com o RF: campo numérico de 2 posições
           variando de 1 a 11, dependendo da opção marcada no formulário | version:
@@ -353,7 +359,7 @@ models :
       - name: nao_sabe_nome_pai
         description: 'Não sabe nome do pai: 0-Opção não marcada no formulário, 1-Opção
           marcada no formulário | version: 0615'
-      - name: sabe_pais_nascimento
+      - name: id_sabe_pais_nascimento
         description: 'Sabe o País de nascimento da pessoa: 1-Opção não marcada no
           formulário, 2-Opção marcada no formulário. | version: 0615'
       - name: id_trabalho_infantil
@@ -383,13 +389,13 @@ models :
         description: "Número de NIS localizado ou atribuído à pessoa no momento de
           sua inclusão no Cadastro Único\nO número de NIS original do membro nunca
           será alterado. | version: 0615"
-      - name: origem_cadastro_pessoa
+      - name: id_origem_cadastro_pessoa
         description: "Valor contendo o domínio da origem.Atualmente temos as origens:
           01 – Online\n02 – APP Número de NIS localizado ou atribuído à pessoa no
           momento de sua inclusão no Cadastro Único\nO número de NIS original do membro
           nunca será alterado. | version: 0615"
       - name: id_membro_familia
-        description: 'Número do membro da Família  | version: 0615'
+        description: 'Número do membro da Família | version: 0615'
       - name: nis
         description: 'NIS atual da pessoa, campo numérico de 11 posições formato NNNNNNNNNNN
           | version: 0615'
@@ -397,14 +403,15 @@ models :
         description: 'Número de ordem, campo numérico de 2 posições no formato NN
           | version: 0615'
       - name: numero_registro_arquivo
-        description: '4 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: sigla_uf_municipio_nascimento
         description: 'UF de nascimento da Pessoa | version: 0615'
   - name: documento_pessoa
     description: Table documento_pessoa
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_cartorio_certidao
         description: 'Código do cartório da certidão | version: 0615'
       - name: id_certidao_civil
@@ -422,7 +429,7 @@ models :
       - name: livro_certidao_obito_excluido
         description: 'Livro da certidão | version: 0615'
       - name: id_termi_matricula_certidao
-        description: "Número do Termo / Matrícula.da Certidão\n | version: 0615"
+        description: 'Número do Termo / Matrícula.da Certidão. | version: 0615'
       - name: data_emissao_carteira_trabalho
         description: 'Data de emissão da CTPS da Pessoa, formato DDMMAAAA | version:
           0615'
@@ -444,7 +451,8 @@ models :
       - name: id_membro_familia
         description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '5 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: id_secao_titulo_eleitor
         description: 'Seção do Título de Eleitor da Pessoa | version: 0615'
       - name: id_serie_carteira_trabalho
@@ -465,7 +473,7 @@ models :
     description: Table pessoa_deficiencia
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_tem_deficiencia
         description: 'Pessoa tem deficiência: 1-Sim, 2-Não | version: 0615'
       - name: id_familia
@@ -515,12 +523,13 @@ models :
       - name: id_membro_familia
         description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '6 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
   - name: escolaridade
     description: Table escolaridade
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_ano_serie_frequenta
         description: 'Ano e série que a pessoa frequenta: campo numérico de 2 posições
           variando de 1 a 10, dependendo da opção marcada no formulário | version:
@@ -561,16 +570,17 @@ models :
       - name: municipio_escola
         description: 'Nome do Município da Escola da Pessoa | version: 0615'
       - name: id_membro_familia
-        description: 'Número do membro da Família  | version: 0615'
+        description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '7 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: sigla_uf_escola
         description: 'UF da Escola da Pessoa | version: 0615'
   - name: trabalho_remuneracao
     description: Table trabalho_remuneracao
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_afastado_semana_passada
         description: 'Pessoa afastada na semana passada: 1-Sim, 2-Não | version: 0615'
       - name: id_atividade_extravista
@@ -647,9 +657,10 @@ models :
         description: 'Não recebe seguro desemprego: 0-Opção não marcada no formulário,
           1-Opção marcada no formulário | version: 0615'
       - name: id_membro_familia
-        description: 'Número do membro da Família  | version: 0615'
+        description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '8 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: meses_trabalhados_nos_ultimos_12
         description: 'Quantidade de meses trabalhados nos últimos 12, campo numérico
           de 2 posições, formato NN | version: 0615'
@@ -678,7 +689,7 @@ models :
     description: Table contato
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_familia
         description: 'Código Familiar | version: 0615'
       - name: cpf_operador_responsavel
@@ -702,17 +713,17 @@ models :
         description: '1º envio SMS do telefone de contato da família | version: 0615'
       - name: contato_2_envio_sms
         description: '2º envio SMS do telefone de contato da família | version: 0615'
-      - name: contato_tipo
+      - name: id_contato_tipo
         description: "1º tipo de telefone de contato da família L– Celular\nC– Trabalho\n
           R– Residencial\nO-Recado\nN- Não tem\nD- Não declarado\nS – Sem coleta de
           dados (família não alterada/atualizada após a obrigatoriedade do campo “Telefone”)\n
           | version: 0615"
-      - name: contato_2_tipo
+      - name: id_contato_2_tipo
         description: "2º tipo de telefone de contato da família L– Celular\nC– Trabalho\n
           R– Residencial\nO-Recado\nN- Não tem\nD- Não declarado\nS – Sem coleta de
           dados (família não alterada/atualizada após a obrigatoriedade do campo “Telefone”)\n
           | version: 0615"
-      - name: email_tipo
+      - name: id_email_tipo
         description: "Indicador do tipo de e-mail da família, sendo: P-E-mail Pessoal\n
           R- E-Mail de Recado\nN- Não tem\nD- Não declarado\nS – Sem coleta de dados
           (família não alterada/atualizada após a criação do campo “E-mail”)\n | version:
@@ -722,7 +733,8 @@ models :
       - name: contato_2_ddd
         description: '2º DDD do telefone de contato da família | version: 0615'
       - name: numero_registro_arquivo
-        description: '9 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: contato_telefone
         description: '1º telefone de contato da família | version: 0615'
       - name: contato_2_telefone
@@ -731,7 +743,7 @@ models :
     description: Table seguranca_alimentar
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_conta_energia_numero_ordem
         description: "Número de ordem do membro da família associado a conta de energia
           elétrica do domicílio\nQuando não houver membro da família associado, o
@@ -761,7 +773,7 @@ models :
         description: 'Recebe sua conta de energia elétrica faturada como Tarifa Social:
           0-Opção não marcada no formulário, 1-Opção marcada no formulário | version:
           0615'
-      - name: ind_parc_mds_fam
+      - name: id_ind_parc_mds_fam
         description: '101 Família Cigana 201 Família Extrativista 202 Família de Pescadores
           Artesanais 203 Família pertencente a Comunidade de Terreiro 204 Família
           Ribeirinha 205 Família de Agricultores Familiares 301 Família Assentada
@@ -899,12 +911,13 @@ models :
         description: 'ProJovem Urbano: 0-Opção não marcada no formulário, 1-Opção
           marcada no formulário | version: 0615'
       - name: numero_registro_arquivo
-        description: '11 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
   - name: condicao_rua
     description: Table condicao_rua
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_carteira_assinada
         description: 'Teve emprego com carteira assinada: 1-Sim, 2-Não, 3-Não sabe
           | version: 0615'
@@ -1036,7 +1049,8 @@ models :
       - name: id_membro_familia
         description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '12 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: dorme_albergue_vezes_semana
         description: 'Quantidade de vezes por semana que dorme em albergue | version:
           0615'
@@ -1055,328 +1069,330 @@ models :
         description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_familia
         description: 'Código Familiar | version: 0615'
-      - name: exclusao_pessoa_cpf_nulo
+      - name: id_exclusao_pessoa_cpf_nulo
         description: 'Existência da ocorrência “Exclusão de pessoa com CPF nulo na
           base da Receita Federal” 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: sem_unidade_territorial
+      - name: id_sem_unidade_territorial
         description: "Existência de Ocorrência \"Família sem unidade territorial local
           (pendência somente para prefeituras que optarem por utilizar esse campo)\n\
           \" para a família 0- Não Existe 1- Existe NULO | version: 0615"
-      - name: transferida_este_municipio_familia_existente
+      - name: id_transferida_este_municipio_familia_existente
         description: 'Existência de Ocorrência "• Família transferida para este município
           em família existente" para a família 0- Não Existe 1- Existe NULO | version:
           0615'
-      - name: transferida_este_municipio_nova_familia
+      - name: id_transferida_este_municipio_nova_familia
         description: 'Existência de Ocorrência " Família transferida para este município
           em uma nova família" para a família 0- Não Existe 1- Existe NULO | version:
           0615'
-      - name: transferida_outra_familia_mesmo_municipio
+      - name: id_transferida_outra_familia_mesmo_municipio
         description: 'Existência de Ocorrência "Família transferida para outra família
           no mesmo município" para a família 0- Não Existe 1- Existe NULO | version:
           0615'
-      - name: transferida_outro_municipio
+      - name: id_transferida_outro_municipio
         description: 'Existência de Ocorrência " Família transferida para outro município"
           para a família 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: patl_dados_desatualizados
+      - name: id_patl_dados_desatualizados
         description: 'Existência de pendência "Famílias com dados desatualizados há
           mais de 24 meses (Família que não sofreu nenhuma atualização nos campos
           sensíveis há mais de 24 meses.)" para a família 0- Não Existe 1- Existe
           NULO | version: 0615'
-      - name: paud_campo_obrigatorio_nao_preenchido_formulario_principal
+      - name: id_paud_campo_obrigatorio_nao_preenchido_formulario_principal
         description: 'Existência de pendência " Campos Obrigatórios ou Obrigatórios
           Condicionados Não Preenchidos do formulário principal" para a família 0-
           Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_campo_obrigatorio_nao_preenchido_formulario_suplementar_1
+      - name: id_paud_campo_obrigatorio_nao_preenchido_formulario_suplementar_1
         description: 'Existência de pendência " Campos Obrigatórios ou Obrigatórios
           Condicionados Não Preenchidos do formulário suplementar 1" para a família
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_sem_responsavel_cadastrado
+      - name: id_paud_sem_responsavel_cadastrado
         description: "Existência de pendência • \"Família sem Responsável Familiar
           cadastrado\" para a famílias atualizadas na V7\n0- Não Existe 1- Existe
           NULO | version: 0615"
-      - name: pmds_pendencia_01
+      - name: id_pmds_pendencia_01
         description: "Existência da pendência batch parametrizável 01\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_02
+      - name: id_pmds_pendencia_02
         description: "Existência da pendência batch parametrizável 02\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_03
+      - name: id_pmds_pendencia_03
         description: "Existência da pendência batch parametrizável 03\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_04
+      - name: id_pmds_pendencia_04
         description: "Existência da pendência batch parametrizável 04\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_05
+      - name: id_pmds_pendencia_05
         description: "Existência da pendência batch parametrizável 05\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_06
+      - name: id_pmds_pendencia_06
         description: "Existência da pendência batch parametrizável 06\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_07
+      - name: id_pmds_pendencia_07
         description: "Existência da pendência batch parametrizável 07\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_08
+      - name: id_pmds_pendencia_08
         description: "Existência da pendência batch parametrizável 08\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_09
+      - name: id_pmds_pendencia_09
         description: "Existência da pendência batch parametrizável 09\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_10
+      - name: id_pmds_pendencia_10
         description: "Existência da pendência batch parametrizável 10\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_11
+      - name: id_pmds_pendencia_11
         description: "Existência da pendência batch parametrizável 11\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_12
+      - name: id_pmds_pendencia_12
         description: "Existência da pendência batch parametrizável 12\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_13
+      - name: id_pmds_pendencia_13
         description: "Existência da pendência batch parametrizável 13\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_14
+      - name: id_pmds_pendencia_14
         description: "Existência da pendência batch parametrizável 14\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_15
+      - name: id_pmds_pendencia_15
         description: "Existência da pendência batch parametrizável 15\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_16
+      - name: id_pmds_pendencia_16
         description: "Existência da pendência batch parametrizável 16\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_17
+      - name: id_pmds_pendencia_17
         description: "Existência da pendência batch parametrizável 17\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_18
+      - name: id_pmds_pendencia_18
         description: "Existência da pendência batch parametrizável 18\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_19
+      - name: id_pmds_pendencia_19
         description: "Existência da pendência batch parametrizável 19\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_20
+      - name: id_pmds_pendencia_20
         description: "Existência da pendência batch parametrizável 20\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_21
+      - name: id_pmds_pendencia_21
         description: "Existência da pendência batch parametrizável 21\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_22
+      - name: id_pmds_pendencia_22
         description: "Existência da pendência batch parametrizável 22\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_23
+      - name: id_pmds_pendencia_23
         description: "Existência da pendência batch parametrizável 23\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_24
+      - name: id_pmds_pendencia_24
         description: "Existência da pendência batch parametrizável 24\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_25
+      - name: id_pmds_pendencia_25
         description: "Existência da pendência batch parametrizável 25\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_26
+      - name: id_pmds_pendencia_26
         description: "Existência da pendência batch parametrizável 26\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_27
+      - name: id_pmds_pendencia_27
         description: "Existência da pendência batch parametrizável 27\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_28
+      - name: id_pmds_pendencia_28
         description: "Existência da pendência batch parametrizável 28\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_29
+      - name: id_pmds_pendencia_29
         description: "Existência da pendência batch parametrizável 29\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmds_pendencia_30
+      - name: id_pmds_pendencia_30
         description: "Existência da pendência batch parametrizável 30\n0- Sem Pendência
           1- Pendente 2- Atualizada NULO | version: 0615"
-      - name: pmig_campos_obrigatorios_nao_preenchidos
+      - name: id_pmig_campos_obrigatorios_nao_preenchidos
         description: 'Existência de pendência " Campos Obrigatórios ou Obrigatórios
           Condicionados Não Preenchidos do formulário principal" para a família 0-
           Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_campos_obrigatorios_nao_preenchidos_sumeplentar_1
+      - name: id_pmig_campos_obrigatorios_nao_preenchidos_sumeplentar_1
         description: 'Existência de pendência • "• Campos Obrigatórios ou Obrigatórios
           Condicionados Não Preenchidos do formulário suplementar 1" para a família
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_sem_responsavel_familiar_cadastrado
+      - name: id_pmig_sem_responsavel_familiar_cadastrado
         description: 'Existência de pendência • "Família sem Responsável Familiar
           cadastrado" para a família 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: ptab_desativacao_cras_creas
+      - name: id_ptab_desativacao_cras_creas
         description: 'Existência de pendência • "Desativação de CRAS E CREAS" para
           a família 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: ptab_desativacao_eas
+      - name: id_ptab_desativacao_eas
         description: 'Existência de pendência • "Desativação de EAS" para a família
           0- Não Existe 1- Existe NULO | version: 0615'
       - name: ptab_desativacao_comunidades_quilombolas
         description: 'Existência de pendência • "Desativação de Comunidades Quilombolas"
           para a família 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: ptab_desativacao_terras_indigenas
+      - name: id_ptab_desativacao_terras_indigenas
         description: 'Existência de pendência • "Desativação de Terras Indígenas"
           para a família 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: ptrn_sem_responsavel_familiar_cadastrado
+      - name: id_ptrn_sem_responsavel_familiar_cadastrado
         description: 'Existência de pendência "Família sem Responsável Familiar Cadastrado"
           para a família 0- Não Existe 1- Existe NULO | version: 0615'
       - name: numero_registro_arquivo
-        description: '13 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
   - name: documento_membro
     description: Table documento_membro
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_familia
         description: 'Código Familiar | version: 0615'
-      - name: oaud_indicativo_obito
+      - name: id_oaud_indicativo_obito
         description: 'Existência de ocorrência "Membro da Família com Indicativo de
           Óbito Negado" 0- Não Existe 1- Existe  | version: 0615'
-      - name: oaud_carteira_trabalho_multiplicidade
+      - name: id_oaud_carteira_trabalho_multiplicidade
         description: 'Existência de ocorrência “Multiplicidade de Carteira de Trabalho”
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: oaud_certidao_nascimento_multiplicidade
+      - name: id_oaud_certidao_nascimento_multiplicidade
         description: 'Existência de ocorrência “Multiplicidade de Certidão de Nascimento”
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: oaud_rg_multiplicidade
+      - name: id_oaud_rg_multiplicidade
         description: 'Existência de ocorrência “Multiplicidade de RG” 0- Não Existe
           1- Existe NULO | version: 0615'
-      - name: osrg_nao_sabe_registrada_cartorio
+      - name: id_osrg_nao_sabe_registrada_cartorio
         description: 'Existência de Ocorrência "Não sabe se foi registrada em Cartório
           (conforme RN019)" para a pessoa: 0- Não Existe 1- Existe NULO | version:
           0615'
-      - name: osrg_registrada_sem_cetidao_civil
+      - name: id_osrg_registrada_sem_cetidao_civil
         description: 'Existência de Ocorrência "Registrada e sem Certidão Civil (conforme
           RN019)" para a Pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: osrg_nao_registrada_cartorio
+      - name: id_osrg_nao_registrada_cartorio
         description: 'Existência de Ocorrência "Não registrada em cartório (conforme
           RN019)" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: otrn_transferida_este_municipio_familia_existente
+      - name: id_otrn_transferida_este_municipio_familia_existente
         description: 'Existência de Ocorrência "• Pessoa de outro município (origem)
           transferida para este município (destino )em família existente" para a pessoa:
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: otrn_transferida_este_municipio_nova_familia
+      - name: id_otrn_transferida_este_municipio_nova_familia
         description: "Existência de Ocorrência \" • Pessoa de outro município (origem)
           transferida para este município (destino ) em uma nova família\n(destino)\"\
           \ para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615"
-      - name: otrn_transferida_outra_familia
+      - name: id_otrn_transferida_outra_familia
         description: 'Existência de Ocorrência "Pessoa transferida para outra família
           no mesmo município" para a pessoa: 0- Não Existe 1- Existe NULO | version:
           0615'
-      - name: otrn_transferida_outro_municipio
+      - name: id_otrn_transferida_outro_municipio
         description: 'Existência de Ocorrência " Pessoa transferida para outro município"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_cpf_cancelado_base_receita_federal
+      - name: id_paud_cpf_cancelado_base_receita_federal
         description: 'Existência de pendência “CPF suspenso na base da Receita Federal”
           0 – Não Existe 1 – Existe NULO | version: 0615'
-      - name: paud_cpf_suspenso_base_receita_federal
-        description: 'Existência de pendência “CPF cancelado na base da Receita Federal”
+      - name: id_paud_cpf_suspenso_base_receita_federal
+        description: 'Existência de pendência “CPF suspenso na base da Receita Federal”
           0 – Não Existe 1 – Existe NULO | version: 0615'
-      - name: paud_campo_obrigatorio_nao_preenchido
+      - name: id_paud_campo_obrigatorio_nao_preenchido
         description: 'Existência de pendência " Campos Obrigatórios ou Obrigatórios
           Condicionados Não Preenchidos" para a pessoa: 0- Não Existe 1- Existe NULO
           | version: 0615'
-      - name: paud_cadatrado_com_certidao_obito
+      - name: id_paud_cadatrado_com_certidao_obito
         description: 'Existência de pendência "Membro da Família Cadastrado e com
           Certidão de Óbito" para a pessoa: 0- Não Existe 1- Existe NULO | version:
           0615'
-      - name: paud_cpf_invalido
+      - name: id_paud_cpf_invalido
         description: 'Existência de pendência "Membro com CPF inválido (DV inválido)"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_cpf_multiplicidade
+      - name: id_paud_cpf_multiplicidade
         description: 'Existência de pendência "Membro com CPF em multiplicidade" para
           a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_cpf_divergencia_titularidade
+      - name: id_paud_cpf_divergencia_titularidade
         description: 'Existência de pendência "• Membro com divergência de titularidade
           de CPF (validação de titularidade com base na receita federal)" para a pessoa:
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_titulo_eleitor_invalido
+      - name: id_paud_titulo_eleitor_invalido
         description: 'Existência de pendência "Membro com Título de Eleitor inválido
           (DV inválido)" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_titulo_eleitor_multiplicidade
+      - name: id_paud_titulo_eleitor_multiplicidade
         description: 'Existência de pendência "Membro com Título de Eleitor em multiplicidade"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_rejeicao_inclusao_atualizacao_dados_cadastrais
+      - name: id_paud_rejeicao_inclusao_atualizacao_dados_cadastrais
         description: 'Existência de pendência "Rejeição de inclusão/atualização dos
           dados cadastrais da pessoa" para a pessoa: 0- Não Existe 1- Existe NULO
           | version: 0615'
-      - name: paud_responsavel_sem_cpf_tiluto_eleitor
+      - name: id_paud_responsavel_sem_cpf_tiluto_eleitor
         description: "Existência de pendência \"Responsável Familiar sem CPF ou Título
           de Eleitor\n\" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615"
-      - name: paud_responsavel_cpf_invalido
+      - name: id_paud_responsavel_cpf_invalido
         description: 'Existência de pendência "• Responsável Familiar com CPF inválido
           (DV inválido)" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_responsavel_cpf_multiplicidade
+      - name: id_paud_responsavel_cpf_multiplicidade
         description: 'Existência de pendência "Responsável Familiar com CPF em multiplicidade"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_responsavel_cpf_divergencia_titularidade
+      - name: id_paud_responsavel_cpf_divergencia_titularidade
         description: 'Existência de pendência "• Responsável Familiar com divergência
           de titularidade de CPF (validação de titularidade com base na receita federal)"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: paud_responsavel_titulo_eleitor_invalido
+      - name: id_paud_responsavel_titulo_eleitor_invalido
         description: 'Existência de pendência "Responsável Familiar com Título de
           Eleitor inválido (DV inválido)" para a pessoa: 0- Não Existe 1- Existe NULO
           | version: 0615'
-      - name: paud_responsavel_titulo_eleitor_multiplicidade
+      - name: id_paud_responsavel_titulo_eleitor_multiplicidade
         description: 'Existência de pendência "Responsável Familiar com Título de
           Eleitor em multiplicidade" para a pessoa: 0- Não Existe 1- Existe NULO |
           version: 0615'
-      - name: paud_responsavel_idade_inferior_16_anos
+      - name: id_paud_responsavel_idade_inferior_16_anos
         description: 'Existência de pendência "Responsável Familiar com idade inferior
           a 16 anos" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_campo_obrigatorio_nao_preenchido
+      - name: id_pmig_campo_obrigatorio_nao_preenchido
         description: 'Existência de pendência " Campos Obrigatórios ou Obrigatórios
           Condicionados Não Preenchidos" para a pessoa: 0- Não Existe 1- Existe NULO
           | version: 0615'
-      - name: pmig_cpf_invalido
+      - name: id_pmig_cpf_invalido
         description: 'Existência de pendência "Membro com CPF inválido (DV inválido)"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_cpf_multiplicidade
+      - name: id_pmig_cpf_multiplicidade
         description: 'Existência de pendência "Membro com CPF em multiplicidade" para
           a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_cpf_divergencia_titularidade
+      - name: id_pmig_cpf_divergencia_titularidade
         description: 'Existência de pendência "• Membro com divergência de titularidade
           de CPF (validação de titularidade com base na receita federal)" para a pessoa:
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_titulo_eleitor_multiplicidade
+      - name: id_pmig_titulo_eleitor_multiplicidade
         description: 'Existência de pendência "Membro com Título de Eleitor em multiplicidade"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_responsavel_sem_cpf_titulo_eleitor
+      - name: id_pmig_responsavel_sem_cpf_titulo_eleitor
         description: "Existência de pendência \"Responsável Familiar sem CPF ou Título
           de Eleitor\n\" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615"
-      - name: pmig_responsavel_cpf_invalido
+      - name: id_pmig_responsavel_cpf_invalido
         description: 'Existência de pendência "• Responsável Familiar com CPF inválido
           (DV inválido)" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_reponsavel_cpf_multiplicidade
+      - name: id_pmig_reponsavel_cpf_multiplicidade
         description: 'Existência de pendência "Responsável Familiar com CPF em multiplicidade"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_responsavel_cpf_divergencia_titularidade
+      - name: id_pmig_responsavel_cpf_divergencia_titularidade
         description: 'Existência de pendência "• Responsável Familiar com divergência
           de titularidade de CPF (validação de titularidade com base na receita federal)"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_responsavel_titulo_eleitor_invalido
+      - name: id_pmig_responsavel_titulo_eleitor_invalido
         description: 'Existência de pendência "Responsável Familiar com Título de
           Eleitor inválido (DV inválido)" para a pessoa: 0- Não Existe 1- Existe NULO
           | version: 0615'
-      - name: pmig_responsavel_titulo_eleitor_multiplicidade
+      - name: id_pmig_responsavel_titulo_eleitor_multiplicidade
         description: 'Existência de pendência "• Responsável Familiar com Titulo de
           Eleitor em multiplicidade" para a pessoa: 0- Não Existe 1- Existe NULO |
           version: 0615'
-      - name: pmig_responsavel_idade_inferior_16_anos
+      - name: id_pmig_responsavel_idade_inferior_16_anos
         description: 'Existência de pendência "Responsável Familiar com idade inferior
           a 16 anos" para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: pmig_sem_nunhuma_documentacao
+      - name: id_pmig_sem_nunhuma_documentacao
         description: 'Existência de pendência "Membro da família sem NENHUMA documentação
           (exceto o caso da pessoa SEM registro civil conforme RN019)" para a pessoa:
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: ptab_desativacao_inep
+      - name: id_ptab_desativacao_inep
         description: 'Existência de pendência "Desativação de INEP" para a pessoa:
           0- Não Existe 1- Existe NULO | version: 0615'
-      - name: ptrn_verficacao_dados_inep
+      - name: id_ptrn_verficacao_dados_inep
         description: 'Existência de pendência "Verificação dos dados da escola (INEP)"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
-      - name: ptrn_sem_relacao_parentesco
+      - name: id_ptrn_sem_relacao_parentesco
         description: 'Existência de pendência "• Pessoa sem relação de parentesco"
           para a pessoa: 0- Não Existe 1- Existe NULO | version: 0615'
       - name: id_membro_familia
-        description: 'Numero do membro da Família | version: 0615'
+        description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '14 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
   - name: habitacao
     description: Table habitacao
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: contrato_pro_habitacao
         description: 'Número do contrato do programa | version: 0615'
       - name: id_familia
@@ -1388,9 +1404,10 @@ models :
           variando de 1 a 8, dependendo da opção marcada no formulário | version:
           0615'
       - name: id_membro_familia
-        description: 'Número do membro da Família  | version: 0615'
+        description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '11 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
   - name: transferencia_familia
     description: Table transferencia_familia
     columns:
@@ -1428,9 +1445,9 @@ models :
         description: 'Pessoa registrada em cartório: campo numérico de 1 posição variando
           de 1 a 4, dependendo da opção marcada no formulário | version: 0615'
       - name: id_familia_destino_transferencia
-        description: 'CÓDIGO DA FAMÍLIA DE DESTINO  | version: 0615'
+        description: 'CÓDIGO DA FAMÍLIA DE DESTINO | version: 0615'
       - name: id_prefeitura_destino_transferencia
-        description: 'CÓDIGO DA PREFEITURA DE DESTINO  | version: 0615'
+        description: 'CÓDIGO DA PREFEITURA DE DESTINO | version: 0615'
       - name: id_estado_cadastro_transferencia_membro
         description: 'Estado cadastral da pessoa: 1- EM CADASTRAMENTO 2- SEM REGISTRO
           CIVIL 3- CADASTRADO 4- EXCLUIDO 5- AGUARDANDO ATRIBUIÇÃO NIS 6- AGUARDANDO
@@ -1485,12 +1502,13 @@ models :
       - name: pais_nascimento
         description: 'Nome do país de nascimento da Pessoa | version: 0615'
       - name: id_membro_familia
-        description: 'Número do membro da Família  | version: 0615'
+        description: 'Número do membro da Família | version: 0615'
       - name: nis
         description: 'NIS da pessoa, campo numérico de 11 posições formato NNNNNNNNNNN
           | version: 0615'
       - name: numero_registro_arquivo
-        description: '17 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: sigla_uf_nascimento
         description: 'UF de nascimento da Pessoa | version: 0615'
   - name: exclusao_servidor
@@ -1516,8 +1534,9 @@ models :
         description: 'Data da exclusão da família, no formato dd/mm/aaaa | version:
           0615'
       - name: descricao_cotivo_exclusao
-        description: 'Descrição do complemento do Motivo de Exclusão | version: 0615'
-      - name: motivo_exclusao
+        description: 'Descrição do complemento do Motivo de Exclusão da pessoa | version:
+          0615'
+      - name: id_motivo_exclusao
         description: "Código identificador do motivo de exclusão da família\nPodendo
           ser: 01-Falecimento de toda a família\n02-Recusa da família em prestar informações\n
           03-Omissão ou prestação de informações inverídicas pela família, por comprovada
@@ -1542,7 +1561,8 @@ models :
         description: 'Número do Parecer da Gestão Municipal do Cadastro Único | version:
           0615'
       - name: numero_registro_arquivo
-        description: '18 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: sigla_uf_parecer_gestao_municipal_cadunico
         description: 'UF do Parecer da Gestão Municipal do Cadastro Único | version:
           0615'
@@ -1561,7 +1581,7 @@ models :
         description: 'Código IBGE do município da certidão de óbito da pessoa excluída
           | version: 0615'
       - name: livro_certidao_obito_excluido
-        description: 'Livro da certidão de óbito da pessoa excluída  | version: 0615'
+        description: 'Livro da certidão de óbito da pessoa excluída | version: 0615'
       - name: numero_termo_matricula_certidao_excluido
         description: 'Número do Termo / Matrícula da Certidão. | version: 0615'
       - name: cpf_operador_exclusao_membro
@@ -1583,21 +1603,20 @@ models :
       - name: data_emissao_certidao_obito_excluido
         description: 'Data de emissão da da certidão de óbito da pessoa excluída,
           formato DDMMAAAA | version: 0615'
-      - name: motivo_exclusao_membro
+      - name: id_motivo_exclusao_membro
         description: "Código identificador do motivo de exclusão da pessoa\nPodendo
-          ser: 01-Falecimento da pessoa\n02-Desligamento da pessoa da Família em que
-          está cadastrada\n03-Solicitação da pessoa\n04-Decisão judicial\n05-Decurso
-          de prazo no estado cadastral “Em cadastramento”\n06-Mudança de endereço
-          ocorrido anteriormente a V7\n07-Cadastramento incorreto ocorrido anteriormente
-          a V7\n08-Pessoa Transferida\n09-Cadastro desatualizado há mais de 48 meses\n
-          10-Averiguação Cadastral\n11-Multiplicidade\n12-NIS cancelado no Cadastro
-          NIS\n13-Averiguação-Suspeita de fraude\n14-Pessoa excluída por decurso de
-          prazo na situação \"Atribuindo NIS\"\n15-Averiguação-Suspeita de fraude
-          identificada pelo município\n16 – Pessoa excluída por possuir CPF nulo\n
-          17-Membro excluído por ter sido incluído pelo próprio operador/Entrevistador
-          da família\n18-Identificação de cadastros incluídos ou alterados indevidamente
-          por agente público por má fé\n19-Indicativo de óbito há mais de 12 meses-exclusão
-          batch 99 – Exclusão da família (para casos em que a pessoa tenha sido ex"
+          ser: 01-Falecimento da pessoa\n02-Desligamento da pessoa daquela família\n
+          03-Solicitação da pessoa\n04-Decisão judicial\n05-Decurso de prazo no estado
+          cadastral “Em cadastramento”\n06-Mudança de endereço ocorrido anteriormente
+          a V7\n07-Cadastramento incorreto ocorrido anteriormente a V7\n08-Pessoa
+          Transferida\n09-Cadastro desatualizado há mais de 48 meses\n10-Averiguação
+          Cadastral\n11-Multiplicidade\n12-NIS cancelado no Cadastro NIS\n13-Averiguação-Suspeita
+          de fraude\n14-Pessoa excluída por decurso de prazo na situação \"Atribuindo
+          NIS\"\n15-Averiguação-Suspeita de fraude identificada pelo município\n16
+          – Pessoa excluída por possuir CPF nulo\n17-Membro excluído por ter sido
+          incluído pelo próprio operador/Entrevistador da família\n99 – Exclusão da
+          família (para casos em que a pessoa tenha sido excluída pela exclusão de
+          sua família). | version: 0615"
       - name: id_municipio_parecer_gestao_municipal_cadunico_membro
         description: 'Código IBGE do Município do Parecer da Gestão Municipal do Cadastro
           Único do Membro Excluído | version: 0615'
@@ -1616,7 +1635,8 @@ models :
         description: 'Número do Parecer da Gestão Municipal do Cadastro Único do Membro
           Excluído | version: 0615'
       - name: numero_registro_arquivo
-        description: '19 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: sigla_uf_certidao_obito_excluido
         description: 'UF da Certidão de óbito da pessoa excluída | version: 0615'
       - name: sigla_uf_parecer_gestao_municipal_cadunico_membro
@@ -1651,11 +1671,11 @@ models :
         description: "Data de nascimento do RL\nFormato: DDMMAAAA | version: 0615"
       - name: email_representante_legal
         description: 'Endereço de E-mail para contato | version: 0615'
-      - name: obito_acatado_representante_legal
+      - name: id_obito_acatado_representante_legal
         description: 'Indicativo de óbito acatado: S – Óbito Acatado N – Óbito não
           acatado Vazio para casos onde não há tratamento do óbito do RL ainda ou
           não há indicação de óbito | version: 0615'
-      - name: obito_representante_legal
+      - name: id_obito_representante_legal
         description: 'Indicativo de óbito do RL: S – Possui óbito N – Não possui |
           version: 0615'
       - name: nao_sabe_nome_mae_representante_legal
@@ -1710,14 +1730,14 @@ models :
         description: 'UF do Estado de nascimento do RL | version: 0615'
       - name: sigla_uf_representante_legal
         description: 'UF do Estado do logradouro | version: 0615'
-      - name: tipo_representacao_legal
+      - name: id_tipo_representacao_legal
         description: "Tipo de Representação Legal para aquela família\nEx.: 01-Curatela,
           02-Tutela, 03-Guarda | version: 0615"
   - name: renda
     description: Table renda
     columns:
       - name: id_prefeitura
-        description: 'Chave única de identificação da Família | version: 0615'
+        description: 'Chave única de identificação da Prefeitura | version: 0615'
       - name: id_afastado_semana_passada
         description: 'Pessoa afastada na semana passada: 1-Sim, 2-Não | version: 0615'
       - name: id_atividade_extravista
@@ -1800,9 +1820,10 @@ models :
         description: 'Não recebeu remuneração de trabalho: 0-Opção não marcada no
           formulário, 1-Opção marcada no formulário | version: 0615'
       - name: id_membro_familia
-        description: 'Número do membro da Família  | version: 0615'
+        description: 'Número do membro da Família | version: 0615'
       - name: numero_registro_arquivo
-        description: '8 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: meses_trabalhados_nos_ultimos_12
         description: 'Quantidade de meses trabalhados nos últimos 12, campo numérico
           de 2 posições, formato NN | version: 0615'
@@ -1816,17 +1837,19 @@ models :
           sua UF | version: 0615'
       - name: if_municipio
         description: 'Segunda parte do código IBGE | version: 0615'
-      - name: migracao
+      - name: id_migracao
         description: '1 se a Prefeitura migrou, senão 0 | version: 0615'
       - name: prefeitura
         description: 'Nome da Prefeitura | version: 0615'
       - name: numero_registro_arquivo
-        description: '98 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
   - name: registros
     description: Table registros
     columns:
       - name: numero_registro_arquivo
-        description: '99 | version: 0615'
+        description: "Número do tipo de registro\nPara o FS3 será sempre 20 | version:
+          0615"
       - name: registros_tipo_00
         description: 'Quantidade de registros do tipo 00, campo numérico de 9 posições,
           formato 999999999 | version: 0615'
