@@ -43,6 +43,15 @@ SELECT
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,1))
         END AS STRING
+    ) AS id_familia_indigena,
+    --column: cod_familia_indigena_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,40,1))
+        END AS STRING
     ) AS familia_indigena,
 
     --column: cod_familiar_fam
@@ -389,6 +398,15 @@ SELECT
     CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,1))
+        END AS STRING
+    ) AS id_familia_indigena,
+    --column: cod_familia_indigena_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^2$') THEN 'Não'
             ELSE TRIM(SUBSTRING(text,40,1))
         END AS STRING
     ) AS familia_indigena,
@@ -739,6 +757,15 @@ SELECT
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,1))
         END AS STRING
+    ) AS id_familia_indigena,
+    --column: cod_familia_indigena_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,40,1))
+        END AS STRING
     ) AS familia_indigena,
 
     --column: cod_familiar_fam
@@ -1085,6 +1112,15 @@ SELECT
     CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,1))
+        END AS STRING
+    ) AS id_familia_indigena,
+    --column: cod_familia_indigena_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^2$') THEN 'Não'
             ELSE TRIM(SUBSTRING(text,40,1))
         END AS STRING
     ) AS familia_indigena,
@@ -1435,6 +1471,15 @@ SELECT
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,1))
         END AS STRING
+    ) AS id_familia_indigena,
+    --column: cod_familia_indigena_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^2$') THEN 'Não'
+            ELSE TRIM(SUBSTRING(text,40,1))
+        END AS STRING
     ) AS familia_indigena,
 
     --column: cod_familiar_fam
@@ -1781,6 +1826,15 @@ SELECT
     CAST(
         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            ELSE TRIM(SUBSTRING(text,40,1))
+        END AS STRING
+    ) AS id_familia_indigena,
+    --column: cod_familia_indigena_fam
+    CAST(
+        CASE
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^\s*$') THEN NULL
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^1$') THEN 'Sim'
+            WHEN REGEXP_CONTAINS(SUBSTRING(text,40,1), r'^2$') THEN 'Não'
             ELSE TRIM(SUBSTRING(text,40,1))
         END AS STRING
     ) AS familia_indigena,

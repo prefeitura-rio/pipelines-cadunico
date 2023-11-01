@@ -245,6 +245,8 @@ models :
       - name: id_comunidade_quilombola
         description: 'Código da comunidade quilombola, campo numérico de 4 posições
           no formato NNNN | version: 0615'
+      - name: id_familia_indigena
+        description: 'Família indígena: 1-Sim, 2-Não | version: 0615'
       - name: familia_indigena
         description: 'Família indígena: 1-Sim, 2-Não | version: 0615'
       - name: id_familia

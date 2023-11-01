@@ -6,7 +6,7 @@ WITH tb AS (
       WHEN f.id_cras_creas IS NULL THEN "Não Informado"
       ELSE f.id_cras_creas
     END AS id_cras_creas,
-    d.local_domicilio,
+    d.destino_lixo_domicilio,
   FROM `rj-smas.protecao_social_cadunico.domicilio` as d
   JOIN `rj-smas.protecao_social_cadunico.familia` as f
     ON  d.id_familia = f.id_familia
@@ -15,10 +15,10 @@ WITH tb AS (
 
 SELECT
   data_particao,
-  local_domicilio,
-  ROUND(100 * COUNT(DISTINCT id_familia) / SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao), 2) AS porcentagem_local_domicilio,
+  id_cras_creas,
+  destino_lixo_domicilio,
+  ROUND(100 * COUNT(DISTINCT id_familia) / SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao), 2) AS porcentagem_destino_lixo_domicilio,
   COUNT(DISTINCT id_familia) numero_familias,
   SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao) AS total_familias,
 FROM tb
-GROUP BY data_particao,  id_cras_creas, local_domicilio
-ORDER BY id_cras_creas, data_particao, local_domicilio
+GROUP BY data_particao,  id_cras_creas, destino_lixo_domicilio

@@ -1,19 +1,25 @@
+WITH tb AS (
+  SELECT
+    f.id_familia,
+    f.data_particao,
+    CASE
+      WHEN f.id_cras_creas IS NULL THEN "Não Informado"
+      ELSE f.id_cras_creas
+    END AS id_cras_creas,
+    d.possui_banheiro_domicilio,
+  FROM `rj-smas.protecao_social_cadunico.domicilio` as d
+  JOIN `rj-smas.protecao_social_cadunico.familia` as f
+    ON  d.id_familia = f.id_familia
+      AND d.data_particao = f.data_particao
+)
+
 SELECT
-  f.data_particao,
-  CASE
-    WHEN f.id_cras_creas IS NULL THEN "Não Informado"
-    ELSE f.id_cras_creas
-  END AS id_cras_creas,
-  CASE
-      WHEN d.id_possui_banheiro_domicilio = '1' THEN 'Sim'
-      WHEN d.id_possui_banheiro_domicilio = '2' THEN 'Não'
-      ELSE 'Não especificado'
-  END AS possui_banheiro,
-    ROUND(100 * COUNT(DISTINCT d.id_familia) / SUM(COUNT(DISTINCT d.id_familia)) OVER(PARTITION BY f.data_particao, f.id_cras_creas), 2) AS porcentagem,
-  COUNT(DISTINCT f.id_familia) numero_familias,
-  SUM(COUNT(DISTINCT d.id_familia)) OVER(PARTITION BY f.data_particao, f.id_cras_creas) AS total_familias,
-FROM `rj-smas.protecao_social_cadunico.domicilio` as d
-JOIN `rj-smas.protecao_social_cadunico.familia` as f
-  ON  d.id_familia = f.id_familia
-    AND d.data_particao = f.data_particao
-GROUP BY f.data_particao,  f.id_cras_creas, d.id_possui_banheiro_domicilio
+  data_particao,
+  id_cras_creas,
+  possui_banheiro_domicilio,
+  ROUND(100 * COUNT(DISTINCT id_familia) / SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao), 2) AS porcentagem_possui_banheiro_domicilio,
+  COUNT(DISTINCT id_familia) numero_familias,
+  SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao) AS total_familias,
+FROM tb
+GROUP BY data_particao,  id_cras_creas, possui_banheiro_domicilio
+ORDER BY id_cras_creas, data_particao, possui_banheiro_domicilio
