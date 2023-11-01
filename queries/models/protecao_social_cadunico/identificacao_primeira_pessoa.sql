@@ -362,6 +362,8 @@ SELECT
 
     --column: nu_origem_cadastro_pessoa
     NULL AS id_origem_cadastro_pessoa, --Essa coluna não esta na versao posterior
+    --column: nu_origem_cadastro_pessoa
+    NULL AS origem_cadastro_pessoa, --Essa coluna não esta na versao posterior
 
     --column: num_membro_fmla
     CAST(

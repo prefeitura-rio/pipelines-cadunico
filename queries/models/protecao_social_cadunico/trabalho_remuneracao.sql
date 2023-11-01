@@ -47,24 +47,38 @@ SELECT
 
     --column: cod_orgm_vlr_outra_fonte_renda
     NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_outra_fonte_renda
+    NULL AS origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_pensao_ali
     NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_pensao_ali
+    NULL AS origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_rndmo_bruto_prdo
     NULL AS id_origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_rndmo_bruto_prdo
+    NULL AS origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_rndmo_mes_passado
     NULL AS id_origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_rndmo_mes_passado
+    NULL AS origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_seguro_desemprego
     NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_seguro_desemprego
+    NULL AS origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
 
     --column: cod_origem_valor_ajuda_doacao
     NULL AS id_origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
+    --column: cod_origem_valor_ajuda_doacao
+    NULL AS origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
 
     --column: cod_origem_valor_aposentadoria
     NULL AS id_origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
+    --column: cod_origem_valor_aposentadoria
+    NULL AS origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
 
     --column: cod_principal_trab_memb
     CAST(
@@ -292,24 +306,38 @@ SELECT
 
     --column: cod_orgm_vlr_outra_fonte_renda
     NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_outra_fonte_renda
+    NULL AS origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_pensao_ali
     NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_pensao_ali
+    NULL AS origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_rndmo_bruto_prdo
     NULL AS id_origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_rndmo_bruto_prdo
+    NULL AS origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_rndmo_mes_passado
     NULL AS id_origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_rndmo_mes_passado
+    NULL AS origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_seguro_desemprego
     NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_seguro_desemprego
+    NULL AS origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
 
     --column: cod_origem_valor_ajuda_doacao
     NULL AS id_origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
+    --column: cod_origem_valor_ajuda_doacao
+    NULL AS origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
 
     --column: cod_origem_valor_aposentadoria
     NULL AS id_origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
+    --column: cod_origem_valor_aposentadoria
+    NULL AS origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
 
     --column: cod_principal_trab_memb
     CAST(
@@ -537,24 +565,38 @@ SELECT
 
     --column: cod_orgm_vlr_outra_fonte_renda
     NULL AS id_origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_outra_fonte_renda
+    NULL AS origem_valor_outra_fonte, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_pensao_ali
     NULL AS id_origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_pensao_ali
+    NULL AS origem_valor_pensao_alimenticia, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_rndmo_bruto_prdo
     NULL AS id_origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_rndmo_bruto_prdo
+    NULL AS origem_valor_rendimento_bruto, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_rndmo_mes_passado
     NULL AS id_origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_rndmo_mes_passado
+    NULL AS origem_valor_rendimento_mes_passado, --Essa coluna não esta na versao posterior
 
     --column: cod_orgm_vlr_seguro_desemprego
     NULL AS id_origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
+    --column: cod_orgm_vlr_seguro_desemprego
+    NULL AS origem_valor_seguro_desemprego, --Essa coluna não esta na versao posterior
 
     --column: cod_origem_valor_ajuda_doacao
     NULL AS id_origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
+    --column: cod_origem_valor_ajuda_doacao
+    NULL AS origem_valor_ajuda_doacao, --Essa coluna não esta na versao posterior
 
     --column: cod_origem_valor_aposentadoria
     NULL AS id_origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
+    --column: cod_origem_valor_aposentadoria
+    NULL AS origem_valor_aposentadoria, --Essa coluna não esta na versao posterior
 
     --column: cod_principal_trab_memb
     CAST(

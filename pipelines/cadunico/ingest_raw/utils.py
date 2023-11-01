@@ -400,18 +400,32 @@ def create_cadunico_dbt_consolidated_models(
                 bigquery_type = bigquery_type if bigquery_type is not None else "STRING"
                 date_format = row["date_format"]
                 ajuste_decimal = row["ajuste_decimal"]
-                dicionario_atributos = row["dicionario_atributos"]
                 col_in_last_version = row["coluna_esta_versao_anterior"]
 
                 col_name_padronizado = (
                     col_name_padronizado if col_name_padronizado is not None else col_name
                 )
+                dicionario_atributos = row["dicionario_atributos"]
+
+                if dicionario_atributos is not None:
+                    if "id_" in col_name_padronizado:
+                        col_name_padronizado_dict_atr = col_name_padronizado.replace("id_", "", 1)
+                    else:
+                        raise Exception(
+                            f"col_name_padronizado: {col_name_padronizado} should have id_ in the name"
+                        )
 
                 if col_in_last_version == "False":
                     col_expression = (
                         f"\n    --column: {column}\n"
                         + f"    NULL AS {col_name_padronizado}, --Essa coluna não esta na versao posterior"
                     )
+                    if dicionario_atributos is not None:
+                        col_expression = (
+                            col_expression
+                            + f"\n    --column: {column}\n"
+                            + f"    NULL AS {col_name_padronizado_dict_atr}, --Essa coluna não esta na versao posterior"
+                        )
                 else:
                     if bigquery_type == "DATE":
                         col_expression = (
@@ -467,15 +481,6 @@ def create_cadunico_dbt_consolidated_models(
                                 col_expression = (
                                     col_expression
                                     + f"            WHEN REGEXP_CONTAINS({col_name}, r'^{key}$') THEN '{dicionario_atributos[key]}'\n"
-                                )
-
-                            if "id_" in col_name_padronizado:
-                                col_name_padronizado_dict_atr = col_name_padronizado.replace(
-                                    "id_", "", 1
-                                )
-                            else:
-                                raise Exception(
-                                    f"col_name_padronizado: {col_name_padronizado} should have id_ in the name"
                                 )
                             col_expression = (
                                 col_expression
