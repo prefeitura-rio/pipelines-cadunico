@@ -200,24 +200,24 @@ SELECT
 
     --column: dta_atual_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
         END    ) AS data_ultima_atualizacao,
 
     --column: dta_cadastramento_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_cadastro,
 
     --column: dta_nasc_pessoa
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,176,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,176,8))
         END    ) AS data_nascimento,
@@ -600,24 +600,24 @@ SELECT
 
     --column: dta_atual_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
         END    ) AS data_ultima_atualizacao,
 
     --column: dta_cadastramento_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_cadastro,
 
     --column: dta_nasc_pessoa
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,176,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,176,8))
         END    ) AS data_nascimento,
@@ -1014,24 +1014,24 @@ SELECT
 
     --column: dta_atual_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
         END    ) AS data_ultima_atualizacao,
 
     --column: dta_cadastramento_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_cadastro,
 
     --column: dta_nasc_pessoa
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,176,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,176,8))
         END    ) AS data_nascimento,
@@ -1428,24 +1428,24 @@ SELECT
 
     --column: dta_atual_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
         END    ) AS data_ultima_atualizacao,
 
     --column: dta_cadastramento_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_cadastro,
 
     --column: dta_nasc_pessoa
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,176,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,176,8))
         END    ) AS data_nascimento,
@@ -1842,24 +1842,24 @@ SELECT
 
     --column: dta_atual_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
         END    ) AS data_ultima_atualizacao,
 
     --column: dta_cadastramento_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_cadastro,
 
     --column: dta_nasc_pessoa
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,176,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,176,8))
         END    ) AS data_nascimento,
@@ -2256,24 +2256,24 @@ SELECT
 
     --column: dta_atual_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,48,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,48,8))
         END    ) AS data_ultima_atualizacao,
 
     --column: dta_cadastramento_memb
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_cadastro,
 
     --column: dta_nasc_pessoa
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,176,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,176,8))
         END    ) AS data_nascimento,

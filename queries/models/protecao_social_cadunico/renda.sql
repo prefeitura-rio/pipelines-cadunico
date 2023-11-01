@@ -208,32 +208,32 @@ SELECT
 
     --column: dt_intgo_vlr_aposentadoria
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,86,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,86,8))
         END    ) AS data_integracao_aposentadoria,
 
     --column: dt_intgo_vlr_outra_fonte_rnda
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,94,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,94,8))
         END    ) AS data_integracao_outras_fonte,
 
     --column: dt_intgo_vlr_rndmo_bruto
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,78,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,78,8))
         END    ) AS data_integracao_renda_bruta_12_meses,
 
     --column: dt_intgo_vlr_rndmo_mes_passado
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,70,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,70,8))
         END    ) AS data_integracao_emprego_ultimo_mes,

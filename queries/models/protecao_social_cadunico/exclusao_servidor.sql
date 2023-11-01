@@ -47,16 +47,16 @@ SELECT
 
     --column: dat_emi_pgmcu
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
         END    ) AS data_emissao_parecer_gestao_municipal_cadunico,
 
     --column: data_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_exclusao,
@@ -187,16 +187,16 @@ SELECT
 
     --column: dat_emi_pgmcu
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
         END    ) AS data_emissao_parecer_gestao_municipal_cadunico,
 
     --column: data_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_exclusao,
@@ -327,16 +327,16 @@ SELECT
 
     --column: dat_emi_pgmcu
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
         END    ) AS data_emissao_parecer_gestao_municipal_cadunico,
 
     --column: data_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_exclusao,
@@ -467,16 +467,16 @@ SELECT
 
     --column: dat_emi_pgmcu
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
         END    ) AS data_emissao_parecer_gestao_municipal_cadunico,
 
     --column: data_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_exclusao,
@@ -607,16 +607,16 @@ SELECT
 
     --column: dat_emi_pgmcu
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
         END    ) AS data_emissao_parecer_gestao_municipal_cadunico,
 
     --column: data_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_exclusao,
@@ -747,16 +747,16 @@ SELECT
 
     --column: dat_emi_pgmcu
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,71,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,71,8))
         END    ) AS data_emissao_parecer_gestao_municipal_cadunico,
 
     --column: data_exc
     SAFE.PARSE_DATE(
-        '%d%m%Y'
-,         CASE
+        '%d%m%Y,'
+         CASE
             WHEN REGEXP_CONTAINS(SUBSTRING(text,40,8), r'^\s*$') THEN NULL
             ELSE TRIM(SUBSTRING(text,40,8))
         END    ) AS data_exclusao,

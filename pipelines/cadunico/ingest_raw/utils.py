@@ -417,7 +417,7 @@ def create_cadunico_dbt_consolidated_models(
                         col_expression = (
                             f"\n    --column: {column}\n"
                             + "    SAFE.PARSE_DATE(\n"
-                            + f"        '{date_format}'\n,"
+                            + f"        '{date_format},'\n"
                             + "         CASE\n"
                             + f"            WHEN REGEXP_CONTAINS({col_name}, r'^\s*$') THEN NULL\n"  # noqa
                             + f"            ELSE TRIM({col_name})\n"
@@ -724,26 +724,25 @@ def get_dbt_models_to_materialize(
 
     log("STARTING GETTING DBT MODELS TO MATERIALIZE")
     dataset_id_original = dataset_id
-    dataset_id = dataset_id + "_versao"
-
-    versions = get_staging_partitions_versions(
-        project_id=project_id, dataset_id=dataset_id_original, table_id=table_id
-    )
-    versions.sort()
-    log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
-
     root_path = get_root_path()
-    queries_dir = root_path / f"queries/models/{dataset_id}"
-    files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
-    files_path.sort()
-    tables = [
-        q.replace(".sql", "").split("/")[-1].split("__")[-1]
-        for q in files_path
-        if q.endswith(".sql")
-    ]
-    table_dbt_alias = [
-        True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
-    ]
+
+    # dataset_id = dataset_id + "_versao"
+    # versions = get_staging_partitions_versions(
+    #     project_id=project_id, dataset_id=dataset_id_original, table_id=table_id
+    # )
+    # versions.sort()
+    # log(f"FOUND STAGING VERSIONS FOR {dataset_id_original}.{table_id}: {versions}")
+    # queries_dir = root_path / f"queries/models/{dataset_id}"
+    # files_path = [str(q) for q in queries_dir.iterdir() if q.is_file()]
+    # files_path.sort()
+    # tables = [
+    #     q.replace(".sql", "").split("/")[-1].split("__")[-1]
+    #     for q in files_path
+    #     if q.endswith(".sql")
+    # ]
+    # table_dbt_alias = [
+    #     True if "__" in q.split("/")[-1] else False for q in files_path if q.endswith(".sql")
+    # ]
 
     # if not only_version_tables:
     parameters_list = []
