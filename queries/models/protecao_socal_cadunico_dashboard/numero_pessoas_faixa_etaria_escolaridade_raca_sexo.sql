@@ -36,11 +36,12 @@ membro AS (
 
 membro_escolaridade AS (
   SELECT
+    m.id_familia,
     m.data_particao,
-    CASE
-      WHEN f.id_cras_creas IS NULL THEN "Não Informado"
-      ELSE f.id_cras_creas
-    END AS id_cras_creas,
+    -- CASE
+    --   WHEN f.id_cras_creas IS NULL THEN "Não Informado"
+    --   ELSE f.id_cras_creas
+    -- END AS id_cras_creas,
     m.id_membro_familia,
     m.genero,
     m.raca,
@@ -59,7 +60,6 @@ membro_escolaridade AS (
 
 SELECT
   data_particao,
-  id_cras_creas,
   faixa_etaria,
   genero,
   raca,
@@ -67,5 +67,5 @@ SELECT
   COUNT(*) AS numero_pessoas,
   SUM(COUNT(DISTINCT id_membro_familia)) OVER(PARTITION BY data_particao) AS total_membros,
 FROM membro_escolaridade
-GROUP BY 1, 2, 3, 4, 5, 6
-ORDER BY 1, 2, 3, 4, 5, 6
+GROUP BY 1, 2, 3, 4, 5
+ORDER BY 1, 2, 3, 4, 5

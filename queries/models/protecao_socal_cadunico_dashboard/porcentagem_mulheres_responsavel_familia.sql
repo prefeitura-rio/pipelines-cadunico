@@ -16,13 +16,13 @@ WHERE p.id_parentesco_responsavel_familia = '01'
 
 SELECT
     data_particao,
-    CASE
-      WHEN id_cras_creas IS NULL THEN "Não Informado"
-      ELSE id_cras_creas
-    END AS id_cras_creas,
-    ROUND((SUM(CASE WHEN id_parentesco_responsavel_familia = '01' AND sexo = 'Feminino' THEN 1 ELSE 0 END) * 100.0 / COUNT(DISTINCT CASE WHEN id_parentesco_responsavel_familia = '01' THEN id_familia END)), 2) AS porcentagem_mulheres_chefes,
+    -- CASE
+    --   WHEN id_cras_creas IS NULL THEN "Não Informado"
+    --   ELSE id_cras_creas
+    -- END AS id_cras_creas,
+    ROUND((SUM(CASE WHEN id_parentesco_responsavel_familia = '01' AND sexo = 'Feminino' THEN 1 ELSE 0 END) * 100.0 / COUNT(DISTINCT CASE WHEN id_parentesco_responsavel_familia = '01' THEN id_familia END)), 2) AS porcentagem,
     SUM(CASE WHEN id_parentesco_responsavel_familia = '01' AND sexo = 'Feminino' THEN 1 ELSE 0 END) AS numero_mulheres_chefes,
     COUNT(DISTINCT CASE WHEN id_parentesco_responsavel_familia = '01' THEN id_familia END) AS total_familias
 FROM responsavel_familiar
-GROUP BY 2, 1
-ORDER BY 2, 1
+GROUP BY  1
+ORDER BY  1

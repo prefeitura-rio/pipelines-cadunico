@@ -1,10 +1,6 @@
 WITH renda_familias AS (
     SELECT
         p.data_particao,
-        CASE
-          WHEN f.id_cras_creas IS NULL THEN "Não Informado"
-          ELSE f.id_cras_creas
-        END AS id_cras_creas,
         p.id_familia,
         c.valor_renda_media,
         CASE
@@ -22,12 +18,11 @@ WITH renda_familias AS (
 )
 SELECT
     data_particao,
-    id_cras_creas,
     tipo_familia,
-    AVG(valor_renda_media) AS valor_renda_media
-    ROUND(100 * SAFE_DIVIDE(COUNT(DISTINCT id_familia) , SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao)),4) AS porcentagem_familias,
+    AVG(valor_renda_media) AS valor_renda_media,
+    ROUND(100 * SAFE_DIVIDE(COUNT(DISTINCT id_familia) , SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao)),4) AS porcentagem,
     COUNT(DISTINCT id_familia) AS numero_familias,
     SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao) AS total_familias,
 FROM renda_familias
-GROUP BY 1, 2, 3
-ORDER BY 1, 2, 3
+GROUP BY 1, 2
+ORDER BY 1, 2

@@ -14,10 +14,10 @@ WITH faixa_renda_tb AS (
 despesas AS (
   SELECT
       fr.data_particao,
-      CASE
-        WHEN id_cras_creas IS NULL THEN "Não Informado"
-        ELSE id_cras_creas
-      END AS id_cras_creas,
+--       CASE
+--         WHEN id_cras_creas IS NULL THEN "Não Informado"
+--         ELSE id_cras_creas
+--       END AS id_cras_creas,
       fr.faixa_renda,
       COUNT(DISTINCT fr.id_familia) AS numero_familias,
       AVG(despesa_agua_esgoto + despesa_alimentacao + despesa_aluguel + despesa_energia + despesa_gas + despesa_medicamentos + despesa_transporte) as media_despesas,
@@ -32,8 +32,8 @@ despesas AS (
   JOIN `rj-smas.protecao_social_cadunico.familia` f
       ON fr.id_familia = f.id_familia
         AND fr.data_particao = f.data_particao
-  GROUP BY 1, 2, 3
-  ORDER BY 1, 2, 3
+  GROUP BY 1, 2
+  ORDER BY 1, 2
 )
 
 SELECT
