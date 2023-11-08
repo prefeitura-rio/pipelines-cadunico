@@ -27,6 +27,7 @@ WITH trabalho_remuneracao_tb AS (
     COUNTIF(tr.nao_recebe_pensao_alimenticia != '0' AND tr.nao_recebe_pensao_alimenticia IS NOT NULL) AS recebe_pensao_alimenticia,
     COUNTIF(tr.nao_recebe_outras_fontes != '0' AND tr.nao_recebe_outras_fontes IS NOT NULL) AS recebe_outras_fontes,
     COUNTIF(ic.trabalho_infantil = '1') AS trabalho_infantil,
+    COUNT(*) AS numero_membros
 FROM `rj-smas.protecao_social_cadunico.trabalho_remuneracao` tr
 LEFT JOIN `rj-smas.protecao_social_cadunico.identificacao_primeira_pessoa` pp
   ON pp.id_membro_familia = tr.id_membro_familia
@@ -44,36 +45,38 @@ ORDER BY data_particao, faixa_renda, faixa_etaria, funcao_principal_trabalho
 total_data_cras_cres AS (
   SELECT
       data_particao,
-      COUNT(*) AS total_familias_cras,
-      SUM(COUNT(DISTINCT id_familia)) OVER(PARTITION BY data_particao) AS total_familias,
-  FROM `rj-smas.protecao_social_cadunico.familia`
+      COUNT(*) AS total_membros_cras,
+      SUM(COUNT(DISTINCT id_membro_familia)) OVER(PARTITION BY data_particao) AS total_membros,
+  FROM `rj-smas.protecao_social_cadunico.trabalho_remuneracao`
   GROUP BY 1
 )
 
 SELECT
   tr.data_particao,
-  tdcc.total_familias,
   tr.faixa_etaria,
   tr.faixa_renda,
   tr.funcao_principal_trabalho,
+  ROUND(100 * SAFE_DIVIDE(tr.numero_membros,tdcc.total_membros), 4) AS porcentagem_membros,
+  tr.numero_membros,
+  tdcc.total_membros,
   tr.trabalho_semana_passada,
-  ROUND(100 * SAFE_DIVIDE(tr.trabalho_semana_passada, tdcc.total_familias), 4) AS porcentagem_trabalho_semana_passada,
+  ROUND(100 * SAFE_DIVIDE(tr.trabalho_semana_passada, tdcc.total_membros), 4) AS porcentagem_trabalho_semana_passada,
   tr.afastado_semana_passada,
-  ROUND(100 * SAFE_DIVIDE(tr.afastado_semana_passada, tdcc.total_familias), 4) AS porcentagem_afastado_semana_passada,
+  ROUND(100 * SAFE_DIVIDE(tr.afastado_semana_passada, tdcc.total_membros), 4) AS porcentagem_afastado_semana_passada,
   tr.media_meses_trabalhados_nos_ultimos_12,
   tr.media_remuneracao,
   tr.recebe_doacao,
-  ROUND(100 * SAFE_DIVIDE(tr.recebe_doacao, tdcc.total_familias), 4) AS porcentagem_recebe_doacao,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_doacao, tdcc.total_membros), 4) AS porcentagem_recebe_doacao,
   tr.recebe_aposentadoria,
-  ROUND(100 * SAFE_DIVIDE(tr.recebe_aposentadoria, tdcc.total_familias), 4) AS porcentagem_recebe_aposentadoria,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_aposentadoria, tdcc.total_membros), 4) AS porcentagem_recebe_aposentadoria,
   tr.recebe_seguro_desemprego,
-  ROUND(100 * SAFE_DIVIDE(tr.recebe_seguro_desemprego, tdcc.total_familias), 4) AS porcentagem_recebe_seguro_desemprego,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_seguro_desemprego, tdcc.total_membros), 4) AS porcentagem_recebe_seguro_desemprego,
   tr.recebe_pensao_alimenticia,
-  ROUND(100 * SAFE_DIVIDE(tr.recebe_pensao_alimenticia, tdcc.total_familias), 4) AS porcentagem_recebe_pensao_alimenticia,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_pensao_alimenticia, tdcc.total_membros), 4) AS porcentagem_recebe_pensao_alimenticia,
   tr.recebe_outras_fontes,
-  ROUND(100 * SAFE_DIVIDE(tr.recebe_outras_fontes, tdcc.total_familias), 4) AS porcentagem_recebe_outras_fontes,
+  ROUND(100 * SAFE_DIVIDE(tr.recebe_outras_fontes, tdcc.total_membros), 4) AS porcentagem_recebe_outras_fontes,
   tr.trabalho_infantil,
-  ROUND(100 * SAFE_DIVIDE(tr.trabalho_infantil, tdcc.total_familias), 4) AS porcentagem_trabalho_infantil
+  ROUND(100 * SAFE_DIVIDE(tr.trabalho_infantil, tdcc.total_membros), 4) AS porcentagem_trabalho_infantil
 FROM trabalho_remuneracao_tb tr
 LEFT JOIN total_data_cras_cres tdcc
   ON tr.data_particao = tdcc.data_particao

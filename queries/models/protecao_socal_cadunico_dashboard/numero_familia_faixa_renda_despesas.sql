@@ -19,6 +19,7 @@ despesas AS (
 --         ELSE id_cras_creas
 --       END AS id_cras_creas,
       fr.faixa_renda,
+      ROUND(100 * SAFE_DIVIDE(COUNT(DISTINCT fr.id_familia) , SUM(COUNT(DISTINCT fr.id_familia)) OVER(PARTITION BY fr.data_particao)),4) AS porcentagem,
       COUNT(DISTINCT fr.id_familia) AS numero_familias,
       AVG(despesa_agua_esgoto + despesa_alimentacao + despesa_aluguel + despesa_energia + despesa_gas + despesa_medicamentos + despesa_transporte) as media_despesas,
       AVG(f.despesa_agua_esgoto) AS media_despesa_agua_esgoto,
