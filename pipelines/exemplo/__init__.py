@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from pipelines.exemplo.nome_do_objetivo.flows import *  # noqa: F401, F403
+from pipelines.exemplo.teste.flows import *  # noqa: F401, F403
